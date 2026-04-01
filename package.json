@@ -9,11 +9,12 @@
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
-    "format": "prettier --write \"src/**/*.{ts,js,json,md}\"",
+    "format:write": "prettier --write \"src/**/*.{ts,js,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,js,json,md}\"",
     "generate-types": "openapi-typescript ./openApiClientSpecs/rules-service.openapi.yaml --o ./src/__generated__/rulesService.d.ts",
     "release": "npm run build && changeset publish",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
   "description": "",
   "dependencies": {
     "axios": "^1.14.0",
+    "husky": "^9.1.7",
     "neverthrow": "^8.2.0"
   },
   "devDependencies": {

@@ -1,0 +1,5 @@
+echo 'Running pre-commit hooks...'
+npm run format:write
+prettier $(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g') --write --ignore-unknown
+npm run lint
+git update-index --again
