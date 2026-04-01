@@ -1,0 +1,8 @@
+src/
+tsconfig.json
+.eslintrc*
+.github/
+.vscode/
+*.log
+node_modules/
+coverage/

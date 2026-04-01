@@ -1,0 +1,6 @@
+node_modules/
+dist/
+coverage/
+*.log
+remediations.openapi.yaml
+src/__generated__/

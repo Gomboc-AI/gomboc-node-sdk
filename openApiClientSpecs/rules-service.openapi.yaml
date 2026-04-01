@@ -1,0 +1,2831 @@
+openapi: 3.1.0
+info:
+  title: Rules Service API
+  version: 1.0.0
+paths:
+  /healthcheck:
+    get:
+      operationId: GetHealthcheck
+      tags:
+        - Health
+      responses:
+        "200":
+          description: GET /healthcheck Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetHealthcheckPositiveResponse"
+        "400":
+          description: GET /healthcheck Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetHealthcheckNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /docs:
+    get:
+      operationId: GetDocs
+      responses:
+        "200":
+          description: GET /docs Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDocsPositiveResponse"
+        "400":
+          description: GET /docs Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDocsNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /docs/swagger.html:
+    get:
+      operationId: GetDocsSwaggerHtml
+      responses:
+        "200":
+          description: GET /docs/swagger.html Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDocsSwaggerHtmlPositiveResponse"
+        "400":
+          description: GET /docs/swagger.html Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDocsSwaggerHtmlNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /openapi.json:
+    get:
+      operationId: GetOpenapiJson
+      responses:
+        "200":
+          description: GET /openapi.json Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOpenapiJsonPositiveResponse"
+        "400":
+          description: GET /openapi.json Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOpenapiJsonNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/rules/create:
+    post:
+      operationId: PostApiV1RulesCreate
+      tags:
+        - Rules
+      requestBody:
+        description: POST /api/v1/rules/create Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostApiV1RulesCreateRequestBody"
+        required: true
+      responses:
+        "200":
+          description: POST /api/v1/rules/create Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostApiV1RulesCreatePositiveResponse"
+        "400":
+          description: POST /api/v1/rules/create Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostApiV1RulesCreateNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/rules/get:
+    get:
+      operationId: GetApiV1RulesGet
+      tags:
+        - Rules
+      parameters:
+        - name: name
+          in: query
+          required: true
+          description: GET /api/v1/rules/get Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1RulesGetParameterName"
+        - name: includeClassifications
+          in: query
+          required: false
+          description: GET /api/v1/rules/get Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1RulesGetParameterIncludeClassifications"
+      responses:
+        "200":
+          description: GET /api/v1/rules/get Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1RulesGetPositiveResponse"
+        "400":
+          description: GET /api/v1/rules/get Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1RulesGetNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/rules/update:
+    put:
+      operationId: PutApiV1RulesUpdate
+      tags:
+        - Rules
+      requestBody:
+        description: PUT /api/v1/rules/update Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PutApiV1RulesUpdateRequestBody"
+        required: true
+      responses:
+        "200":
+          description: PUT /api/v1/rules/update Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PutApiV1RulesUpdatePositiveResponse"
+        "400":
+          description: PUT /api/v1/rules/update Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PutApiV1RulesUpdateNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/rules/delete:
+    delete:
+      operationId: DeleteApiV1RulesDelete
+      tags:
+        - Rules
+      parameters:
+        - name: name
+          in: query
+          required: true
+          description: DELETE /api/v1/rules/delete Parameter
+          schema:
+            $ref: "#/components/schemas/DeleteApiV1RulesDeleteParameterName"
+        - name: revision
+          in: query
+          required: false
+          description: DELETE /api/v1/rules/delete Parameter
+          schema:
+            $ref: "#/components/schemas/DeleteApiV1RulesDeleteParameterRevision"
+        - name: all
+          in: query
+          required: false
+          description: DELETE /api/v1/rules/delete Parameter
+          schema:
+            $ref: "#/components/schemas/DeleteApiV1RulesDeleteParameterAll"
+      responses:
+        "200":
+          description: DELETE /api/v1/rules/delete Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteApiV1RulesDeletePositiveResponse"
+        "400":
+          description: DELETE /api/v1/rules/delete Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteApiV1RulesDeleteNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/rules/search:
+    get:
+      operationId: GetApiV1RulesSearch
+      tags:
+        - Rules
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: GET /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1RulesSearchParameterPage"
+        - name: perPage
+          in: query
+          required: false
+          description: GET /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1RulesSearchParameterPerPage"
+        - name: query
+          in: query
+          required: false
+          description: GET /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1RulesSearchParameterQuery"
+        - name: filters
+          in: query
+          required: false
+          description: GET /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1RulesSearchParameterFilters"
+        - name: filters[]
+          in: query
+          required: false
+          description: GET /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1RulesSearchParameterFilters"
+        - name: type
+          in: query
+          required: false
+          description: GET /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1RulesSearchParameterType"
+        - name: iacLanguage
+          in: query
+          required: false
+          description: GET /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1RulesSearchParameterIacLanguage"
+        - name: includeClassifications
+          in: query
+          required: false
+          description: GET /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1RulesSearchParameterIncludeClassifications"
+      responses:
+        "200":
+          description: GET /api/v1/rules/search Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1RulesSearchPositiveResponse"
+        "400":
+          description: GET /api/v1/rules/search Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1RulesSearchNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/rules/activate:
+    put:
+      operationId: PutApiV1RulesActivate
+      tags:
+        - Rules
+      requestBody:
+        description: PUT /api/v1/rules/activate Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PutApiV1RulesActivateRequestBody"
+        required: true
+      responses:
+        "200":
+          description: PUT /api/v1/rules/activate Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PutApiV1RulesActivatePositiveResponse"
+        "400":
+          description: PUT /api/v1/rules/activate Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PutApiV1RulesActivateNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/classifications/create:
+    post:
+      operationId: PostApiV1ClassificationsCreate
+      tags:
+        - Classifications
+      requestBody:
+        description: POST /api/v1/classifications/create Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostApiV1ClassificationsCreateRequestBody"
+        required: true
+      responses:
+        "200":
+          description: POST /api/v1/classifications/create Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostApiV1ClassificationsCreatePositiveResponse"
+        "400":
+          description: POST /api/v1/classifications/create Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostApiV1ClassificationsCreateNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/classifications/get:
+    get:
+      operationId: GetApiV1ClassificationsGet
+      tags:
+        - Classifications
+      parameters:
+        - name: name
+          in: query
+          required: true
+          description: GET /api/v1/classifications/get Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ClassificationsGetParameterName"
+        - name: parents
+          in: query
+          required: false
+          description: GET /api/v1/classifications/get Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ClassificationsGetParameterParents"
+        - name: children
+          in: query
+          required: false
+          description: GET /api/v1/classifications/get Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ClassificationsGetParameterChildren"
+        - name: expandChildren
+          in: query
+          required: false
+          description: GET /api/v1/classifications/get Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ClassificationsGetParameterExpandChildren"
+      responses:
+        "200":
+          description: GET /api/v1/classifications/get Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1ClassificationsGetPositiveResponse"
+        "400":
+          description: GET /api/v1/classifications/get Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1ClassificationsGetNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/classifications/update:
+    put:
+      operationId: PutApiV1ClassificationsUpdate
+      tags:
+        - Classifications
+      requestBody:
+        description: PUT /api/v1/classifications/update Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PutApiV1ClassificationsUpdateRequestBody"
+        required: true
+      responses:
+        "200":
+          description: PUT /api/v1/classifications/update Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PutApiV1ClassificationsUpdatePositiveResponse"
+        "400":
+          description: PUT /api/v1/classifications/update Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PutApiV1ClassificationsUpdateNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/classifications/delete:
+    delete:
+      operationId: DeleteApiV1ClassificationsDelete
+      tags:
+        - Classifications
+      parameters:
+        - name: name
+          in: query
+          required: true
+          description: DELETE /api/v1/classifications/delete Parameter
+          schema:
+            $ref: "#/components/schemas/DeleteApiV1ClassificationsDeleteParameterName"
+      responses:
+        "200":
+          description: DELETE /api/v1/classifications/delete Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteApiV1ClassificationsDeletePositiveResponse"
+        "400":
+          description: DELETE /api/v1/classifications/delete Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteApiV1ClassificationsDeleteNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/classifications/search:
+    get:
+      operationId: GetApiV1ClassificationsSearch
+      tags:
+        - Classifications
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: GET /api/v1/classifications/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ClassificationsSearchParameterPage"
+        - name: perPage
+          in: query
+          required: false
+          description: GET /api/v1/classifications/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ClassificationsSearchParameterPerPage"
+        - name: query
+          in: query
+          required: false
+          description: GET /api/v1/classifications/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ClassificationsSearchParameterQuery"
+        - name: filters
+          in: query
+          required: false
+          description: GET /api/v1/classifications/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ClassificationsSearchParameterFilters"
+        - name: filters[]
+          in: query
+          required: false
+          description: GET /api/v1/classifications/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ClassificationsSearchParameterFilters"
+      responses:
+        "200":
+          description: GET /api/v1/classifications/search Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1ClassificationsSearchPositiveResponse"
+        "400":
+          description: GET /api/v1/classifications/search Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1ClassificationsSearchNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/channels/create:
+    post:
+      operationId: PostApiV1ChannelsCreate
+      tags:
+        - Channels
+      requestBody:
+        description: POST /api/v1/channels/create Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostApiV1ChannelsCreateRequestBody"
+        required: true
+      responses:
+        "200":
+          description: POST /api/v1/channels/create Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostApiV1ChannelsCreatePositiveResponse"
+        "400":
+          description: POST /api/v1/channels/create Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostApiV1ChannelsCreateNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/channels/get:
+    get:
+      operationId: GetApiV1ChannelsGet
+      tags:
+        - Channels
+      parameters:
+        - name: name
+          in: query
+          required: false
+          description: GET /api/v1/channels/get Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ChannelsGetParameterName"
+      responses:
+        "200":
+          description: GET /api/v1/channels/get Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1ChannelsGetPositiveResponse"
+        "400":
+          description: GET /api/v1/channels/get Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1ChannelsGetNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/channels/batch/create:
+    post:
+      operationId: PostApiV1ChannelsBatchCreate
+      tags:
+        - Channels
+      requestBody:
+        description: POST /api/v1/channels/batch/create Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostApiV1ChannelsBatchCreateRequestBody"
+        required: true
+      responses:
+        "200":
+          description: POST /api/v1/channels/batch/create Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostApiV1ChannelsBatchCreatePositiveResponse"
+        "400":
+          description: POST /api/v1/channels/batch/create Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostApiV1ChannelsBatchCreateNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/channels/batch/upsert:
+    post:
+      operationId: PostApiV1ChannelsBatchUpsert
+      tags:
+        - Channels
+      requestBody:
+        description: POST /api/v1/channels/batch/upsert Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostApiV1ChannelsBatchUpsertRequestBody"
+        required: true
+      responses:
+        "200":
+          description: POST /api/v1/channels/batch/upsert Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostApiV1ChannelsBatchUpsertPositiveResponse"
+        "400":
+          description: POST /api/v1/channels/batch/upsert Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostApiV1ChannelsBatchUpsertNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/channels/update:
+    put:
+      operationId: PutApiV1ChannelsUpdate
+      tags:
+        - Channels
+      requestBody:
+        description: PUT /api/v1/channels/update Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PutApiV1ChannelsUpdateRequestBody"
+        required: true
+      responses:
+        "200":
+          description: PUT /api/v1/channels/update Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PutApiV1ChannelsUpdatePositiveResponse"
+        "400":
+          description: PUT /api/v1/channels/update Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PutApiV1ChannelsUpdateNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/channels/delete:
+    delete:
+      operationId: DeleteApiV1ChannelsDelete
+      tags:
+        - Channels
+      parameters:
+        - name: name
+          in: query
+          required: true
+          description: DELETE /api/v1/channels/delete Parameter
+          schema:
+            $ref: "#/components/schemas/DeleteApiV1ChannelsDeleteParameterName"
+      responses:
+        "200":
+          description: DELETE /api/v1/channels/delete Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteApiV1ChannelsDeletePositiveResponse"
+        "400":
+          description: DELETE /api/v1/channels/delete Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteApiV1ChannelsDeleteNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/channels/rules:
+    get:
+      operationId: GetApiV1ChannelsRules
+      tags:
+        - Channels
+      parameters:
+        - name: name
+          in: query
+          required: false
+          description: GET /api/v1/channels/rules Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ChannelsRulesParameterName"
+        - name: filters
+          in: query
+          required: false
+          description: GET /api/v1/channels/rules Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ChannelsRulesParameterFilters"
+        - name: filters[]
+          in: query
+          required: false
+          description: GET /api/v1/channels/rules Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ChannelsRulesParameterFilters"
+        - name: page
+          in: query
+          required: false
+          description: GET /api/v1/channels/rules Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ChannelsRulesParameterPage"
+        - name: perPage
+          in: query
+          required: false
+          description: GET /api/v1/channels/rules Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ChannelsRulesParameterPerPage"
+        - name: includeClassifications
+          in: query
+          required: false
+          description: GET /api/v1/channels/rules Parameter
+          schema:
+            $ref:
+              "#/components/schemas/GetApiV1ChannelsRulesParameterIncludeClassification\
+              s"
+      responses:
+        "200":
+          description: GET /api/v1/channels/rules Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1ChannelsRulesPositiveResponse"
+        "400":
+          description: GET /api/v1/channels/rules Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1ChannelsRulesNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /api/v1/channels/search:
+    get:
+      operationId: GetApiV1ChannelsSearch
+      tags:
+        - Channels
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: GET /api/v1/channels/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ChannelsSearchParameterPage"
+        - name: perPage
+          in: query
+          required: false
+          description: GET /api/v1/channels/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ChannelsSearchParameterPerPage"
+        - name: query
+          in: query
+          required: false
+          description: GET /api/v1/channels/search Parameter
+          schema:
+            $ref: "#/components/schemas/GetApiV1ChannelsSearchParameterQuery"
+      responses:
+        "200":
+          description: GET /api/v1/channels/search Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1ChannelsSearchPositiveResponse"
+        "400":
+          description: GET /api/v1/channels/search Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiV1ChannelsSearchNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+components:
+  schemas:
+    GetHealthcheckPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            status:
+              type: string
+            timestamp:
+              type: string
+          required:
+            - status
+            - timestamp
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetHealthcheckNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    GetDocsPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            html:
+              type: string
+          required:
+            - html
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetDocsNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    GetDocsSwaggerHtmlPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            html:
+              type: string
+          required:
+            - html
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetDocsSwaggerHtmlNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    GetOpenapiJsonPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            json: {}
+          required:
+            - json
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetOpenapiJsonNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostApiV1RulesCreatePositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            accountId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            type:
+              type: string
+            version:
+              type: string
+            iacLanguage:
+              type: string
+            name:
+              type: string
+            shortName:
+              type:
+                - string
+                - "null"
+            revision:
+              type: number
+            revisions:
+              type: array
+              items:
+                type: number
+            classificationPaths:
+              type: array
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    accountId:
+                      type: string
+                      format: uuid
+                      pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                    name:
+                      type: string
+                    shortName:
+                      type:
+                        - string
+                        - "null"
+                  required:
+                    - accountId
+                    - name
+                    - shortName
+                  additionalProperties: false
+            annotations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            metadata:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            body:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            id:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            createdAt: {}
+            updatedAt: {}
+          required:
+            - accountId
+            - type
+            - version
+            - iacLanguage
+            - name
+            - shortName
+            - revision
+            - revisions
+            - id
+            - createdAt
+            - updatedAt
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostApiV1RulesCreateNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostApiV1RulesCreateRequestBody:
+      type: object
+      properties:
+        type:
+          type: string
+        version:
+          type: string
+        iacLanguage:
+          type: string
+        name:
+          type: string
+        classificationNames:
+          type: array
+          items:
+            type: string
+        classifications:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              accountId:
+                type: string
+                format: uuid
+                pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            required:
+              - name
+        shortName:
+          type: string
+        annotations:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+        metadata:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+        body:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+        revisionData:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+        active:
+          default: false
+          type: boolean
+      required:
+        - type
+        - version
+        - iacLanguage
+        - name
+    GetApiV1RulesGetParameterName:
+      type: string
+    GetApiV1RulesGetParameterIncludeClassifications:
+      default: 1
+      type: number
+    GetApiV1RulesGetPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            accountId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            type:
+              type: string
+            version:
+              type: string
+            iacLanguage:
+              type: string
+            name:
+              type: string
+            shortName:
+              type:
+                - string
+                - "null"
+            revision:
+              type: number
+            revisions:
+              type: array
+              items:
+                type: number
+            classificationPaths:
+              type: array
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    accountId:
+                      type: string
+                      format: uuid
+                      pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                    name:
+                      type: string
+                    shortName:
+                      type:
+                        - string
+                        - "null"
+                  required:
+                    - accountId
+                    - name
+                    - shortName
+                  additionalProperties: false
+            annotations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            metadata:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            body:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            id:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            createdAt: {}
+            updatedAt: {}
+          required:
+            - accountId
+            - type
+            - version
+            - iacLanguage
+            - name
+            - shortName
+            - revision
+            - revisions
+            - id
+            - createdAt
+            - updatedAt
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetApiV1RulesGetNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PutApiV1RulesUpdatePositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            accountId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            type:
+              type: string
+            version:
+              type: string
+            iacLanguage:
+              type: string
+            name:
+              type: string
+            shortName:
+              type:
+                - string
+                - "null"
+            revision:
+              type: number
+            revisions:
+              type: array
+              items:
+                type: number
+            classificationPaths:
+              type: array
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    accountId:
+                      type: string
+                      format: uuid
+                      pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                    name:
+                      type: string
+                    shortName:
+                      type:
+                        - string
+                        - "null"
+                  required:
+                    - accountId
+                    - name
+                    - shortName
+                  additionalProperties: false
+            annotations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            metadata:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            body:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            id:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            createdAt: {}
+            updatedAt: {}
+          required:
+            - accountId
+            - type
+            - version
+            - iacLanguage
+            - name
+            - shortName
+            - revision
+            - revisions
+            - id
+            - createdAt
+            - updatedAt
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PutApiV1RulesUpdateNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PutApiV1RulesUpdateRequestBody:
+      type: object
+      properties:
+        type:
+          type: string
+        version:
+          type: string
+        iacLanguage:
+          type: string
+        classificationNames:
+          type: array
+          items:
+            type: string
+        classifications:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              accountId:
+                type: string
+                format: uuid
+                pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            required:
+              - name
+        shortName:
+          type: string
+        annotations:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+        metadata:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+        body:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+        revisionData:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+        active:
+          default: false
+          type: boolean
+        name:
+          type: string
+      required:
+        - name
+    DeleteApiV1RulesDeleteParameterName:
+      type: string
+    DeleteApiV1RulesDeleteParameterRevision:
+      type: number
+    DeleteApiV1RulesDeleteParameterAll:
+      type: boolean
+    DeleteApiV1RulesDeletePositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            success:
+              type: boolean
+          required:
+            - success
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    DeleteApiV1RulesDeleteNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    GetApiV1RulesSearchParameterPage:
+      default: 1
+      type: number
+    GetApiV1RulesSearchParameterPerPage:
+      default: 20
+      type: number
+    GetApiV1RulesSearchParameterQuery:
+      type: string
+    GetApiV1RulesSearchParameterFilters:
+      anyOf:
+        - type: string
+        - type: array
+          items:
+            type: string
+    GetApiV1RulesSearchParameterType:
+      type: string
+    GetApiV1RulesSearchParameterIacLanguage:
+      type: string
+    GetApiV1RulesSearchParameterIncludeClassifications:
+      default: 1
+      type: number
+    GetApiV1RulesSearchPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            rules:
+              type: array
+              items:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                  type:
+                    type: string
+                  version:
+                    type: string
+                  iacLanguage:
+                    type: string
+                  name:
+                    type: string
+                  shortName:
+                    type:
+                      - string
+                      - "null"
+                  revision:
+                    type: number
+                  revisions:
+                    type: array
+                    items:
+                      type: number
+                  classificationPaths:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          accountId:
+                            type: string
+                            format: uuid
+                            pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                          name:
+                            type: string
+                          shortName:
+                            type:
+                              - string
+                              - "null"
+                        required:
+                          - accountId
+                          - name
+                          - shortName
+                        additionalProperties: false
+                  annotations:
+                    type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties: {}
+                  metadata:
+                    type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties: {}
+                  body:
+                    type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties: {}
+                  id:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                  createdAt: {}
+                  updatedAt: {}
+                required:
+                  - accountId
+                  - type
+                  - version
+                  - iacLanguage
+                  - name
+                  - shortName
+                  - revision
+                  - revisions
+                  - id
+                  - createdAt
+                  - updatedAt
+                additionalProperties: false
+            total:
+              type: number
+            page:
+              type: number
+            perPage:
+              type: number
+          required:
+            - rules
+            - total
+            - page
+            - perPage
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetApiV1RulesSearchNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PutApiV1RulesActivatePositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            success:
+              type: boolean
+          required:
+            - success
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PutApiV1RulesActivateNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PutApiV1RulesActivateRequestBody:
+      type: object
+      properties:
+        name:
+          type: string
+        revision:
+          type: number
+      required:
+        - name
+        - revision
+    PostApiV1ClassificationsCreatePositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            accountId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            name:
+              type: string
+            parent:
+              type:
+                - string
+                - "null"
+            shortName:
+              type:
+                - string
+                - "null"
+            description:
+              type:
+                - string
+                - "null"
+            annotations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            id:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            createdAt: {}
+            updatedAt: {}
+            parentPath:
+              type: array
+              items:
+                type: string
+            children:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+          required:
+            - accountId
+            - name
+            - parent
+            - shortName
+            - description
+            - id
+            - createdAt
+            - updatedAt
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostApiV1ClassificationsCreateNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostApiV1ClassificationsCreateRequestBody:
+      type: object
+      properties:
+        name:
+          type: string
+        parent:
+          type: string
+        shortName:
+          type: string
+        description:
+          type: string
+        annotations:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+      required:
+        - name
+    GetApiV1ClassificationsGetParameterName:
+      type: string
+    GetApiV1ClassificationsGetParameterParents:
+      default: 0
+      type: number
+    GetApiV1ClassificationsGetParameterChildren:
+      default: 0
+      type: number
+    GetApiV1ClassificationsGetParameterExpandChildren:
+      default: false
+      type: boolean
+    GetApiV1ClassificationsGetPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            accountId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            name:
+              type: string
+            parent:
+              type:
+                - string
+                - "null"
+            shortName:
+              type:
+                - string
+                - "null"
+            description:
+              type:
+                - string
+                - "null"
+            annotations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            id:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            createdAt: {}
+            updatedAt: {}
+            parentPath:
+              type: array
+              items:
+                type: string
+            children:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+          required:
+            - accountId
+            - name
+            - parent
+            - shortName
+            - description
+            - id
+            - createdAt
+            - updatedAt
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetApiV1ClassificationsGetNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PutApiV1ClassificationsUpdatePositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            accountId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            name:
+              type: string
+            parent:
+              type:
+                - string
+                - "null"
+            shortName:
+              type:
+                - string
+                - "null"
+            description:
+              type:
+                - string
+                - "null"
+            annotations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            id:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            createdAt: {}
+            updatedAt: {}
+            parentPath:
+              type: array
+              items:
+                type: string
+            children:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+          required:
+            - accountId
+            - name
+            - parent
+            - shortName
+            - description
+            - id
+            - createdAt
+            - updatedAt
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PutApiV1ClassificationsUpdateNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PutApiV1ClassificationsUpdateRequestBody:
+      type: object
+      properties:
+        name:
+          type: string
+        parent:
+          type: string
+        shortName:
+          type: string
+        description:
+          type: string
+        annotations:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+      required:
+        - name
+    DeleteApiV1ClassificationsDeleteParameterName:
+      type: string
+    DeleteApiV1ClassificationsDeletePositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            success:
+              type: boolean
+          required:
+            - success
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    DeleteApiV1ClassificationsDeleteNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    GetApiV1ClassificationsSearchParameterPage:
+      default: 1
+      type: number
+    GetApiV1ClassificationsSearchParameterPerPage:
+      default: 20
+      type: number
+    GetApiV1ClassificationsSearchParameterQuery:
+      type: string
+    GetApiV1ClassificationsSearchParameterFilters:
+      anyOf:
+        - type: string
+        - type: array
+          items:
+            type: string
+    GetApiV1ClassificationsSearchPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            classifications:
+              type: array
+              items:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                  name:
+                    type: string
+                  parent:
+                    type:
+                      - string
+                      - "null"
+                  shortName:
+                    type:
+                      - string
+                      - "null"
+                  description:
+                    type:
+                      - string
+                      - "null"
+                  annotations:
+                    type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties: {}
+                  id:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                  createdAt: {}
+                  updatedAt: {}
+                  parentPath:
+                    type: array
+                    items:
+                      type: string
+                  children:
+                    type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties: {}
+                required:
+                  - accountId
+                  - name
+                  - parent
+                  - shortName
+                  - description
+                  - id
+                  - createdAt
+                  - updatedAt
+                additionalProperties: false
+            total:
+              type: number
+            page:
+              type: number
+            perPage:
+              type: number
+          required:
+            - classifications
+            - total
+            - page
+            - perPage
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetApiV1ClassificationsSearchNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostApiV1ChannelsCreatePositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            accountId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            name:
+              type: string
+            query:
+              type: string
+            filters:
+              type: array
+              items:
+                type: string
+            annotations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            id:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            createdAt: {}
+            updatedAt: {}
+          required:
+            - accountId
+            - name
+            - filters
+            - id
+            - createdAt
+            - updatedAt
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostApiV1ChannelsCreateNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostApiV1ChannelsCreateRequestBody:
+      type: object
+      properties:
+        name:
+          type: string
+        query:
+          type: string
+        filters:
+          type: array
+          items:
+            type: string
+        annotations:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+      required:
+        - name
+    GetApiV1ChannelsGetParameterName:
+      type: string
+    GetApiV1ChannelsGetPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            accountId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            name:
+              type: string
+            query:
+              type: string
+            filters:
+              type: array
+              items:
+                type: string
+            annotations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            id:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            createdAt: {}
+            updatedAt: {}
+          required:
+            - accountId
+            - name
+            - filters
+            - id
+            - createdAt
+            - updatedAt
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetApiV1ChannelsGetNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostApiV1ChannelsBatchCreatePositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                      - created
+                      - skipped
+                      - error
+                  channel:
+                    type: object
+                    properties:
+                      accountId:
+                        type: string
+                        format: uuid
+                        pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                      name:
+                        type: string
+                      query:
+                        type: string
+                      filters:
+                        type: array
+                        items:
+                          type: string
+                      annotations:
+                        type: object
+                        propertyNames:
+                          type: string
+                        additionalProperties: {}
+                      id:
+                        type: string
+                        format: uuid
+                        pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                      createdAt: {}
+                      updatedAt: {}
+                    required:
+                      - accountId
+                      - name
+                      - filters
+                      - id
+                      - createdAt
+                      - updatedAt
+                    additionalProperties: false
+                  error:
+                    type: string
+                required:
+                  - name
+                  - status
+                additionalProperties: false
+          required:
+            - results
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostApiV1ChannelsBatchCreateNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostApiV1ChannelsBatchCreateRequestBody:
+      type: object
+      properties:
+        channels:
+          maxItems: 200
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              query:
+                type: string
+              filters:
+                type: array
+                items:
+                  type: string
+              annotations:
+                type: object
+                propertyNames:
+                  type: string
+                additionalProperties: {}
+            required:
+              - name
+        onConflict:
+          default: error
+          type: string
+          enum:
+            - error
+            - skip
+      required:
+        - channels
+    PostApiV1ChannelsBatchUpsertPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                      - created
+                      - updated
+                      - error
+                  channel:
+                    type: object
+                    properties:
+                      accountId:
+                        type: string
+                        format: uuid
+                        pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                      name:
+                        type: string
+                      query:
+                        type: string
+                      filters:
+                        type: array
+                        items:
+                          type: string
+                      annotations:
+                        type: object
+                        propertyNames:
+                          type: string
+                        additionalProperties: {}
+                      id:
+                        type: string
+                        format: uuid
+                        pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                      createdAt: {}
+                      updatedAt: {}
+                    required:
+                      - accountId
+                      - name
+                      - filters
+                      - id
+                      - createdAt
+                      - updatedAt
+                    additionalProperties: false
+                  error:
+                    type: string
+                required:
+                  - name
+                  - status
+                additionalProperties: false
+          required:
+            - results
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostApiV1ChannelsBatchUpsertNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostApiV1ChannelsBatchUpsertRequestBody:
+      type: object
+      properties:
+        channels:
+          maxItems: 200
+          type: array
+          items:
+            type: object
+            properties:
+              query:
+                type: string
+              filters:
+                type: array
+                items:
+                  type: string
+              annotations:
+                type: object
+                propertyNames:
+                  type: string
+                additionalProperties: {}
+              name:
+                type: string
+            required:
+              - name
+      required:
+        - channels
+    PutApiV1ChannelsUpdatePositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            accountId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            name:
+              type: string
+            query:
+              type: string
+            filters:
+              type: array
+              items:
+                type: string
+            annotations:
+              type: object
+              propertyNames:
+                type: string
+              additionalProperties: {}
+            id:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            createdAt: {}
+            updatedAt: {}
+          required:
+            - accountId
+            - name
+            - filters
+            - id
+            - createdAt
+            - updatedAt
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PutApiV1ChannelsUpdateNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PutApiV1ChannelsUpdateRequestBody:
+      type: object
+      properties:
+        query:
+          type: string
+        filters:
+          type: array
+          items:
+            type: string
+        annotations:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+        name:
+          type: string
+      required:
+        - name
+    DeleteApiV1ChannelsDeleteParameterName:
+      type: string
+    DeleteApiV1ChannelsDeletePositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            success:
+              type: boolean
+          required:
+            - success
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    DeleteApiV1ChannelsDeleteNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    GetApiV1ChannelsRulesParameterName:
+      type: string
+    GetApiV1ChannelsRulesParameterFilters:
+      anyOf:
+        - type: string
+        - type: array
+          items:
+            type: string
+    GetApiV1ChannelsRulesParameterPage:
+      default: 1
+      type: number
+    GetApiV1ChannelsRulesParameterPerPage:
+      default: 20
+      type: number
+    GetApiV1ChannelsRulesParameterIncludeClassifications:
+      default: 1
+      type: number
+    GetApiV1ChannelsRulesPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            rules:
+              type: array
+              items:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                  type:
+                    type: string
+                  version:
+                    type: string
+                  iacLanguage:
+                    type: string
+                  name:
+                    type: string
+                  shortName:
+                    type:
+                      - string
+                      - "null"
+                  revision:
+                    type: number
+                  revisions:
+                    type: array
+                    items:
+                      type: number
+                  classificationPaths:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          accountId:
+                            type: string
+                            format: uuid
+                            pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                          name:
+                            type: string
+                          shortName:
+                            type:
+                              - string
+                              - "null"
+                        required:
+                          - accountId
+                          - name
+                          - shortName
+                        additionalProperties: false
+                  annotations:
+                    type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties: {}
+                  metadata:
+                    type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties: {}
+                  body:
+                    type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties: {}
+                  id:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                  createdAt: {}
+                  updatedAt: {}
+                required:
+                  - accountId
+                  - type
+                  - version
+                  - iacLanguage
+                  - name
+                  - shortName
+                  - revision
+                  - revisions
+                  - id
+                  - createdAt
+                  - updatedAt
+                additionalProperties: false
+            total:
+              type: number
+            page:
+              type: number
+            perPage:
+              type: number
+          required:
+            - rules
+            - total
+            - page
+            - perPage
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetApiV1ChannelsRulesNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    GetApiV1ChannelsSearchParameterPage:
+      default: 1
+      type: number
+    GetApiV1ChannelsSearchParameterPerPage:
+      default: 20
+      type: number
+    GetApiV1ChannelsSearchParameterQuery:
+      type: string
+    GetApiV1ChannelsSearchPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            channels:
+              type: array
+              items:
+                type: object
+                properties:
+                  accountId:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                  name:
+                    type: string
+                  query:
+                    type: string
+                  filters:
+                    type: array
+                    items:
+                      type: string
+                  annotations:
+                    type: object
+                    propertyNames:
+                      type: string
+                    additionalProperties: {}
+                  id:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                  createdAt: {}
+                  updatedAt: {}
+                required:
+                  - accountId
+                  - name
+                  - filters
+                  - id
+                  - createdAt
+                  - updatedAt
+                additionalProperties: false
+            total:
+              type: number
+            page:
+              type: number
+            perPage:
+              type: number
+          required:
+            - channels
+            - total
+            - page
+            - perPage
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetApiV1ChannelsSearchNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+  responses: {}
+  parameters: {}
+  examples: {}
+  requestBodies: {}
+  headers: {}
+  securitySchemes: {}
+  links: {}
+  callbacks: {}
+tags:
+  - name: Rules
+    description: Rule management and versioning
+  - name: Classifications
+    description: Classification hierarchy management
+  - name: Channels
+    description: Channel and search management
+servers:
+  - url: http://localhost:3011
