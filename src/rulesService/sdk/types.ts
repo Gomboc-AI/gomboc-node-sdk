@@ -6,13 +6,20 @@ import type {
 
 type Schemas = components['schemas'];
 
+/** OpenAPI error body; optional fields reflect HTTP/client layers (e.g. axios status). */
 export type IRulesServiceErrorType =
-  Schemas['GetApiV1RulesGetNegativeResponse']['error'];
+  Schemas['GetApiV1RulesGetNegativeResponse']['error'] & {
+    code?: string;
+    statusCode?: number;
+  };
 
 export type GetRuleParams =
   operations['GetApiV1RulesGet']['parameters']['query'];
 export type GetRuleResponse =
   Schemas['GetApiV1RulesGetPositiveResponse']['data'];
+
+/** Rule record as returned by GET /v1/rules/get */
+export type Rule = GetRuleResponse;
 
 export type GetRulesPageParams =
   operations['GetApiV1RulesSearch']['parameters']['query'];
@@ -36,6 +43,9 @@ export type GetChannelParams =
   operations['GetApiV1ChannelsGet']['parameters']['query'];
 export type GetChannelResponse =
   Schemas['GetApiV1ChannelsGetPositiveResponse']['data'];
+
+/** Channel record as returned by the channels API */
+export type Channel = GetChannelResponse;
 
 export type GetChannelsSearchRequestParams =
   operations['GetApiV1ChannelsSearch']['parameters']['query'];

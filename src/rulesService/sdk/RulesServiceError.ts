@@ -21,12 +21,27 @@ export class RulesServiceError extends Error implements IRulesServiceErrorType {
   }
 }
 
+function readRulesServiceErrorPayload(data: object): {
+  message?: string;
+  code?: string;
+} | null {
+  const d = data as Record<string, unknown>;
+  if (d.status !== 'error' || d.error == null || typeof d.error !== 'object') {
+    return null;
+  }
+  const errObj = d.error as Record<string, unknown>;
+  const message =
+    typeof errObj.message === 'string' ? errObj.message : undefined;
+  const code = typeof errObj.code === 'string' ? errObj.code : undefined;
+  return { message, code };
+}
+
 export function extractErrorMessage(error: unknown): string {
   if (axios.isAxiosError(error)) {
     if (error.response?.data && typeof error.response.data === 'object') {
-      const data = error.response.data as any;
-      if (data.status === 'error' && data.error?.message) {
-        return data.error.message;
+      const payload = readRulesServiceErrorPayload(error.response.data);
+      if (payload?.message) {
+        return payload.message;
       }
     }
     if (error.response?.statusText) {
@@ -45,9 +60,9 @@ export function extractErrorMessage(error: unknown): string {
 export function extractErrorCode(error: unknown): string | undefined {
   if (axios.isAxiosError(error)) {
     if (error.response?.data && typeof error.response.data === 'object') {
-      const data = error.response.data as any;
-      if (data.status === 'error' && data.error?.code) {
-        return data.error.code;
+      const payload = readRulesServiceErrorPayload(error.response.data);
+      if (payload?.code) {
+        return payload.code;
       }
     }
   }
