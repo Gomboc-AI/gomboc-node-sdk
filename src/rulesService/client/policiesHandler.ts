@@ -188,25 +188,29 @@ export class PoliciesHandler {
   };
 
   public static getPoliciesIac = (policies: Policy[]): string[] => {
-    const allValues = policies.flatMap(policy =>
-      this.getAnnotationValueList(policy.annotations, 'gomboc-ai/iac')
-    );
-    return [...new Set(allValues)];
+    return this.getUniqueAnnotationValuesByKey(policies, 'gomboc-ai/iac');
   };
 
   public static getPoliciesProviders = (policies: Policy[]): string[] => {
-    const allValues = policies.flatMap(policy =>
-      this.getAnnotationValueList(policy.annotations, 'gomboc-ai/providers')
-    );
-    return [...new Set(allValues)];
+    return this.getUniqueAnnotationValuesByKey(policies, 'gomboc-ai/providers');
   };
 
   public static getPoliciesCategories = (policies: Policy[]): string[] => {
+    return this.getUniqueAnnotationValuesByKey(
+      policies,
+      'gomboc-ai/categories'
+    );
+  };
+
+  private static getUniqueAnnotationValuesByKey(
+    policies: Policy[],
+    key: string
+  ): string[] {
     const allValues = policies.flatMap(policy =>
-      this.getAnnotationValueList(policy.annotations, 'gomboc-ai/categories')
+      this.getAnnotationValueList(policy.annotations, key)
     );
     return [...new Set(allValues)];
-  };
+  }
 
   public static getPoliciesImpactScore = (policies: Policy[]): string[] => {
     return policies.map(policy =>

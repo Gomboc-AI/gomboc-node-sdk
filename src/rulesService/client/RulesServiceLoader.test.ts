@@ -14,31 +14,6 @@ import type { Exception, Policy, PolicySet } from './types';
 import { SagaRollbackError } from './types';
 import { err, ok } from 'neverthrow';
 
-/** Private loader methods reached from tests (single `unknown` bridge, no `any`). */
-type RulesServiceLoaderInternals = {
-  getPolicySetQuery(policyNames: string[]): string;
-  isQueryEmpty(queryString: string): boolean;
-  ensureDeprecatedFilter(query: string): string;
-  parseExceptionRuleNamesFromQuery(query: string): string[];
-  getPolicySetNamesFromChannelQuery(query: string): string[];
-  attachPolicySetToWorkspaceChannelQuery(
-    workspaceChannelQuery: string,
-    policySetShortName: string
-  ): string;
-  removePolicySetFromWorkspaceChannelQuery(
-    policySetShortName: string,
-    workspaceChannelQuery: string | null | undefined
-  ): string | undefined;
-  removePolicySetFromWorkspaceChannels(
-    policySetShortName: string
-  ): Promise<void>;
-  getExceptionCountsByPolicySetName(): Promise<Map<string, number>>;
-};
-
-function loaderInternals(loader: TestLoader): RulesServiceLoaderInternals {
-  return loader as unknown as RulesServiceLoaderInternals;
-}
-
 function makeChannel(name: string, filters: string[] = []) {
   return {
     accountId: 'acct-1',
@@ -725,11 +700,17 @@ describe('RulesServiceLoader', () => {
       const deleteExceptionSpy = jest
         .spyOn(loader, 'deleteException')
         .mockResolvedValue(undefined);
-      const removeFromWorkspacesSpy = jest
-        .spyOn(loaderInternals(loader), 'removePolicySetFromWorkspaceChannels')
-        .mockResolvedValue(undefined);
 
       loader.client = {
+        searchForChannels: jest.fn().mockResolvedValue(
+          ok({
+            channels: [],
+            total: 0,
+            page: 1,
+            perPage: 100,
+          })
+        ),
+        batchUpsertChannels: jest.fn().mockResolvedValue(ok({ results: [] })),
         deleteChannel: jest.fn().mockResolvedValue(ok({ success: true })),
       };
 
@@ -740,7 +721,7 @@ describe('RulesServiceLoader', () => {
       });
       expect(deleteExceptionSpy).toHaveBeenNthCalledWith(1, { name: 'EX-A' });
       expect(deleteExceptionSpy).toHaveBeenNthCalledWith(2, { name: 'EX-B' });
-      expect(removeFromWorkspacesSpy).toHaveBeenCalledWith('default');
+      expect(loader.client.searchForChannels).toHaveBeenCalled();
       expect(loader.client.deleteChannel).toHaveBeenCalledWith({
         name: 'acct-1/set/default',
       });
@@ -748,8 +729,9 @@ describe('RulesServiceLoader', () => {
       const lastExceptionCallOrder = Math.max(
         ...deleteExceptionSpy.mock.invocationCallOrder
       );
-      const removeWorkspacesCallOrder =
-        removeFromWorkspacesSpy.mock.invocationCallOrder[0];
+      const removeWorkspacesCallOrder = (
+        loader.client.searchForChannels as jest.Mock
+      ).mock.invocationCallOrder[0];
       const deletePolicySetCallOrder = (
         loader.client.deleteChannel as jest.Mock
       ).mock.invocationCallOrder[0];
@@ -954,247 +936,6 @@ describe('RulesServiceLoader', () => {
         { name: 'default', id: 'ps-1' },
         { name: 'platform', id: 'ps-2' },
       ]);
-    });
-  });
-
-  describe('getPolicySetQuery', () => {
-    it('returns empty string for empty policy names array', () => {
-      const { loader } = buildLoader();
-      expect(loaderInternals(loader).getPolicySetQuery([])).toBe('');
-    });
-
-    it('builds a single-policy query wrapped with deprecated filter', () => {
-      const { loader } = buildLoader();
-      const result = loaderInternals(loader).getPolicySetQuery([
-        'gomboc-ai/policy/s3',
-      ]);
-      expect(result).toBe(
-        '(and (or (contains "gomboc-ai/policy/s3" finding.classification)) (not (eq $.annotations["deprecated"] "true")))'
-      );
-    });
-
-    it('builds a multi-policy query with multiple contains clauses', () => {
-      const { loader } = buildLoader();
-      const result = loaderInternals(loader).getPolicySetQuery([
-        'gomboc-ai/policy/a',
-        'gomboc-ai/policy/b',
-      ]);
-      expect(result).toContain(
-        '(contains "gomboc-ai/policy/a" finding.classification)'
-      );
-      expect(result).toContain(
-        '(contains "gomboc-ai/policy/b" finding.classification)'
-      );
-      expect(result).toContain('(not (eq $.annotations["deprecated"] "true"))');
-    });
-
-    it('deduplicates policy names', () => {
-      const { loader } = buildLoader();
-      const result = loaderInternals(loader).getPolicySetQuery(['p', 'p', 'p']);
-      const matches = (result as string).match(
-        /\(contains "p" finding\.classification\)/g
-      );
-      expect(matches).toHaveLength(1);
-    });
-  });
-
-  describe('isQueryEmpty', () => {
-    it('returns true for "(or )"', () => {
-      const { loader } = buildLoader();
-      expect(loaderInternals(loader).isQueryEmpty('(or )')).toBe(true);
-    });
-
-    it('returns false for a non-empty (or ...) query', () => {
-      const { loader } = buildLoader();
-      expect(
-        loaderInternals(loader).isQueryEmpty(
-          '(or (contains "x" finding.classification))'
-        )
-      ).toBe(false);
-    });
-
-    it('returns true for "(and (or ) (not ...))" style query', () => {
-      const { loader } = buildLoader();
-      expect(
-        loaderInternals(loader).isQueryEmpty(
-          '(and (or ) (not (eq $.annotations["deprecated"] "true")))'
-        )
-      ).toBe(true);
-    });
-
-    it('returns false for "(and (or (channel "..." true)) (not ...))"', () => {
-      const { loader } = buildLoader();
-      expect(
-        loaderInternals(loader).isQueryEmpty(
-          '(and (or (channel "acct-1/set/ps" true)) (not (eq $.annotations["deprecated"] "true")))'
-        )
-      ).toBe(false);
-    });
-
-    it('returns false for an empty string', () => {
-      const { loader } = buildLoader();
-      expect(loaderInternals(loader).isQueryEmpty('')).toBe(false);
-    });
-  });
-
-  describe('ensureDeprecatedFilter', () => {
-    const DEPRECATED = '(not (eq $.annotations["deprecated"] "true"))';
-
-    it('wraps a plain (or ...) query as (and (or ...) (not ...))', () => {
-      const { loader } = buildLoader();
-      const query = '(or (contains "p" finding.classification))';
-      expect(loaderInternals(loader).ensureDeprecatedFilter(query)).toBe(
-        `(and ${query} ${DEPRECATED})`
-      );
-    });
-
-    it('is idempotent — does not double-wrap an already-wrapped query', () => {
-      const { loader } = buildLoader();
-      const wrapped = `(and (or (contains "p" finding.classification)) ${DEPRECATED})`;
-      expect(loaderInternals(loader).ensureDeprecatedFilter(wrapped)).toBe(
-        wrapped
-      );
-    });
-
-    it('inserts deprecated filter inside an existing (and ...) before its closing paren', () => {
-      const { loader } = buildLoader();
-      const query = '(and (or (channel "acct-1/set/ps" true)))';
-      const result = loaderInternals(loader).ensureDeprecatedFilter(query);
-      expect(result).toContain(DEPRECATED);
-      expect(result.startsWith('(and')).toBe(true);
-    });
-
-    it('returns an unchanged empty string', () => {
-      const { loader } = buildLoader();
-      expect(loaderInternals(loader).ensureDeprecatedFilter('')).toBe('');
-    });
-  });
-
-  describe('parseExceptionRuleNamesFromQuery', () => {
-    it('extracts rule names from a multi-clause query', () => {
-      const { loader } = buildLoader();
-      const query =
-        '(or (eq $.name "gomboc-ai/rule-a") (eq $.name "gomboc-ai/rule-b"))';
-      expect(
-        loaderInternals(loader).parseExceptionRuleNamesFromQuery(query)
-      ).toEqual(['gomboc-ai/rule-a', 'gomboc-ai/rule-b']);
-    });
-
-    it('returns empty array for an empty query', () => {
-      const { loader } = buildLoader();
-      expect(
-        loaderInternals(loader).parseExceptionRuleNamesFromQuery('')
-      ).toEqual([]);
-    });
-
-    it('returns empty array for a blank/whitespace query', () => {
-      const { loader } = buildLoader();
-      expect(
-        loaderInternals(loader).parseExceptionRuleNamesFromQuery('   ')
-      ).toEqual([]);
-    });
-  });
-
-  describe('getPolicySetNamesFromChannelQuery', () => {
-    it('extracts short policy set names from channel predicates in query', () => {
-      const { loader } = buildLoader();
-      const query =
-        '(and (or (channel "acct-1/set/default" true) (channel "acct-1/set/platform" true)) (not (eq $.annotations["deprecated"] "true")))';
-      expect(
-        loaderInternals(loader).getPolicySetNamesFromChannelQuery(query)
-      ).toEqual(['default', 'platform']);
-    });
-
-    it('returns empty array for empty query', () => {
-      const { loader } = buildLoader();
-      expect(
-        loaderInternals(loader).getPolicySetNamesFromChannelQuery('')
-      ).toEqual([]);
-    });
-
-    it('returns empty array when query contains no policy set channels', () => {
-      const { loader } = buildLoader();
-      const query = '(eq $.name "some-rule")';
-      expect(
-        loaderInternals(loader).getPolicySetNamesFromChannelQuery(query)
-      ).toEqual([]);
-    });
-  });
-
-  describe('attachPolicySetToWorkspaceChannelQuery', () => {
-    const DEPRECATED = '(not (eq $.annotations["deprecated"] "true"))';
-
-    it('wraps an empty query with the new policy set channel', () => {
-      const { loader } = buildLoader();
-      const result = loaderInternals(
-        loader
-      ).attachPolicySetToWorkspaceChannelQuery('', 'my-ps');
-      expect(result).toContain('(channel "acct-1/set/my-ps" true)');
-      expect(result).toContain(DEPRECATED);
-    });
-
-    it('inserts new channel inside existing (and (or ...)) query', () => {
-      const { loader } = buildLoader();
-      const existing = `(and (or (channel "acct-1/set/default" true)) ${DEPRECATED})`;
-      const result = loaderInternals(
-        loader
-      ).attachPolicySetToWorkspaceChannelQuery(existing, 'platform');
-      expect(result).toContain('(channel "acct-1/set/default" true)');
-      expect(result).toContain('(channel "acct-1/set/platform" true)');
-    });
-
-    it('is idempotent — does not add channel if already present', () => {
-      const { loader } = buildLoader();
-      const existing = `(and (or (channel "acct-1/set/my-ps" true)) ${DEPRECATED})`;
-      const result = loaderInternals(
-        loader
-      ).attachPolicySetToWorkspaceChannelQuery(existing, 'my-ps');
-      const channelMatches = (result as string).match(
-        /\(channel "acct-1\/set\/my-ps" true\)/g
-      );
-      expect(channelMatches).toHaveLength(1);
-    });
-  });
-
-  describe('removePolicySetFromWorkspaceChannelQuery', () => {
-    const DEPRECATED = '(not (eq $.annotations["deprecated"] "true"))';
-
-    it('removes the exact policy set channel predicate from query', () => {
-      const { loader } = buildLoader();
-      const query = `(and (or (channel "acct-1/set/default" true) (channel "acct-1/set/platform" true)) ${DEPRECATED})`;
-      const result = loaderInternals(
-        loader
-      ).removePolicySetFromWorkspaceChannelQuery('platform', query);
-      expect(result).not.toContain('(channel "acct-1/set/platform" true)');
-      expect(result).toContain('(channel "acct-1/set/default" true)');
-    });
-
-    it('returns empty string when the last channel is removed', () => {
-      const { loader } = buildLoader();
-      const query = `(and (or (channel "acct-1/set/only-ps" true)) ${DEPRECATED})`;
-      const result = loaderInternals(
-        loader
-      ).removePolicySetFromWorkspaceChannelQuery('only-ps', query);
-      expect(result).toBe('');
-    });
-
-    it('returns undefined when workspaceChannelQuery is null/undefined', () => {
-      const { loader } = buildLoader();
-      expect(
-        loaderInternals(loader).removePolicySetFromWorkspaceChannelQuery(
-          'ps',
-          undefined
-        )
-      ).toBeUndefined();
-    });
-
-    it('returns the query unchanged when the policy set is not present', () => {
-      const { loader } = buildLoader();
-      const query = `(and (or (channel "acct-1/set/default" true)) ${DEPRECATED})`;
-      const result = loaderInternals(
-        loader
-      ).removePolicySetFromWorkspaceChannelQuery('other-ps', query);
-      expect(result).toContain('(channel "acct-1/set/default" true)');
     });
   });
 
@@ -1523,9 +1264,12 @@ describe('RulesServiceLoader', () => {
   describe('getPolicySets', () => {
     it('strips {accountId}/set/ prefix from channel names', async () => {
       const { loader } = buildLoader();
-      jest
-        .spyOn(loaderInternals(loader), 'getExceptionCountsByPolicySetName')
-        .mockResolvedValue(new Map());
+      jest.spyOn(loader, 'getExceptions').mockResolvedValue({
+        items: [],
+        total: 0,
+        page: 1,
+        perPage: 100,
+      });
       jest
         .spyOn(loader, 'getWorkspaceChannelsWithPolicySet')
         .mockResolvedValue([]);
@@ -1547,9 +1291,12 @@ describe('RulesServiceLoader', () => {
 
     it('counts policies from (contains "..." finding.classification) clauses in query', async () => {
       const { loader } = buildLoader();
-      jest
-        .spyOn(loaderInternals(loader), 'getExceptionCountsByPolicySetName')
-        .mockResolvedValue(new Map());
+      jest.spyOn(loader, 'getExceptions').mockResolvedValue({
+        items: [],
+        total: 0,
+        page: 1,
+        perPage: 100,
+      });
       jest
         .spyOn(loader, 'getWorkspaceChannelsWithPolicySet')
         .mockResolvedValue([]);
@@ -1574,10 +1321,31 @@ describe('RulesServiceLoader', () => {
 
     it('merges exceptionsCount from exception search', async () => {
       const { loader } = buildLoader();
-      const exceptionsMap = new Map([['my-ps', 3]]);
-      jest
-        .spyOn(loaderInternals(loader), 'getExceptionCountsByPolicySetName')
-        .mockResolvedValue(exceptionsMap);
+      jest.spyOn(loader, 'getExceptions').mockResolvedValue({
+        items: [
+          makeMinimalException({
+            name: 'EX-1',
+            rules: [],
+            policySets: ['my-ps'],
+            createdBy: 'u',
+          }),
+          makeMinimalException({
+            name: 'EX-2',
+            rules: [],
+            policySets: ['my-ps'],
+            createdBy: 'u',
+          }),
+          makeMinimalException({
+            name: 'EX-3',
+            rules: [],
+            policySets: ['my-ps'],
+            createdBy: 'u',
+          }),
+        ],
+        total: 3,
+        page: 1,
+        perPage: 100,
+      });
       jest
         .spyOn(loader, 'getWorkspaceChannelsWithPolicySet')
         .mockResolvedValue([]);

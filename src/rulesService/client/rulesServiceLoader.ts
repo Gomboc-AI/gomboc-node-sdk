@@ -1,10 +1,10 @@
 import {
   ALL_POLICIES_CHANNEL_NAME,
+  ensureDeprecatedFilterOnQuery,
   extractErrorInfo,
   mergeSearchQueryWithDeprecatedFilter,
   RulesServiceError,
   RulesServiceSdk,
-  ensureDeprecatedFilterOnQuery,
 } from '../sdk';
 import {
   BatchUpsertChannelsRequestParams,
@@ -38,6 +38,19 @@ import {
 } from '../../sagaAccessService';
 import type { ILogger } from '../ILogger';
 import { parseGombocAiStringArrayAnnotation } from './schemas/exceptionChannelAnnotations';
+import {
+  POLICY_QUERY_SUBSTRING,
+  POLICY_SET_POLICY_NAME_REGEX,
+  attachPolicySetToWorkspaceChannelQuery as attachPolicySetToWorkspaceChannelQueryUtil,
+  filtersWithoutExceptionChannelClause as filtersWithoutExceptionChannelClauseUtil,
+  getPolicyCountFromChannelQuery as getPolicyCountFromChannelQueryUtil,
+  getPolicyNamesFromQuery as getPolicyNamesFromQueryUtil,
+  getPolicySetNamesFromChannelQuery as getPolicySetNamesFromChannelQueryUtil,
+  getPolicySetQuery as getPolicySetQueryUtil,
+  mergePolicySetFiltersWithExceptionChannelName as mergePolicySetFiltersWithExceptionChannelNameUtil,
+  parseExceptionRuleNamesFromQuery as parseExceptionRuleNamesFromQueryUtil,
+  removePolicySetFromWorkspaceChannelQuery as removePolicySetFromWorkspaceChannelQueryUtil,
+} from './queryUtils';
 
 type BatchUpsertChannelResult =
   BatchUpsertChannelsRequestResponse['results'][number];
@@ -52,12 +65,6 @@ export class RulesServiceLoader {
   private client: IRulesServiceSdk;
   private accountId: string;
   private logger: ILogger;
-  private static readonly POLICY_QUERY_SUBSTRING =
-    /\(contains\s+"([^"]+)"\s+\$\.classification\)/g;
-
-  /** Matches policy name in (contains "name" finding.classification) for getPolicySetPolicies */
-  private static readonly POLICY_SET_POLICY_NAME_REGEX =
-    /.*?\(contains\s+"([^"]+)"\s+finding\.classification\).*?/g;
 
   public allPolicies: Policy[];
   public accountPolicies: Policy[];
@@ -107,39 +114,6 @@ export class RulesServiceLoader {
   /** Query string that references the default channel (used as the global channel's content). */
   private getDefaultChannelQuery(): string {
     return `(channel "${this.getDefaultChannelName()}" true)`;
-  }
-
-  private isQueryEmpty(queryString: string): boolean {
-    const trimmed = queryString.trim();
-    const orPrefix = /^\s*\(\s*or\s*/i;
-    const andOrPrefix = /^\s*\(\s*and\s*\(\s*or\s*/i;
-
-    let openParenIndex: number;
-    if (andOrPrefix.test(trimmed)) {
-      // (and (or ...)) — find the inner (or's opening paren (second "(")
-      const firstParen = trimmed.indexOf('(');
-      openParenIndex = trimmed.indexOf('(', firstParen + 1);
-    } else if (orPrefix.test(trimmed)) {
-      // (or ...)
-      openParenIndex = trimmed.indexOf('(');
-    } else {
-      return false;
-    }
-
-    if (openParenIndex === -1) return false;
-    let depth = 0;
-    for (let i = openParenIndex; i < trimmed.length; i++) {
-      const c = trimmed[i];
-      if (c === '(') depth++;
-      else if (c === ')') {
-        depth--;
-        if (depth === 0) {
-          const inner = trimmed.substring(openParenIndex + 1, i);
-          return !/[()]/.test(inner);
-        }
-      }
-    }
-    return false;
   }
 
   private getPolicySetChannelName(policySetName: string) {
@@ -200,16 +174,7 @@ export class RulesServiceLoader {
    * {@link createException}. Used when `annotations.rules` is absent (older channels).
    */
   private parseExceptionRuleNamesFromQuery(query: string): string[] {
-    if (!query.trim()) {
-      return [];
-    }
-    const names: string[] = [];
-    const re = /\(eq \$\.name "([^"]*)"\)/g;
-    let m: RegExpExecArray | null;
-    while ((m = re.exec(query)) !== null) {
-      names.push(m[1]);
-    }
-    return names;
+    return parseExceptionRuleNamesFromQueryUtil(query);
   }
 
   /** Maps a rules-service exception channel to the API shape (short name, string dates). */
@@ -622,7 +587,7 @@ export class RulesServiceLoader {
      */
     const convertQueryToClassificationQuery = (query: string): string => {
       return query.replace(
-        RulesServiceLoader.POLICY_QUERY_SUBSTRING,
+        POLICY_QUERY_SUBSTRING,
         (_, classificationName) => `(eq $.name "${classificationName}")`
       );
     };
@@ -682,9 +647,7 @@ export class RulesServiceLoader {
   }
 
   private getPolicyCountFromChannelQuery(channelQuery: string) {
-    const matches =
-      channelQuery.match(RulesServiceLoader.POLICY_SET_POLICY_NAME_REGEX) || [];
-    return matches.length;
+    return getPolicyCountFromChannelQueryUtil(channelQuery);
   }
 
   public async getWorkspaceChannelsWithPolicySet(
@@ -877,19 +840,14 @@ export class RulesServiceLoader {
     }
 
     // Extract policy names from query like (contains "name" finding.classification)
-    const matches = policySet.query.matchAll(
-      RulesServiceLoader.POLICY_SET_POLICY_NAME_REGEX
-    );
+    const matches = policySet.query.matchAll(POLICY_SET_POLICY_NAME_REGEX);
     const policyNames = Array.from(matches, m => m[1]);
     // Match policy names with allPolicies to get Policy objects
     return this.allPolicies.filter(p => policyNames.includes(p.id));
   }
 
   private getPolicyNamesFromQuery(query: string): string[] {
-    const matches = query.matchAll(
-      RulesServiceLoader.POLICY_SET_POLICY_NAME_REGEX
-    );
-    return Array.from(matches, m => m[1]);
+    return getPolicyNamesFromQueryUtil(query);
   }
 
   /**
@@ -905,73 +863,9 @@ export class RulesServiceLoader {
     workspaceQuery: string = '',
     policySetName: string
   ) {
-    const trimmedWorkspaceQuery = workspaceQuery.trim();
-    const policySetChannelName = this.getPolicySetChannelName(policySetName);
-    const escapedChannelName = policySetChannelName.replace(
-      /[.*+?^${}()|[\]\\]/g,
-      '\\$&'
-    );
-    // Require whitespace or " immediately after so we match the exact channel name only
-    if (
-      new RegExp(escapedChannelName + '(?=[\\s"])').test(trimmedWorkspaceQuery)
-    ) {
-      return this.ensureDeprecatedFilter(workspaceQuery);
-    }
-
-    // First match "(and", then match "(and (or" (with varying whitespace) — does not match plain "(or"
-    const startsWithAnd = /^\s*\(\s*and\s*/i.test(trimmedWorkspaceQuery);
-    const startsWithAndOr = /^\s*\(\s*and\s*\(\s*or\s*/i.test(
-      trimmedWorkspaceQuery
-    );
-    const policySetChannel = `(channel "${policySetChannelName}" true)`;
-    if (startsWithAndOr) {
-      // Add policy set channel within the existing (or ...) — find the closing paren of the first (or
-      const firstOrMatch = trimmedWorkspaceQuery.match(/\(\s*or\s/i);
-      const openParenIndex =
-        firstOrMatch && firstOrMatch.index !== undefined
-          ? firstOrMatch.index
-          : -1;
-      let insertAtIndex = -1;
-      if (openParenIndex !== -1) {
-        let depth = 0;
-        for (let i = openParenIndex; i < trimmedWorkspaceQuery.length; i++) {
-          const c = trimmedWorkspaceQuery[i];
-          if (c === '(') depth++;
-          else if (c === ')') {
-            depth--;
-            if (depth === 0) {
-              insertAtIndex = i;
-              break;
-            }
-          }
-        }
-      }
-      if (insertAtIndex !== -1) {
-        const beforeInsert = trimmedWorkspaceQuery.substring(0, insertAtIndex);
-        const afterInsert = trimmedWorkspaceQuery.substring(insertAtIndex);
-        return this.ensureDeprecatedFilter(
-          `${beforeInsert} ${policySetChannel}${afterInsert}`
-        );
-      }
-      return this.ensureDeprecatedFilter(workspaceQuery);
-    } else if (startsWithAnd) {
-      // Has (and but no (or: wrap inner content in (or ... (channel ...))
-      const andMatch = trimmedWorkspaceQuery.match(/^\s*\(\s*and\s*/i);
-      if (andMatch) {
-        const indexAfterAnd = andMatch.index! + andMatch[0].length;
-        const innerContent = trimmedWorkspaceQuery.substring(
-          indexAfterAnd,
-          trimmedWorkspaceQuery.length - 1
-        );
-        return this.ensureDeprecatedFilter(
-          `(and (or ${innerContent} ${policySetChannel}))`
-        );
-      }
-      return this.ensureDeprecatedFilter(workspaceQuery);
-    }
-
-    return this.ensureDeprecatedFilter(
-      `(and (or ${trimmedWorkspaceQuery} ${policySetChannel}))`
+    return attachPolicySetToWorkspaceChannelQueryUtil(
+      workspaceQuery,
+      this.getPolicySetChannelName(policySetName)
     );
   }
 
@@ -980,16 +874,7 @@ export class RulesServiceLoader {
    * Matches (channel "accountId/set/PolicySetName" true) and returns the PolicySetName parts.
    */
   private getPolicySetNamesFromChannelQuery(query: string): string[] {
-    if (!query?.trim()) return [];
-    const prefix = `${this.accountId}/set/`;
-    const escapedPrefix = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`\\(channel\\s+"${escapedPrefix}([^"]+)"`, 'g');
-    const names: string[] = [];
-    let match: RegExpExecArray | null;
-    while ((match = regex.exec(query)) !== null) {
-      names.push(match[1]);
-    }
-    return names;
+    return getPolicySetNamesFromChannelQueryUtil(query, this.accountId);
   }
 
   public async getWorkspacePolicySets(workspaceId: string): Promise<string[]> {
@@ -1083,47 +968,7 @@ export class RulesServiceLoader {
   }
 
   private getPolicySetQuery(updatedPolicyNameList: string[]) {
-    const uniquePolicyNames = [...new Set(updatedPolicyNameList)];
-    const updatedPolicyQueries = uniquePolicyNames.map(
-      name => `(contains "${name}" finding.classification)`
-    );
-    const newPolicySetQuery = `(or ${updatedPolicyQueries.join(' ')})`;
-
-    if (newPolicySetQuery === '(or )') {
-      return '';
-    }
-
-    return this.ensureDeprecatedFilter(newPolicySetQuery);
-  }
-
-  /**
-   * Policy set `filters` entries for exceptions use the channel predicate form
-   * `(channel "<full channel path>" true)`.
-   */
-  private escapeChannelPathForChannelPredicate(path: string): string {
-    return path.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-  }
-
-  private policySetExceptionChannelFilterClause(
-    exceptionChannelName: string
-  ): string {
-    const escaped = this.escapeChannelPathForChannelPredicate(
-      exceptionChannelName.trim()
-    );
-    return `(channel "${escaped}" true)`;
-  }
-
-  private policySetFiltersAlreadyReferenceExceptionChannel(
-    currentFilters: string[],
-    exceptionChannelName: string
-  ): boolean {
-    const name = exceptionChannelName.trim();
-    if (!name) {
-      return true;
-    }
-    return currentFilters.includes(
-      this.policySetExceptionChannelFilterClause(name)
-    );
+    return getPolicySetQueryUtil(updatedPolicyNameList);
   }
 
   /** Appends the exception channel filter clause to the policy set channel's filters when missing. */
@@ -1131,22 +976,10 @@ export class RulesServiceLoader {
     currentFilters: string[],
     exceptionChannelName: string
   ): string[] {
-    const name = exceptionChannelName.trim();
-    if (!name) {
-      return currentFilters;
-    }
-    if (
-      this.policySetFiltersAlreadyReferenceExceptionChannel(
-        currentFilters,
-        name
-      )
-    ) {
-      return currentFilters;
-    }
-    return [
-      ...currentFilters,
-      this.policySetExceptionChannelFilterClause(name),
-    ];
+    return mergePolicySetFiltersWithExceptionChannelNameUtil(
+      currentFilters,
+      exceptionChannelName
+    );
   }
 
   /** Removes the exception channel predicate from a policy set `filters` list. */
@@ -1154,9 +987,247 @@ export class RulesServiceLoader {
     filters: string[],
     exceptionChannelName: string
   ): string[] {
-    const clause =
-      this.policySetExceptionChannelFilterClause(exceptionChannelName);
-    return filters.filter(f => f !== clause);
+    return filtersWithoutExceptionChannelClauseUtil(
+      filters,
+      exceptionChannelName
+    );
+  }
+
+  private buildPolicySetStepState(policySets: string[]) {
+    return Object.fromEntries(
+      policySets.map(policySetName => [
+        policySetName,
+        {
+          channelName: this.getPolicySetChannelName(policySetName),
+          snapshot: null,
+          didUpdate: false,
+        },
+      ])
+    );
+  }
+
+  private buildAttachExceptionFilterStep(args: {
+    policySetName: string;
+    exceptionChannelName: string;
+    ctx: CreateExceptionSagaContext;
+  }): SagaStep {
+    const { policySetName, exceptionChannelName, ctx } = args;
+
+    return {
+      name: `attach_exception_filter_to_policy_set:${policySetName}`,
+      execute: async () => {
+        const state = ctx.policySetStepState[policySetName];
+        const channelResponse = await this.getChannelSafe({
+          name: state.channelName,
+        });
+        if (!channelResponse) {
+          throw new Error(
+            `Policy set channel not found for policy set "${policySetName}"`
+          );
+        }
+
+        const snapshot = channelResponse;
+        state.snapshot = snapshot;
+        const prevFilters = snapshot.filters ?? [];
+        const nextFilters = this.mergePolicySetFiltersWithExceptionChannelName(
+          prevFilters,
+          exceptionChannelName
+        );
+        if (
+          nextFilters.length === prevFilters.length &&
+          nextFilters.every((f, i) => f === prevFilters[i])
+        ) {
+          return;
+        }
+
+        await this.updateChannel({
+          name: state.channelName,
+          query: snapshot.query,
+          filters: nextFilters,
+          annotations: snapshot.annotations,
+        });
+        state.didUpdate = true;
+      },
+      compensate: async () => {
+        const state = ctx.policySetStepState[policySetName];
+        if (!state.didUpdate || !state.snapshot) {
+          return;
+        }
+
+        await this.updateChannel({
+          name: state.channelName,
+          query: state.snapshot.query,
+          filters: state.snapshot.filters,
+          annotations: state.snapshot.annotations,
+        });
+      },
+    };
+  }
+
+  private buildDetachExceptionFilterStep(args: {
+    policySetName: string;
+    exceptionChannelName: string;
+    ctx: DeleteExceptionSagaContext;
+  }): SagaStep {
+    const { policySetName, exceptionChannelName, ctx } = args;
+
+    return {
+      name: `detach_exception_filter_from_policy_set:${policySetName}`,
+      execute: async () => {
+        const state = ctx.policySetStepState[policySetName];
+        const channelResponse = await this.getChannelSafe({
+          name: state.channelName,
+        });
+        if (!channelResponse) {
+          throw new Error(
+            `Policy set channel not found for policy set "${policySetName}"`
+          );
+        }
+
+        const snapshot = channelResponse;
+        state.snapshot = snapshot;
+        const prevFilters = snapshot.filters ?? [];
+        const nextFilters = this.filtersWithoutExceptionChannelClause(
+          prevFilters,
+          exceptionChannelName
+        );
+        if (
+          nextFilters.length === prevFilters.length &&
+          nextFilters.every((f, i) => f === prevFilters[i])
+        ) {
+          return;
+        }
+
+        await this.updateChannel({
+          name: state.channelName,
+          query: snapshot.query,
+          filters: nextFilters,
+          annotations: snapshot.annotations,
+        });
+        state.didUpdate = true;
+      },
+      compensate: async () => {
+        const state = ctx.policySetStepState[policySetName];
+        if (!state.didUpdate || !state.snapshot) {
+          return;
+        }
+
+        await this.updateChannel({
+          name: state.channelName,
+          query: state.snapshot.query,
+          filters: state.snapshot.filters,
+          annotations: state.snapshot.annotations,
+        });
+      },
+    };
+  }
+
+  private buildCreateExceptionSteps(args: {
+    query: string;
+    createdAt: string;
+    exceptionChannelName: string;
+    rules: string[];
+    policySets: string[];
+    createdBy: string;
+    description: string;
+    ctx: CreateExceptionSagaContext;
+  }): SagaStep[] {
+    const {
+      query,
+      createdAt,
+      exceptionChannelName,
+      rules,
+      policySets,
+      createdBy,
+      description,
+      ctx,
+    } = args;
+
+    const steps: SagaStep[] = [
+      {
+        name: 'create_exception_channel',
+        execute: async () => {
+          const res = await this.client.createChannel({
+            query,
+            name: exceptionChannelName,
+            annotations: {
+              'gomboc-ai/created-at': createdAt,
+              'gomboc-ai/created-by': createdBy,
+              'gomboc-ai/rules': rules,
+              'gomboc-ai/policy-sets': policySets,
+              'gomboc-ai/description': description,
+            },
+          });
+
+          if (res.isErr()) {
+            if (res.error.statusCode === 409) {
+              ctx.exceptionChannelCreated = true;
+            }
+            throw res.error;
+          }
+          ctx.exceptionChannelCreated = true;
+        },
+        compensate: async () => {
+          if (!ctx.exceptionChannelCreated) {
+            return;
+          }
+          const deleteRes = await this.client.deleteChannel({
+            name: exceptionChannelName,
+          });
+          if (deleteRes.isErr() || !deleteRes.value.success) {
+            throw new Error(
+              `Failed to rollback exception channel "${exceptionChannelName}"`
+            );
+          }
+        },
+      },
+    ];
+
+    for (const policySetName of policySets) {
+      steps.push(
+        this.buildAttachExceptionFilterStep({
+          policySetName,
+          exceptionChannelName,
+          ctx,
+        })
+      );
+    }
+
+    return steps;
+  }
+
+  private buildDeleteExceptionSteps(args: {
+    exceptionChannelName: string;
+    policySets: string[];
+    ctx: DeleteExceptionSagaContext;
+  }): SagaStep[] {
+    const { exceptionChannelName, policySets, ctx } = args;
+    const steps: SagaStep[] = policySets.map(policySetName =>
+      this.buildDetachExceptionFilterStep({
+        policySetName,
+        exceptionChannelName,
+        ctx,
+      })
+    );
+
+    steps.push({
+      name: 'delete_exception_channel',
+      execute: async () => {
+        const deleteRes = await this.client.deleteChannel({
+          name: exceptionChannelName,
+        });
+        if (deleteRes.isErr()) {
+          throw deleteRes.error;
+        }
+        if (!deleteRes.value.success) {
+          throw new Error(
+            `Failed to delete exception channel "${exceptionChannelName}"`
+          );
+        }
+      },
+    });
+
+    return steps;
   }
 
   private buildSagaRollbackError(args: {
@@ -1411,29 +1482,10 @@ export class RulesServiceLoader {
     policySetName: string,
     workspaceChannelQuery?: string
   ) {
-    if (workspaceChannelQuery == null) {
-      return;
-    }
-    // Query stores the channel name (e.g. "4a14c841-a133-400f-bd27-a70dfbef6a0a/set/1"), not the display name
-    const channelName = this.getPolicySetChannelName(policySetName);
-    const escapedChannelName = channelName.replace(
-      /[.*+?^${}()|[\]\\]/g,
-      '\\$&'
+    return removePolicySetFromWorkspaceChannelQueryUtil(
+      this.getPolicySetChannelName(policySetName),
+      workspaceChannelQuery
     );
-    // Matches: (channel "channelName" true) with flexible whitespace
-    const policySetQuery = new RegExp(
-      `\\(\\s*channel\\s+"${escapedChannelName}"\\s*true\\s*\\)`
-    );
-    const finalQuery = workspaceChannelQuery.replace(policySetQuery, '').trim();
-
-    if (this.isQueryEmpty(finalQuery)) {
-      return '';
-    }
-    // If no channels remain (e.g. only (and (not (eq $.annotations["deprecated"] "true")))), return empty
-    if (!/\(\s*channel\s+"/.test(finalQuery)) {
-      return '';
-    }
-    return finalQuery;
   }
 
   private async removePolicySetFromWorkspaceChannels(policySetName: string) {
@@ -1679,109 +1731,18 @@ export class RulesServiceLoader {
 
     const ctx: CreateExceptionSagaContext = {
       exceptionChannelCreated: false,
-      policySetStepState: {},
+      policySetStepState: this.buildPolicySetStepState(policySets),
     };
-
-    const steps: SagaStep[] = [];
-
-    steps.push({
-      name: 'create_exception_channel',
-      execute: async () => {
-        const res = await this.client.createChannel({
-          query,
-          name: exceptionChannelName,
-          annotations: {
-            'gomboc-ai/created-at': createdAt,
-            'gomboc-ai/created-by': createdBy,
-            'gomboc-ai/rules': rules,
-            'gomboc-ai/policy-sets': policySets,
-            'gomboc-ai/description': description,
-          },
-        });
-
-        if (res.isErr()) {
-          // 409 means the channel was created by a previous attempt that timed out
-          // before its response arrived. Mark it as created so compensation deletes it.
-          if (res.error.statusCode === 409) {
-            ctx.exceptionChannelCreated = true;
-          }
-          throw res.error;
-        }
-        ctx.exceptionChannelCreated = true;
-      },
-      compensate: async () => {
-        if (!ctx.exceptionChannelCreated) {
-          return;
-        }
-        const deleteRes = await this.client.deleteChannel({
-          name: exceptionChannelName,
-        });
-        if (deleteRes.isErr() || !deleteRes.value.success) {
-          throw new Error(
-            `Failed to rollback exception channel "${exceptionChannelName}"`
-          );
-        }
-      },
+    const steps = this.buildCreateExceptionSteps({
+      query,
+      createdAt,
+      exceptionChannelName,
+      rules,
+      policySets,
+      createdBy,
+      description,
+      ctx,
     });
-
-    for (const policySetName of policySets) {
-      const policySetChannelName = this.getPolicySetChannelName(policySetName);
-      ctx.policySetStepState[policySetName] = {
-        channelName: policySetChannelName,
-        snapshot: null,
-        didUpdate: false,
-      };
-
-      steps.push({
-        name: `attach_exception_filter_to_policy_set:${policySetName}`,
-        execute: async () => {
-          const state = ctx.policySetStepState[policySetName];
-          const channelResponse = await this.getChannelSafe({
-            name: state.channelName,
-          });
-          if (!channelResponse) {
-            throw new Error(
-              `Policy set channel not found for policy set "${policySetName}"`
-            );
-          }
-
-          const snap = channelResponse;
-          state.snapshot = snap;
-          const prevFilters = snap.filters ?? [];
-          const nextFilters =
-            this.mergePolicySetFiltersWithExceptionChannelName(
-              prevFilters,
-              exceptionChannelName
-            );
-          if (
-            nextFilters.length === prevFilters.length &&
-            nextFilters.every((f, i) => f === prevFilters[i])
-          ) {
-            return;
-          }
-
-          await this.updateChannel({
-            name: state.channelName,
-            query: snap.query,
-            filters: nextFilters,
-            annotations: snap.annotations,
-          });
-          state.didUpdate = true;
-        },
-        compensate: async () => {
-          const state = ctx.policySetStepState[policySetName];
-          if (!state.didUpdate || !state.snapshot) {
-            return;
-          }
-          await this.updateChannel({
-            name: state.channelName,
-            query: state.snapshot.query,
-            filters: state.snapshot.filters,
-            annotations: state.snapshot.annotations,
-          });
-        },
-      });
-    }
 
     try {
       await runSaga(
@@ -1821,84 +1782,12 @@ export class RulesServiceLoader {
     const policySets = exception.policySets;
 
     const ctx: DeleteExceptionSagaContext = {
-      policySetStepState: {},
+      policySetStepState: this.buildPolicySetStepState(policySets),
     };
-
-    const steps: SagaStep[] = [];
-
-    for (const policySetName of policySets) {
-      const policySetChannelName = this.getPolicySetChannelName(policySetName);
-      ctx.policySetStepState[policySetName] = {
-        channelName: policySetChannelName,
-        snapshot: null,
-        didUpdate: false,
-      };
-
-      steps.push({
-        name: `detach_exception_filter_from_policy_set:${policySetName}`,
-        execute: async () => {
-          const state = ctx.policySetStepState[policySetName];
-          const channelResponse = await this.getChannelSafe({
-            name: state.channelName,
-          });
-          if (!channelResponse) {
-            throw new Error(
-              `Policy set channel not found for policy set "${policySetName}"`
-            );
-          }
-
-          const snap = channelResponse;
-          state.snapshot = snap;
-          const prevFilters = snap.filters ?? [];
-          const nextFilters = this.filtersWithoutExceptionChannelClause(
-            prevFilters,
-            exceptionChannelName
-          );
-          if (
-            nextFilters.length === prevFilters.length &&
-            nextFilters.every((f, i) => f === prevFilters[i])
-          ) {
-            return;
-          }
-
-          await this.updateChannel({
-            name: state.channelName,
-            query: snap.query,
-            filters: nextFilters,
-            annotations: snap.annotations,
-          });
-          state.didUpdate = true;
-        },
-        compensate: async () => {
-          const state = ctx.policySetStepState[policySetName];
-          if (!state.didUpdate || !state.snapshot) {
-            return;
-          }
-          await this.updateChannel({
-            name: state.channelName,
-            query: state.snapshot.query,
-            filters: state.snapshot.filters,
-            annotations: state.snapshot.annotations,
-          });
-        },
-      });
-    }
-
-    steps.push({
-      name: 'delete_exception_channel',
-      execute: async () => {
-        const deleteRes = await this.client.deleteChannel({
-          name: exceptionChannelName,
-        });
-        if (deleteRes.isErr()) {
-          throw deleteRes.error;
-        }
-        if (!deleteRes.value.success) {
-          throw new Error(
-            `Failed to delete exception channel "${exceptionChannelName}"`
-          );
-        }
-      },
+    const steps = this.buildDeleteExceptionSteps({
+      exceptionChannelName,
+      policySets,
+      ctx,
     });
 
     try {

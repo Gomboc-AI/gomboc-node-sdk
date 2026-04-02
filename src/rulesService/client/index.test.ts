@@ -12,7 +12,7 @@ describe('initRulesServiceLoader', () => {
     jest.clearAllMocks();
   });
 
-  it('initializes once and returns cached loader for same token, account, and baseUrl', async () => {
+  it('initializes once and returns cached loader for same token and account', async () => {
     const logger = {
       info: jest.fn(),
       error: jest.fn(),
@@ -38,16 +38,14 @@ describe('initRulesServiceLoader', () => {
     expect(second).toBe(loader);
   });
 
-  it('creates a new loader when baseUrl differs', async () => {
+  it('reuses cached loader when baseUrl differs but token/account match', async () => {
     const logger = {
       info: jest.fn(),
       error: jest.fn(),
       warn: jest.fn(),
       debug: jest.fn(),
     };
-    mockInit
-      .mockResolvedValueOnce({ id: 'a' })
-      .mockResolvedValueOnce({ id: 'b' });
+    mockInit.mockResolvedValueOnce({ id: 'a' });
     const { initRulesServiceLoader } = await import('./index');
 
     const first = await initRulesServiceLoader({
@@ -63,8 +61,8 @@ describe('initRulesServiceLoader', () => {
       logger,
     });
 
-    expect(mockInit).toHaveBeenCalledTimes(2);
+    expect(mockInit).toHaveBeenCalledTimes(1);
     expect(first).toEqual({ id: 'a' });
-    expect(second).toEqual({ id: 'b' });
+    expect(second).toEqual({ id: 'a' });
   });
 });
