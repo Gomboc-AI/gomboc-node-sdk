@@ -221,6 +221,7 @@ export class RulesServiceLoader {
     return channelName;
   }
 
+  /** Creates and initializes a loader instance, including default/global policy set bootstrap checks. */
   static async init(args: {
     accessToken: string;
     accountId: string;
@@ -247,6 +248,7 @@ export class RulesServiceLoader {
     });
   }
 
+  /** Loads all non-deprecated policy classifications and stores them in `allPolicies`. */
   public async loadAllAvailablePolicies() {
     this.logger.info(
       'RulesService.loadAllAvailablePolicies: Loading all available policies'
@@ -301,6 +303,7 @@ export class RulesServiceLoader {
     return result.value;
   }
 
+  /** Fetches a batch of classifications by name for policy resolution flows. */
   public async getPoliciesBatch(args: {
     names: string[];
     includeDeprecated?: boolean;
@@ -321,6 +324,7 @@ export class RulesServiceLoader {
     return result.value;
   }
 
+  /** Resolves policy ids to policy objects, deduplicating and optionally including deprecated entries. */
   public async getPoliciesByIds(
     names: string[],
     options?: { includeDeprecated?: boolean }
@@ -537,6 +541,7 @@ export class RulesServiceLoader {
     return result.value;
   }
 
+  /** Searches channels with optional query and pagination, returning raw SDK search results. */
   public async searchForChannels(args: {
     query?: string;
     page?: number;
@@ -650,6 +655,7 @@ export class RulesServiceLoader {
     return getPolicyCountFromChannelQueryUtil(channelQuery);
   }
 
+  /** Lists workspace channels whose query currently references the given policy set channel. */
   public async getWorkspaceChannelsWithPolicySet(
     policySetName: string
   ): Promise<Channel[]> {
@@ -733,6 +739,7 @@ export class RulesServiceLoader {
     }
   }
 
+  /** Returns policy set channels mapped to API shape with counts and workspace linkage metadata. */
   public async getPolicySets(
     page?: number,
     perPage?: number
@@ -785,6 +792,8 @@ export class RulesServiceLoader {
       total: res.total,
     };
   }
+
+  /** Loads one policy set by short name and enriches it with workspace and exception linkage metadata. */
   public async getPolicySet(policySetName: string): Promise<PolicySet> {
     const channel = await this.getChannel({
       name: this.getPolicySetChannelName(policySetName),
@@ -831,6 +840,7 @@ export class RulesServiceLoader {
     };
   }
 
+  /** Resolves concrete policies referenced by a policy set query. */
   public async getPolicySetPolicies(policySet: PolicySet): Promise<Policy[]> {
     if (!policySet.query) {
       return [];
@@ -877,6 +887,7 @@ export class RulesServiceLoader {
     return getPolicySetNamesFromChannelQueryUtil(query, this.accountId);
   }
 
+  /** Returns unique policy set names effectively applied to a workspace (global + workspace channel). */
   public async getWorkspacePolicySets(workspaceId: string): Promise<string[]> {
     const globalChannelRes = await this.client.getChannel({
       name: this.getAccountGlobalChannelName(),
@@ -1259,6 +1270,7 @@ export class RulesServiceLoader {
     });
   }
 
+  /** Creates a policy set channel and optionally wires it to global/workspace channels. */
   public async createPolicySet(args: CreatePolicySetArgs) {
     const {
       name,
@@ -1522,6 +1534,7 @@ export class RulesServiceLoader {
     }
   }
 
+  /** Deletes a policy set after removing linked exceptions and workspace references. */
   public async deletePolicySet(args: { name: string }) {
     const { name } = args;
     const linkedExceptions = await this.getExceptionsLinkedToPolicySet({
@@ -1548,6 +1561,7 @@ export class RulesServiceLoader {
     throw new Error('Unable to delete policy set');
   }
 
+  /** Updates policy set metadata/query and optionally global/workspace channel application state. */
   public async updatePolicySet(args: UpdatePolicySetArgs) {
     const {
       name,
@@ -1696,6 +1710,7 @@ export class RulesServiceLoader {
     return Array.from(allPolicyNames);
   }
 
+  /** Lists framework classifications from the rules service. */
   public async getFrameworks() {
     const res = await this.client.getAllClassifications({
       params: {
