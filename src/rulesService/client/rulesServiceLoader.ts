@@ -37,7 +37,11 @@ import {
   type SagaStep,
 } from '../../sagaAccessService';
 import type { ILogger } from '../ILogger';
-import { parseGombocAiStringArrayAnnotation } from './schemas/exceptionChannelAnnotations';
+import {
+  parseGombocAiBooleanAnnotation,
+  parseGombocAiStringAnnotation,
+  parseGombocAiStringArrayAnnotation,
+} from './schemas/exceptionChannelAnnotations';
 import {
   POLICY_QUERY_SUBSTRING,
   POLICY_SET_POLICY_NAME_REGEX,
@@ -124,30 +128,35 @@ export class RulesServiceLoader {
     return `${this.accountId}/wksp/${workspaceId}`;
   }
 
-  private getCreatedByAnnotation(channel: Channel) {
-    if (channel.annotations && channel.annotations['gomboc-ai/created-by']) {
-      return String(channel.annotations['gomboc-ai/created-by']);
-    }
+  private getCreatedByAnnotation(channel: Channel): string {
+    return parseGombocAiStringAnnotation(
+      channel.annotations?.['gomboc-ai/created-by'],
+      'gomboc-ai/created-by'
+    );
   }
-  private getDescriptionAnnotation(channel: Channel) {
-    if (channel.annotations && channel.annotations['gomboc-ai/description']) {
-      return String(channel.annotations['gomboc-ai/description']);
-    }
+  private getDescriptionAnnotation(channel: Channel): string {
+    return parseGombocAiStringAnnotation(
+      channel.annotations?.['gomboc-ai/description'],
+      'gomboc-ai/description'
+    );
   }
-  private getIsDefault(channel: Channel) {
-    if (channel.annotations && channel.annotations['gomboc-ai/is-default']) {
-      return Boolean(channel.annotations['gomboc-ai/is-default']);
-    }
+  private getIsDefault(channel: Channel): boolean {
+    return parseGombocAiBooleanAnnotation(
+      channel.annotations?.['gomboc-ai/is-default'],
+      'gomboc-ai/is-default'
+    );
   }
-  private getUpdatedBy(channel: Channel) {
-    if (channel.annotations && channel.annotations['gomboc-ai/updated-by']) {
-      return String(channel.annotations['gomboc-ai/updated-by']);
-    }
+  private getUpdatedBy(channel: Channel): string {
+    return parseGombocAiStringAnnotation(
+      channel.annotations?.['gomboc-ai/updated-by'],
+      'gomboc-ai/updated-by'
+    );
   }
-  private getShouldApplyToAllWorkspaces(channel: Channel) {
-    if (channel.annotations) {
-      return Boolean(channel.annotations['gomboc-ai/apply-to-all-workspaces']);
-    }
+  private getShouldApplyToAllWorkspaces(channel: Channel): boolean {
+    return parseGombocAiBooleanAnnotation(
+      channel.annotations?.['gomboc-ai/apply-to-all-workspaces'],
+      'gomboc-ai/apply-to-all-workspaces'
+    );
   }
   private getPolicySetNameFromChannelName(channelName: string): string {
     const prefix = `${this.accountId}/set/`;
@@ -1693,15 +1702,18 @@ export class RulesServiceLoader {
         const frameworkData = receivedFramework.value;
         const relatedAnnotation =
           frameworkData.annotations?.['gomboc-ai/related'];
-        if (typeof relatedAnnotation === 'string') {
-          const policyNames = relatedAnnotation
-            .split('\n')
-            .map(s => s.trim())
-            .filter(s => s.startsWith('gomboc-ai/policy'))
-            .filter(s => validPolicyIds.has(s));
-          for (const policyName of policyNames) {
-            allPolicyNames.add(policyName);
-          }
+        const relatedEntries =
+          relatedAnnotation == null
+            ? []
+            : parseGombocAiStringArrayAnnotation(
+                relatedAnnotation,
+                'gomboc-ai/related'
+              );
+        const policyNames = relatedEntries
+          .filter(s => s.startsWith('gomboc-ai/policy'))
+          .filter(s => validPolicyIds.has(s));
+        for (const policyName of policyNames) {
+          allPolicyNames.add(policyName);
         }
       } else {
         throw new Error(`Unable to retreive framework ${framework}`);

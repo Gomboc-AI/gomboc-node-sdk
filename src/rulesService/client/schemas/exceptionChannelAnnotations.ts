@@ -15,6 +15,8 @@ const gombocAiStringArrayAnnotationSchema = z.preprocess(
   preprocessStringArrayAnnotation,
   z.array(z.string())
 );
+const gombocAiStringAnnotationSchema = z.string();
+const gombocAiBooleanAnnotationSchema = z.boolean();
 
 /** Stored on exception channels as `annotations['gomboc-ai/rules']`. */
 export const gombocAiRulesAnnotationSchema =
@@ -34,6 +36,50 @@ export function parseGombocAiStringArrayAnnotation(
   fieldName: string
 ): string[] {
   const result = gombocAiStringArrayAnnotationSchema.safeParse(value);
+  if (!result.success) {
+    const detail = result.error.issues
+      .map(i => `${i.path.join('.') || '(root)'}: ${i.message}`)
+      .join('; ');
+    throw new Error(`Invalid ${fieldName}: ${detail}`);
+  }
+  return result.data;
+}
+
+/**
+ * Parses a string annotation value with a default when absent.
+ * @throws Error with Zod issues in the message when validation fails.
+ */
+export function parseGombocAiStringAnnotation(
+  value: unknown,
+  fieldName: string,
+  defaultValue = ''
+): string {
+  if (value == null) {
+    return defaultValue;
+  }
+  const result = gombocAiStringAnnotationSchema.safeParse(value);
+  if (!result.success) {
+    const detail = result.error.issues
+      .map(i => `${i.path.join('.') || '(root)'}: ${i.message}`)
+      .join('; ');
+    throw new Error(`Invalid ${fieldName}: ${detail}`);
+  }
+  return result.data;
+}
+
+/**
+ * Parses a boolean annotation value with a default when absent.
+ * @throws Error with Zod issues in the message when validation fails.
+ */
+export function parseGombocAiBooleanAnnotation(
+  value: unknown,
+  fieldName: string,
+  defaultValue = false
+): boolean {
+  if (value == null) {
+    return defaultValue;
+  }
+  const result = gombocAiBooleanAnnotationSchema.safeParse(value);
   if (!result.success) {
     const detail = result.error.issues
       .map(i => `${i.path.join('.') || '(root)'}: ${i.message}`)
