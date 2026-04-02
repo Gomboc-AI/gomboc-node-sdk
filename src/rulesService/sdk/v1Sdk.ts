@@ -56,7 +56,7 @@ export class RulesServiceSdk implements IRulesServiceSdk {
     this.client = axios.create({
       baseURL: `${baseUrl}/api`,
       headers: {
-        Authorization: `bearer ${accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
         'x-account-id': accountId,
         'kubernetes-auth': kubernetesAuth,
       },
@@ -74,11 +74,10 @@ export class RulesServiceSdk implements IRulesServiceSdk {
   }
 
   private async request<T>(
-    fn: () => Promise<{ status: number; data: ApiSuccess<T> | ApiError }>
+    fn: () => Promise<ApiSuccess<T> | ApiError>
   ): Promise<Result<T, IRulesServiceErrorType>> {
     try {
-      const res = await fn();
-      const body = res.data;
+      const body = await fn();
       if (body.status === 'success') return ok(body.data);
       return err(body.error);
     } catch (e) {
