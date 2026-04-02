@@ -8,4 +8,6 @@ export default defineConfig({
   splitting: false,
   clean: true,
   target: 'es2020',
+  /** Root tsconfig may use `incremental`; tsup's DTS step requires incremental off (TS5074). */
+  tsconfig: 'tsconfig.build.json',
 });
