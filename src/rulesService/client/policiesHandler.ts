@@ -37,7 +37,7 @@ export class PoliciesHandler {
         if (typeof rawValue === 'string') {
           const values = PoliciesHandler.getAnnotationValueList(
             policy.annotations,
-            key,
+            key
           );
           if (!annotationMap.has(key)) {
             annotationMap.set(key, new Set());
@@ -79,7 +79,7 @@ export class PoliciesHandler {
    * @param keys Optional array of keys to filter by. If not provided, returns all annotations.
    */
   public getAnnotations = (
-    keys?: string[],
+    keys?: string[]
   ): Array<{ value: string; key: string }> => {
     if (!keys || keys.length === 0) {
       return this.annotations;
@@ -97,7 +97,7 @@ export class PoliciesHandler {
    */
   public filter(
     nameSearchTerm: string,
-    annotations?: Array<{ key: string; value: string }>,
+    annotations?: Array<{ key: string; value: string }>
   ): Policy[] {
     let filtered = this.policies;
 
@@ -105,7 +105,7 @@ export class PoliciesHandler {
     if (nameSearchTerm && nameSearchTerm.trim().length >= 2) {
       const trimmedSearch = nameSearchTerm.trim().toLowerCase();
       filtered = filtered.filter(policy =>
-        policy.name.toLowerCase().includes(trimmedSearch),
+        policy.name.toLowerCase().includes(trimmedSearch)
       );
     }
 
@@ -122,7 +122,7 @@ export class PoliciesHandler {
           // Get the list of values for this key (handles newline-separated values)
           const values = PoliciesHandler.getAnnotationValueList(
             policy.annotations,
-            annotation.key,
+            annotation.key
           );
           return values.includes(annotation.value);
         });
@@ -134,7 +134,7 @@ export class PoliciesHandler {
 
   /** Some annotations contain arrays of values, which are stored as a single string with newlines. This function formats them into a comma separated list. */
   public static formatAnnotationValue = (
-    value: string | undefined | null,
+    value: string | undefined | null
   ): string => {
     if (!value || typeof value !== 'string') return '';
     return value
@@ -146,19 +146,19 @@ export class PoliciesHandler {
   /** Gets a single annotation value from a policy annotations object */
   public static getAnnotationValue = (
     annotations: PolicyAnnotations,
-    key: string,
+    key: string
   ): string => {
     if (!annotations) return '';
     const value = annotations[key as keyof typeof annotations];
     return this.formatAnnotationValue(
-      typeof value === 'string' ? value : undefined,
+      typeof value === 'string' ? value : undefined
     );
   };
 
   /** This version of getAnnotation needed as some of the annotations are formatted with markdown and need to stay as is */
   public static getAnnotationValueNoReformat = (
     annotations: PolicyAnnotations,
-    key: string,
+    key: string
   ): string => {
     if (!annotations) return '';
     const value = annotations[key as keyof typeof annotations];
@@ -168,7 +168,7 @@ export class PoliciesHandler {
   /** Gets an array of values from a policy annotations object */
   public static getAnnotationValueList = (
     annotations: PolicyAnnotations,
-    key: string,
+    key: string
   ): string[] => {
     if (!annotations) return [];
     const value = annotations[key as keyof typeof annotations];
@@ -189,28 +189,28 @@ export class PoliciesHandler {
 
   public static getPoliciesIac = (policies: Policy[]): string[] => {
     const allValues = policies.flatMap(policy =>
-      this.getAnnotationValueList(policy.annotations, 'gomboc-ai/iac'),
+      this.getAnnotationValueList(policy.annotations, 'gomboc-ai/iac')
     );
     return [...new Set(allValues)];
   };
 
   public static getPoliciesProviders = (policies: Policy[]): string[] => {
     const allValues = policies.flatMap(policy =>
-      this.getAnnotationValueList(policy.annotations, 'gomboc-ai/providers'),
+      this.getAnnotationValueList(policy.annotations, 'gomboc-ai/providers')
     );
     return [...new Set(allValues)];
   };
 
   public static getPoliciesCategories = (policies: Policy[]): string[] => {
     const allValues = policies.flatMap(policy =>
-      this.getAnnotationValueList(policy.annotations, 'gomboc-ai/categories'),
+      this.getAnnotationValueList(policy.annotations, 'gomboc-ai/categories')
     );
     return [...new Set(allValues)];
   };
 
   public static getPoliciesImpactScore = (policies: Policy[]): string[] => {
     return policies.map(policy =>
-      this.getAnnotationValue(policy.annotations, 'gomboc-ai/impact/score'),
+      this.getAnnotationValue(policy.annotations, 'gomboc-ai/impact/score')
     );
   };
 
@@ -219,12 +219,12 @@ export class PoliciesHandler {
 
   public static getPoliciesImpactStatement = (
     policies: Policy[],
-    options?: { clean?: boolean },
+    options?: { clean?: boolean }
   ): string[] => {
     return policies.map(policy => {
       let raw = this.getAnnotationValueNoReformat(
         policy.annotations,
-        'gomboc-ai/impact/statement',
+        'gomboc-ai/impact/statement'
       );
       if (options?.clean && raw) {
         raw = raw
@@ -236,7 +236,7 @@ export class PoliciesHandler {
   };
 
   public static removeMarkdownFromDescription = (
-    policies: Policy[],
+    policies: Policy[]
   ): string => {
     const description = policies[0]?.description;
     if (typeof description !== 'string') return '';
@@ -244,7 +244,7 @@ export class PoliciesHandler {
   };
 
   public static getRuleFrameworkData = (
-    rules: Rule[],
+    rules: Rule[]
   ): Array<{ shortName: string; name: string }> => {
     const frameworks: Array<{ shortName: string; name: string }> = [];
 

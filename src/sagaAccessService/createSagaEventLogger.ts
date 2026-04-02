@@ -34,7 +34,7 @@ export type CreateSagaEventLoggerOptions = {
  * (`namespace.operation: saga …`) and optional static context on every line.
  */
 export function createSagaEventLogger(
-  options: CreateSagaEventLoggerOptions,
+  options: CreateSagaEventLoggerOptions
 ): (event: SagaEvent) => void {
   const { logger, namespace, operation, context = {} } = options;
   const prefix = `${namespace}.${operation}`;
@@ -43,35 +43,35 @@ export function createSagaEventLogger(
     const base: Record<string, unknown> = { step: event.stepName, ...context };
 
     switch (event.type) {
-    case 'step_start':
-      logger.debug(`${prefix}: saga step start`, base);
-      break;
-    case 'step_success':
-      logger.debug(`${prefix}: saga step success`, base);
-      break;
-    case 'step_failure':
-      logger.error(`${prefix}: saga step failure`, {
-        ...base,
-        error: event.error,
-      });
-      break;
-    case 'compensation_start':
-      logger.debug(`${prefix}: saga compensation start`, base);
-      break;
-    case 'compensation_success':
-      logger.debug(`${prefix}: saga compensation success`, base);
-      break;
-    case 'compensation_failure':
-      logger.error(`${prefix}: saga compensation failure`, {
-        ...base,
-        error: event.error,
-      });
-      break;
-    default: {
-      const _exhaustive: never = event;
-      void _exhaustive;
-      break;
-    }
+      case 'step_start':
+        logger.debug(`${prefix}: saga step start`, base);
+        break;
+      case 'step_success':
+        logger.debug(`${prefix}: saga step success`, base);
+        break;
+      case 'step_failure':
+        logger.error(`${prefix}: saga step failure`, {
+          ...base,
+          error: event.error,
+        });
+        break;
+      case 'compensation_start':
+        logger.debug(`${prefix}: saga compensation start`, base);
+        break;
+      case 'compensation_success':
+        logger.debug(`${prefix}: saga compensation success`, base);
+        break;
+      case 'compensation_failure':
+        logger.error(`${prefix}: saga compensation failure`, {
+          ...base,
+          error: event.error,
+        });
+        break;
+      default: {
+        const _exhaustive: never = event;
+        void _exhaustive;
+        break;
+      }
     }
   };
 }

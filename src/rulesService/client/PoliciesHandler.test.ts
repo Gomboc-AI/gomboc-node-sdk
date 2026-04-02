@@ -175,13 +175,13 @@ describe('PoliciesHandler', () => {
   describe('formatAnnotationValue', () => {
     it('joins newline-separated values with comma-space', () => {
       expect(PoliciesHandler.formatAnnotationValue('terraform\ncdk')).toBe(
-        'terraform, cdk',
+        'terraform, cdk'
       );
     });
 
     it('returns single value unchanged (no comma)', () => {
       expect(PoliciesHandler.formatAnnotationValue('terraform')).toBe(
-        'terraform',
+        'terraform'
       );
     });
 
@@ -202,7 +202,7 @@ describe('PoliciesHandler', () => {
     it('reads and formats a string annotation value', () => {
       const annotations = { 'gomboc-ai/iac': 'terraform\ncdk' };
       expect(
-        PoliciesHandler.getAnnotationValue(annotations, 'gomboc-ai/iac'),
+        PoliciesHandler.getAnnotationValue(annotations, 'gomboc-ai/iac')
       ).toBe('terraform, cdk');
     });
 
@@ -221,20 +221,20 @@ describe('PoliciesHandler', () => {
       expect(
         PoliciesHandler.getAnnotationValueNoReformat(
           annotations,
-          'gomboc-ai/iac',
-        ),
+          'gomboc-ai/iac'
+        )
       ).toBe('terraform\ncdk');
     });
 
     it('returns empty string for missing key', () => {
       expect(PoliciesHandler.getAnnotationValueNoReformat({}, 'missing')).toBe(
-        '',
+        ''
       );
     });
 
     it('returns empty string for null annotations', () => {
       expect(PoliciesHandler.getAnnotationValueNoReformat(null, 'any')).toBe(
-        '',
+        ''
       );
     });
   });
@@ -243,13 +243,13 @@ describe('PoliciesHandler', () => {
     it('splits a newline-separated string into an array', () => {
       const annotations = { 'gomboc-ai/iac': 'terraform\ncdk\npulumi' };
       expect(
-        PoliciesHandler.getAnnotationValueList(annotations, 'gomboc-ai/iac'),
+        PoliciesHandler.getAnnotationValueList(annotations, 'gomboc-ai/iac')
       ).toEqual(['terraform', 'cdk', 'pulumi']);
     });
 
     it('returns a single-element array for a non-newline string', () => {
       expect(
-        PoliciesHandler.getAnnotationValueList({ key: 'val' }, 'key'),
+        PoliciesHandler.getAnnotationValueList({ key: 'val' }, 'key')
       ).toEqual(['val']);
     });
 
@@ -357,13 +357,13 @@ describe('PoliciesHandler', () => {
         }),
       ];
       expect(
-        PoliciesHandler.getPoliciesImpactStatement(policies, { clean: true }),
+        PoliciesHandler.getPoliciesImpactStatement(policies, { clean: true })
       ).toEqual(['Some impact text']);
     });
 
     it('returns empty string when annotation is absent', () => {
       expect(
-        PoliciesHandler.getPoliciesImpactStatement([makePolicy()]),
+        PoliciesHandler.getPoliciesImpactStatement([makePolicy()])
       ).toEqual(['']);
     });
   });
@@ -374,14 +374,14 @@ describe('PoliciesHandler', () => {
         makePolicy({ description: '## Description\n\nThis is the body.' }),
       ];
       expect(PoliciesHandler.removeMarkdownFromDescription(policies)).toBe(
-        'This is the body.',
+        'This is the body.'
       );
     });
 
     it('returns the description unchanged when there is no heading', () => {
       const policies = [makePolicy({ description: 'Plain description.' })];
       expect(PoliciesHandler.removeMarkdownFromDescription(policies)).toBe(
-        'Plain description.',
+        'Plain description.'
       );
     });
 
@@ -393,7 +393,7 @@ describe('PoliciesHandler', () => {
       expect(
         PoliciesHandler.removeMarkdownFromDescription([
           makePolicy({ description: null }),
-        ]),
+        ])
       ).toBe('');
     });
   });
@@ -406,7 +406,7 @@ describe('PoliciesHandler', () => {
         { annotations: { 'gomboc-ai/resource': 'aws_s3_bucket' } },
       ] as unknown as Rule[];
       expect(PoliciesHandler.getResourceTypesFromRules(rules)).toBe(
-        'aws_s3_bucket, aws_iam_role',
+        'aws_s3_bucket, aws_iam_role'
       );
     });
 

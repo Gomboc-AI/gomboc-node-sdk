@@ -23,21 +23,19 @@ type RulesServiceLoaderInternals = {
   getPolicySetNamesFromChannelQuery(query: string): string[];
   attachPolicySetToWorkspaceChannelQuery(
     workspaceChannelQuery: string,
-    policySetShortName: string,
+    policySetShortName: string
   ): string;
   removePolicySetFromWorkspaceChannelQuery(
     policySetShortName: string,
-    workspaceChannelQuery: string | null | undefined,
+    workspaceChannelQuery: string | null | undefined
   ): string | undefined;
   removePolicySetFromWorkspaceChannels(
-    policySetShortName: string,
+    policySetShortName: string
   ): Promise<void>;
   getExceptionCountsByPolicySetName(): Promise<Map<string, number>>;
 };
 
-function loaderInternals(
-  loader: TestLoader,
-): RulesServiceLoaderInternals {
+function loaderInternals(loader: TestLoader): RulesServiceLoaderInternals {
   return loader as unknown as RulesServiceLoaderInternals;
 }
 
@@ -61,7 +59,7 @@ function makeExceptionChannelRecord(
     filters?: string[];
     annotations?: Record<string, unknown>;
     id?: string;
-  } = {},
+  } = {}
 ) {
   return {
     accountId: 'acct-1',
@@ -83,7 +81,7 @@ function makeExceptionChannelRecord(
 
 function makeMinimalException(
   overrides: Pick<Exception, 'name' | 'rules' | 'policySets' | 'createdBy'> &
-    Partial<Exception>,
+    Partial<Exception>
 ): Exception {
   const base = makeExceptionChannelRecord({
     name: `acct-1/exception/${overrides.name}`,
@@ -103,7 +101,7 @@ function makeMinimalException(
 function makeMinimalPolicySet(
   shortName: string,
   id: string,
-  extra: Partial<PolicySet> = {},
+  extra: Partial<PolicySet> = {}
 ): PolicySet {
   const ch = makeChannel(`acct-1/set/${shortName}`);
   return {
@@ -174,17 +172,9 @@ describe('RulesServiceLoader', () => {
       ]);
 
       loader.client = {
-        createChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
-        updateChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
-        deleteChannel: jest
-          .fn()
-          .mockResolvedValue(
-            ok({ success: true }),
-          ),
+        createChannel: jest.fn().mockResolvedValue(ok({})),
+        updateChannel: jest.fn().mockResolvedValue(ok({})),
+        deleteChannel: jest.fn().mockResolvedValue(ok({ success: true })),
         getChannel: jest
           .fn()
           .mockResolvedValueOnce(ok(policySet1))
@@ -210,7 +200,7 @@ describe('RulesServiceLoader', () => {
             'gomboc-ai/rules': ['gomboc-ai/policy/a'],
             'gomboc-ai/policy-sets': ['default', 'platform'],
           }),
-        }),
+        })
       );
       const exceptionFilter = `(channel "${exceptionChannelName}" true)`;
       expect(loader.client.updateChannel).toHaveBeenNthCalledWith(
@@ -219,7 +209,7 @@ describe('RulesServiceLoader', () => {
           name: 'acct-1/set/default',
           query: policySet1.query,
           filters: [exceptionFilter],
-        }),
+        })
       );
       expect(loader.client.updateChannel).toHaveBeenNthCalledWith(
         2,
@@ -227,7 +217,7 @@ describe('RulesServiceLoader', () => {
           name: 'acct-1/set/platform',
           query: policySet2.query,
           filters: ['existing-filter', exceptionFilter],
-        }),
+        })
       );
     });
 
@@ -236,20 +226,10 @@ describe('RulesServiceLoader', () => {
       const policySet = makeChannel('acct-1/set/default');
 
       loader.client = {
-        createChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
-        updateChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
-        deleteChannel: jest
-          .fn()
-          .mockResolvedValue(
-            ok({ success: true }),
-          ),
-        getChannel: jest
-          .fn()
-          .mockResolvedValue(ok(policySet)),
+        createChannel: jest.fn().mockResolvedValue(ok({})),
+        updateChannel: jest.fn().mockResolvedValue(ok({})),
+        deleteChannel: jest.fn().mockResolvedValue(ok({ success: true })),
+        getChannel: jest.fn().mockResolvedValue(ok(policySet)),
       };
 
       await loader.createException({
@@ -268,7 +248,7 @@ describe('RulesServiceLoader', () => {
             'gomboc-ai/rules': ['gomboc-ai/policy/a', 'gomboc-ai/policy/b'],
             'gomboc-ai/policy-sets': ['default'],
           }),
-        }),
+        })
       );
     });
 
@@ -278,20 +258,10 @@ describe('RulesServiceLoader', () => {
       const policySet = makeChannel('acct-1/set/default');
 
       loader.client = {
-        createChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
-        updateChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
-        deleteChannel: jest
-          .fn()
-          .mockResolvedValue(
-            ok({ success: true }),
-          ),
-        getChannel: jest
-          .fn()
-          .mockResolvedValue(ok(policySet)),
+        createChannel: jest.fn().mockResolvedValue(ok({})),
+        updateChannel: jest.fn().mockResolvedValue(ok({})),
+        deleteChannel: jest.fn().mockResolvedValue(ok({ success: true })),
+        getChannel: jest.fn().mockResolvedValue(ok(policySet)),
       };
 
       await loader.createException({
@@ -310,7 +280,7 @@ describe('RulesServiceLoader', () => {
             'gomboc-ai/rules': [],
             'gomboc-ai/policy-sets': ['default'],
           }),
-        }),
+        })
       );
     });
 
@@ -322,23 +292,17 @@ describe('RulesServiceLoader', () => {
       const updateError = new RulesServiceError(
         'update failed',
         'UPD_FAIL',
-        500,
+        500
       );
 
       loader.client = {
-        createChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
+        createChannel: jest.fn().mockResolvedValue(ok({})),
         updateChannel: jest
           .fn()
           .mockResolvedValueOnce(ok({}))
           .mockResolvedValueOnce(err(updateError))
           .mockResolvedValueOnce(ok({})),
-        deleteChannel: jest
-          .fn()
-          .mockResolvedValue(
-            ok({ success: true }),
-          ),
+        deleteChannel: jest.fn().mockResolvedValue(ok({ success: true })),
         getChannel: jest
           .fn()
           .mockResolvedValueOnce(ok(policySet1))
@@ -363,7 +327,7 @@ describe('RulesServiceLoader', () => {
       const sagaError = thrown as SagaRollbackError;
       expect(sagaError.rollbackStatus).toBe('completed');
       expect(sagaError.failedStep).toBe(
-        'attach_exception_filter_to_policy_set:platform',
+        'attach_exception_filter_to_policy_set:platform'
       );
       expect(sagaError.correlationId).toBe(exceptionChannelName);
       expect(sagaError.compensationFailures).toEqual([]);
@@ -377,7 +341,7 @@ describe('RulesServiceLoader', () => {
         expect.objectContaining({
           name: 'acct-1/set/default',
           filters: [],
-        }),
+        })
       );
       expect(loader.client.deleteChannel).toHaveBeenCalledWith({
         name: exceptionChannelName,
@@ -395,9 +359,7 @@ describe('RulesServiceLoader', () => {
       };
 
       loader.client = {
-        createChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
+        createChannel: jest.fn().mockResolvedValue(ok({})),
         updateChannel: jest
           .fn()
           .mockResolvedValueOnce(ok({}))
@@ -430,7 +392,7 @@ describe('RulesServiceLoader', () => {
       const sagaError = thrown as SagaRollbackError;
       expect(sagaError.rollbackStatus).toBe('partial');
       expect(sagaError.compensationFailures[0]?.step).toBe(
-        'create_exception_channel',
+        'create_exception_channel'
       );
     });
 
@@ -441,20 +403,10 @@ describe('RulesServiceLoader', () => {
       const policySet = makeChannel('acct-1/set/default', [exceptionFilter]);
 
       loader.client = {
-        createChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
-        updateChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
-        deleteChannel: jest
-          .fn()
-          .mockResolvedValue(
-            ok({ success: true }),
-          ),
-        getChannel: jest
-          .fn()
-          .mockResolvedValue(ok(policySet)),
+        createChannel: jest.fn().mockResolvedValue(ok({})),
+        updateChannel: jest.fn().mockResolvedValue(ok({})),
+        deleteChannel: jest.fn().mockResolvedValue(ok({ success: true })),
+        getChannel: jest.fn().mockResolvedValue(ok(policySet)),
       };
 
       await loader.createException({
@@ -473,17 +425,9 @@ describe('RulesServiceLoader', () => {
       const exceptionChannelName = 'acct-1/exception/EX-missing-ps';
 
       loader.client = {
-        createChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
-        updateChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
-        deleteChannel: jest
-          .fn()
-          .mockResolvedValue(
-            ok({ success: true }),
-          ),
+        createChannel: jest.fn().mockResolvedValue(ok({})),
+        updateChannel: jest.fn().mockResolvedValue(ok({})),
+        deleteChannel: jest.fn().mockResolvedValue(ok({ success: true })),
         getChannel: jest.fn().mockResolvedValue(null),
       };
 
@@ -494,7 +438,7 @@ describe('RulesServiceLoader', () => {
           policySets: ['ghost'],
           createdBy: 'u',
           description: 'd',
-        }),
+        })
       ).rejects.toBeInstanceOf(SagaRollbackError);
 
       expect(loader.client.deleteChannel).toHaveBeenCalledWith({
@@ -530,14 +474,8 @@ describe('RulesServiceLoader', () => {
           .mockResolvedValueOnce(ok(exceptionData))
           .mockResolvedValueOnce(ok(policySet1))
           .mockResolvedValueOnce(ok(policySet2)),
-        updateChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
-        deleteChannel: jest
-          .fn()
-          .mockResolvedValue(
-            ok({ success: true }),
-          ),
+        updateChannel: jest.fn().mockResolvedValue(ok({})),
+        deleteChannel: jest.fn().mockResolvedValue(ok({ success: true })),
       };
 
       await loader.deleteException({ name: exceptionName });
@@ -548,7 +486,7 @@ describe('RulesServiceLoader', () => {
           name: 'acct-1/set/default',
           query: policySet1.query,
           filters: [],
-        }),
+        })
       );
       expect(loader.client.updateChannel).toHaveBeenNthCalledWith(
         2,
@@ -556,7 +494,7 @@ describe('RulesServiceLoader', () => {
           name: 'acct-1/set/platform',
           query: policySet2.query,
           filters: ['other'],
-        }),
+        })
       );
       expect(loader.client.deleteChannel).toHaveBeenCalledWith({
         name: exceptionChannelName,
@@ -595,7 +533,7 @@ describe('RulesServiceLoader', () => {
       };
 
       await expect(
-        loader.deleteException({ name: exceptionName }),
+        loader.deleteException({ name: exceptionName })
       ).rejects.toBeInstanceOf(SagaRollbackError);
 
       expect(loader.client.deleteChannel).not.toHaveBeenCalled();
@@ -604,7 +542,7 @@ describe('RulesServiceLoader', () => {
         expect.objectContaining({
           name: 'acct-1/set/default',
           filters: policySet1.filters,
-        }),
+        })
       );
     });
 
@@ -632,14 +570,12 @@ describe('RulesServiceLoader', () => {
           .mockResolvedValueOnce(ok(exceptionData))
           .mockResolvedValueOnce(ok(policySetA))
           .mockResolvedValueOnce(ok(policySetB)),
-        updateChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
+        updateChannel: jest.fn().mockResolvedValue(ok({})),
         deleteChannel: jest.fn().mockResolvedValue(err(deleteError)),
       };
 
       await expect(
-        loader.deleteException({ name: exceptionName }),
+        loader.deleteException({ name: exceptionName })
       ).rejects.toBeInstanceOf(SagaRollbackError);
 
       expect(loader.client.updateChannel).toHaveBeenCalledTimes(4);
@@ -648,14 +584,14 @@ describe('RulesServiceLoader', () => {
         expect.objectContaining({
           name: 'acct-1/set/b',
           filters: policySetB.filters,
-        }),
+        })
       );
       expect(loader.client.updateChannel).toHaveBeenNthCalledWith(
         4,
         expect.objectContaining({
           name: 'acct-1/set/a',
           filters: policySetA.filters,
-        }),
+        })
       );
     });
 
@@ -674,17 +610,9 @@ describe('RulesServiceLoader', () => {
       });
 
       loader.client = {
-        getChannel: jest
-          .fn()
-          .mockResolvedValueOnce(
-            ok(exceptionData),
-          ),
+        getChannel: jest.fn().mockResolvedValueOnce(ok(exceptionData)),
         updateChannel: jest.fn(),
-        deleteChannel: jest
-          .fn()
-          .mockResolvedValue(
-            ok({ success: true }),
-          ),
+        deleteChannel: jest.fn().mockResolvedValue(ok({ success: true })),
       };
 
       await loader.deleteException({ name: exceptionName });
@@ -716,14 +644,8 @@ describe('RulesServiceLoader', () => {
           .fn()
           .mockResolvedValueOnce(ok(exceptionData))
           .mockResolvedValueOnce(ok(policySet)),
-        updateChannel: jest
-          .fn()
-          .mockResolvedValue(ok({})),
-        deleteChannel: jest
-          .fn()
-          .mockResolvedValue(
-            ok({ success: true }),
-          ),
+        updateChannel: jest.fn().mockResolvedValue(ok({})),
+        deleteChannel: jest.fn().mockResolvedValue(ok({ success: true })),
       };
 
       await loader.deleteException({ name: exceptionName });
@@ -786,7 +708,7 @@ describe('RulesServiceLoader', () => {
         perPage: 100,
       });
       expect(
-        linked.map((exception: { name: string }) => exception.name),
+        linked.map((exception: { name: string }) => exception.name)
       ).toEqual(['EX-A', 'EX-C']);
     });
   });
@@ -808,11 +730,7 @@ describe('RulesServiceLoader', () => {
         .mockResolvedValue(undefined);
 
       loader.client = {
-        deleteChannel: jest
-          .fn()
-          .mockResolvedValue(
-            ok({ success: true }),
-          ),
+        deleteChannel: jest.fn().mockResolvedValue(ok({ success: true })),
       };
 
       await loader.deletePolicySet({ name: 'default' });
@@ -828,7 +746,7 @@ describe('RulesServiceLoader', () => {
       });
 
       const lastExceptionCallOrder = Math.max(
-        ...deleteExceptionSpy.mock.invocationCallOrder,
+        ...deleteExceptionSpy.mock.invocationCallOrder
       );
       const removeWorkspacesCallOrder =
         removeFromWorkspacesSpy.mock.invocationCallOrder[0];
@@ -848,8 +766,8 @@ describe('RulesServiceLoader', () => {
           ok(
             makeExceptionChannelRecord({
               name: 'acct-1/exception/MY-EX',
-            }),
-          ),
+            })
+          )
         ),
       };
 
@@ -879,8 +797,8 @@ describe('RulesServiceLoader', () => {
                 'gomboc-ai/description': 'd',
                 // intentionally omits 'gomboc-ai/rules' to exercise query-parse fallback
               },
-            }),
-          ),
+            })
+          )
         ),
       };
 
@@ -921,7 +839,7 @@ describe('RulesServiceLoader', () => {
             total: 2,
             page: 1,
             perPage: 20,
-          }),
+          })
         ),
       };
 
@@ -945,16 +863,14 @@ describe('RulesServiceLoader', () => {
     it('returns empty array without calling getRule when exception has no rules', async () => {
       const { loader } = buildLoader();
       loader.client = { getRule: jest.fn() };
-      jest
-        .spyOn(loader, 'getException')
-        .mockResolvedValue(
-          makeMinimalException({
-            name: 'EX',
-            rules: [],
-            policySets: [],
-            createdBy: '',
-          }),
-        );
+      jest.spyOn(loader, 'getException').mockResolvedValue(
+        makeMinimalException({
+          name: 'EX',
+          rules: [],
+          policySets: [],
+          createdBy: '',
+        })
+      );
 
       const rules = await loader.getExceptionRules({ name: 'EX' });
 
@@ -970,16 +886,14 @@ describe('RulesServiceLoader', () => {
           .mockResolvedValueOnce(ok({ name: 'gomboc-ai/a', id: 'id-a' }))
           .mockResolvedValueOnce(ok({ name: 'gomboc-ai/b', id: 'id-b' })),
       };
-      jest
-        .spyOn(loader, 'getException')
-        .mockResolvedValue(
-          makeMinimalException({
-            name: 'EX',
-            rules: ['gomboc-ai/a', 'gomboc-ai/b'],
-            policySets: ['default'],
-            createdBy: 'u',
-          }),
-        );
+      jest.spyOn(loader, 'getException').mockResolvedValue(
+        makeMinimalException({
+          name: 'EX',
+          rules: ['gomboc-ai/a', 'gomboc-ai/b'],
+          policySets: ['default'],
+          createdBy: 'u',
+        })
+      );
 
       const rules = await loader.getExceptionRules({ name: 'EX' });
 
@@ -999,16 +913,14 @@ describe('RulesServiceLoader', () => {
   describe('getExceptionPolicySets', () => {
     it('returns empty array without calling getPolicySet when exception has no policy sets', async () => {
       const { loader } = buildLoader();
-      jest
-        .spyOn(loader, 'getException')
-        .mockResolvedValue(
-          makeMinimalException({
-            name: 'EX',
-            rules: [],
-            policySets: [],
-            createdBy: '',
-          }),
-        );
+      jest.spyOn(loader, 'getException').mockResolvedValue(
+        makeMinimalException({
+          name: 'EX',
+          rules: [],
+          policySets: [],
+          createdBy: '',
+        })
+      );
       const getPolicySet = jest
         .spyOn(loader, 'getPolicySet')
         .mockResolvedValue(makeMinimalPolicySet('_unused', 'id-0'));
@@ -1021,16 +933,14 @@ describe('RulesServiceLoader', () => {
 
     it('loads each policy set via getPolicySet', async () => {
       const { loader } = buildLoader();
-      jest
-        .spyOn(loader, 'getException')
-        .mockResolvedValue(
-          makeMinimalException({
-            name: 'EX',
-            rules: [],
-            policySets: ['default', 'platform'],
-            createdBy: 'u',
-          }),
-        );
+      jest.spyOn(loader, 'getException').mockResolvedValue(
+        makeMinimalException({
+          name: 'EX',
+          rules: [],
+          policySets: ['default', 'platform'],
+          createdBy: 'u',
+        })
+      );
       jest
         .spyOn(loader, 'getPolicySet')
         .mockResolvedValueOnce(makeMinimalPolicySet('default', 'ps-1'))
@@ -1055,9 +965,11 @@ describe('RulesServiceLoader', () => {
 
     it('builds a single-policy query wrapped with deprecated filter', () => {
       const { loader } = buildLoader();
-      const result = loaderInternals(loader).getPolicySetQuery(['gomboc-ai/policy/s3']);
+      const result = loaderInternals(loader).getPolicySetQuery([
+        'gomboc-ai/policy/s3',
+      ]);
       expect(result).toBe(
-        '(and (or (contains "gomboc-ai/policy/s3" finding.classification)) (not (eq $.annotations["deprecated"] "true")))',
+        '(and (or (contains "gomboc-ai/policy/s3" finding.classification)) (not (eq $.annotations["deprecated"] "true")))'
       );
     });
 
@@ -1068,10 +980,10 @@ describe('RulesServiceLoader', () => {
         'gomboc-ai/policy/b',
       ]);
       expect(result).toContain(
-        '(contains "gomboc-ai/policy/a" finding.classification)',
+        '(contains "gomboc-ai/policy/a" finding.classification)'
       );
       expect(result).toContain(
-        '(contains "gomboc-ai/policy/b" finding.classification)',
+        '(contains "gomboc-ai/policy/b" finding.classification)'
       );
       expect(result).toContain('(not (eq $.annotations["deprecated"] "true"))');
     });
@@ -1080,7 +992,7 @@ describe('RulesServiceLoader', () => {
       const { loader } = buildLoader();
       const result = loaderInternals(loader).getPolicySetQuery(['p', 'p', 'p']);
       const matches = (result as string).match(
-        /\(contains "p" finding\.classification\)/g,
+        /\(contains "p" finding\.classification\)/g
       );
       expect(matches).toHaveLength(1);
     });
@@ -1096,8 +1008,8 @@ describe('RulesServiceLoader', () => {
       const { loader } = buildLoader();
       expect(
         loaderInternals(loader).isQueryEmpty(
-          '(or (contains "x" finding.classification))',
-        ),
+          '(or (contains "x" finding.classification))'
+        )
       ).toBe(false);
     });
 
@@ -1105,8 +1017,8 @@ describe('RulesServiceLoader', () => {
       const { loader } = buildLoader();
       expect(
         loaderInternals(loader).isQueryEmpty(
-          '(and (or ) (not (eq $.annotations["deprecated"] "true")))',
-        ),
+          '(and (or ) (not (eq $.annotations["deprecated"] "true")))'
+        )
       ).toBe(true);
     });
 
@@ -1114,8 +1026,8 @@ describe('RulesServiceLoader', () => {
       const { loader } = buildLoader();
       expect(
         loaderInternals(loader).isQueryEmpty(
-          '(and (or (channel "acct-1/set/ps" true)) (not (eq $.annotations["deprecated"] "true")))',
-        ),
+          '(and (or (channel "acct-1/set/ps" true)) (not (eq $.annotations["deprecated"] "true")))'
+        )
       ).toBe(false);
     });
 
@@ -1132,14 +1044,16 @@ describe('RulesServiceLoader', () => {
       const { loader } = buildLoader();
       const query = '(or (contains "p" finding.classification))';
       expect(loaderInternals(loader).ensureDeprecatedFilter(query)).toBe(
-        `(and ${query} ${DEPRECATED})`,
+        `(and ${query} ${DEPRECATED})`
       );
     });
 
     it('is idempotent — does not double-wrap an already-wrapped query', () => {
       const { loader } = buildLoader();
       const wrapped = `(and (or (contains "p" finding.classification)) ${DEPRECATED})`;
-      expect(loaderInternals(loader).ensureDeprecatedFilter(wrapped)).toBe(wrapped);
+      expect(loaderInternals(loader).ensureDeprecatedFilter(wrapped)).toBe(
+        wrapped
+      );
     });
 
     it('inserts deprecated filter inside an existing (and ...) before its closing paren', () => {
@@ -1161,22 +1075,23 @@ describe('RulesServiceLoader', () => {
       const { loader } = buildLoader();
       const query =
         '(or (eq $.name "gomboc-ai/rule-a") (eq $.name "gomboc-ai/rule-b"))';
-      expect(loaderInternals(loader).parseExceptionRuleNamesFromQuery(query)).toEqual([
-        'gomboc-ai/rule-a',
-        'gomboc-ai/rule-b',
-      ]);
+      expect(
+        loaderInternals(loader).parseExceptionRuleNamesFromQuery(query)
+      ).toEqual(['gomboc-ai/rule-a', 'gomboc-ai/rule-b']);
     });
 
     it('returns empty array for an empty query', () => {
       const { loader } = buildLoader();
-      expect(loaderInternals(loader).parseExceptionRuleNamesFromQuery('')).toEqual([]);
+      expect(
+        loaderInternals(loader).parseExceptionRuleNamesFromQuery('')
+      ).toEqual([]);
     });
 
     it('returns empty array for a blank/whitespace query', () => {
       const { loader } = buildLoader();
-      expect(loaderInternals(loader).parseExceptionRuleNamesFromQuery('   ')).toEqual(
-        [],
-      );
+      expect(
+        loaderInternals(loader).parseExceptionRuleNamesFromQuery('   ')
+      ).toEqual([]);
     });
   });
 
@@ -1185,23 +1100,24 @@ describe('RulesServiceLoader', () => {
       const { loader } = buildLoader();
       const query =
         '(and (or (channel "acct-1/set/default" true) (channel "acct-1/set/platform" true)) (not (eq $.annotations["deprecated"] "true")))';
-      expect(loaderInternals(loader).getPolicySetNamesFromChannelQuery(query)).toEqual([
-        'default',
-        'platform',
-      ]);
+      expect(
+        loaderInternals(loader).getPolicySetNamesFromChannelQuery(query)
+      ).toEqual(['default', 'platform']);
     });
 
     it('returns empty array for empty query', () => {
       const { loader } = buildLoader();
-      expect(loaderInternals(loader).getPolicySetNamesFromChannelQuery('')).toEqual([]);
+      expect(
+        loaderInternals(loader).getPolicySetNamesFromChannelQuery('')
+      ).toEqual([]);
     });
 
     it('returns empty array when query contains no policy set channels', () => {
       const { loader } = buildLoader();
       const query = '(eq $.name "some-rule")';
-      expect(loaderInternals(loader).getPolicySetNamesFromChannelQuery(query)).toEqual(
-        [],
-      );
+      expect(
+        loaderInternals(loader).getPolicySetNamesFromChannelQuery(query)
+      ).toEqual([]);
     });
   });
 
@@ -1210,10 +1126,9 @@ describe('RulesServiceLoader', () => {
 
     it('wraps an empty query with the new policy set channel', () => {
       const { loader } = buildLoader();
-      const result = loaderInternals(loader).attachPolicySetToWorkspaceChannelQuery(
-        '',
-        'my-ps',
-      );
+      const result = loaderInternals(
+        loader
+      ).attachPolicySetToWorkspaceChannelQuery('', 'my-ps');
       expect(result).toContain('(channel "acct-1/set/my-ps" true)');
       expect(result).toContain(DEPRECATED);
     });
@@ -1221,10 +1136,9 @@ describe('RulesServiceLoader', () => {
     it('inserts new channel inside existing (and (or ...)) query', () => {
       const { loader } = buildLoader();
       const existing = `(and (or (channel "acct-1/set/default" true)) ${DEPRECATED})`;
-      const result = loaderInternals(loader).attachPolicySetToWorkspaceChannelQuery(
-        existing,
-        'platform',
-      );
+      const result = loaderInternals(
+        loader
+      ).attachPolicySetToWorkspaceChannelQuery(existing, 'platform');
       expect(result).toContain('(channel "acct-1/set/default" true)');
       expect(result).toContain('(channel "acct-1/set/platform" true)');
     });
@@ -1232,12 +1146,11 @@ describe('RulesServiceLoader', () => {
     it('is idempotent — does not add channel if already present', () => {
       const { loader } = buildLoader();
       const existing = `(and (or (channel "acct-1/set/my-ps" true)) ${DEPRECATED})`;
-      const result = loaderInternals(loader).attachPolicySetToWorkspaceChannelQuery(
-        existing,
-        'my-ps',
-      );
+      const result = loaderInternals(
+        loader
+      ).attachPolicySetToWorkspaceChannelQuery(existing, 'my-ps');
       const channelMatches = (result as string).match(
-        /\(channel "acct-1\/set\/my-ps" true\)/g,
+        /\(channel "acct-1\/set\/my-ps" true\)/g
       );
       expect(channelMatches).toHaveLength(1);
     });
@@ -1249,10 +1162,9 @@ describe('RulesServiceLoader', () => {
     it('removes the exact policy set channel predicate from query', () => {
       const { loader } = buildLoader();
       const query = `(and (or (channel "acct-1/set/default" true) (channel "acct-1/set/platform" true)) ${DEPRECATED})`;
-      const result = loaderInternals(loader).removePolicySetFromWorkspaceChannelQuery(
-        'platform',
-        query,
-      );
+      const result = loaderInternals(
+        loader
+      ).removePolicySetFromWorkspaceChannelQuery('platform', query);
       expect(result).not.toContain('(channel "acct-1/set/platform" true)');
       expect(result).toContain('(channel "acct-1/set/default" true)');
     });
@@ -1260,10 +1172,9 @@ describe('RulesServiceLoader', () => {
     it('returns empty string when the last channel is removed', () => {
       const { loader } = buildLoader();
       const query = `(and (or (channel "acct-1/set/only-ps" true)) ${DEPRECATED})`;
-      const result = loaderInternals(loader).removePolicySetFromWorkspaceChannelQuery(
-        'only-ps',
-        query,
-      );
+      const result = loaderInternals(
+        loader
+      ).removePolicySetFromWorkspaceChannelQuery('only-ps', query);
       expect(result).toBe('');
     });
 
@@ -1272,18 +1183,17 @@ describe('RulesServiceLoader', () => {
       expect(
         loaderInternals(loader).removePolicySetFromWorkspaceChannelQuery(
           'ps',
-          undefined,
-        ),
+          undefined
+        )
       ).toBeUndefined();
     });
 
     it('returns the query unchanged when the policy set is not present', () => {
       const { loader } = buildLoader();
       const query = `(and (or (channel "acct-1/set/default" true)) ${DEPRECATED})`;
-      const result = loaderInternals(loader).removePolicySetFromWorkspaceChannelQuery(
-        'other-ps',
-        query,
-      );
+      const result = loaderInternals(
+        loader
+      ).removePolicySetFromWorkspaceChannelQuery('other-ps', query);
       expect(result).toContain('(channel "acct-1/set/default" true)');
     });
   });
@@ -1297,9 +1207,9 @@ describe('RulesServiceLoader', () => {
           createdBy: 'u',
           applyToAllWorkspaces: true,
           workspaceIds: ['ws-1'],
-        }),
+        })
       ).rejects.toThrow(
-        'Unable to determine if policy set should be applied to all Workspaces',
+        'Unable to determine if policy set should be applied to all Workspaces'
       );
     });
 
@@ -1308,9 +1218,7 @@ describe('RulesServiceLoader', () => {
       loader.client = {
         getChannel: jest
           .fn()
-          .mockResolvedValue(
-            ok(makeChannel('acct-1/set/existing')),
-          ),
+          .mockResolvedValue(ok(makeChannel('acct-1/set/existing'))),
       };
 
       let thrown: unknown;
@@ -1334,7 +1242,7 @@ describe('RulesServiceLoader', () => {
         getChannel: jest
           .fn()
           .mockResolvedValue(
-            err({ message: 'db error', code: 'DB_ERR', statusCode: 500 }),
+            err({ message: 'db error', code: 'DB_ERR', statusCode: 500 })
           ),
       };
 
@@ -1360,14 +1268,12 @@ describe('RulesServiceLoader', () => {
         getChannel: jest
           .fn()
           .mockResolvedValue(
-            err({ message: 'not found', code: 'NOT_FOUND', statusCode: 404 }),
+            err({ message: 'not found', code: 'NOT_FOUND', statusCode: 404 })
           ),
         batchUpsertChannels: jest.fn().mockResolvedValue(
           ok({
-            results: [
-              { name: 'acct-1/set/new-ps', channel: policySetChannel },
-            ],
-          }),
+            results: [{ name: 'acct-1/set/new-ps', channel: policySetChannel }],
+          })
         ),
       };
 
@@ -1390,7 +1296,7 @@ describe('RulesServiceLoader', () => {
               }),
             }),
           ]),
-        }),
+        })
       );
       expect(result.name).toBe('new-ps');
     });
@@ -1403,15 +1309,13 @@ describe('RulesServiceLoader', () => {
         getChannel: jest
           .fn()
           .mockResolvedValueOnce(err({ message: 'not found', statusCode: 404 }))
-          .mockResolvedValueOnce(
-            ok(globalChannel),
-          ),
+          .mockResolvedValueOnce(ok(globalChannel)),
         batchUpsertChannels: jest.fn().mockResolvedValue(
           ok({
             results: [
               { name: 'acct-1/set/global-ps', channel: policySetChannel },
             ],
-          }),
+          })
         ),
       };
 
@@ -1443,7 +1347,7 @@ describe('RulesServiceLoader', () => {
                 annotations: { 'gomboc-ai/type': 'policy' },
               },
             ],
-          }),
+          })
         ),
       };
 
@@ -1479,15 +1383,13 @@ describe('RulesServiceLoader', () => {
         description: 'desc',
         annotations: { key: 'value' },
       } as unknown as Classification;
-      jest
-        .spyOn(loader, 'getPoliciesBatch')
-        .mockResolvedValue([batchRow]);
+      jest.spyOn(loader, 'getPoliciesBatch').mockResolvedValue([batchRow]);
 
       const result = await loader.getPoliciesByIds(
         ['gomboc-ai/policy-1', 'gomboc-ai/policy-1', ''],
         {
           includeDeprecated: true,
-        },
+        }
       );
 
       expect(loader.getPoliciesBatch).toHaveBeenCalledWith({
@@ -1520,7 +1422,7 @@ describe('RulesServiceLoader', () => {
         getChannel: jest
           .fn()
           .mockResolvedValue(
-            err(new RulesServiceError('nope', 'NOT_FOUND', 404)),
+            err(new RulesServiceError('nope', 'NOT_FOUND', 404))
           ),
       };
 
@@ -1559,7 +1461,7 @@ describe('RulesServiceLoader', () => {
               'gomboc-ai/apply-to-all-workspaces': false,
               'gomboc-ai/description': 'desc',
             },
-          }),
+          })
         ),
       };
 
@@ -1602,10 +1504,10 @@ describe('RulesServiceLoader', () => {
         getAllClassifications: jest
           .fn()
           .mockResolvedValueOnce(
-            ok({ classifications: [{ name: 'framework-1' }] }),
+            ok({ classifications: [{ name: 'framework-1' }] })
           )
           .mockResolvedValueOnce(
-            err(new RulesServiceError('svc unavailable', 'X', 503)),
+            err(new RulesServiceError('svc unavailable', 'X', 503))
           ),
       };
 
@@ -1613,7 +1515,7 @@ describe('RulesServiceLoader', () => {
       expect(frameworks).toEqual([{ name: 'framework-1' }]);
 
       await expect(loader.getFrameworks()).rejects.toThrow(
-        'Unable to fetch frameworks',
+        'Unable to fetch frameworks'
       );
     });
   });
@@ -1634,7 +1536,7 @@ describe('RulesServiceLoader', () => {
             total: 1,
             page: 1,
             perPage: 20,
-          }),
+          })
         ),
       };
 
@@ -1661,7 +1563,7 @@ describe('RulesServiceLoader', () => {
             total: 1,
             page: 1,
             perPage: 20,
-          }),
+          })
         ),
       };
 
@@ -1686,7 +1588,7 @@ describe('RulesServiceLoader', () => {
             total: 1,
             page: 1,
             perPage: 20,
-          }),
+          })
         ),
       };
 
@@ -1711,13 +1613,13 @@ describe('RulesServiceLoader', () => {
             ok({
               ...makeChannel('acct-1/accounts/global'),
               query: globalQuery,
-            }),
+            })
           )
           .mockResolvedValueOnce(
             ok({
               ...makeChannel('acct-1/wksp/ws-1'),
               query: workspaceQuery,
-            }),
+            })
           ),
       };
 
@@ -1740,10 +1642,10 @@ describe('RulesServiceLoader', () => {
             ok({
               ...makeChannel('acct-1/accounts/global'),
               query: globalQuery,
-            }),
+            })
           )
           .mockResolvedValueOnce(
-            err({ message: 'not found', statusCode: 404 }),
+            err({ message: 'not found', statusCode: 404 })
           ),
       };
 
@@ -1764,10 +1666,10 @@ describe('RulesServiceLoader', () => {
             ok({
               ...makeChannel('acct-1/accounts/global'),
               query: sharedQuery,
-            }),
+            })
           )
           .mockResolvedValueOnce(
-            ok({ ...makeChannel('acct-1/wksp/ws-1'), query: sharedQuery }),
+            ok({ ...makeChannel('acct-1/wksp/ws-1'), query: sharedQuery })
           ),
       };
 

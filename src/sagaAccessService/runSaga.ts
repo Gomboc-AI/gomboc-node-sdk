@@ -45,7 +45,7 @@ export class SagaExecutionError extends Error {
 /** `onEvent` is optional so callers can omit it when they only need success vs thrown `SagaExecutionError`. */
 export async function runSaga(
   steps: SagaStep[],
-  onEvent?: (event: SagaEvent) => void,
+  onEvent?: (event: SagaEvent) => void
 ) {
   const completedSteps: SagaStep[] = [];
 

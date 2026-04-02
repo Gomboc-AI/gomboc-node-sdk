@@ -19,7 +19,7 @@ const rulesServiceCache = new LRUCache<string, RulesServiceLoader>({
 function cacheKey(
   accessToken: string,
   accountId: string,
-  baseUrl: string,
+  baseUrl: string
 ): string {
   return `${accessToken}\0${accountId}\0${baseUrl}`;
 }
@@ -29,7 +29,7 @@ function cacheKey(
  * Callers supply auth and service configuration (e.g. from their app session and env).
  */
 export async function initRulesServiceLoader(
-  options: InitRulesServiceLoaderOptions,
+  options: InitRulesServiceLoaderOptions
 ): Promise<RulesServiceLoader> {
   const { accessToken, accountId, baseUrl, ...rest } = options;
   const key = cacheKey(accessToken, accountId, baseUrl);

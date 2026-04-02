@@ -29,7 +29,7 @@ describe('createSagaEventLogger', () => {
       {
         step: 'create_exception_channel',
         exceptionChannelName: 'acct/exc/1',
-      },
+      }
     );
     expect(logger.error).not.toHaveBeenCalled();
   });
@@ -65,7 +65,7 @@ describe('createSagaEventLogger', () => {
       {
         step: 's1',
         error: err,
-      },
+      }
     );
   });
 

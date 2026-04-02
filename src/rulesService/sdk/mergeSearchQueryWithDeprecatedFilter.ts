@@ -27,7 +27,7 @@ export function omitIncludeDeprecated<
  */
 export function mergeSearchQueryWithDeprecatedFilter(
   query: string | undefined,
-  includeDeprecated: boolean | undefined,
+  includeDeprecated: boolean | undefined
 ): string | undefined {
   if (includeDeprecated) {
     return query;
@@ -49,7 +49,7 @@ export function buildSearchParamsWithDeprecatedOption<
   const base = omitIncludeDeprecated(args) as T;
   const query = mergeSearchQueryWithDeprecatedFilter(
     base.query,
-    includeDeprecated,
+    includeDeprecated
   );
 
   if (query === undefined) {
@@ -83,7 +83,7 @@ export function ensureDeprecatedFilterOnQuery(query: string): string {
 
   const hasDeprecatedFilter =
     /\s*\(\s*not\s*\(\s*eq\s+\$\.annotations\["deprecated"\]\s+"true"\s*\)\s*\)\s*\)\s*$/i.test(
-      trimmed,
+      trimmed
     );
   if (hasDeprecatedFilter) return query;
 

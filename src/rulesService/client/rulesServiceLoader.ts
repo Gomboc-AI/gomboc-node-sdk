@@ -69,8 +69,13 @@ export class RulesServiceLoader {
     kubernetesAuth?: string;
     logger: ILogger;
   }) {
-    const { accountId, accessToken, baseUrl, kubernetesAuth = '', logger } =
-      args;
+    const {
+      accountId,
+      accessToken,
+      baseUrl,
+      kubernetesAuth = '',
+      logger,
+    } = args;
 
     this.logger = logger;
     this.accountId = accountId;
@@ -215,9 +220,9 @@ export class RulesServiceLoader {
     const policySets =
       rawPolicySets != null
         ? parseGombocAiStringArrayAnnotation(
-          rawPolicySets,
-          'gomboc-ai/policy-sets',
-        )
+            rawPolicySets,
+            'gomboc-ai/policy-sets'
+          )
         : [];
     const rawRules = a?.['gomboc-ai/rules'];
     const rules =
@@ -236,7 +241,7 @@ export class RulesServiceLoader {
       createdBy,
       ...(description && { description }),
       policySets: policySets.map(set =>
-        this.getPolicySetNameFromChannelName(set),
+        this.getPolicySetNameFromChannelName(set)
       ),
       createdAt: String(channel.createdAt),
       updatedAt: String(channel.updatedAt),
@@ -279,13 +284,13 @@ export class RulesServiceLoader {
 
   public async loadAllAvailablePolicies() {
     this.logger.info(
-      'RulesService.loadAllAvailablePolicies: Loading all available policies',
+      'RulesService.loadAllAvailablePolicies: Loading all available policies'
     );
     const result = await this.client.getAllClassifications({
       params: {
         query: mergeSearchQueryWithDeprecatedFilter(
           '(eq $.annotations["gomboc-ai/type"] "policy")',
-          false,
+          false
         ),
       },
     });
@@ -297,8 +302,8 @@ export class RulesServiceLoader {
       throw result.error;
     }
 
-    this.allPolicies = result.value.classifications.map(
-      (c: Classification) => this.classificationToPolicy(c),
+    this.allPolicies = result.value.classifications.map((c: Classification) =>
+      this.classificationToPolicy(c)
     );
     this.logger.info('RulesService.loadAllAvailablePolicies: Success', {
       allPoliciesCount: this.allPolicies.length,
@@ -336,7 +341,7 @@ export class RulesServiceLoader {
     includeDeprecated?: boolean;
   }) {
     this.logger.info(
-      'RulesService.getPoliciesBatch: Loading batch of policies',
+      'RulesService.getPoliciesBatch: Loading batch of policies'
     );
     const result = await this.client.getClassificationsBatch(args);
 
@@ -353,7 +358,7 @@ export class RulesServiceLoader {
 
   public async getPoliciesByIds(
     names: string[],
-    options?: { includeDeprecated?: boolean },
+    options?: { includeDeprecated?: boolean }
   ): Promise<Policy[]> {
     const includeDeprecated = options?.includeDeprecated ?? false;
     const uniqueNames = Array.from(new Set(names.filter(Boolean)));
@@ -363,7 +368,7 @@ export class RulesServiceLoader {
       includeDeprecated,
     });
     return classifications.map((c: Classification) =>
-      this.classificationToPolicy(c),
+      this.classificationToPolicy(c)
     );
   }
 
@@ -618,7 +623,7 @@ export class RulesServiceLoader {
     const convertQueryToClassificationQuery = (query: string): string => {
       return query.replace(
         RulesServiceLoader.POLICY_QUERY_SUBSTRING,
-        (_, classificationName) => `(eq $.name "${classificationName}")`,
+        (_, classificationName) => `(eq $.name "${classificationName}")`
       );
     };
 
@@ -635,11 +640,11 @@ export class RulesServiceLoader {
 
       if (!channelRes) {
         throw new Error(
-          `Channel not found: ${channelName} and default channel ${this.getDefaultChannelName()} also not found`,
+          `Channel not found: ${channelName} and default channel ${this.getDefaultChannelName()} also not found`
         );
       }
       const convertedClassificationQuery = convertQueryToClassificationQuery(
-        channelRes.query || '',
+        channelRes.query || ''
       );
 
       // Get classifications for the channel, loading multiple pages up to maxPages
@@ -655,8 +660,7 @@ export class RulesServiceLoader {
           query: convertedClassificationQuery,
         });
 
-        const pageClassifications =
-          classificationsResult.classifications || [];
+        const pageClassifications = classificationsResult.classifications || [];
         allClassifications.push(...pageClassifications);
 
         const total = classificationsResult.total || 0;
@@ -684,7 +688,7 @@ export class RulesServiceLoader {
   }
 
   public async getWorkspaceChannelsWithPolicySet(
-    policySetName: string,
+    policySetName: string
   ): Promise<Channel[]> {
     const policySetChannelName = this.getPolicySetChannelName(policySetName);
     const cumulativeWorkspaces: Channel[] = [];
@@ -699,7 +703,7 @@ export class RulesServiceLoader {
             updatedAt: String(channel.updatedAt),
           });
         }
-      },
+      }
     );
     return cumulativeWorkspaces;
   }
@@ -716,13 +720,13 @@ export class RulesServiceLoader {
       const globalChannelName = this.getAccountGlobalChannelName();
       const defaultChannelName = this.getDefaultChannelName();
       const globalChannelExists = channels.some(
-        (c: Channel) => c.name === globalChannelName,
+        (c: Channel) => c.name === globalChannelName
       );
 
       if (!globalChannelExists) {
         await this.loadAllPolicies();
         const defaultQuery = this.getPolicySetQuery(
-          this.allPolicies.map(p => p.id),
+          this.allPolicies.map(p => p.id)
         );
         const result = await this.client.batchUpsertChannels({
           channels: [
@@ -730,7 +734,7 @@ export class RulesServiceLoader {
               name: globalChannelName,
               query: mergeSearchQueryWithDeprecatedFilter(
                 `(or ${this.getDefaultChannelQuery()})`,
-                false,
+                false
               ),
               annotations: {
                 'gomboc-ai/created-by': 'Gomboc.AI',
@@ -768,7 +772,7 @@ export class RulesServiceLoader {
 
   public async getPolicySets(
     page?: number,
-    perPage?: number,
+    perPage?: number
   ): Promise<PolicySetPage> {
     const res = await this.searchForChannels({
       page,
@@ -780,7 +784,7 @@ export class RulesServiceLoader {
     const modifiedChannels = await Promise.all(
       res.channels.map(async (channel: Channel) => {
         const policySetName = this.getPolicySetNameFromChannelName(
-          channel.name,
+          channel.name
         );
         const isAppliedToAllWorkspaces =
           this.getShouldApplyToAllWorkspaces(channel) ?? false;
@@ -788,10 +792,10 @@ export class RulesServiceLoader {
         const appliedWorkspaceChannelNames = isAppliedToAllWorkspaces
           ? undefined
           : (await this.getWorkspaceChannelsWithPolicySet(policySetName))
-            .map(channel =>
-              this.getWorkspaceIdFromWorkspaceChannelName(channel.name),
-            )
-            .sort((a, b) => a.localeCompare(b));
+              .map(channel =>
+                this.getWorkspaceIdFromWorkspaceChannelName(channel.name)
+              )
+              .sort((a, b) => a.localeCompare(b));
 
         return {
           ...channel,
@@ -803,13 +807,13 @@ export class RulesServiceLoader {
           updatedAt: String(channel.updatedAt),
           ...(appliedWorkspaceChannelNames && { appliedWorkspaceChannelNames }),
           policiesCount: this.getPolicyCountFromChannelQuery(
-            channel.query ?? '',
+            channel.query ?? ''
           ),
           exceptionsCount: exceptionCountsByPolicySet.get(policySetName) ?? 0,
           isAppliedToAllWorkspaces,
           updatedBy: this.getUpdatedBy(channel) ?? '',
         };
-      }),
+      })
     );
     return {
       items: modifiedChannels,
@@ -828,19 +832,19 @@ export class RulesServiceLoader {
     const workspaceChannels = isAppliedToAllWorkspaces
       ? []
       : await this.getWorkspaceChannelsWithPolicySet(
-        this.getPolicySetNameFromChannelName(channel.name),
-      );
+          this.getPolicySetNameFromChannelName(channel.name)
+        );
     const appliedWorkspaceChannelNames =
       workspaceChannels.length > 0
         ? workspaceChannels
-          .map(ch => ch.name)
-          .sort((a, b) => a.localeCompare(b))
+            .map(ch => ch.name)
+            .sort((a, b) => a.localeCompare(b))
         : undefined;
     const appliedWorkspaceIds =
       workspaceChannels.length > 0
         ? workspaceChannels
-          .map(ch => this.getWorkspaceIdFromWorkspaceChannelName(ch.name))
-          .sort((a, b) => a.localeCompare(b))
+            .map(ch => this.getWorkspaceIdFromWorkspaceChannelName(ch.name))
+            .sort((a, b) => a.localeCompare(b))
         : undefined;
 
     const linkedExceptions = await this.getExceptionsLinkedToPolicySet({
@@ -874,7 +878,7 @@ export class RulesServiceLoader {
 
     // Extract policy names from query like (contains "name" finding.classification)
     const matches = policySet.query.matchAll(
-      RulesServiceLoader.POLICY_SET_POLICY_NAME_REGEX,
+      RulesServiceLoader.POLICY_SET_POLICY_NAME_REGEX
     );
     const policyNames = Array.from(matches, m => m[1]);
     // Match policy names with allPolicies to get Policy objects
@@ -883,7 +887,7 @@ export class RulesServiceLoader {
 
   private getPolicyNamesFromQuery(query: string): string[] {
     const matches = query.matchAll(
-      RulesServiceLoader.POLICY_SET_POLICY_NAME_REGEX,
+      RulesServiceLoader.POLICY_SET_POLICY_NAME_REGEX
     );
     return Array.from(matches, m => m[1]);
   }
@@ -899,13 +903,13 @@ export class RulesServiceLoader {
 
   private attachPolicySetToWorkspaceChannelQuery(
     workspaceQuery: string = '',
-    policySetName: string,
+    policySetName: string
   ) {
     const trimmedWorkspaceQuery = workspaceQuery.trim();
     const policySetChannelName = this.getPolicySetChannelName(policySetName);
     const escapedChannelName = policySetChannelName.replace(
       /[.*+?^${}()|[\]\\]/g,
-      '\\$&',
+      '\\$&'
     );
     // Require whitespace or " immediately after so we match the exact channel name only
     if (
@@ -917,7 +921,7 @@ export class RulesServiceLoader {
     // First match "(and", then match "(and (or" (with varying whitespace) — does not match plain "(or"
     const startsWithAnd = /^\s*\(\s*and\s*/i.test(trimmedWorkspaceQuery);
     const startsWithAndOr = /^\s*\(\s*and\s*\(\s*or\s*/i.test(
-      trimmedWorkspaceQuery,
+      trimmedWorkspaceQuery
     );
     const policySetChannel = `(channel "${policySetChannelName}" true)`;
     if (startsWithAndOr) {
@@ -946,7 +950,7 @@ export class RulesServiceLoader {
         const beforeInsert = trimmedWorkspaceQuery.substring(0, insertAtIndex);
         const afterInsert = trimmedWorkspaceQuery.substring(insertAtIndex);
         return this.ensureDeprecatedFilter(
-          `${beforeInsert} ${policySetChannel}${afterInsert}`,
+          `${beforeInsert} ${policySetChannel}${afterInsert}`
         );
       }
       return this.ensureDeprecatedFilter(workspaceQuery);
@@ -957,17 +961,17 @@ export class RulesServiceLoader {
         const indexAfterAnd = andMatch.index! + andMatch[0].length;
         const innerContent = trimmedWorkspaceQuery.substring(
           indexAfterAnd,
-          trimmedWorkspaceQuery.length - 1,
+          trimmedWorkspaceQuery.length - 1
         );
         return this.ensureDeprecatedFilter(
-          `(and (or ${innerContent} ${policySetChannel}))`,
+          `(and (or ${innerContent} ${policySetChannel}))`
         );
       }
       return this.ensureDeprecatedFilter(workspaceQuery);
     }
 
     return this.ensureDeprecatedFilter(
-      `(and (or ${trimmedWorkspaceQuery} ${policySetChannel}))`,
+      `(and (or ${trimmedWorkspaceQuery} ${policySetChannel}))`
     );
   }
 
@@ -1000,13 +1004,13 @@ export class RulesServiceLoader {
 
     if (globalChannelRes.isOk() && globalChannelRes.value?.query) {
       this.getPolicySetNamesFromChannelQuery(
-        globalChannelRes.value.query,
+        globalChannelRes.value.query
       ).forEach(name => policySetNames.add(name));
     }
 
     if (workspaceChannelRes.isOk() && workspaceChannelRes.value?.query) {
       this.getPolicySetNamesFromChannelQuery(
-        workspaceChannelRes.value.query,
+        workspaceChannelRes.value.query
       ).forEach(name => policySetNames.add(name));
     }
 
@@ -1016,10 +1020,10 @@ export class RulesServiceLoader {
   private async getUpdatedPolicySetAppliedWorkspacesArg(
     workspaceIds: string[],
     policySetName: string,
-    updatedBy: string,
+    updatedBy: string
   ): Promise<BatchUpsertChannelsRequestParams> {
     const allWorkspaceChannelNames = workspaceIds.map(id =>
-      this.getWorkspaceChannelsName(id),
+      this.getWorkspaceChannelsName(id)
     );
     const existingWorkspaceChannels: Channel[] = [];
 
@@ -1033,17 +1037,17 @@ export class RulesServiceLoader {
         // All workspaces have been found and the other workspace channels need to be created
         if (existingWorkspaceChannels.length === total) {
           const existingWorkspaceChannelNames = existingWorkspaceChannels.map(
-            channel => channel.name,
+            channel => channel.name
           );
           const nonExistingWorkspaceChannels = allWorkspaceChannelNames.filter(
-            name => !existingWorkspaceChannelNames.includes(name),
+            name => !existingWorkspaceChannelNames.includes(name)
           );
           const batchCreateArgs = nonExistingWorkspaceChannels.map(channel => {
             return {
               name: channel,
               query: this.attachPolicySetToWorkspaceChannelQuery(
                 this.getGlobalChannelQuery(),
-                policySetName,
+                policySetName
               ),
               annotations: {
                 'gomboc-ai/updated-by': updatedBy,
@@ -1054,7 +1058,7 @@ export class RulesServiceLoader {
           // within the workspaceIds function argument need to be updated to exclude the policy set
           // from the query
           const excludedWorkspaces = existingWorkspaceChannels.filter(
-            channel => !allWorkspaceChannelNames.includes(channel.name),
+            channel => !allWorkspaceChannelNames.includes(channel.name)
           );
 
           const batchRemoveArgs = excludedWorkspaces.map(channel => {
@@ -1063,7 +1067,7 @@ export class RulesServiceLoader {
               name: channel.name,
               query: this.removePolicySetFromWorkspaceChannelQuery(
                 policySetName,
-                channel.query,
+                channel.query
               ),
               annotations: {
                 ...channel.annotations,
@@ -1073,7 +1077,7 @@ export class RulesServiceLoader {
           });
           finalUpsertArgs.channels.push(...batchCreateArgs, ...batchRemoveArgs);
         }
-      },
+      }
     );
     return finalUpsertArgs;
   }
@@ -1081,7 +1085,7 @@ export class RulesServiceLoader {
   private getPolicySetQuery(updatedPolicyNameList: string[]) {
     const uniquePolicyNames = [...new Set(updatedPolicyNameList)];
     const updatedPolicyQueries = uniquePolicyNames.map(
-      name => `(contains "${name}" finding.classification)`,
+      name => `(contains "${name}" finding.classification)`
     );
     const newPolicySetQuery = `(or ${updatedPolicyQueries.join(' ')})`;
 
@@ -1101,31 +1105,31 @@ export class RulesServiceLoader {
   }
 
   private policySetExceptionChannelFilterClause(
-    exceptionChannelName: string,
+    exceptionChannelName: string
   ): string {
     const escaped = this.escapeChannelPathForChannelPredicate(
-      exceptionChannelName.trim(),
+      exceptionChannelName.trim()
     );
     return `(channel "${escaped}" true)`;
   }
 
   private policySetFiltersAlreadyReferenceExceptionChannel(
     currentFilters: string[],
-    exceptionChannelName: string,
+    exceptionChannelName: string
   ): boolean {
     const name = exceptionChannelName.trim();
     if (!name) {
       return true;
     }
     return currentFilters.includes(
-      this.policySetExceptionChannelFilterClause(name),
+      this.policySetExceptionChannelFilterClause(name)
     );
   }
 
   /** Appends the exception channel filter clause to the policy set channel's filters when missing. */
   private mergePolicySetFiltersWithExceptionChannelName(
     currentFilters: string[],
-    exceptionChannelName: string,
+    exceptionChannelName: string
   ): string[] {
     const name = exceptionChannelName.trim();
     if (!name) {
@@ -1134,7 +1138,7 @@ export class RulesServiceLoader {
     if (
       this.policySetFiltersAlreadyReferenceExceptionChannel(
         currentFilters,
-        name,
+        name
       )
     ) {
       return currentFilters;
@@ -1148,7 +1152,7 @@ export class RulesServiceLoader {
   /** Removes the exception channel predicate from a policy set `filters` list. */
   private filtersWithoutExceptionChannelClause(
     filters: string[],
-    exceptionChannelName: string,
+    exceptionChannelName: string
   ): string[] {
     const clause =
       this.policySetExceptionChannelFilterClause(exceptionChannelName);
@@ -1166,7 +1170,7 @@ export class RulesServiceLoader {
       (failure: SagaCompensationFailure) => ({
         step: failure.step,
         message: extractErrorInfo(failure.error).message,
-      }),
+      })
     );
     const rollbackStatus =
       compensationFailures.length > 0 ? 'partial' : 'completed';
@@ -1196,7 +1200,7 @@ export class RulesServiceLoader {
     } = args;
     if (applyToAllWorkspaces && workspaceIds) {
       throw new Error(
-        'Unable to determine if policy set should be applied to all Workspaces',
+        'Unable to determine if policy set should be applied to all Workspaces'
       );
     }
     const policySetChannelName = this.getPolicySetChannelName(name);
@@ -1211,14 +1215,14 @@ export class RulesServiceLoader {
       throw new RulesServiceError(
         'Currently unable to create a policy set',
         'SERVICE_UNAVAILABLE',
-        503,
+        503
       );
     }
     if (existingPolicySetName.isOk() && existingPolicySetName.value != null) {
       throw new RulesServiceError(
         'Name is already taken',
         'POLICY_SET_NAME_TAKEN',
-        409,
+        409
       );
     }
 
@@ -1247,7 +1251,7 @@ export class RulesServiceLoader {
       const globalChannelBaseQuery = globalChannelRes?.query ?? '';
       const updatedGlobalQuery = this.attachPolicySetToWorkspaceChannelQuery(
         globalChannelBaseQuery,
-        name,
+        name
       );
       channelsToUpsert.push({
         name: this.getAccountGlobalChannelName(),
@@ -1267,7 +1271,7 @@ export class RulesServiceLoader {
         {
           error: upsertResult.error,
           name,
-        },
+        }
       );
       throw upsertResult.error;
     }
@@ -1278,7 +1282,7 @@ export class RulesServiceLoader {
           await this.getUpdatedPolicySetAppliedWorkspacesArg(
             workspaceIds,
             name,
-            createdBy,
+            createdBy
           );
         const result =
           await this.client.batchUpsertChannels(workspaceUpsertArgs);
@@ -1291,12 +1295,12 @@ export class RulesServiceLoader {
     }
 
     const policySetResult = upsertResult.value.results.find(
-      (r: BatchUpsertChannelResult) => r.name === policySetChannelName,
+      (r: BatchUpsertChannelResult) => r.name === policySetChannelName
     );
     const channel = policySetResult?.channel;
     if (!channel) {
       throw new Error(
-        `RulesService.createPolicySet: no channel data returned for ${policySetChannelName}`,
+        `RulesService.createPolicySet: no channel data returned for ${policySetChannelName}`
       );
     }
     return {
@@ -1313,7 +1317,7 @@ export class RulesServiceLoader {
       page: number;
       perPage: number;
       total: number;
-    }) => Promise<void>,
+    }) => Promise<void>
   ) {
     let currentPage = 1;
     let totalReceived: number | null = null;
@@ -1350,7 +1354,7 @@ export class RulesServiceLoader {
       );
     } catch (e) {
       this.logger.error(
-        'RulesServiceLoader._applyToAllWorkspaceChannels failed to iterate through all workspaces',
+        'RulesServiceLoader._applyToAllWorkspaceChannels failed to iterate through all workspaces'
       );
       throw e;
     }
@@ -1370,7 +1374,7 @@ export class RulesServiceLoader {
       page: number;
       perPage: number;
       total: number;
-    }) => Promise<void>,
+    }) => Promise<void>
   ) {
     try {
       const result = await this.client.getAllClassifications({
@@ -1397,7 +1401,7 @@ export class RulesServiceLoader {
       });
     } catch (e) {
       this.logger.error(
-        'RulesServiceLoader._applyToAllFrameworks failed to fetch classifications',
+        'RulesServiceLoader._applyToAllFrameworks failed to fetch classifications'
       );
       throw e;
     }
@@ -1405,7 +1409,7 @@ export class RulesServiceLoader {
 
   private removePolicySetFromWorkspaceChannelQuery(
     policySetName: string,
-    workspaceChannelQuery?: string,
+    workspaceChannelQuery?: string
   ) {
     if (workspaceChannelQuery == null) {
       return;
@@ -1414,11 +1418,11 @@ export class RulesServiceLoader {
     const channelName = this.getPolicySetChannelName(policySetName);
     const escapedChannelName = channelName.replace(
       /[.*+?^${}()|[\]\\]/g,
-      '\\$&',
+      '\\$&'
     );
     // Matches: (channel "channelName" true) with flexible whitespace
     const policySetQuery = new RegExp(
-      `\\(\\s*channel\\s+"${escapedChannelName}"\\s*true\\s*\\)`,
+      `\\(\\s*channel\\s+"${escapedChannelName}"\\s*true\\s*\\)`
     );
     const finalQuery = workspaceChannelQuery.replace(policySetQuery, '').trim();
 
@@ -1444,7 +1448,7 @@ export class RulesServiceLoader {
               ...channel,
               query: this.removePolicySetFromWorkspaceChannelQuery(
                 policySetName,
-                channel.query,
+                channel.query
               ),
             };
           });
@@ -1456,11 +1460,11 @@ export class RulesServiceLoader {
               throw result.error;
             }
           }
-        },
+        }
       );
     } catch (e) {
       this.logger.error(
-        'RulesService._removePolicySetFromWorkspaceChannels failed. Unable to remove policy sets from all workspaces',
+        'RulesService._removePolicySetFromWorkspaceChannels failed. Unable to remove policy sets from all workspaces'
       );
       throw e;
     }
@@ -1504,7 +1508,7 @@ export class RulesServiceLoader {
     } = args;
     if (applyToAllWorkspaces && workspaceIds) {
       throw new Error(
-        'Unable to determine if policy set should be applied to all Workspaces for the update',
+        'Unable to determine if policy set should be applied to all Workspaces for the update'
       );
     }
     const policySetRes = await this.client.getChannel({
@@ -1538,7 +1542,7 @@ export class RulesServiceLoader {
         await this.getUpdatedPolicySetAppliedWorkspacesArg(
           workspaceIds,
           name,
-          updatedBy,
+          updatedBy
         );
     }
     if (frameworkNames) {
@@ -1550,7 +1554,7 @@ export class RulesServiceLoader {
         ]);
       } else {
         const currentPolicies = this.getPolicyNamesFromQuery(
-          currentPolicySet.query ?? '',
+          currentPolicySet.query ?? ''
         );
         finalPolicySetState['query'] = this.getPolicySetQuery([
           ...currentPolicies,
@@ -1571,13 +1575,13 @@ export class RulesServiceLoader {
     if (globalChannel && applyToAllWorkspaces != null) {
       const updatedGlobalQuery = applyToAllWorkspaces
         ? this.attachPolicySetToWorkspaceChannelQuery(
-          globalChannel.query ?? '',
-          name,
-        )
-        : this.removePolicySetFromWorkspaceChannelQuery(
-          name,
-          globalChannel.query,
-        ) ?? '';
+            globalChannel.query ?? '',
+            name
+          )
+        : (this.removePolicySetFromWorkspaceChannelQuery(
+            name,
+            globalChannel.query
+          ) ?? '');
       const finalQuery = this.ensureDeprecatedFilter(updatedGlobalQuery);
       channelsToUpsert.push({
         name: this.getAccountGlobalChannelName(),
@@ -1714,7 +1718,7 @@ export class RulesServiceLoader {
         });
         if (deleteRes.isErr() || !deleteRes.value.success) {
           throw new Error(
-            `Failed to rollback exception channel "${exceptionChannelName}"`,
+            `Failed to rollback exception channel "${exceptionChannelName}"`
           );
         }
       },
@@ -1737,7 +1741,7 @@ export class RulesServiceLoader {
           });
           if (!channelResponse) {
             throw new Error(
-              `Policy set channel not found for policy set "${policySetName}"`,
+              `Policy set channel not found for policy set "${policySetName}"`
             );
           }
 
@@ -1747,7 +1751,7 @@ export class RulesServiceLoader {
           const nextFilters =
             this.mergePolicySetFiltersWithExceptionChannelName(
               prevFilters,
-              exceptionChannelName,
+              exceptionChannelName
             );
           if (
             nextFilters.length === prevFilters.length &&
@@ -1787,7 +1791,7 @@ export class RulesServiceLoader {
           namespace: 'RulesService',
           operation: 'createException',
           context: { exceptionChannelName },
-        }),
+        })
       );
     } catch (error) {
       if (error instanceof SagaExecutionError) {
@@ -1839,7 +1843,7 @@ export class RulesServiceLoader {
           });
           if (!channelResponse) {
             throw new Error(
-              `Policy set channel not found for policy set "${policySetName}"`,
+              `Policy set channel not found for policy set "${policySetName}"`
             );
           }
 
@@ -1848,7 +1852,7 @@ export class RulesServiceLoader {
           const prevFilters = snap.filters ?? [];
           const nextFilters = this.filtersWithoutExceptionChannelClause(
             prevFilters,
-            exceptionChannelName,
+            exceptionChannelName
           );
           if (
             nextFilters.length === prevFilters.length &&
@@ -1891,7 +1895,7 @@ export class RulesServiceLoader {
         }
         if (!deleteRes.value.success) {
           throw new Error(
-            `Failed to delete exception channel "${exceptionChannelName}"`,
+            `Failed to delete exception channel "${exceptionChannelName}"`
           );
         }
       },
@@ -1905,7 +1909,7 @@ export class RulesServiceLoader {
           namespace: 'RulesService',
           operation: 'deleteException',
           context: { exceptionChannelName },
-        }),
+        })
       );
     } catch (error) {
       if (error instanceof SagaExecutionError) {
@@ -1946,7 +1950,7 @@ export class RulesServiceLoader {
       query: `(contains "${this.accountId}/exception/" $.name)`,
     });
     const items = res.channels.map((ch: Channel) =>
-      this.channelToException(ch),
+      this.channelToException(ch)
     );
     return {
       items,
@@ -1961,7 +1965,7 @@ export class RulesServiceLoader {
    */
   private async getExceptionCountsByPolicySetName(): Promise<
     Map<string, number>
-    > {
+  > {
     const perPage = 100;
     let page = 1;
     let total = 0;
@@ -1998,8 +2002,8 @@ export class RulesServiceLoader {
       total = result.total;
       items.push(
         ...result.items.filter(exception =>
-          exception.policySets.includes(policySetName),
-        ),
+          exception.policySets.includes(policySetName)
+        )
       );
       page += 1;
     } while ((page - 1) * perPage < total);
@@ -2017,7 +2021,7 @@ export class RulesServiceLoader {
       return [];
     }
     const pages = await Promise.all(
-      exception.rules.map(ruleName => this.getRule({ name: ruleName })),
+      exception.rules.map(ruleName => this.getRule({ name: ruleName }))
     );
     return pages;
   }
@@ -2035,8 +2039,8 @@ export class RulesServiceLoader {
     }
     return Promise.all(
       exception.policySets.map(policySetName =>
-        this.getPolicySet(policySetName),
-      ),
+        this.getPolicySet(policySetName)
+      )
     );
   }
 }

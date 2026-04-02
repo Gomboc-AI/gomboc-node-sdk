@@ -13,11 +13,12 @@ function preprocessStringArrayAnnotation(value: unknown): unknown {
 
 const gombocAiStringArrayAnnotationSchema = z.preprocess(
   preprocessStringArrayAnnotation,
-  z.array(z.string()),
+  z.array(z.string())
 );
 
 /** Stored on exception channels as `annotations['gomboc-ai/rules']`. */
-export const gombocAiRulesAnnotationSchema = gombocAiStringArrayAnnotationSchema;
+export const gombocAiRulesAnnotationSchema =
+  gombocAiStringArrayAnnotationSchema;
 
 /** Stored on exception channels as `annotations['gomboc-ai/policy-sets']`. */
 export const gombocAiPolicySetsAnnotationSchema =
@@ -30,7 +31,7 @@ export const gombocAiPolicySetsAnnotationSchema =
  */
 export function parseGombocAiStringArrayAnnotation(
   value: unknown,
-  fieldName: string,
+  fieldName: string
 ): string[] {
   const result = gombocAiStringArrayAnnotationSchema.safeParse(value);
   if (!result.success) {
