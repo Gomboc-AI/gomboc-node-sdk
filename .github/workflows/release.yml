@@ -1,7 +1,7 @@
 name: Release
 on:
   push:
-    branches: 
+    branches:
       - 'main'
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
@@ -14,6 +14,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Run actions (checkout, setup-node, etc.) on Node 24; Node 20 runtime is deprecated on runners.
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
 
