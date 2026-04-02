@@ -16,10 +16,7 @@ const rulesServiceCache = new LRUCache<string, RulesServiceLoader>({
   max: 100,
 });
 
-function cacheKey(
-  accessToken: string,
-  accountId: string
-): string {
+function cacheKey(accessToken: string, accountId: string): string {
   return `${accessToken}\0${accountId}`;
 }
 
