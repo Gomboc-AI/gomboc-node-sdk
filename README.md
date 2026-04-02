@@ -1,5 +1,8 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3afb387356cb46dd9edc631e2cf66f38)](https://app.codacy.com?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
+![eric](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWV1cmZ1dGptZHRjendsMzdsOXc1em01dXZxczVnY3Z5ZWJsZ280ZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/yx400dIdkwWdsCgWYp/giphy.gif)
+
+
 # @gomboc-ai/gomboc-node-sdk
 
 TypeScript SDKs for Gomboc services. This repository is intended to grow with additional packages over time; **today it ships the rules service client** (`RulesServiceLoader`, `PoliciesHandler`, `RulesServiceSdk`, and related types) under `src/rulesService/`.
