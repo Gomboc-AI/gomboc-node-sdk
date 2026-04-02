@@ -56,7 +56,7 @@ function buildLiveSdk(): RulesServiceSdk {
 }
 
 const integrationDescribe =
-  integrationEnabled && accessToken ? describe : describe.skip;
+  integrationEnabled && accessToken.length > 0 ? describe : describe.skip;
 
 integrationDescribe('RulesServiceSdk integration (live GETs only)', () => {
   let sdk: RulesServiceSdk;
