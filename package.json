@@ -1,7 +1,22 @@
 {
-  "name": "gomboc-node-sdk",
+  "name": "@gomboc-ai/gomboc-node-sdk",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "A node.sdk for all gomboc projects",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "prepublishOnly": "npm run build",
   "scripts": {
     "test": "TS_NODE_PROJECT=tsconfig.jest-config.json jest",
     "test:ci": "TS_NODE_PROJECT=tsconfig.jest-config.json jest --coverage --coverageReporters=text --coverageReporters=lcov",
@@ -18,8 +33,7 @@
     "format:check": "prettier --check \"src/**/*.{ts,js,json,md}\"",
     "generate-types": "openapi-typescript ./openApiClientSpecs/rules-service.openapi.yaml --o ./src/__generated__/rulesService.d.ts",
     "release": "npm run build && changeset publish",
-    "clean": "rm -rf dist",
-    "prepare": "husky"
+    "clean": "rm -rf dist"
   },
   "repository": {
     "type": "git",
@@ -40,11 +54,11 @@
     "url": "https://github.com/gomboc-ai/gomboc-node-sdk/issues"
   },
   "homepage": "https://github.com/gomboc-ai/gomboc-node-sdk#readme",
-  "description": "",
   "dependencies": {
     "axios": "^1.14.0",
-    "husky": "^9.1.7",
-    "neverthrow": "^8.2.0"
+    "lru-cache": "^11.2.7",
+    "neverthrow": "^8.2.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
@@ -54,6 +68,7 @@
     "dotenv": "^16.4.7",
     "eslint": "^8.57.0",
     "eslint-plugin-jest": "^28.14.0",
+    "husky": "^9.1.7",
     "jest": "^30.3.0",
     "openapi-typescript": "^7.8.0",
     "prettier": "^3.0.0",
