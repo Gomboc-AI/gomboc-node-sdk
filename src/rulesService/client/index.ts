@@ -44,4 +44,5 @@ export async function initRulesServiceLoader(
 
 export { PoliciesHandler } from './policiesHandler';
 export { RulesServiceLoader } from './rulesServiceLoader';
+export * from './queryUtils';
 export * from './types';
