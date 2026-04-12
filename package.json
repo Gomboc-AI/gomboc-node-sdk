@@ -55,7 +55,7 @@
   },
   "homepage": "https://github.com/gomboc-ai/gomboc-node-sdk#readme",
   "dependencies": {
-    "axios": "^1.14.0",
+    "axios": "^1.15.0",
     "lru-cache": "^11.2.7",
     "neverthrow": "^8.2.0",
     "zod": "^4.3.6"
