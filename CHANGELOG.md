@@ -1,5 +1,11 @@
 # @gomboc-ai/gomboc-node-sdk
 
+## 1.1.0
+
+### Minor Changes
+
+- 4fa3d7d: add integrations client, remove lru caching
+
 ## 1.0.2
 
 ### Patch Changes
