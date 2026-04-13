@@ -40,7 +40,7 @@ export async function listPolicySetsForRequest(req: {
 }
 ```
 
-`initRulesServiceLoader` caches one `RulesServiceLoader` per access token + account pair. For a fresh instance every time (no cache), use `RulesServiceLoader.init` instead. Swap `getPolicySets` for other loader methods (`getPolicySet`, `createPolicySet`, `getExceptions`, and so on) as needed.
+`initRulesServiceLoader` creates a fresh `RulesServiceLoader` per call. Swap `getPolicySets` for other loader methods (`getPolicySet`, `createPolicySet`, `getExceptions`, and so on) as needed.
 
 ---
 
