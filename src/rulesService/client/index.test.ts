@@ -21,7 +21,9 @@ describe('initRulesServiceLoader', () => {
     };
     const firstLoader = { id: 'loader-1' };
     const secondLoader = { id: 'loader-2' };
-    mockInit.mockResolvedValueOnce(firstLoader).mockResolvedValueOnce(secondLoader);
+    mockInit
+      .mockResolvedValueOnce(firstLoader)
+      .mockResolvedValueOnce(secondLoader);
     const { initRulesServiceLoader } = await import('./index');
 
     const opts = {
@@ -47,7 +49,9 @@ describe('initRulesServiceLoader', () => {
       warn: jest.fn(),
       debug: jest.fn(),
     };
-    mockInit.mockResolvedValueOnce({ id: 'a' }).mockResolvedValueOnce({ id: 'b' });
+    mockInit
+      .mockResolvedValueOnce({ id: 'a' })
+      .mockResolvedValueOnce({ id: 'b' });
     const { initRulesServiceLoader } = await import('./index');
 
     const first = await initRulesServiceLoader({
