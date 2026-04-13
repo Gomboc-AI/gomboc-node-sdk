@@ -1,0 +1,1623 @@
+openapi: 3.1.0
+info:
+  title: Integrations API
+  version: 1.0.0
+paths:
+  /healthcheck:
+    get:
+      operationId: GetHealthcheck
+      tags:
+        - Health
+      responses:
+        "200":
+          description: GET /healthcheck Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetHealthcheckPositiveResponse"
+        "400":
+          description: GET /healthcheck Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetHealthcheckNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+    head:
+      operationId: HeadHealthcheck
+      tags:
+        - Health
+      responses:
+        "200":
+          description: HEAD /healthcheck Positive response
+        "400":
+          description: HEAD /healthcheck Negative response
+  /tf-ops/api/v1/hcp/integrations/{integrationId}:
+    get:
+      operationId: getHcpIntegration
+      tags:
+        - Integrations
+      parameters:
+        - name: integrationId
+          in: path
+          required: true
+          description: GET /tf-ops/api/v1/hcp/integrations/:integrationId Parameter
+          schema:
+            $ref: "#/components/schemas/GetTfOpsApiV1HcpIntegrationsIntegrationIdParameterI\
+              ntegrationId"
+        - name: x-organization-id
+          in: header
+          required: true
+          description: GET /tf-ops/api/v1/hcp/integrations/:integrationId Parameter
+          schema:
+            $ref: "#/components/schemas/GetTfOpsApiV1HcpIntegrationsIntegrationIdParameterX\
+              OrganizationId"
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: GET /tf-ops/api/v1/hcp/integrations/:integrationId Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTfOpsApiV1HcpIntegrationsIntegrationIdPositiveRe\
+                  sponse"
+        "400":
+          description: GET /tf-ops/api/v1/hcp/integrations/:integrationId Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTfOpsApiV1HcpIntegrationsIntegrationIdNegativeRe\
+                  sponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+    head:
+      operationId: getHcpIntegration__HEAD
+      tags:
+        - Integrations
+      parameters:
+        - name: integrationId
+          in: path
+          required: true
+          description: HEAD /tf-ops/api/v1/hcp/integrations/:integrationId Parameter
+          schema:
+            $ref: "#/components/schemas/HeadTfOpsApiV1HcpIntegrationsIntegrationIdParameter\
+              IntegrationId"
+        - name: x-organization-id
+          in: header
+          required: true
+          description: HEAD /tf-ops/api/v1/hcp/integrations/:integrationId Parameter
+          schema:
+            $ref: "#/components/schemas/HeadTfOpsApiV1HcpIntegrationsIntegrationIdParameter\
+              XOrganizationId"
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: HEAD /tf-ops/api/v1/hcp/integrations/:integrationId Positive response
+        "400":
+          description: HEAD /tf-ops/api/v1/hcp/integrations/:integrationId Negative response
+    delete:
+      operationId: deleteHcpIntegration
+      tags:
+        - Integrations
+      parameters:
+        - name: integrationId
+          in: path
+          required: true
+          description: DELETE /tf-ops/api/v1/hcp/integrations/:integrationId Parameter
+          schema:
+            $ref: "#/components/schemas/DeleteTfOpsApiV1HcpIntegrationsIntegrationIdParamet\
+              erIntegrationId"
+        - name: x-organization-id
+          in: header
+          required: true
+          description: DELETE /tf-ops/api/v1/hcp/integrations/:integrationId Parameter
+          schema:
+            $ref: "#/components/schemas/DeleteTfOpsApiV1HcpIntegrationsIntegrationIdParamet\
+              erXOrganizationId"
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: DELETE /tf-ops/api/v1/hcp/integrations/:integrationId Positive
+            response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteTfOpsApiV1HcpIntegrationsIntegrationIdPositiv\
+                  eResponse"
+        "400":
+          description: DELETE /tf-ops/api/v1/hcp/integrations/:integrationId Negative
+            response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteTfOpsApiV1HcpIntegrationsIntegrationIdNegativ\
+                  eResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /tf-ops/api/v1/hcp/integrations:
+    post:
+      operationId: createHcpIntegration
+      tags:
+        - Integrations
+      parameters:
+        - name: x-organization-id
+          in: header
+          required: true
+          description: POST /tf-ops/api/v1/hcp/integrations Parameter
+          schema:
+            $ref: "#/components/schemas/PostTfOpsApiV1HcpIntegrationsParameterXOrganization\
+              Id"
+      requestBody:
+        description: POST /tf-ops/api/v1/hcp/integrations Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostTfOpsApiV1HcpIntegrationsRequestBody"
+        required: true
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: POST /tf-ops/api/v1/hcp/integrations Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostTfOpsApiV1HcpIntegrationsPositiveResponse"
+        "400":
+          description: POST /tf-ops/api/v1/hcp/integrations Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostTfOpsApiV1HcpIntegrationsNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+    get:
+      operationId: getAllHcpIntegrations
+      tags:
+        - Integrations
+      parameters:
+        - name: x-organization-id
+          in: header
+          required: true
+          description: GET /tf-ops/api/v1/hcp/integrations Parameter
+          schema:
+            $ref: "#/components/schemas/GetTfOpsApiV1HcpIntegrationsParameterXOrganizationI\
+              d"
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: GET /tf-ops/api/v1/hcp/integrations Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTfOpsApiV1HcpIntegrationsPositiveResponse"
+        "400":
+          description: GET /tf-ops/api/v1/hcp/integrations Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTfOpsApiV1HcpIntegrationsNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+    head:
+      operationId: getAllHcpIntegrations__HEAD
+      tags:
+        - Integrations
+      parameters:
+        - name: x-organization-id
+          in: header
+          required: true
+          description: HEAD /tf-ops/api/v1/hcp/integrations Parameter
+          schema:
+            $ref: "#/components/schemas/HeadTfOpsApiV1HcpIntegrationsParameterXOrganization\
+              Id"
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: HEAD /tf-ops/api/v1/hcp/integrations Positive response
+        "400":
+          description: HEAD /tf-ops/api/v1/hcp/integrations Negative response
+  /tf-ops/api/v1/hcp/webhooks/terraform-run-task/{integrationId}:
+    post:
+      operationId: PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationId
+      parameters:
+        - name: integrationId
+          in: path
+          required: true
+          description: POST /tf-ops/api/v1/hcp/webhooks/terraform-run-task/:integrationId
+            Parameter
+          schema:
+            $ref: "#/components/schemas/PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegratio\
+              nIdParameterIntegrationId"
+      requestBody:
+        description: POST /tf-ops/api/v1/hcp/webhooks/terraform-run-task/:integrationId
+          Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegratio\
+                nIdRequestBody"
+        required: true
+      security:
+        - APIKEY_1: []
+        - APIKEY_2: []
+      responses:
+        "200":
+          description: POST /tf-ops/api/v1/hcp/webhooks/terraform-run-task/:integrationId
+            Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegratio\
+                  nIdPositiveResponse"
+        "400":
+          description: POST /tf-ops/api/v1/hcp/webhooks/terraform-run-task/:integrationId
+            Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegratio\
+                  nIdNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /tf-ops/api/v1/hcp/webhooks/notifications/{integrationId}:
+    post:
+      operationId: PostTfOpsApiV1HcpWebhooksNotificationsIntegrationId
+      parameters:
+        - name: integrationId
+          in: path
+          required: true
+          description: POST /tf-ops/api/v1/hcp/webhooks/notifications/:integrationId
+            Parameter
+          schema:
+            $ref: "#/components/schemas/PostTfOpsApiV1HcpWebhooksNotificationsIntegrationId\
+              ParameterIntegrationId"
+      requestBody:
+        description: POST /tf-ops/api/v1/hcp/webhooks/notifications/:integrationId
+          Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostTfOpsApiV1HcpWebhooksNotificationsIntegrationId\
+                RequestBody"
+        required: true
+      security:
+        - APIKEY_1: []
+        - APIKEY_2: []
+      responses:
+        "200":
+          description: POST /tf-ops/api/v1/hcp/webhooks/notifications/:integrationId
+            Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostTfOpsApiV1HcpWebhooksNotificationsIntegrationId\
+                  PositiveResponse"
+        "400":
+          description: POST /tf-ops/api/v1/hcp/webhooks/notifications/:integrationId
+            Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostTfOpsApiV1HcpWebhooksNotificationsIntegrationId\
+                  NegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /tf-ops/api/v1/hcp/drift/terraform-plan/{driftNotificationId}:
+    get:
+      operationId: GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationId
+      parameters:
+        - name: driftNotificationId
+          in: path
+          required: true
+          description: GET /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId
+            Parameter
+          schema:
+            $ref: "#/components/schemas/GetTfOpsApiV1HcpDriftTerraformPlanDriftNotification\
+              IdParameterDriftNotificationId"
+        - name: x-organization-id
+          in: header
+          required: true
+          description: GET /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId
+            Parameter
+          schema:
+            $ref: "#/components/schemas/GetTfOpsApiV1HcpDriftTerraformPlanDriftNotification\
+              IdParameterXOrganizationId"
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: GET /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId
+            Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTfOpsApiV1HcpDriftTerraformPlanDriftNotification\
+                  IdPositiveResponse"
+        "400":
+          description: GET /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId
+            Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetTfOpsApiV1HcpDriftTerraformPlanDriftNotification\
+                  IdNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+    head:
+      operationId: HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationId
+      parameters:
+        - name: driftNotificationId
+          in: path
+          required: true
+          description: HEAD /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId
+            Parameter
+          schema:
+            $ref: "#/components/schemas/HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificatio\
+              nIdParameterDriftNotificationId"
+        - name: x-organization-id
+          in: header
+          required: true
+          description: HEAD /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId
+            Parameter
+          schema:
+            $ref: "#/components/schemas/HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificatio\
+              nIdParameterXOrganizationId"
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: HEAD /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId
+            Positive response
+        "400":
+          description: HEAD /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId
+            Negative response
+  /reporting/orl-external:
+    post:
+      operationId: createOrlReportEvent
+      tags:
+        - ORL Reports
+      requestBody:
+        description: POST /reporting/orl-external Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostReportingOrlExternalRequestBody"
+        required: true
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: POST /reporting/orl-external Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostReportingOrlExternalPositiveResponse"
+        "400":
+          description: POST /reporting/orl-external Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostReportingOrlExternalNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /reporting/orl-fix-applied:
+    post:
+      operationId: createOrlFixAppliedEvent
+      tags:
+        - ORL Fix Applied
+      requestBody:
+        description: POST /reporting/orl-fix-applied Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostReportingOrlFixAppliedRequestBody"
+        required: true
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: POST /reporting/orl-fix-applied Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostReportingOrlFixAppliedPositiveResponse"
+        "400":
+          description: POST /reporting/orl-fix-applied Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostReportingOrlFixAppliedNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+components:
+  schemas:
+    GetHealthcheckPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            status:
+              type: string
+            timestamp:
+              type: string
+          required:
+            - status
+            - timestamp
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetHealthcheckNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    GetTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId:
+      type: string
+    GetTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId:
+      type: string
+    GetTfOpsApiV1HcpIntegrationsIntegrationIdPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            deletedAt: {}
+            integrationId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            organizationId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            createdBy:
+              type: string
+              format: email
+              pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+            name:
+              type: string
+            HMACKey:
+              type: string
+            createdAt: {}
+            webhookUrl:
+              type: string
+              format: uri
+            type:
+              type: string
+              enum:
+                - RUN_TASK
+                - NOTIFICATION
+          required:
+            - integrationId
+            - organizationId
+            - createdBy
+            - name
+            - HMACKey
+            - createdAt
+            - webhookUrl
+            - type
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetTfOpsApiV1HcpIntegrationsIntegrationIdNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    HeadTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId:
+      type: string
+    HeadTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId:
+      type: string
+    DeleteTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId:
+      type: string
+    DeleteTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId:
+      type: string
+    DeleteTfOpsApiV1HcpIntegrationsIntegrationIdPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            integrationId:
+              type: string
+          required:
+            - integrationId
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    DeleteTfOpsApiV1HcpIntegrationsIntegrationIdNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostTfOpsApiV1HcpIntegrationsParameterXOrganizationId:
+      type: string
+    PostTfOpsApiV1HcpIntegrationsPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            deletedAt: {}
+            integrationId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            organizationId:
+              type: string
+              format: uuid
+              pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+            createdBy:
+              type: string
+              format: email
+              pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+            name:
+              type: string
+            HMACKey:
+              type: string
+            createdAt: {}
+            webhookUrl:
+              type: string
+              format: uri
+            type:
+              type: string
+              enum:
+                - RUN_TASK
+                - NOTIFICATION
+          required:
+            - integrationId
+            - organizationId
+            - createdBy
+            - name
+            - HMACKey
+            - createdAt
+            - webhookUrl
+            - type
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostTfOpsApiV1HcpIntegrationsNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostTfOpsApiV1HcpIntegrationsRequestBody:
+      type: object
+      properties:
+        createdBy:
+          type: string
+          format: email
+          pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - RUN_TASK
+            - NOTIFICATION
+        pat:
+          type: string
+      required:
+        - createdBy
+        - type
+    GetTfOpsApiV1HcpIntegrationsParameterXOrganizationId:
+      type: string
+    GetTfOpsApiV1HcpIntegrationsPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            integrations:
+              type: array
+              items:
+                type: object
+                properties:
+                  deletedAt: {}
+                  integrationId:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                  organizationId:
+                    type: string
+                    format: uuid
+                    pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+                  createdBy:
+                    type: string
+                    format: email
+                    pattern: ^(?!\.)(?!.*\.\.)([A-Za-z0-9_'+\-\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\-]*\.)+[A-Za-z]{2,}$
+                  name:
+                    type: string
+                  HMACKey:
+                    type: string
+                  createdAt: {}
+                  webhookUrl:
+                    type: string
+                    format: uri
+                  type:
+                    type: string
+                    enum:
+                      - RUN_TASK
+                      - NOTIFICATION
+                required:
+                  - integrationId
+                  - organizationId
+                  - createdBy
+                  - name
+                  - HMACKey
+                  - createdAt
+                  - webhookUrl
+                  - type
+                additionalProperties: false
+          required:
+            - integrations
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetTfOpsApiV1HcpIntegrationsNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    HeadTfOpsApiV1HcpIntegrationsParameterXOrganizationId:
+      type: string
+    PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdParameterIntegrationId:
+      type: string
+      format: uuid
+      pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+    PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties: {}
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdRequestBody:
+      type: object
+      properties:
+        payload_version:
+          type: number
+        stage:
+          type: string
+        access_token:
+          type: string
+        capabilities:
+          type: object
+          properties:
+            outcomes:
+              type: boolean
+          required:
+            - outcomes
+        configuration_version_download_url:
+          type: string
+          format: uri
+        configuration_version_id:
+          type: string
+        is_speculative:
+          type: boolean
+        organization_name:
+          type: string
+        plan_json_api_url:
+          type: string
+          format: uri
+        run_app_url:
+          type: string
+          format: uri
+        run_created_at:
+          type: string
+        run_created_by:
+          type: string
+        run_id:
+          type: string
+        run_message:
+          type: string
+        task_result_callback_url:
+          type: string
+          format: uri
+        task_result_enforcement_level:
+          type: string
+          enum:
+            - mandatory
+            - advisory
+            - test
+        task_result_id:
+          type: string
+        vcs_branch:
+          type:
+            - string
+            - "null"
+        vcs_commit_url:
+          type:
+            - string
+            - "null"
+          format: uri
+        vcs_pull_request_url:
+          type:
+            - string
+            - "null"
+          format: uri
+        vcs_repo_url:
+          type:
+            - string
+            - "null"
+          format: uri
+        workspace_app_url:
+          type: string
+          format: uri
+        workspace_id:
+          type: string
+        workspace_name:
+          type: string
+        workspace_working_directory:
+          type: string
+      required:
+        - payload_version
+        - stage
+        - access_token
+        - capabilities
+        - configuration_version_download_url
+        - configuration_version_id
+        - is_speculative
+        - organization_name
+        - run_app_url
+        - run_created_at
+        - run_created_by
+        - run_id
+        - run_message
+        - task_result_callback_url
+        - task_result_enforcement_level
+        - task_result_id
+        - vcs_branch
+        - vcs_commit_url
+        - vcs_pull_request_url
+        - vcs_repo_url
+        - workspace_app_url
+        - workspace_id
+        - workspace_name
+        - workspace_working_directory
+    PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdParameterIntegrationId:
+      type: string
+      format: uuid
+      pattern: ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000)$
+    PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties: {}
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdRequestBody:
+      allOf:
+        - type: object
+          properties: {}
+        - type: object
+          properties: {}
+          required: []
+        - anyOf:
+            - type: object
+              properties:
+                payload_version:
+                  type: number
+                  const: 1
+                notification_configuration_id:
+                  type: string
+                run_url:
+                  type:
+                    - string
+                    - "null"
+                  format: uri
+                run_id:
+                  type:
+                    - string
+                    - "null"
+                run_message:
+                  type:
+                    - string
+                    - "null"
+                run_created_at:
+                  type:
+                    - string
+                    - "null"
+                  format: date-time
+                  pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                run_created_by:
+                  type:
+                    - string
+                    - "null"
+                workspace_id:
+                  type:
+                    - string
+                    - "null"
+                workspace_name:
+                  type:
+                    - string
+                    - "null"
+                organization_name:
+                  type:
+                    - string
+                    - "null"
+                notifications:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                      trigger:
+                        type: string
+                        enum:
+                          - run:created
+                          - run:planning
+                          - run:needs_attention
+                          - run:applying
+                          - run:completed
+                          - run:errored
+                          - assessment:drifted
+                          - assessment:check_failure
+                          - assessment:failed
+                          - workspace:auto_destroy_reminder
+                          - workspace:auto_destroy_run_results
+                          - verification
+                      run_status:
+                        type:
+                          - string
+                          - "null"
+                      run_updated_at:
+                        type:
+                          - string
+                          - "null"
+                        format: date-time
+                        pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                      run_updated_by:
+                        type:
+                          - string
+                          - "null"
+                    required:
+                      - message
+                      - trigger
+                      - run_status
+                      - run_updated_at
+                      - run_updated_by
+              required:
+                - payload_version
+                - notification_configuration_id
+                - run_url
+                - run_id
+                - run_message
+                - run_created_at
+                - run_created_by
+                - workspace_id
+                - workspace_name
+                - organization_name
+                - notifications
+            - type: object
+              properties:
+                payload_version:
+                  type: string
+                  const: "2"
+                notification_configuration_id:
+                  type: string
+                notification_configuration_url:
+                  type: string
+                  format: uri
+                trigger_scope:
+                  type: string
+                  enum:
+                    - assessment
+                    - workspace
+                trigger:
+                  type: string
+                  enum:
+                    - run:created
+                    - run:planning
+                    - run:needs_attention
+                    - run:applying
+                    - run:completed
+                    - run:errored
+                    - assessment:drifted
+                    - assessment:check_failure
+                    - assessment:failed
+                    - workspace:auto_destroy_reminder
+                    - workspace:auto_destroy_run_results
+                    - verification
+                message:
+                  type: string
+                details:
+                  type: object
+                  properties:
+                    new_assessment_result:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        url:
+                          type: string
+                          format: uri
+                        succeeded:
+                          type: boolean
+                        drifted:
+                          type: boolean
+                        all_checks_succeeded:
+                          type: boolean
+                        resources_drifted:
+                          type: number
+                        resources_undrifted:
+                          type: number
+                        checks_passed:
+                          type: number
+                        checks_failed:
+                          type: number
+                        checks_errored:
+                          type: number
+                        checks_unknown:
+                          type: number
+                        created_at:
+                          type: string
+                          format: date-time
+                          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                      required:
+                        - id
+                        - url
+                        - succeeded
+                        - drifted
+                        - all_checks_succeeded
+                        - resources_drifted
+                        - resources_undrifted
+                        - checks_passed
+                        - checks_failed
+                        - checks_errored
+                        - checks_unknown
+                        - created_at
+                    prior_assessment_result:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        url:
+                          type: string
+                          format: uri
+                        succeeded:
+                          type: boolean
+                        drifted:
+                          type: boolean
+                        all_checks_succeeded:
+                          type: boolean
+                        resources_drifted:
+                          type: number
+                        resources_undrifted:
+                          type: number
+                        checks_passed:
+                          type: number
+                        checks_failed:
+                          type: number
+                        checks_errored:
+                          type: number
+                        checks_unknown:
+                          type: number
+                        created_at:
+                          type: string
+                          format: date-time
+                          pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                      required:
+                        - id
+                        - url
+                        - succeeded
+                        - drifted
+                        - all_checks_succeeded
+                        - resources_drifted
+                        - resources_undrifted
+                        - checks_passed
+                        - checks_failed
+                        - checks_errored
+                        - checks_unknown
+                        - created_at
+                    workspace_id:
+                      type: string
+                    workspace_name:
+                      type: string
+                    organization_name:
+                      type: string
+                    auto_destroy_at:
+                      type:
+                        - string
+                        - "null"
+                      format: date-time
+                      pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                    run_created_at:
+                      type:
+                        - string
+                        - "null"
+                      format: date-time
+                      pattern: ^(?:(?:\d\d[2468][048]|\d\d[13579][26]|\d\d0[48]|[02468][048]00|[13579][26]00)-02-29|\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\d|30)|(?:02)-(?:0[1-9]|1\d|2[0-8])))T(?:(?:[01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z))$
+                    run_status:
+                      type:
+                        - string
+                        - "null"
+                    run_external_id:
+                      type:
+                        - string
+                        - "null"
+                    run_create_error_message:
+                      type:
+                        - string
+                        - "null"
+                    trigger_type:
+                      type: string
+                      enum:
+                        - reminder
+                        - results
+                  required:
+                    - workspace_name
+                    - organization_name
+              required:
+                - payload_version
+                - notification_configuration_id
+                - notification_configuration_url
+                - trigger_scope
+                - trigger
+                - message
+                - details
+          discriminator:
+            propertyName: payload_version
+    GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterDriftNotificationId:
+      type: string
+    GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterXOrganizationId:
+      type: string
+    GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            rawTerraformPlan:
+              type: string
+          required:
+            - rawTerraformPlan
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterDriftNotificationId:
+      type: string
+    HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterXOrganizationId:
+      type: string
+    PostReportingOrlExternalPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+            jobId:
+              type: string
+          required:
+            - success
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostReportingOrlExternalNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostReportingOrlExternalRequestBody:
+      type: object
+      properties:
+        version:
+          default: 1
+          type: number
+        requestOrigin:
+          type: string
+        effect:
+          type: string
+        reports:
+          type: array
+          items:
+            type: object
+            properties:
+              path:
+                type: string
+              branch:
+                type: string
+              orlReport:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    const: Report
+                  version:
+                    type: string
+                    const: v1
+                  metadata:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      priority:
+                        type: number
+                      skip:
+                        type: boolean
+                      required_contexts:
+                        type: array
+                        items:
+                          type: string
+                      annotations:
+                        type: object
+                        propertyNames:
+                          type: string
+                        additionalProperties:
+                          type: string
+                    required:
+                      - name
+                  workspace:
+                    type: string
+                  language:
+                    type: string
+                  rules_applied:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  findings:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  fixes:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  changes:
+                    type: integer
+                    minimum: 0
+                    maximum: 9007199254740991
+                  errors:
+                    type: array
+                    items: {}
+                  rules:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            description:
+                              type: string
+                            priority:
+                              type: number
+                            skip:
+                              type: boolean
+                            required_contexts:
+                              type: array
+                              items:
+                                type: string
+                            annotations:
+                              type: object
+                              propertyNames:
+                                type: string
+                              additionalProperties:
+                                type: string
+                            classifications:
+                              type: array
+                              items:
+                                type: string
+                          required:
+                            - name
+                        name:
+                          type: string
+                        findings:
+                          type: integer
+                          minimum: 0
+                          maximum: 9007199254740991
+                        fixes:
+                          type: integer
+                          minimum: 0
+                          maximum: 9007199254740991
+                        changes:
+                          type: integer
+                          minimum: 0
+                          maximum: 9007199254740991
+                        errors:
+                          type: array
+                          items: {}
+                        files:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              path:
+                                type: string
+                            required:
+                              - path
+                      required:
+                        - metadata
+                        - name
+                        - findings
+                        - fixes
+                        - changes
+                        - errors
+                        - files
+                required:
+                  - type
+                  - version
+                  - metadata
+                  - workspace
+                  - language
+                  - rules_applied
+                  - findings
+                  - fixes
+                  - changes
+                  - errors
+                  - rules
+                additionalProperties: {}
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: integer
+                minimum: -9007199254740991
+                maximum: 9007199254740991
+              message:
+                type: string
+            required:
+              - status
+              - message
+      required:
+        - requestOrigin
+        - reports
+        - errors
+    PostReportingOrlFixAppliedPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          properties:
+            success:
+              type: boolean
+            message:
+              type: string
+          required:
+            - success
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostReportingOrlFixAppliedNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostReportingOrlFixAppliedRequestBody:
+      type: object
+      properties:
+        version:
+          default: 1
+          type: number
+        requestOrigin:
+          type: string
+        events:
+          minItems: 1
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                const: orl_fix_applied
+              idempotencyKey:
+                type: string
+                minLength: 1
+              occurredAt:
+                type: string
+                minLength: 1
+              fixKind:
+                type: string
+                enum:
+                  - individual
+                  - grouped
+              ruleNames:
+                default: []
+                type: array
+                items:
+                  type: string
+              ruleIdentifiers:
+                default: []
+                type: array
+                items:
+                  type: string
+              filePaths:
+                default: []
+                type: array
+                items:
+                  type: string
+              repoPath:
+                type: string
+              branch:
+                type: string
+            required:
+              - type
+              - idempotencyKey
+              - occurredAt
+              - fixKind
+            additionalProperties: {}
+      required:
+        - requestOrigin
+        - events
+  responses: {}
+  parameters: {}
+  examples: {}
+  requestBodies: {}
+  headers: {}
+  securitySchemes:
+    HTTP_1:
+      type: http
+      scheme: bearer
+    APIKEY_1:
+      type: apiKey
+      in: header
+      name: x-tfc-task-signature
+    APIKEY_2:
+      type: apiKey
+      in: header
+      name: x-tfe-notification-signature
+  links: {}
+  callbacks: {}
+tags:
+  - name: Integrations
+    description: Terraform Run Task HCP Integrations
+servers:
+  - url: http://0.0.0.0:3010

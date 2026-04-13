@@ -21,7 +21,6 @@ const config: Config = {
   coverageProvider: 'v8',
   coverageReporters: ['text', 'lcov', 'html', 'json'],
   moduleDirectories: ['node_modules'],
-  preset: 'ts-jest',
   testEnvironment: 'node',
   testMatch: [
     '**/__tests__/**/*.[jt]s?(x)',

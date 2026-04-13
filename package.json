@@ -31,7 +31,7 @@
     "lint:fix": "eslint src/**/*.ts --fix",
     "format:write": "prettier --write \"src/**/*.{ts,js,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,js,json,md}\"",
-    "generate-types": "openapi-typescript ./openApiClientSpecs/rules-service.openapi.yaml --o ./src/__generated__/rulesService.d.ts",
+    "generate-types": "openapi-typescript ./openApiClientSpecs/rules-service.openapi.yaml --o ./src/__generated__/rulesService.d.ts && openapi-typescript ./openApiClientSpecs/integrations.openapi.yaml --o ./src/__generated__/integrationsService.d.ts",
     "release": "npm run build && changeset publish",
     "clean": "rm -rf dist"
   },
@@ -56,20 +56,19 @@
   "homepage": "https://github.com/gomboc-ai/gomboc-node-sdk#readme",
   "dependencies": {
     "axios": "^1.14.0",
-    "lru-cache": "^11.2.7",
     "neverthrow": "^8.2.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
-    "@types/jest": "^30.0.0",
+    "@types/jest": "^29.5.14",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "dotenv": "^16.4.7",
     "eslint": "^8.57.0",
     "eslint-plugin-jest": "^28.14.0",
     "husky": "^9.1.7",
-    "jest": "^30.3.0",
+    "jest": "^29.7.0",
     "openapi-typescript": "^7.8.0",
     "prettier": "^3.0.0",
     "ts-jest": "^29.4.9",

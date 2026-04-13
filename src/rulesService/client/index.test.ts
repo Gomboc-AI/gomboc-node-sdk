@@ -12,15 +12,18 @@ describe('initRulesServiceLoader', () => {
     jest.clearAllMocks();
   });
 
-  it('initializes once and returns cached loader for same token and account', async () => {
+  it('initializes on every call even for same token and account', async () => {
     const logger = {
       info: jest.fn(),
       error: jest.fn(),
       warn: jest.fn(),
       debug: jest.fn(),
     };
-    const loader = { id: 'loader-1' };
-    mockInit.mockResolvedValue(loader);
+    const firstLoader = { id: 'loader-1' };
+    const secondLoader = { id: 'loader-2' };
+    mockInit
+      .mockResolvedValueOnce(firstLoader)
+      .mockResolvedValueOnce(secondLoader);
     const { initRulesServiceLoader } = await import('./index');
 
     const opts = {
@@ -32,20 +35,23 @@ describe('initRulesServiceLoader', () => {
     const first = await initRulesServiceLoader(opts);
     const second = await initRulesServiceLoader(opts);
 
-    expect(mockInit).toHaveBeenCalledTimes(1);
-    expect(mockInit).toHaveBeenCalledWith(opts);
-    expect(first).toBe(loader);
-    expect(second).toBe(loader);
+    expect(mockInit).toHaveBeenCalledTimes(2);
+    expect(mockInit).toHaveBeenNthCalledWith(1, opts);
+    expect(mockInit).toHaveBeenNthCalledWith(2, opts);
+    expect(first).toBe(firstLoader);
+    expect(second).toBe(secondLoader);
   });
 
-  it('reuses cached loader when baseUrl differs but token/account match', async () => {
+  it('initializes again when baseUrl differs with same token/account', async () => {
     const logger = {
       info: jest.fn(),
       error: jest.fn(),
       warn: jest.fn(),
       debug: jest.fn(),
     };
-    mockInit.mockResolvedValueOnce({ id: 'a' });
+    mockInit
+      .mockResolvedValueOnce({ id: 'a' })
+      .mockResolvedValueOnce({ id: 'b' });
     const { initRulesServiceLoader } = await import('./index');
 
     const first = await initRulesServiceLoader({
@@ -61,8 +67,8 @@ describe('initRulesServiceLoader', () => {
       logger,
     });
 
-    expect(mockInit).toHaveBeenCalledTimes(1);
+    expect(mockInit).toHaveBeenCalledTimes(2);
     expect(first).toEqual({ id: 'a' });
-    expect(second).toEqual({ id: 'a' });
+    expect(second).toEqual({ id: 'b' });
   });
 });

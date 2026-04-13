@@ -1,5 +1,3 @@
-import { LRUCache } from 'lru-cache';
-
 import type { ILogger } from '../ILogger';
 import { RulesServiceLoader } from './rulesServiceLoader';
 
@@ -12,34 +10,20 @@ export type InitRulesServiceLoaderOptions = {
   logger: ILogger;
 };
 
-const rulesServiceCache = new LRUCache<string, RulesServiceLoader>({
-  max: 100,
-});
-
-function cacheKey(accessToken: string, accountId: string): string {
-  return `${accessToken}\0${accountId}`;
-}
-
 /**
- * Returns a cached RulesServiceLoader for the same access token and account, or creates one.
+ * Creates and returns a RulesServiceLoader.
  * Callers supply auth and service configuration (e.g. from their app session and env).
  */
 export async function initRulesServiceLoader(
   options: InitRulesServiceLoaderOptions
 ): Promise<RulesServiceLoader> {
   const { accessToken, accountId, baseUrl, ...rest } = options;
-  const key = cacheKey(accessToken, accountId);
-  if (rulesServiceCache.has(key)) {
-    return rulesServiceCache.get(key) as RulesServiceLoader;
-  }
-  const client = await RulesServiceLoader.init({
+  return RulesServiceLoader.init({
     accessToken,
     accountId,
     baseUrl,
     ...rest,
   });
-  rulesServiceCache.set(key, client);
-  return client;
 }
 
 export { PoliciesHandler } from './policiesHandler';
