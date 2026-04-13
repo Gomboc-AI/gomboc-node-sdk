@@ -95,7 +95,9 @@ export interface IIntegrationsServiceSdk {
   postNotificationWebhook(args: {
     params: NotificationWebhookParams;
     body: NotificationWebhookRequestBody;
-  }): Promise<Result<NotificationWebhookResponse, IIntegrationsServiceErrorType>>;
+  }): Promise<
+    Result<NotificationWebhookResponse, IIntegrationsServiceErrorType>
+  >;
   getDriftTerraformPlan(
     args: GetDriftTerraformPlanParams
   ): Promise<

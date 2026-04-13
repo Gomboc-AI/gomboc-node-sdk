@@ -130,7 +130,10 @@ export class IntegrationsServiceSdk implements IIntegrationsServiceSdk {
     Result<CreateHcpIntegrationResponse, IIntegrationsServiceErrorType>
   > {
     return this.request<CreateHcpIntegrationResponse>(async () => {
-      const res = await this.client.post('/tf-ops/api/v1/hcp/integrations', args);
+      const res = await this.client.post(
+        '/tf-ops/api/v1/hcp/integrations',
+        args
+      );
       return res.data;
     });
   }
@@ -153,7 +156,9 @@ export class IntegrationsServiceSdk implements IIntegrationsServiceSdk {
   async postNotificationWebhook(args: {
     params: NotificationWebhookParams;
     body: NotificationWebhookRequestBody;
-  }): Promise<Result<NotificationWebhookResponse, IIntegrationsServiceErrorType>> {
+  }): Promise<
+    Result<NotificationWebhookResponse, IIntegrationsServiceErrorType>
+  > {
     return this.request<NotificationWebhookResponse>(async () => {
       const res = await this.client.post(
         `/tf-ops/api/v1/hcp/webhooks/notifications/${args.params.integrationId}`,
