@@ -32,6 +32,7 @@
     "format:write": "prettier --write \"src/**/*.{ts,js,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,js,json,md}\"",
     "generate-types": "openapi-typescript ./openApiClientSpecs/rules-service.openapi.yaml --o ./src/__generated__/rulesService.d.ts && openapi-typescript ./openApiClientSpecs/integrations.openapi.yaml --o ./src/__generated__/integrationsService.d.ts",
+    "orl-generate-types": "tsx ./orl/scripts/generate-types.ts",
     "release": "npm run build && changeset publish",
     "clean": "rm -rf dist"
   },
@@ -69,6 +70,7 @@
     "eslint-plugin-jest": "^28.14.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
+    "json-schema-to-typescript": "^15.0.4",
     "openapi-typescript": "^7.8.0",
     "prettier": "^3.0.0",
     "ts-jest": "^29.4.9",

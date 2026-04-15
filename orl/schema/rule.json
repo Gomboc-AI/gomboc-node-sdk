@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Gomboc-AI/orl/lib/lang/rulespace/rule",
+  "$ref": "#/$defs/Rule",
+  "$defs": {
+    "Collect": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "audit": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name",
+        "audit"
+      ]
+    },
+    "Metadata": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name uniquely identifies the name among all rules"
+        },
+        "display_name": {
+          "type": "string",
+          "description": "'display_name' is a human-readable display name for the rule"
+        },
+        "skip": {
+          "type": "boolean",
+          "description": "'skip' allows the creation of rules that are skipped.  Deprecated, used 'skip_expression' instead."
+        },
+        "skip_expression": {
+          "type": "string",
+          "description": "'skip_expression' is a template expression that is evaluated to determine if the item should be skipped."
+        },
+        "skip_reason": {
+          "type": "string",
+          "description": "'skip_reason' is a human-readable reason for why the item is skipped.  This will be logged at INFO level in the report, if the item is skipped."
+        },
+        "priority": {
+          "type": "integer",
+          "description": "priority defines the order in which the rule is evaluated.  If not provided then it sorts last"
+        },
+        "description": {
+          "type": "string",
+          "description": "'description' is a human-readable description of the rule"
+        },
+        "required_contexts": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "'required_contexts' is a list of contexts that are required for the rule to run.  Deprecated, used 'skip_expression' instead."
+        },
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object",
+          "description": "'annotations' are a map of key-value pairs that are used to store additional information about the rule"
+        },
+        "classifications": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "'classifications' are the classifications of the rule as an array of strings."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    },
+    "Remediation": {
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "'command' is the command to execute.  The command is executed on the captured node in 'path'."
+        },
+        "path": {
+          "type": "string",
+          "description": "'path' is the path to the captured node to execute the command against. This is the anchor point for the command."
+        },
+        "skip": {
+          "type": "string",
+          "description": "'skip' is a template expression that is evaluated to determine if the remediation should be skipped.  If true then the remediation is skipped."
+        },
+        "invert_skip": {
+          "type": "boolean",
+          "description": "'invert_skip' adds 'not' in front of 'skip' to invert the skip condition.  This can make the skip condition more readable."
+        },
+        "skip_reason": {
+          "type": "string",
+          "description": "'skip_reason' is a human-readable reason for why the remediation is skipped.  This will be logged at INFO level in the report, if the remediation is skipped."
+        },
+        "value": {
+          "type": "string",
+          "description": "'value' is the value to use with the command.  It supports multiple templates."
+        },
+        "flags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object",
+          "description": "Flags are any flags that can modify the behavior of the command. They are all `key: value` string pairs."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "command"
+      ]
+    },
+    "Rule": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Rule",
+            "Test",
+            "Ruleset",
+            "Context",
+            "Variables",
+            "Report"
+          ],
+          "description": "'type' defines the type of object"
+        },
+        "version": {
+          "type": "string",
+          "enum": [
+            "v1"
+          ],
+          "description": "'version' defines the parsing of the spec"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata",
+          "description": "'metadata' is the metadata for the object"
+        },
+        "spec": {
+          "$ref": "#/$defs/RuleSpec"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "type",
+        "version",
+        "metadata",
+        "spec"
+      ],
+      "description": "Rule represents a single rule"
+    },
+    "RuleSpec": {
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "'language' is the language this rule is valid for."
+        },
+        "audit_language": {
+          "type": "string",
+          "enum": [
+            "ast"
+          ],
+          "description": "'audit_language' is the language to use for the audit query."
+        },
+        "variables": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "'variables' is a list of variables that are needed for this rule to be evaluated.  Deprecated, use 'metadata.skip_expression' instead."
+        },
+        "collect": {
+          "items": {
+            "$ref": "#/$defs/Collect"
+          },
+          "type": "array",
+          "description": "'collect' is a list of AST nodes to collect from the workspace before evaluating the rule.  They can be later used to build a remediation."
+        },
+        "audit": {
+          "type": "string",
+          "description": "'audit' is the audit query for this rule.  It is a string that is parsed based on 'audit_language'.  For 'audit_language' of 'ast' the audit query is an S-expression."
+        },
+        "skip_finding": {
+          "type": "string",
+          "description": "'skip_finding' is a filter query for to determine if the finding should be skipped.  If true the finding is not counted, nor are any remediations applied."
+        },
+        "skip_finding_reason": {
+          "type": "string",
+          "description": "'skip_finding_reason' is a human-readable reason for why the finding is skipped.  This will be logged at INFO level in the report, if the finding is skipped."
+        },
+        "foreach": {
+          "type": "string",
+          "description": "'foreach' is a template expression that MUST return an array, and is executed after collection but before auditing.  The rule will be executed once for each item in the array.  The current item is available in to 'audit' and 'remediation' in the context as \"item\"."
+        },
+        "remediation": {
+          "items": {
+            "$ref": "#/$defs/Remediation"
+          },
+          "type": "array",
+          "description": "'remediation' is a list of commands to run to remediate the issue.  Each command is run in order on all audit findings."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "language",
+        "audit",
+        "remediation"
+      ],
+      "description": "RuleSpec is the specification for a rule."
+    }
+  }
+}

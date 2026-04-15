@@ -1,0 +1,456 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Gomboc-AI/orl/lib/lang/test/test",
+  "$ref": "#/$defs/Test",
+  "$defs": {
+    "ContextPath": {
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "'path' is the path to load files from based on 'type'."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "variables",
+            "tfplan"
+          ],
+          "description": "'type' is the type of context to load.  Values are 'variables' for ORL Variable files or 'tfplan' for Terraform plan file."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "path",
+        "type"
+      ],
+      "description": "ContextPath is a path to a context space."
+    },
+    "HookDetails": {
+      "properties": {
+        "command_path": {
+          "type": "string"
+        },
+        "args": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "stdout": {
+          "type": "string"
+        },
+        "stderr": {
+          "type": "string"
+        },
+        "exit_code": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "command_path",
+        "args",
+        "stdout",
+        "stderr",
+        "exit_code"
+      ]
+    },
+    "Level": {
+      "type": "string",
+      "enum": [
+        "TRACE",
+        "DEBUG",
+        "INFO",
+        "WARN",
+        "ERROR",
+        "FATAL"
+      ]
+    },
+    "Metadata": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name uniquely identifies the name among all rules"
+        },
+        "display_name": {
+          "type": "string",
+          "description": "'display_name' is a human-readable display name for the rule"
+        },
+        "skip": {
+          "type": "boolean",
+          "description": "'skip' allows the creation of rules that are skipped.  Deprecated, used 'skip_expression' instead."
+        },
+        "skip_expression": {
+          "type": "string",
+          "description": "'skip_expression' is a template expression that is evaluated to determine if the item should be skipped."
+        },
+        "skip_reason": {
+          "type": "string",
+          "description": "'skip_reason' is a human-readable reason for why the item is skipped.  This will be logged at INFO level in the report, if the item is skipped."
+        },
+        "priority": {
+          "type": "integer",
+          "description": "priority defines the order in which the rule is evaluated.  If not provided then it sorts last"
+        },
+        "description": {
+          "type": "string",
+          "description": "'description' is a human-readable description of the rule"
+        },
+        "required_contexts": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "'required_contexts' is a list of contexts that are required for the rule to run.  Deprecated, used 'skip_expression' instead."
+        },
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object",
+          "description": "'annotations' are a map of key-value pairs that are used to store additional information about the rule"
+        },
+        "classifications": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "'classifications' are the classifications of the rule as an array of strings."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    },
+    "PathOrInline": {
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "'path' is the path to load files from.  This or 'inline' is required."
+        },
+        "inline": {
+          "type": "string",
+          "description": "'inline' is a single file content that is loaded.  Useful if you have a lot of small files that need to be loaded and tested separated.  This or 'path' is required."
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "strict",
+            "ast"
+          ],
+          "description": "'mode' is the mode used for comparing 'remediated_workspace' against the remediated workspace.  Values are 'strict' (default) for a byte-level comparison of the file contents or 'ast' for a comparison of the ASTs."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "Record": {
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "level": {
+          "$ref": "#/$defs/Level"
+        },
+        "message": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "message"
+      ],
+      "description": "Record is a single log record."
+    },
+    "ReportExpectations": {
+      "properties": {
+        "workspace": {
+          "type": "string",
+          "description": "'workspace' is the path as listed in the report."
+        },
+        "language": {
+          "type": "string",
+          "description": "'language' is the language as listed in the report."
+        },
+        "version": {
+          "type": "string",
+          "description": "'version' is the version of the report that generated."
+        },
+        "type": {
+          "type": "string",
+          "description": "'type' is ORL type of report generated. Should always be 'Report'."
+        },
+        "findings": {
+          "type": "integer",
+          "description": "'findings' is the number of findings reported."
+        },
+        "fixes": {
+          "type": "integer",
+          "description": "'fixes' is the number of fixes reported."
+        },
+        "error_count": {
+          "type": "integer",
+          "description": "'error_count' is the number of errors reported."
+        },
+        "logs_count": {
+          "type": "integer",
+          "description": "'logs_count' is the number of logs messages reported."
+        },
+        "rules_applied": {
+          "type": "integer",
+          "description": "'rules_applied' is the number of rules applied reported."
+        },
+        "rules_skipped": {
+          "type": "integer",
+          "description": "'rules_skipped' is the number of rules skipped reported."
+        },
+        "changes": {
+          "type": "integer",
+          "description": "'changes' is the number of changes reported."
+        },
+        "errors": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "'errors' is a list of error messages reported.  The messages have to be exact matches, and in the correct order.  But they don't have to the same index as in the report (e.g. the first error here might be the third error in the report)"
+        },
+        "logs": {
+          "items": {
+            "$ref": "#/$defs/Record"
+          },
+          "type": "array",
+          "description": "'logs' is a list of log messages reported.  The messages have to be exact matches, and in the correct order.  But they don't have to the same index as in the report (e.g. the first log here might be the third log in the report)"
+        },
+        "rules": {
+          "items": {
+            "$ref": "#/$defs/RuleExpectation"
+          },
+          "type": "array",
+          "description": "'rules' is a list of rule expectations.  The rules must be in the same sequence as they appear in the actual report. Each rule is validated by position, not by name."
+        },
+        "hooks": {
+          "additionalProperties": {
+            "$ref": "#/$defs/HookDetails"
+          },
+          "type": "object",
+          "description": "'hooks' is a map of hook names to their details.  The hooks must be in the same sequence as they appear in the actual report. Each hook is validated by position, not by name."
+        },
+        "output_file": {
+          "type": "string",
+          "description": "'output_file' is the path to the file that was output.  This is used to validate the file output."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "description": "ReportExpectations defines what to expect in the remediation report."
+    },
+    "RuleExpectation": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "'name' is the name of the rule reported."
+        },
+        "findings": {
+          "type": "integer",
+          "description": "'findings' is the number of findings reported for the rule."
+        },
+        "fixes": {
+          "type": "integer",
+          "description": "'fixes' is the number of fixes reported for the rule."
+        },
+        "changes": {
+          "type": "integer",
+          "description": "'changes' is the number of changes reported for the rule."
+        },
+        "errors": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "'errors' is a list of error messages reported for the rule.  The messages have to be exact matches, and in the correct order.  But they don't have to the same index as in the report (e.g. the first error here might be the third error in the report)"
+        },
+        "error_count": {
+          "type": "integer",
+          "description": "'error_count' is the number of errors reported for the rule."
+        },
+        "files": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "'files' is a list of files reported for the rule.  The files have to be exact matches, and in the correct order.  But they don't have to the same index as in the report (e.g. the first file here might be the third file in the report)"
+        },
+        "file_count": {
+          "type": "integer",
+          "description": "'file_count' is the number of files reported for the rule."
+        },
+        "hooks": {
+          "additionalProperties": {
+            "$ref": "#/$defs/HookDetails"
+          },
+          "type": "object",
+          "description": "'hooks' is a map of hook names to their details.  The hooks must be in the same sequence as they appear in the actual report. Each hook is validated by position, not by name."
+        },
+        "logs": {
+          "items": {
+            "$ref": "#/$defs/Record"
+          },
+          "type": "array",
+          "description": "'logs' is a list of log messages reported for the rule.  The messages have to be exact matches, and in the correct order.  But they don't have to the same index as in the report (e.g. the first log here might be the third log in the report)"
+        },
+        "logs_count": {
+          "type": "integer",
+          "description": "'logs_count' is the number of log messages reported for the rule."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "description": "RuleExpectation defines what to expect for a specific rule in the report."
+    },
+    "Test": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Rule",
+            "Test",
+            "Ruleset",
+            "Context",
+            "Variables",
+            "Report"
+          ],
+          "description": "'type' defines the type of object"
+        },
+        "version": {
+          "type": "string",
+          "enum": [
+            "v1"
+          ],
+          "description": "'version' defines the parsing of the spec"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata",
+          "description": "'metadata' is the metadata for the object"
+        },
+        "spec": {
+          "$ref": "#/$defs/TestSpec",
+          "description": "'spec' is the specification for the test."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "type",
+        "version",
+        "metadata",
+        "spec"
+      ]
+    },
+    "TestCase": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "'name' is the name of the test case."
+        },
+        "hooks_dir": {
+          "type": "string",
+          "description": "'hooks_dir' is the path to the hooks directory."
+        },
+        "preset_hook": {
+          "type": "string",
+          "description": "'preset_hook' is the name of the preset hook to use.  Conflicts with 'hooks_dir'."
+        },
+        "skip": {
+          "type": "boolean",
+          "description": "'skip' is true if the test case should be skipped.  This is useful for tests that are not ready to run.  Deprecated, use 'skip_expression' instead."
+        },
+        "skip_expression": {
+          "type": "string",
+          "description": "'skip_expression' is a template expression that is evaluated to determine if the test case should be skipped.  This is useful for tests that are not ready to run."
+        },
+        "skip_reason": {
+          "type": "string",
+          "description": "'skip_reason' is a human-readable reason for why the test case is skipped.  This will be logged at INFO level in the report, if the test case is skipped."
+        },
+        "language": {
+          "type": "string",
+          "description": "'language' is the language to use for the workspace and rulespace to test.  Only files that match the language will be included int he workspace.  Only rules that match the language will be included in the rulespace."
+        },
+        "recursive": {
+          "type": "boolean",
+          "description": "'recursive' is true if the workspace path should be searched recursively.  This overrides the languages' default recursive behavior."
+        },
+        "workspace": {
+          "$ref": "#/$defs/PathOrInline",
+          "description": "'workspace' is the workspace to test."
+        },
+        "contexts": {
+          "items": {
+            "$ref": "#/$defs/ContextPath"
+          },
+          "type": "array",
+          "description": "'contexts' is the list of contexts made present to the test case."
+        },
+        "log_level": {
+          "type": "string",
+          "description": "'log_level' is the level of logs to capture.  Values are DEBUG, INFO, WARN, or ERROR.  Default is ERROR."
+        },
+        "remediated_workspace": {
+          "$ref": "#/$defs/PathOrInline",
+          "description": "'remediated_workspace' is what the remediated workspace is compared to. Any diffs = a failure.  This or 'expected_report' is required."
+        },
+        "expected_report": {
+          "$ref": "#/$defs/ReportExpectations",
+          "description": "'expected_report' is compared to the report output after remediations. Any diffs = a failure. All fields are optional - omit any field you don't want to validate.  This or 'remediated_workspace' is required."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name",
+        "language",
+        "workspace"
+      ]
+    },
+    "TestSpec": {
+      "properties": {
+        "recursive_rulespace": {
+          "type": "boolean"
+        },
+        "rulespace": {
+          "type": "string",
+          "description": "'rulespace' is the path to the rulespace to test."
+        },
+        "cases": {
+          "items": {
+            "$ref": "#/$defs/TestCase"
+          },
+          "type": "array",
+          "description": "'cases' is the list of test cases to run."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "rulespace",
+        "cases"
+      ]
+    }
+  }
+}

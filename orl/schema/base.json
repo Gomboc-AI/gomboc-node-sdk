@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Gomboc-AI/orl/lib/lang/base",
+  "$ref": "#/$defs/Base",
+  "$defs": {
+    "Base": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Rule",
+            "Test",
+            "Ruleset",
+            "Context",
+            "Variables",
+            "Report"
+          ],
+          "description": "'type' defines the type of object"
+        },
+        "version": {
+          "type": "string",
+          "enum": [
+            "v1"
+          ],
+          "description": "'version' defines the parsing of the spec"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata",
+          "description": "'metadata' is the metadata for the object"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "type",
+        "version",
+        "metadata"
+      ],
+      "description": "Base is the very basic of any parsable item we understand The design is based in K8s yaml objects, which allows for future addition relatively easily."
+    },
+    "Metadata": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name uniquely identifies the name among all rules"
+        },
+        "display_name": {
+          "type": "string",
+          "description": "'display_name' is a human-readable display name for the rule"
+        },
+        "skip": {
+          "type": "boolean",
+          "description": "'skip' allows the creation of rules that are skipped.  Deprecated, used 'skip_expression' instead."
+        },
+        "skip_expression": {
+          "type": "string",
+          "description": "'skip_expression' is a template expression that is evaluated to determine if the item should be skipped."
+        },
+        "skip_reason": {
+          "type": "string",
+          "description": "'skip_reason' is a human-readable reason for why the item is skipped.  This will be logged at INFO level in the report, if the item is skipped."
+        },
+        "priority": {
+          "type": "integer",
+          "description": "priority defines the order in which the rule is evaluated.  If not provided then it sorts last"
+        },
+        "description": {
+          "type": "string",
+          "description": "'description' is a human-readable description of the rule"
+        },
+        "required_contexts": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "'required_contexts' is a list of contexts that are required for the rule to run.  Deprecated, used 'skip_expression' instead."
+        },
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object",
+          "description": "'annotations' are a map of key-value pairs that are used to store additional information about the rule"
+        },
+        "classifications": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "'classifications' are the classifications of the rule as an array of strings."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    }
+  }
+}
