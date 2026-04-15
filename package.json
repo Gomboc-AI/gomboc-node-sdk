@@ -32,7 +32,7 @@
     "format:write": "prettier --write \"src/**/*.{ts,js,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,js,json,md}\"",
     "generate-types": "openapi-typescript ./openApiClientSpecs/rules-service.openapi.yaml --o ./src/__generated__/rulesService.d.ts && openapi-typescript ./openApiClientSpecs/integrations.openapi.yaml --o ./src/__generated__/integrationsService.d.ts",
-    "orl-generate-types": "tsx ./orl/scripts/generate-types.ts",
+    "orl-generate-types": "tsx ./src/orl/scripts/generate-types.ts",
     "release": "npm run build && changeset publish",
     "clean": "rm -rf dist"
   },
