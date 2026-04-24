@@ -11,19 +11,13 @@
         },
         "type": {
           "type": "string",
-          "enum": [
-            "variables",
-            "tfplan"
-          ],
+          "enum": ["variables", "tfplan"],
           "description": "'type' is the type of context to load.  Values are 'variables' for ORL Variable files or 'tfplan' for Terraform plan file."
         }
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "path",
-        "type"
-      ],
+      "required": ["path", "type"],
       "description": "ContextPath is a path to a context space."
     },
     "HookDetails": {
@@ -49,24 +43,11 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "command_path",
-        "args",
-        "stdout",
-        "stderr",
-        "exit_code"
-      ]
+      "required": ["command_path", "args", "stdout", "stderr", "exit_code"]
     },
     "Level": {
       "type": "string",
-      "enum": [
-        "TRACE",
-        "DEBUG",
-        "INFO",
-        "WARN",
-        "ERROR",
-        "FATAL"
-      ]
+      "enum": ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"]
     },
     "Metadata": {
       "properties": {
@@ -122,9 +103,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "name"
-      ]
+      "required": ["name"]
     },
     "PathOrInline": {
       "properties": {
@@ -138,10 +117,7 @@
         },
         "mode": {
           "type": "string",
-          "enum": [
-            "strict",
-            "ast"
-          ],
+          "enum": ["strict", "ast"],
           "description": "'mode' is the mode used for comparing 'remediated_workspace' against the remediated workspace.  Values are 'strict' (default) for a byte-level comparison of the file contents or 'ast' for a comparison of the ASTs."
         }
       },
@@ -169,9 +145,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "message"
-      ],
+      "required": ["message"],
       "description": "Record is a single log record."
     },
     "ReportExpectations": {
@@ -318,30 +292,19 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "description": "RuleExpectation defines what to expect for a specific rule in the report."
     },
     "Test": {
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "Rule",
-            "Test",
-            "Ruleset",
-            "Context",
-            "Variables",
-            "Report"
-          ],
+          "enum": ["Rule", "Test", "Ruleset", "Context", "Variables", "Report"],
           "description": "'type' defines the type of object"
         },
         "version": {
           "type": "string",
-          "enum": [
-            "v1"
-          ],
+          "enum": ["v1"],
           "description": "'version' defines the parsing of the spec"
         },
         "metadata": {
@@ -355,12 +318,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "type",
-        "version",
-        "metadata",
-        "spec"
-      ]
+      "required": ["type", "version", "metadata", "spec"]
     },
     "TestCase": {
       "properties": {
@@ -422,11 +380,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "name",
-        "language",
-        "workspace"
-      ]
+      "required": ["name", "language", "workspace"]
     },
     "TestSpec": {
       "properties": {
@@ -447,10 +401,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "rulespace",
-        "cases"
-      ]
+      "required": ["rulespace", "cases"]
     }
   }
 }

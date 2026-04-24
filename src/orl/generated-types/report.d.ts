@@ -12,11 +12,11 @@ export interface Report {
   /**
    * 'type' defines the type of object
    */
-  type: "Rule" | "Test" | "Ruleset" | "Context" | "Variables" | "Report";
+  type: 'Rule' | 'Test' | 'Ruleset' | 'Context' | 'Variables' | 'Report';
   /**
    * 'version' defines the parsing of the spec
    */
-  version: "v1";
+  version: 'v1';
   /**
    * 'metadata' is the metadata for the object
    */
@@ -111,7 +111,7 @@ export interface Report {
      */
     logs?: {
       time?: string;
-      level?: "TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL";
+      level?: 'TRACE' | 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'FATAL';
       message: string;
       source?: string;
       data?: {
@@ -214,7 +214,7 @@ export interface Report {
        */
       logs?: {
         time?: string;
-        level?: "TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL";
+        level?: 'TRACE' | 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'FATAL';
         message: string;
         source?: string;
         data?: {

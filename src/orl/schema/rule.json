@@ -14,10 +14,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "name",
-        "audit"
-      ]
+      "required": ["name", "audit"]
     },
     "Metadata": {
       "properties": {
@@ -73,9 +70,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "name"
-      ]
+      "required": ["name"]
     },
     "Remediation": {
       "properties": {
@@ -113,29 +108,18 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "command"
-      ]
+      "required": ["command"]
     },
     "Rule": {
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "Rule",
-            "Test",
-            "Ruleset",
-            "Context",
-            "Variables",
-            "Report"
-          ],
+          "enum": ["Rule", "Test", "Ruleset", "Context", "Variables", "Report"],
           "description": "'type' defines the type of object"
         },
         "version": {
           "type": "string",
-          "enum": [
-            "v1"
-          ],
+          "enum": ["v1"],
           "description": "'version' defines the parsing of the spec"
         },
         "metadata": {
@@ -148,12 +132,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "type",
-        "version",
-        "metadata",
-        "spec"
-      ],
+      "required": ["type", "version", "metadata", "spec"],
       "description": "Rule represents a single rule"
     },
     "RuleSpec": {
@@ -164,9 +143,7 @@
         },
         "audit_language": {
           "type": "string",
-          "enum": [
-            "ast"
-          ],
+          "enum": ["ast"],
           "description": "'audit_language' is the language to use for the audit query."
         },
         "variables": {
@@ -209,11 +186,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "language",
-        "audit",
-        "remediation"
-      ],
+      "required": ["language", "audit", "remediation"],
       "description": "RuleSpec is the specification for a rule."
     }
   }

@@ -9,11 +9,11 @@ export interface Test {
   /**
    * 'type' defines the type of object
    */
-  type: "Rule" | "Test" | "Ruleset" | "Context" | "Variables" | "Report";
+  type: 'Rule' | 'Test' | 'Ruleset' | 'Context' | 'Variables' | 'Report';
   /**
    * 'version' defines the parsing of the spec
    */
-  version: "v1";
+  version: 'v1';
   /**
    * 'metadata' is the metadata for the object
    */
@@ -121,7 +121,7 @@ export interface Test {
         /**
          * 'mode' is the mode used for comparing 'remediated_workspace' against the remediated workspace.  Values are 'strict' (default) for a byte-level comparison of the file contents or 'ast' for a comparison of the ASTs.
          */
-        mode?: "strict" | "ast";
+        mode?: 'strict' | 'ast';
       };
       /**
        * 'contexts' is the list of contexts made present to the test case.
@@ -134,7 +134,7 @@ export interface Test {
         /**
          * 'type' is the type of context to load.  Values are 'variables' for ORL Variable files or 'tfplan' for Terraform plan file.
          */
-        type: "variables" | "tfplan";
+        type: 'variables' | 'tfplan';
       }[];
       /**
        * 'log_level' is the level of logs to capture.  Values are DEBUG, INFO, WARN, or ERROR.  Default is ERROR.
@@ -155,7 +155,7 @@ export interface Test {
         /**
          * 'mode' is the mode used for comparing 'remediated_workspace' against the remediated workspace.  Values are 'strict' (default) for a byte-level comparison of the file contents or 'ast' for a comparison of the ASTs.
          */
-        mode?: "strict" | "ast";
+        mode?: 'strict' | 'ast';
       };
       /**
        * 'expected_report' is compared to the report output after remediations. Any diffs = a failure. All fields are optional - omit any field you don't want to validate.  This or 'remediated_workspace' is required.
@@ -214,7 +214,7 @@ export interface Test {
          */
         logs?: {
           time?: string;
-          level?: "TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL";
+          level?: 'TRACE' | 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'FATAL';
           message: string;
           source?: string;
           data?: {
@@ -274,7 +274,7 @@ export interface Test {
            */
           logs?: {
             time?: string;
-            level?: "TRACE" | "DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL";
+            level?: 'TRACE' | 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'FATAL';
             message: string;
             source?: string;
             data?: {

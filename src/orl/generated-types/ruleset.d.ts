@@ -9,11 +9,11 @@ export interface Ruleset {
   /**
    * 'type' defines the type of object
    */
-  type: "Rule" | "Test" | "Ruleset" | "Context" | "Variables" | "Report";
+  type: 'Rule' | 'Test' | 'Ruleset' | 'Context' | 'Variables' | 'Report';
   /**
    * 'version' defines the parsing of the spec
    */
-  version: "v1";
+  version: 'v1';
   /**
    * 'metadata' is the metadata for the object
    */
@@ -73,7 +73,7 @@ export interface Ruleset {
       /**
        * 'audit_language' is the language to use for the audit query.  Language is used if not defined.
        */
-      audit_language?: "ast";
+      audit_language?: 'ast';
       /**
        * 'variables' is a list of variables that are needed for this rule to be evaluated.  Deprecated, use 'metadata.skip_expression' instead.
        */
@@ -176,7 +176,7 @@ export interface Ruleset {
       /**
        * 'audit_language' is the language to use for the audit query.  Language is used if not defined.
        */
-      audit_language?: "ast";
+      audit_language?: 'ast';
       /**
        * 'variables' is a list of variables that are needed for this rule to be evaluated.  Deprecated, use 'metadata.skip_expression' instead.
        */

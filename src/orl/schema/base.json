@@ -7,21 +7,12 @@
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "Rule",
-            "Test",
-            "Ruleset",
-            "Context",
-            "Variables",
-            "Report"
-          ],
+          "enum": ["Rule", "Test", "Ruleset", "Context", "Variables", "Report"],
           "description": "'type' defines the type of object"
         },
         "version": {
           "type": "string",
-          "enum": [
-            "v1"
-          ],
+          "enum": ["v1"],
           "description": "'version' defines the parsing of the spec"
         },
         "metadata": {
@@ -31,11 +22,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "type",
-        "version",
-        "metadata"
-      ],
+      "required": ["type", "version", "metadata"],
       "description": "Base is the very basic of any parsable item we understand The design is based in K8s yaml objects, which allows for future addition relatively easily."
     },
     "Metadata": {
@@ -92,9 +79,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "name"
-      ]
+      "required": ["name"]
     }
   }
 }

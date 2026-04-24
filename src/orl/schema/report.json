@@ -26,24 +26,11 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "command_path",
-        "args",
-        "stdout",
-        "stderr",
-        "exit_code"
-      ]
+      "required": ["command_path", "args", "stdout", "stderr", "exit_code"]
     },
     "Level": {
       "type": "string",
-      "enum": [
-        "TRACE",
-        "DEBUG",
-        "INFO",
-        "WARN",
-        "ERROR",
-        "FATAL"
-      ]
+      "enum": ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"]
     },
     "Metadata": {
       "properties": {
@@ -99,9 +86,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "name"
-      ]
+      "required": ["name"]
     },
     "Record": {
       "properties": {
@@ -124,30 +109,19 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "message"
-      ],
+      "required": ["message"],
       "description": "Record is a single log record."
     },
     "Report": {
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "Rule",
-            "Test",
-            "Ruleset",
-            "Context",
-            "Variables",
-            "Report"
-          ],
+          "enum": ["Rule", "Test", "Ruleset", "Context", "Variables", "Report"],
           "description": "'type' defines the type of object"
         },
         "version": {
           "type": "string",
-          "enum": [
-            "v1"
-          ],
+          "enum": ["v1"],
           "description": "'version' defines the parsing of the spec"
         },
         "metadata": {
@@ -161,12 +135,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "type",
-        "version",
-        "metadata",
-        "spec"
-      ],
+      "required": ["type", "version", "metadata", "spec"],
       "description": "Report is the final result of the remediation that is filled out during the remediation."
     },
     "ReportFile": {
@@ -178,9 +147,7 @@
       },
       "additionalProperties": false,
       "type": "object",
-      "required": [
-        "path"
-      ]
+      "required": ["path"]
     },
     "ReportRule": {
       "properties": {

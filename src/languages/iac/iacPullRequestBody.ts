@@ -41,7 +41,9 @@ const formatDescriptionColumn = (args: {
 };
 
 // takes a classification control, breaks it into its parts, and makes a markdown recursive list of its parts
-const generateFrameworkDropdown = (args: { frameworkString: string }): string => {
+const generateFrameworkDropdown = (args: {
+  frameworkString: string;
+}): string => {
   // gomboc-ai/cis/controls_8-1-2/11_data_recovery/11-2_perform_automated_backups
   const { frameworkString } = args;
   const parts = frameworkString.split('/').slice(1);
@@ -78,7 +80,9 @@ const generateFrameworkDropdown = (args: { frameworkString: string }): string =>
 };
 
 // handles multiple framework classifications, grouping them by common parent paths
-const generateFrameworkDropdowns = (args: { frameworkStrings: string[] }): string => {
+const generateFrameworkDropdowns = (args: {
+  frameworkStrings: string[];
+}): string => {
   const { frameworkStrings } = args;
 
   if (frameworkStrings.length === 0) return '';
@@ -170,7 +174,8 @@ const generateErrorsSummary = (args: { report: OrlReport }): string => {
   const allErrors: Array<{ resource: string; reason: string }> = [];
 
   report.spec.rules.forEach(rule => {
-    const resource = rule.metadata.annotations?.['gomboc-ai/resource'] || 'Unknown';
+    const resource =
+      rule.metadata.annotations?.['gomboc-ai/resource'] || 'Unknown';
 
     if (rule.errors && Array.isArray(rule.errors)) {
       rule.errors.forEach(error => {
@@ -183,7 +188,9 @@ const generateErrorsSummary = (args: { report: OrlReport }): string => {
             : null;
         const errorMessage =
           typeof error === 'string' ? error : objectMessage || String(error);
-        const auditFindingIndex = errorMessage.toLowerCase().indexOf('audit finding:');
+        const auditFindingIndex = errorMessage
+          .toLowerCase()
+          .indexOf('audit finding:');
 
         if (auditFindingIndex !== -1) {
           const reason = errorMessage
@@ -225,7 +232,10 @@ const generateStructuredSummary = async (args: {
 
   let tableRowsData = await Promise.all(
     rulesWithFixes.map(async rule => {
-      const ruleProp = (p: { key: string; transform?: (value: string) => string }): string | null => {
+      const ruleProp = (p: {
+        key: string;
+        transform?: (value: string) => string;
+      }): string | null => {
         const { key, transform = (value: string) => value } = p;
         const raw = rule.metadata.annotations?.[key]?.trim();
         if (raw === undefined || raw === '') return null;
@@ -254,16 +264,18 @@ const generateStructuredSummary = async (args: {
       const ruleSetName = ruleProp({ key: 'ruleset-name' });
 
       const policyClassifications =
-        rule.metadata.classifications && Array.isArray(rule.metadata.classifications)
+        rule.metadata.classifications &&
+        Array.isArray(rule.metadata.classifications)
           ? rule.metadata.classifications.filter(classification =>
-              classification.includes('policy'),
+              classification.includes('policy')
             )
           : [];
 
       const frameworkClassifications =
-        rule.metadata.classifications && Array.isArray(rule.metadata.classifications)
+        rule.metadata.classifications &&
+        Array.isArray(rule.metadata.classifications)
           ? rule.metadata.classifications.filter(
-              classification => !classification.includes('policy'),
+              classification => !classification.includes('policy')
             )
           : [];
 
@@ -271,7 +283,9 @@ const generateStructuredSummary = async (args: {
         (async (): Promise<string | null> => {
           if (!ruleSetName || !rulesServiceClient) return null;
           try {
-            const ruleResponse = await rulesServiceClient.getRule({ name: ruleSetName });
+            const ruleResponse = await rulesServiceClient.getRule({
+              name: ruleSetName,
+            });
             const shortName = ruleResponse.shortName?.trim() ?? null;
             if (!shortName) return null;
             return removeNewlines(shortName);
@@ -283,10 +297,14 @@ const generateStructuredSummary = async (args: {
           policyClassifications.map(async classification => {
             if (!rulesServiceClient) return '';
             try {
-              const classificationResponse = await rulesServiceClient.getClassification({
-                name: classification,
-              });
-              if (classificationResponse.annotations?.['gomboc-ai/type'] !== 'policy') {
+              const classificationResponse =
+                await rulesServiceClient.getClassification({
+                  name: classification,
+                });
+              if (
+                classificationResponse.annotations?.['gomboc-ai/type'] !==
+                'policy'
+              ) {
                 return '';
               }
               const shortName = classificationResponse.shortName;
@@ -296,7 +314,7 @@ const generateStructuredSummary = async (args: {
             } catch {
               return '';
             }
-          }),
+          })
         ),
       ]);
 
@@ -307,7 +325,8 @@ const generateStructuredSummary = async (args: {
       });
 
       const validPolicyLinks = policyLinks.filter(link => link.length > 0);
-      const policy = validPolicyLinks.length > 0 ? validPolicyLinks.join(', ') : '';
+      const policy =
+        validPolicyLinks.length > 0 ? validPolicyLinks.join(', ') : '';
 
       let framework = '';
       if (frameworkClassifications.length > 0) {
@@ -329,7 +348,7 @@ const generateStructuredSummary = async (args: {
         framework,
         ruleSetName,
       };
-    }),
+    })
   );
 
   // Collapse rows that share the same ruleSetName (only when set)
@@ -401,7 +420,8 @@ const generateStructuredSummary = async (args: {
 `;
 
   const tableRows = tableRowsData.map(toTableRow);
-  const tableSection = tableRows.join('\n') || '| No fixes applied | | | | | | |';
+  const tableSection =
+    tableRows.join('\n') || '| No fixes applied | | | | | | |';
 
   const separatorIndex = summaryTemplate.indexOf('|--------------|');
   if (separatorIndex !== -1) {
@@ -428,7 +448,10 @@ export const makeIacPullRequestBody: PullRequestBodyMaker = async args => {
     rulesServiceClient,
   } = args;
 
-  const summary = await generateStructuredSummary({ report, rulesServiceClient });
+  const summary = await generateStructuredSummary({
+    report,
+    rulesServiceClient,
+  });
   const footer = generateErrorsSummary({ report });
   const workspace = workspaceName ?? report.spec.workspace;
   const language = iacTool ?? report.spec.language;

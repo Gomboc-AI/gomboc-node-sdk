@@ -12,11 +12,11 @@ export interface Variables {
   /**
    * 'type' defines the type of object
    */
-  type: "Rule" | "Test" | "Ruleset" | "Context" | "Variables" | "Report";
+  type: 'Rule' | 'Test' | 'Ruleset' | 'Context' | 'Variables' | 'Report';
   /**
    * 'version' defines the parsing of the spec
    */
-  version: "v1";
+  version: 'v1';
   /**
    * 'metadata' is the metadata for the object
    */

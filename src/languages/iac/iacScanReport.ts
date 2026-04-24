@@ -9,7 +9,8 @@ const stringifyError = (error: unknown): string => {
 
 const escapeCell = (value: string): string => value.replace(/\|/g, '\\|');
 
-const removeNewlines = (value: string): string => value.replace(/\n/g, ' ').trim();
+const removeNewlines = (value: string): string =>
+  value.replace(/\n/g, ' ').trim();
 
 const generateSummaryTable = (report: OrlReport): string => {
   // All the data is collected & sorted, now produce the markdown table
@@ -55,7 +56,8 @@ const generateSummaryTable = (report: OrlReport): string => {
     return `| ${cols.join(' | ')} |`;
   });
 
-  const tableSection = tableRows.join('\n') || '| No fixes applied | | | | | | |';
+  const tableSection =
+    tableRows.join('\n') || '| No fixes applied | | | | | | |';
 
   const separatorIndex = summaryTemplate.indexOf('|--------------|');
   if (separatorIndex !== -1) {

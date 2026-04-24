@@ -1,4 +1,4 @@
-import { makeIacPullRequestBody } from '../../iac/iacMarkdownReport';
+import { makeIacPullRequestBody } from '../../iac/iacPullRequestBody';
 import { makeIacScanReport } from '../../iac/iacScanReport';
 import { ILanguage, PullRequestBodyArgs, ScanReport } from '../../types';
 import { Report as OrlReport } from '../../../orl/generated-types/report';
