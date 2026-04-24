@@ -18,9 +18,9 @@ jobs:
       # Run actions (checkout, setup-node, etc.) on Node 24; Node 20 runtime is deprecated on runners.
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
           registry-url: 'https://npm.pkg.github.com'
