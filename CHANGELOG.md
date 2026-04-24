@@ -1,5 +1,11 @@
 # @gomboc-ai/gomboc-node-sdk
 
+## 1.2.0
+
+### Minor Changes
+
+- 6552d89: languages
+
 ## 1.1.0
 
 ### Minor Changes
