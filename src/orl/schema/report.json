@@ -1,0 +1,349 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Gomboc-AI/orl/lib/remediate/report/report",
+  "$ref": "#/$defs/Report",
+  "$defs": {
+    "HookDetails": {
+      "properties": {
+        "command_path": {
+          "type": "string"
+        },
+        "args": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "stdout": {
+          "type": "string"
+        },
+        "stderr": {
+          "type": "string"
+        },
+        "exit_code": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": ["command_path", "args", "stdout", "stderr", "exit_code"]
+    },
+    "Level": {
+      "type": "string",
+      "enum": ["TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"]
+    },
+    "Metadata": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name uniquely identifies the name among all rules"
+        },
+        "display_name": {
+          "type": "string",
+          "description": "'display_name' is a human-readable display name for the rule"
+        },
+        "skip": {
+          "type": "boolean",
+          "description": "'skip' allows the creation of rules that are skipped.  Deprecated, used 'skip_expression' instead."
+        },
+        "skip_expression": {
+          "type": "string",
+          "description": "'skip_expression' is a template expression that is evaluated to determine if the item should be skipped."
+        },
+        "skip_reason": {
+          "type": "string",
+          "description": "'skip_reason' is a human-readable reason for why the item is skipped.  This will be logged at INFO level in the report, if the item is skipped."
+        },
+        "priority": {
+          "type": "integer",
+          "description": "priority defines the order in which the rule is evaluated.  If not provided then it sorts last"
+        },
+        "description": {
+          "type": "string",
+          "description": "'description' is a human-readable description of the rule"
+        },
+        "required_contexts": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "'required_contexts' is a list of contexts that are required for the rule to run.  Deprecated, used 'skip_expression' instead."
+        },
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object",
+          "description": "'annotations' are a map of key-value pairs that are used to store additional information about the rule"
+        },
+        "classifications": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "'classifications' are the classifications of the rule as an array of strings."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": ["name"]
+    },
+    "Record": {
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "level": {
+          "$ref": "#/$defs/Level"
+        },
+        "message": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": ["message"],
+      "description": "Record is a single log record."
+    },
+    "Report": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["Rule", "Test", "Ruleset", "Context", "Variables", "Report"],
+          "description": "'type' defines the type of object"
+        },
+        "version": {
+          "type": "string",
+          "enum": ["v1"],
+          "description": "'version' defines the parsing of the spec"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata",
+          "description": "'metadata' is the metadata for the object"
+        },
+        "spec": {
+          "$ref": "#/$defs/ReportSpec",
+          "description": "'spec' is the specification for the report"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": ["type", "version", "metadata", "spec"],
+      "description": "Report is the final result of the remediation that is filled out during the remediation."
+    },
+    "ReportFile": {
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "'path' is the path to the file"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": ["path"]
+    },
+    "ReportRule": {
+      "properties": {
+        "metadata": {
+          "$ref": "#/$defs/Metadata",
+          "description": "'metadata' is the metadata for the rule"
+        },
+        "name": {
+          "type": "string",
+          "description": "'name' is the name of the rule"
+        },
+        "skipped": {
+          "type": "boolean",
+          "description": "'skipped' is true if the rule was skipped"
+        },
+        "skip_reason": {
+          "type": "string",
+          "description": "'skip_reason' is the reason the rule was skipped"
+        },
+        "findings": {
+          "type": "integer",
+          "description": "'findings' is the number of findings found for the rule"
+        },
+        "fixes": {
+          "type": "integer",
+          "description": "'fixes' is the number of fixes applied for the rule"
+        },
+        "changes": {
+          "type": "integer",
+          "description": "'changes' is the total number of changes applied for the rule.  In many cases a remediation requires more then one change"
+        },
+        "errors": {
+          "items": true,
+          "type": "array",
+          "description": "'errors' is a collection of all the errors that were encountered for the rule"
+        },
+        "error_count": {
+          "type": "integer",
+          "description": "'error_count' is the number of errors that were encountered for the rule"
+        },
+        "logs": {
+          "items": {
+            "$ref": "#/$defs/Record"
+          },
+          "type": "array",
+          "description": "logs is a list of all log messages."
+        },
+        "logs_count": {
+          "type": "integer",
+          "description": "logs_count is the number of log messages."
+        },
+        "files": {
+          "items": {
+            "$ref": "#/$defs/ReportFile"
+          },
+          "type": "array",
+          "description": "'files' is a collection of all the files that were processed for the rule"
+        },
+        "file_count": {
+          "type": "integer",
+          "description": "'file_count' is the number of files that were processed for the rule"
+        },
+        "paths_with_findings": {
+          "additionalProperties": {
+            "properties": {},
+            "additionalProperties": false,
+            "type": "object"
+          },
+          "type": "object",
+          "description": "'paths_with_findings' is a map of file paths to a struct indicating that the file had findings"
+        },
+        "files_changed": {
+          "additionalProperties": {
+            "properties": {},
+            "additionalProperties": false,
+            "type": "object"
+          },
+          "type": "object",
+          "description": "'files_changed' is a map of file paths to a struct indicating that the file was changed"
+        },
+        "hooks": {
+          "additionalProperties": {
+            "$ref": "#/$defs/HookDetails"
+          },
+          "type": "object",
+          "description": "'hooks' is a map of hook names to their details"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "metadata",
+        "name",
+        "skipped",
+        "findings",
+        "fixes",
+        "changes",
+        "errors",
+        "error_count",
+        "files",
+        "file_count",
+        "paths_with_findings",
+        "files_changed",
+        "hooks"
+      ]
+    },
+    "ReportSpec": {
+      "properties": {
+        "workspace": {
+          "type": "string",
+          "description": "'workspace' is the path to the workspace that was remediated"
+        },
+        "language": {
+          "type": "string",
+          "description": "'language' is the language of the workspace that was remediated"
+        },
+        "rules_applied": {
+          "type": "integer",
+          "description": "'rules_applied' is the number of rules that were applied"
+        },
+        "rules_skipped": {
+          "type": "integer",
+          "description": "'rules_skipped' is the number of rules that were skipped"
+        },
+        "findings": {
+          "type": "integer",
+          "description": "'findings' is the number of findings found during the audit"
+        },
+        "fixes": {
+          "type": "integer",
+          "description": "'fixes' is the number of fixes that were applied"
+        },
+        "changes": {
+          "type": "integer",
+          "description": "'changes' is the total number of changes applied.  In many cases a remediation requires more then one change"
+        },
+        "files_changed": {
+          "additionalProperties": {
+            "properties": {},
+            "additionalProperties": false,
+            "type": "object"
+          },
+          "type": "object",
+          "description": "'files_changed' is a map of file paths to a struct indicating that the file was changed"
+        },
+        "errors": {
+          "items": true,
+          "type": "array",
+          "description": "'errors' is a collection of all the errors that were encountered"
+        },
+        "logs": {
+          "items": {
+            "$ref": "#/$defs/Record"
+          },
+          "type": "array",
+          "description": "logs is a list of all log messages."
+        },
+        "logs_count": {
+          "type": "integer",
+          "description": "logs_count is the number of log messages."
+        },
+        "error_count": {
+          "type": "integer",
+          "description": "'error_count' is the number of errors that were encountered"
+        },
+        "rules": {
+          "items": {
+            "$ref": "#/$defs/ReportRule"
+          },
+          "type": "array",
+          "description": "'rules' is a collection of all the rules that were applied in order"
+        },
+        "hooks": {
+          "additionalProperties": {
+            "$ref": "#/$defs/HookDetails"
+          },
+          "type": "object",
+          "description": "'hooks' is a map of hook names to their details"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "workspace",
+        "language",
+        "rules_applied",
+        "rules_skipped",
+        "findings",
+        "fixes",
+        "changes",
+        "files_changed",
+        "errors",
+        "error_count",
+        "rules",
+        "hooks"
+      ]
+    }
+  }
+}
