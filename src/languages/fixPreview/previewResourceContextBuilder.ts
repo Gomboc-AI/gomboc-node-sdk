@@ -3,7 +3,7 @@ import {
   BuildPreviewResourceContextsArgs,
   PreviewResourceContext,
   ResourceContextExtractKind,
-} from './types';
+} from '../types';
 
 /** Human-readable label and 1-based inclusive line range for a preview slice. */
 export interface PreviewContextRange {

@@ -3,8 +3,8 @@
  */
 
 import path from 'path';
-import type { ResourceContextExtractKind } from './types';
-import { ILanguage } from './types';
+import type { ResourceContextExtractKind } from '../types';
+import { ILanguage } from '../types';
 import {
   TerraformLanguageHandler,
   CloudFormationYAMLLanguageHandler,
@@ -18,7 +18,7 @@ import {
   JavaLanguageHandler,
   BicepLanguageHandler,
   PythonLanguageHandler,
-} from './supported';
+} from '../handlers';
 
 export interface LanguageSelectionArgs {
   filePath: string;
@@ -159,5 +159,3 @@ export function getResourceContextExtractKind(
   }
   return handler.getResourceContextExtractKind();
 }
-
-export type { ResourceContextExtractKind } from './types';

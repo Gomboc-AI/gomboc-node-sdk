@@ -1,7 +1,7 @@
 import {
   PullRequestBodyMaker,
   PullRequestBodyRulesServiceClient,
-} from '@/languages/types';
+} from '../types';
 import { Report as OrlReport } from '@/orl/generated-types/report';
 
 /** Escape `|` so pipe characters do not split GFM table columns. */

@@ -2,8 +2,8 @@ import { buildPreviewResourceContexts } from './previewResourceContextBuilder';
 import {
   findMatchingLanguageImplementation,
   getResourceContextExtractKind,
-} from './languageHandler';
-import { PreviewContextHunk, PreviewResourceContext } from './types';
+} from '../selection/languageHandler';
+import { PreviewContextHunk, PreviewResourceContext } from '../types';
 
 export interface BuildLanguagePreviewResourceContextsArgs {
   filePath: string;

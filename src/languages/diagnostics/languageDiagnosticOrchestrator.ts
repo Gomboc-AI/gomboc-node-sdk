@@ -1,5 +1,5 @@
-import { chooseLanguageImplementation } from './languageHandler';
-import { DiagnosticContext } from './types';
+import { chooseLanguageImplementation } from '../selection/languageHandler';
+import { DiagnosticContext } from '../types';
 
 export interface BuildLanguageDiagnosticContextArgs {
   filePath: string;

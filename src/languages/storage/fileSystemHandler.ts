@@ -11,7 +11,7 @@ import {
   StorageEntryType,
   WriteBytesArgs,
   WriteTextArgs,
-} from './types';
+} from '../types';
 
 function mapStatToEntryType(s: fs.Stats): StorageEntryType {
   if (s.isSymbolicLink()) {

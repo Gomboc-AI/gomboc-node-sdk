@@ -28,7 +28,7 @@ import {
 import {
   buildPreviewResourceContexts,
   PreviewContextRange,
-} from '../previewResourceContextBuilder';
+} from '../fixPreview/previewResourceContextBuilder';
 
 /**
  * Shared base class for all language handlers. Provides sensible default
