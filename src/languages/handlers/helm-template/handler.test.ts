@@ -18,7 +18,7 @@ describe('HelmTemplateLanguageHandler', () => {
       handler.getDocumentInfo({
         filePath: '/workspace/charts/app/templates/deployment.yaml',
         content: helmTemplate,
-      }),
+      })
     ).toMatchObject({
       languageId: 'helm-template',
       supportsBlocks: true,

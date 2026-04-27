@@ -22,7 +22,7 @@ describe('KubernetesYAMLLanguageHandler', () => {
       handler.getDocumentInfo({
         filePath: '/workspace/k8s/deployment.yaml',
         content: kubernetesYaml,
-      }),
+      })
     ).toMatchObject({
       languageId: 'kubernetes-yaml',
       extension: '.yaml',
@@ -69,7 +69,7 @@ describe('KubernetesYAMLLanguageHandler', () => {
         blockType: 'Deployment',
         blockName: 'web',
         filePath: '/workspace/k8s/deployment.yaml',
-      }),
+      })
     ).toBe('Deployment/web');
   });
 

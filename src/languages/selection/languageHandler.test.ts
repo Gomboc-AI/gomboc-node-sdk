@@ -174,7 +174,7 @@ describe('languageHandler selector', () => {
     const languageId = detectLanguageId({
       filePath: '/workspace/main.bicep',
       content:
-        'resource storageAccount \'Microsoft.Storage/storageAccounts@2023-01-01\' = {}',
+        "resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {}",
     });
     expect(languageId).toBe('bicep');
     expect(

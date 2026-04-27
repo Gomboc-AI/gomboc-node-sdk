@@ -20,7 +20,7 @@ describe('GradleLanguageHandler', () => {
       handler.getDocumentInfo({
         filePath: '/workspace/build.gradle',
         content: gradleContent,
-      }),
+      })
     ).toMatchObject({
       languageId: 'gradle',
       extension: '.gradle',
@@ -35,7 +35,7 @@ describe('GradleLanguageHandler', () => {
     });
     expect(blocks.find(block => block.name === 'plugins')).toBeDefined();
     expect(blocks.find(block => block.type === 'gradle_task')?.name).toBe(
-      'smokeTest',
+      'smokeTest'
     );
   });
 });

@@ -86,7 +86,7 @@ export class CloudFormationYAMLLanguageHandler extends YamlBaseLanguageHandler {
     const lines = content.split('\n');
     const blocks: BlockRange[] = [];
     const resourcesLineIndex = lines.findIndex(
-      line => line.trim() === 'Resources:',
+      line => line.trim() === 'Resources:'
     );
 
     if (resourcesLineIndex < 0) {
@@ -181,7 +181,7 @@ export class CloudFormationYAMLLanguageHandler extends YamlBaseLanguageHandler {
     const blocks = this.parseBlocks(args.content);
     const line = Math.max(1, args.line);
     const hit = blocks.find(
-      block => line >= block.startLine && line <= block.endLine,
+      block => line >= block.startLine && line <= block.endLine
     );
     return hit || null;
   }
@@ -194,7 +194,7 @@ export class CloudFormationYAMLLanguageHandler extends YamlBaseLanguageHandler {
 
     const line = Math.max(1, args.line);
     const containing = blocks.find(
-      block => line >= block.startLine && line <= block.endLine,
+      block => line >= block.startLine && line <= block.endLine
     );
     if (containing) {
       return containing;
@@ -381,7 +381,7 @@ export class CloudFormationYAMLLanguageHandler extends YamlBaseLanguageHandler {
       const lower = ruleName.toLowerCase();
       const score = contextTokens.reduce(
         (acc, token) => acc + (lower.includes(token) ? 1 : 0),
-        0,
+        0
       );
       return { ruleName, score };
     });
@@ -396,7 +396,7 @@ export class CloudFormationYAMLLanguageHandler extends YamlBaseLanguageHandler {
   }
 
   override buildDiagnosticContext(
-    args: BuildDiagnosticContextArgs,
+    args: BuildDiagnosticContextArgs
   ): DiagnosticContext {
     const ctx = super.buildDiagnosticContext(args);
     if (!ctx.blockHeader || ctx.blockHeader === path.basename(args.filePath)) {

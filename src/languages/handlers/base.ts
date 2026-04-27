@@ -55,7 +55,7 @@ export abstract class BaseLanguageHandler implements ILanguage {
   }
 
   buildPreviewResourceContexts(
-    args: BuildPreviewResourceContextsArgs,
+    args: BuildPreviewResourceContextsArgs
   ): PreviewResourceContext[] {
     return buildPreviewResourceContexts({
       ...args,

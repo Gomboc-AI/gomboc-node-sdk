@@ -11,7 +11,7 @@ const packageJson = JSON.stringify(
     },
   },
   null,
-  2,
+  2
 );
 
 describe('NpmPackageJSONHandler', () => {
@@ -22,7 +22,7 @@ describe('NpmPackageJSONHandler', () => {
       handler.getDocumentInfo({
         filePath: '/workspace/package.json',
         content: packageJson,
-      }),
+      })
     ).toMatchObject({
       languageId: 'npm-package-json',
       extension: '.json',
@@ -36,10 +36,10 @@ describe('NpmPackageJSONHandler', () => {
       content: packageJson,
     });
     expect(blocks.find(block => block.type === 'npm_package')?.name).toBe(
-      'my-app',
+      'my-app'
     );
     expect(blocks.find(block => block.type === 'npm_section')?.name).toBe(
-      'scripts',
+      'scripts'
     );
   });
 
@@ -53,7 +53,7 @@ describe('NpmPackageJSONHandler', () => {
         blockType: 'npm_package',
         blockName: 'my-app',
         filePath: '/workspace/package.json',
-      }),
+      })
     ).toBe('npm: my-app');
   });
 

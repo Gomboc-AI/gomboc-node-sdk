@@ -286,7 +286,6 @@ export interface ILanguage {
   matchRulesToDiff(args: MatchRulesToDiffArgs): string[];
 }
 
-
 export type StorageEntryType = 'file' | 'directory' | 'symlink' | 'other';
 export interface StorageEntry {
   name: string;
@@ -359,7 +358,7 @@ export interface IStorage {
   // path-independent file operations
   exists(path: string): Promise<boolean>;
   stat(
-    path: string,
+    path: string
   ): Promise<{ type: StorageEntryType; size?: number; mtimeMs?: number }>;
   readText(args: ReadTextArgs): Promise<string>;
   readBytes(path: string): Promise<Uint8Array>;

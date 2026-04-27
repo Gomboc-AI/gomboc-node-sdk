@@ -33,7 +33,7 @@ export function buildPreviewResourceContexts(
       lines: string[];
       line: number;
     }) => PreviewContextRange | undefined;
-  },
+  }
 ): PreviewResourceContext[] {
   const maxContexts = clampInt({
     value: args.maxContexts ?? 6,
@@ -267,7 +267,7 @@ function countBracesOutsideStrings(args: { line: string }): number {
       escaped = true;
       continue;
     }
-    if (!inDouble && c === '\'') {
+    if (!inDouble && c === "'") {
       inSingle = !inSingle;
       continue;
     }

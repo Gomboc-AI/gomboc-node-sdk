@@ -18,7 +18,7 @@ describe('TerraformLanguageHandler', () => {
       handler.getDocumentInfo({
         filePath: '/workspace/main.tf',
         content: terraformContent,
-      }),
+      })
     ).toMatchObject({
       languageId: 'terraform',
       fileName: 'main.tf',
@@ -137,7 +137,7 @@ describe('TerraformLanguageHandler', () => {
         blockType: 'aws_s3_bucket',
         blockName: 'logs',
         filePath: '/workspace/main.tf',
-      }),
+      })
     ).toBe('aws_s3_bucket.logs');
   });
 

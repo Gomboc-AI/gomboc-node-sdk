@@ -87,7 +87,7 @@ export class CloudFormationJSONLanguageHandler extends BaseLanguageHandler {
       const idPattern = new RegExp(`^\\s*"${escapeRegex(logicalId)}"\\s*:`);
       const startLine = Math.max(
         1,
-        lines.findIndex(line => idPattern.test(line)) + 1,
+        lines.findIndex(line => idPattern.test(line)) + 1
       );
 
       blocks.push({
@@ -128,7 +128,7 @@ export class CloudFormationJSONLanguageHandler extends BaseLanguageHandler {
     const blocks = this.parseBlocks(args.content);
     const line = Math.max(1, args.line);
     const hit = blocks.find(
-      block => line >= block.startLine && line <= block.endLine,
+      block => line >= block.startLine && line <= block.endLine
     );
     return hit || null;
   }
@@ -141,7 +141,7 @@ export class CloudFormationJSONLanguageHandler extends BaseLanguageHandler {
 
     const line = Math.max(1, args.line);
     const containing = blocks.find(
-      block => line >= block.startLine && line <= block.endLine,
+      block => line >= block.startLine && line <= block.endLine
     );
     if (containing) {
       return containing;
@@ -162,7 +162,7 @@ export class CloudFormationJSONLanguageHandler extends BaseLanguageHandler {
   }
 
   override buildDiagnosticContext(
-    args: BuildDiagnosticContextArgs,
+    args: BuildDiagnosticContextArgs
   ): DiagnosticContext {
     const ctx = super.buildDiagnosticContext(args);
     if (!ctx.blockHeader || ctx.blockHeader === path.basename(args.filePath)) {

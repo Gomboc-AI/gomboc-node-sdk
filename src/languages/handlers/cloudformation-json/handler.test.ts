@@ -16,7 +16,7 @@ const cloudFormationJson = JSON.stringify(
     },
   },
   null,
-  2,
+  2
 );
 
 describe('CloudFormationJSONLanguageHandler', () => {
@@ -27,16 +27,16 @@ describe('CloudFormationJSONLanguageHandler', () => {
       handler.detectLanguage({
         filePath: '/workspace/template.json',
         content: '',
-      }),
+      })
     ).toBe(true);
     expect(
-      handler.detectLanguage({ filePath: '/workspace/data.json', content: '' }),
+      handler.detectLanguage({ filePath: '/workspace/data.json', content: '' })
     ).toBe(false);
     expect(
       handler.detectLanguage({
         filePath: '/workspace/package.json',
         content: '{}',
-      }),
+      })
     ).toBe(false);
   });
 
@@ -45,7 +45,7 @@ describe('CloudFormationJSONLanguageHandler', () => {
       handler.getDocumentInfo({
         filePath: '/workspace/template.json',
         content: cloudFormationJson,
-      }),
+      })
     ).toMatchObject({
       languageId: 'cloudformation-json',
       fileName: 'template.json',

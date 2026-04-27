@@ -21,7 +21,7 @@ describe('MavenXMLLanguageHandler', () => {
       handler.getDocumentInfo({
         filePath: '/workspace/pom.xml',
         content: mavenXml,
-      }),
+      })
     ).toMatchObject({
       languageId: 'maven-xml',
       fileName: 'pom.xml',
@@ -35,10 +35,10 @@ describe('MavenXMLLanguageHandler', () => {
       content: mavenXml,
     });
     expect(blocks.find(block => block.type === 'maven_dependency')?.name).toBe(
-      'org.slf4j:slf4j-api',
+      'org.slf4j:slf4j-api'
     );
     expect(
-      blocks.find(block => block.type === 'maven_project')?.header,
+      blocks.find(block => block.type === 'maven_project')?.header
     ).toContain('com.example:service');
   });
 });

@@ -21,13 +21,13 @@ describe('PythonLanguageHandler', () => {
       handler.detectLanguage({
         filePath: '/workspace/service.py',
         content: pythonContent,
-      }),
+      })
     ).toBe(true);
     expect(
       handler.detectLanguage({
         filePath: '/workspace/service.rb',
         content: pythonContent,
-      }),
+      })
     ).toBe(false);
   });
 
@@ -36,7 +36,7 @@ describe('PythonLanguageHandler', () => {
       handler.getDocumentInfo({
         filePath: '/workspace/service.py',
         content: pythonContent,
-      }),
+      })
     ).toMatchObject({
       languageId: 'python',
       extension: '.py',
@@ -51,7 +51,7 @@ describe('PythonLanguageHandler', () => {
       content: pythonContent,
     });
     expect(blocks.find(block => block.type === 'python_class')?.name).toBe(
-      'Service',
+      'Service'
     );
     expect(blocks.find(block => block.name === 'get_name')).toBeDefined();
     expect(blocks.find(block => block.name === 'helper')).toBeDefined();
@@ -61,14 +61,14 @@ describe('PythonLanguageHandler', () => {
         filePath: '/workspace/service.py',
         content: pythonContent,
         line: 9,
-      })?.name,
+      })?.name
     ).toBe('helper');
     expect(
       handler.findNearestBlock({
         filePath: '/workspace/service.py',
         content: pythonContent,
         line: 99,
-      })?.name,
+      })?.name
     ).toBe('helper');
   });
 });

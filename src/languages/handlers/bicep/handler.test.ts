@@ -23,13 +23,13 @@ describe('BicepLanguageHandler', () => {
       handler.detectLanguage({
         filePath: '/workspace/main.bicep',
         content: bicepContent,
-      }),
+      })
     ).toBe(true);
     expect(
       handler.detectLanguage({
         filePath: '/workspace/main.tf',
         content: bicepContent,
-      }),
+      })
     ).toBe(false);
   });
 
@@ -38,7 +38,7 @@ describe('BicepLanguageHandler', () => {
       handler.getDocumentInfo({
         filePath: '/workspace/main.bicep',
         content: bicepContent,
-      }),
+      })
     ).toMatchObject({
       languageId: 'bicep',
       extension: '.bicep',
@@ -53,11 +53,11 @@ describe('BicepLanguageHandler', () => {
       content: bicepContent,
     });
     expect(blocks.find(block => block.type === 'bicep_param')?.name).toBe(
-      'location',
+      'location'
     );
     expect(blocks.find(block => block.type === 'bicep_var')?.name).toBe('tags');
     expect(blocks.find(block => block.type === 'bicep_resource')?.name).toBe(
-      'storageAccount',
+      'storageAccount'
     );
 
     expect(
@@ -65,14 +65,14 @@ describe('BicepLanguageHandler', () => {
         filePath: '/workspace/main.bicep',
         content: bicepContent,
         line: 8,
-      })?.name,
+      })?.name
     ).toBe('storageAccount');
     expect(
       handler.findNearestBlock({
         filePath: '/workspace/main.bicep',
         content: bicepContent,
         line: 99,
-      })?.name,
+      })?.name
     ).toBe('endpoint');
   });
 });

@@ -74,7 +74,7 @@ describe('languagePreviewContextOrchestrator', () => {
     const contexts = buildLanguagePreviewResourceContexts({
       filePath: '/workspace/package.json',
       content: ['{', '  "name": "svc",', '  "version": "1.0.0"', '}'].join(
-        '\n',
+        '\n'
       ),
       hunks: [{ fingerprint: 'h-3', newStart: 2 }],
     });
@@ -92,7 +92,7 @@ describe('languagePreviewContextOrchestrator', () => {
     const contexts = buildLanguagePreviewResourceContexts({
       filePath: '/workspace/notes.txt',
       content: Array.from({ length: 30 }, (_, idx) => `line-${idx + 1}`).join(
-        '\n',
+        '\n'
       ),
       hunks: [{ fingerprint: 'h-4', newStart: 25 }],
     });
@@ -110,7 +110,7 @@ describe('languagePreviewContextOrchestrator', () => {
     const contexts = buildLanguagePreviewResourceContexts({
       filePath: '/workspace/notes.txt',
       content: Array.from({ length: 120 }, (_, idx) => `line-${idx + 1}`).join(
-        '\n',
+        '\n'
       ),
       hunks: [
         { fingerprint: 'h-5', newStart: 80 },

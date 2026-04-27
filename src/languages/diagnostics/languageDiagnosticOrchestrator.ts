@@ -15,7 +15,7 @@ export interface BuildLanguageDiagnosticContextArgs {
  * Coordinates language-specific diagnostic context creation.
  */
 export const buildLanguageDiagnosticContext = (
-  args: BuildLanguageDiagnosticContextArgs,
+  args: BuildLanguageDiagnosticContextArgs
 ): DiagnosticContext => {
   const handler = chooseLanguageImplementation({
     filePath: args.filePath,
@@ -38,7 +38,7 @@ export const buildLanguageDiagnosticContext = (
  * Tries original content first, then falls back to modified content.
  */
 export const buildLanguageDiagnosticContextWithFallback = (
-  args: BuildLanguageDiagnosticContextArgs,
+  args: BuildLanguageDiagnosticContextArgs
 ): DiagnosticContext => {
   const primary = buildLanguageDiagnosticContext(args);
   if (primary.block || primary.nearestBlock) {

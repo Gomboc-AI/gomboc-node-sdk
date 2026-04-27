@@ -17,7 +17,7 @@ export interface BuildLanguagePreviewResourceContextsArgs {
  * Coordinates language-specific preview context creation.
  */
 export const buildLanguagePreviewResourceContexts = (
-  args: BuildLanguagePreviewResourceContextsArgs,
+  args: BuildLanguagePreviewResourceContextsArgs
 ): PreviewResourceContext[] => {
   const handler = findMatchingLanguageImplementation({
     filePath: args.filePath,

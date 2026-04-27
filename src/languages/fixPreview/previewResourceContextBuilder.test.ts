@@ -8,7 +8,7 @@ describe('previewResourceContextBuilder', () => {
         content: 'resource "x" "y" {}\n',
         hunks: [],
         kind: 'terraform',
-      }),
+      })
     ).toEqual([]);
   });
 
@@ -34,7 +34,7 @@ describe('previewResourceContextBuilder', () => {
     const contexts = buildPreviewResourceContexts({
       filePath: '/workspace/stack.tf',
       content: ['resource "null_resource" "x" {', '  triggers = {}', '}'].join(
-        '\n',
+        '\n'
       ),
       hunks: [{ fingerprint: 'fp1', newStart: 2 }],
       kind: 'terraform',
@@ -113,7 +113,7 @@ describe('previewResourceContextBuilder', () => {
     const lineCount = 120;
     const content = Array.from(
       { length: lineCount },
-      (_, i) => `row-${i + 1}`,
+      (_, i) => `row-${i + 1}`
     ).join('\n');
     const contexts = buildPreviewResourceContexts({
       filePath: '/workspace/wide.txt',

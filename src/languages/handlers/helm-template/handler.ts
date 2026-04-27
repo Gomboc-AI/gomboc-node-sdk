@@ -170,7 +170,7 @@ export class HelmTemplateLanguageHandler extends YamlBaseLanguageHandler {
     }
     const line = Math.max(1, args.line);
     const containing = blocks.find(
-      block => line >= block.startLine && line <= block.endLine,
+      block => line >= block.startLine && line <= block.endLine
     );
     if (containing) {
       return containing;

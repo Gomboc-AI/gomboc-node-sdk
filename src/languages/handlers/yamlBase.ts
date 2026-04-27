@@ -71,7 +71,7 @@ export abstract class YamlBaseLanguageHandler extends BaseLanguageHandler {
    * instead of snapping to block start.
    */
   override resolveDiagnosticAnchorLine(
-    args: ResolveDiagnosticAnchorLineArgs,
+    args: ResolveDiagnosticAnchorLineArgs
   ): number {
     const suggested =
       Number.isFinite(args.suggestedLine) && args.suggestedLine > 0

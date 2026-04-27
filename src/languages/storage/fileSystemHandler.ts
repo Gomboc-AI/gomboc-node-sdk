@@ -46,7 +46,7 @@ export class FileSystemHandler implements IStorage {
   }
 
   async stat(
-    filePath: string,
+    filePath: string
   ): Promise<{ type: StorageEntryType; size?: number; mtimeMs?: number }> {
     const s = await fs.promises.lstat(filePath);
     return {

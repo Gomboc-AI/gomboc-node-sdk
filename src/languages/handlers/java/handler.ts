@@ -131,7 +131,7 @@ export class JavaLanguageHandler extends BaseLanguageHandler {
     const blocks = this.parseBlocks(args.content);
     const line = Math.max(1, args.line);
     const containing = blocks.filter(
-      block => line >= block.startLine && line <= block.endLine,
+      block => line >= block.startLine && line <= block.endLine
     );
     if (containing.length === 0) {
       return null;
@@ -152,7 +152,7 @@ export class JavaLanguageHandler extends BaseLanguageHandler {
     }
     const line = Math.max(1, args.line);
     const containing = blocks.filter(
-      block => line >= block.startLine && line <= block.endLine,
+      block => line >= block.startLine && line <= block.endLine
     );
     if (containing.length > 0) {
       containing.sort((a, b) => {

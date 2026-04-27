@@ -16,7 +16,7 @@ describe('DockerfileLanguageHandler', () => {
       handler.getDocumentInfo({
         filePath: '/workspace/Dockerfile',
         content: dockerContent,
-      }),
+      })
     ).toMatchObject({
       languageId: 'dockerfile',
       fileName: 'Dockerfile',
@@ -70,7 +70,7 @@ describe('DockerfileLanguageHandler', () => {
         blockType: 'docker_stage',
         blockName: 'build',
         filePath: '/workspace/Dockerfile',
-      }),
+      })
     ).toBe('Docker Stage: build');
 
     expect(
@@ -78,7 +78,7 @@ describe('DockerfileLanguageHandler', () => {
         blockType: 'docker_stage',
         blockName: null,
         filePath: '/workspace/Dockerfile',
-      }),
+      })
     ).toBe('Docker Stage');
   });
 });

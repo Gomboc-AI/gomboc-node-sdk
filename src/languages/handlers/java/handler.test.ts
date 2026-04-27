@@ -22,13 +22,13 @@ describe('JavaLanguageHandler', () => {
       handler.detectLanguage({
         filePath: '/workspace/src/App.java',
         content: javaContent,
-      }),
+      })
     ).toBe(true);
     expect(
       handler.detectLanguage({
         filePath: '/workspace/src/App.kt',
         content: javaContent,
-      }),
+      })
     ).toBe(false);
   });
 
@@ -37,7 +37,7 @@ describe('JavaLanguageHandler', () => {
       handler.getDocumentInfo({
         filePath: '/workspace/src/App.java',
         content: javaContent,
-      }),
+      })
     ).toMatchObject({
       languageId: 'java',
       fileName: 'App.java',
@@ -54,8 +54,8 @@ describe('JavaLanguageHandler', () => {
     expect(blocks.find(block => block.type === 'java_class')?.name).toBe('App');
     expect(
       blocks.some(
-        block => block.type === 'java_method' && block.name === 'getName',
-      ),
+        block => block.type === 'java_method' && block.name === 'getName'
+      )
     ).toBe(true);
 
     expect(
@@ -63,14 +63,14 @@ describe('JavaLanguageHandler', () => {
         filePath: '/workspace/src/App.java',
         content: javaContent,
         line: 8,
-      })?.name,
+      })?.name
     ).toBe('getName');
     expect(
       handler.findNearestBlock({
         filePath: '/workspace/src/App.java',
         content: javaContent,
         line: 99,
-      })?.name,
+      })?.name
     ).toBe('getName');
   });
 });

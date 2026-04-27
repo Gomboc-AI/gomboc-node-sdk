@@ -22,7 +22,7 @@ describe('CloudFormationYAMLLanguageHandler', () => {
       handler.getDocumentInfo({
         filePath: '/workspace/template.yaml',
         content: cloudFormationYaml,
-      }),
+      })
     ).toMatchObject({
       languageId: 'cloudformation-yaml',
       fileName: 'template.yaml',

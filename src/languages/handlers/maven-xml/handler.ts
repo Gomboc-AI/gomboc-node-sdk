@@ -46,7 +46,7 @@ export class MavenXMLLanguageHandler extends BaseLanguageHandler {
           groupId = groupMatch[1].trim();
         }
         const artifactMatch = lines[j].match(
-          /<artifactId>\s*([^<]+)\s*<\/artifactId>/,
+          /<artifactId>\s*([^<]+)\s*<\/artifactId>/
         );
         if (artifactMatch && !artifactId) {
           artifactId = artifactMatch[1].trim();
@@ -70,7 +70,7 @@ export class MavenXMLLanguageHandler extends BaseLanguageHandler {
     }
 
     const artifactMatch = args.content.match(
-      /<artifactId>\s*([^<]+)\s*<\/artifactId>/,
+      /<artifactId>\s*([^<]+)\s*<\/artifactId>/
     );
     const groupMatch = args.content.match(/<groupId>\s*([^<]+)\s*<\/groupId>/);
     const projectName =
@@ -130,7 +130,7 @@ export class MavenXMLLanguageHandler extends BaseLanguageHandler {
     }
     const line = Math.max(1, args.line);
     const containing = blocks.find(
-      block => line >= block.startLine && line <= block.endLine,
+      block => line >= block.startLine && line <= block.endLine
     );
     if (containing) {
       return containing;

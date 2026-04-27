@@ -13,7 +13,7 @@ import { FileSystemHandler } from './fileSystemHandler';
 function uniqueRoot(): string {
   return path.join(
     os.tmpdir(),
-    `fsh-test-${process.pid}-${Date.now()}-${crypto.randomBytes(8).toString('hex')}`,
+    `fsh-test-${process.pid}-${Date.now()}-${crypto.randomBytes(8).toString('hex')}`
   );
 }
 
@@ -129,7 +129,7 @@ describe('FileSystemHandler', () => {
       handler.remove({
         path: path.join(root, 'definitely-missing.bin'),
         opts: { force: true },
-      }),
+      })
     ).resolves.toBeUndefined();
   });
 
