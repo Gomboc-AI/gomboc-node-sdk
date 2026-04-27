@@ -27,7 +27,7 @@
     "start": "node --watch dist/index.js",
     "dev": "node --watch dist/index.js",
     "build": "tsup src/index.ts --format cjs,esm --dts",
-    "lint": "eslint src/**/*.ts && npm run typecheck && npm run typecheck:tests",
+    "lint": "eslint src/**/*.ts && npm run typecheck && npm run typecheck:tests && npm run format:check",
     "typecheck": "tsc --noEmit",
     "typecheck:tests": "tsc --project tsconfig.test.json",
     "lint:fix": "eslint src/**/*.ts --fix",
