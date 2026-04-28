@@ -1,4 +1,4 @@
-import { ScanReport } from '@/languages/types';
+import { ScanReport } from '../types';
 import { Report as OrlReport } from '@/orl/generated-types/report';
 
 const stringifyError = (error: unknown): string => {

@@ -27,6 +27,12 @@
   },
   "overrides": [
     {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "rules": {
+        "no-undef": "off"
+      }
+    },
+    {
       "files": ["**/*.test.ts", "**/*.spec.ts", "**/*.integration.test.ts"],
       "plugins": ["jest"],
       "extends": ["plugin:jest/recommended"]
