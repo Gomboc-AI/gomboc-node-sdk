@@ -10,3 +10,6 @@ export { GradleLanguageHandler } from './gradle/handler';
 export { JavaLanguageHandler } from './java/handler';
 export { BicepLanguageHandler } from './bicep/handler';
 export { PythonLanguageHandler } from './python/handler';
+export { BashLanguageHandler } from './bash/handler';
+export { CLanguageHandler } from './c/handler';
+export { CppLanguageHandler } from './cpp/handler';

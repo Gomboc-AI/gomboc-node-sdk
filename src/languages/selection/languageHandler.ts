@@ -17,6 +17,9 @@ import {
   JavaLanguageHandler,
   BicepLanguageHandler,
   PythonLanguageHandler,
+  BashLanguageHandler,
+  CLanguageHandler,
+  CppLanguageHandler,
 } from '../handlers';
 
 export interface LanguageSelectionArgs {
@@ -36,6 +39,9 @@ const languageHandlerFactories: Array<() => ILanguage> = [
   () => new JavaLanguageHandler(),
   () => new BicepLanguageHandler(),
   () => new PythonLanguageHandler(),
+  () => new BashLanguageHandler(),
+  () => new CppLanguageHandler(),
+  () => new CLanguageHandler(),
 ];
 
 function findMatchingLanguageHandler(
@@ -66,7 +72,7 @@ export const findMatchingLanguageImplementation = (
  * specific handlers must run before broader fallbacks.
  *
  * Order: dockerfile → terraform → helm-template → cloudformation-json → kubernetes-yaml →
- * cloudformation-yaml → maven-xml → gradle → java → bicep → python.
+ * cloudformation-yaml → maven-xml → gradle → java → bicep → python → bash → cpp → c.
  */
 export const detectLanguageId = (
   args: LanguageSelectionArgs
@@ -118,6 +124,12 @@ export const mapLanguageIdToOrlLanguage = (args: {
       return 'bicep';
     case 'python':
       return 'python';
+    case 'bash':
+      return 'bash';
+    case 'cpp':
+      return 'cpp';
+    case 'c':
+      return 'c';
     default:
       return null;
   }

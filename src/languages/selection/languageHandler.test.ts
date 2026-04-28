@@ -38,14 +38,20 @@ describe('isOrlScannableLanguageFile', () => {
     expect(
       isOrlScannableLanguageFile({ filePath: 'main.bicep', content: '' })
     ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'script.sh', content: '' })
+    ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'main.c', content: '' })
+    ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'main.cpp', content: '' })
+    ).toBe(true);
   });
 
   it('rejects non-ORL files', () => {
     expect(
       isOrlScannableLanguageFile({ filePath: 'README.md', content: '' })
-    ).toBe(false);
-    expect(
-      isOrlScannableLanguageFile({ filePath: 'script.sh', content: '' })
     ).toBe(false);
     expect(
       isOrlScannableLanguageFile({ filePath: 'data.json', content: '' })
@@ -181,7 +187,49 @@ describe('languageHandler selector', () => {
     ).toBe('python');
   });
 
-  it('returns concrete handler implementation for java, bicep, and python', () => {
+  it('detects bash files and maps to ORL bash', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/script.sh',
+      content: ['#!/usr/bin/env bash', 'echo ok'].join('\n'),
+    });
+    expect(languageId).toBe('bash');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/script.sh',
+      })
+    ).toBe('bash');
+  });
+
+  it('detects c files and maps to ORL c', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/main.c',
+      content: ['int main(void) {', '  return 0;', '}'].join('\n'),
+    });
+    expect(languageId).toBe('c');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/main.c',
+      })
+    ).toBe('c');
+  });
+
+  it('detects cpp files and maps to ORL cpp', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/main.cpp',
+      content: ['int helper() {', '  return 1;', '}'].join('\n'),
+    });
+    expect(languageId).toBe('cpp');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/main.cpp',
+      })
+    ).toBe('cpp');
+  });
+
+  it('returns concrete handler implementation for java, bicep, python, bash, cpp, and c', () => {
     expect(
       chooseLanguageImplementation({
         filePath: '/workspace/src/App.java',
@@ -202,5 +250,26 @@ describe('languageHandler selector', () => {
         content: ['def handler():', '    return True'].join('\n'),
       }).displayName
     ).toBe('Python');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/script.sh',
+        content: ['#!/usr/bin/env bash', 'echo ok'].join('\n'),
+      }).displayName
+    ).toBe('Bash');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/main.cpp',
+        content: ['int helper() {', '  return 1;', '}'].join('\n'),
+      }).displayName
+    ).toBe('C++');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/main.c',
+        content: ['int main(void) {', '  return 0;', '}'].join('\n'),
+      }).displayName
+    ).toBe('C');
   });
 });
