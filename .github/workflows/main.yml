@@ -11,6 +11,8 @@ jobs:
     env:
       # Run actions (checkout, setup-node, etc.) on Node 24; Node 20 runtime is deprecated on runners.
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      # Keep CI npm resolution aligned with local .npmrc peer strategy.
+      NPM_CONFIG_LEGACY_PEER_DEPS: true
     steps:
       - uses: actions/checkout@v6
 
