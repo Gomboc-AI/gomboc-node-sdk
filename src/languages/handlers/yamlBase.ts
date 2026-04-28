@@ -1,4 +1,7 @@
-import { ResolveDiagnosticAnchorLineArgs } from '../types';
+import {
+  DiagnosticAnchorResult,
+  ResolveDiagnosticAnchorLineArgs,
+} from '../types';
 import { BaseLanguageHandler } from './base';
 
 /**
@@ -66,29 +69,9 @@ export abstract class YamlBaseLanguageHandler extends BaseLanguageHandler {
     return groups;
   }
 
-  /**
-   * YAML handlers keep the operation line when it comes from a fix operation
-   * instead of snapping to block start.
-   */
   override resolveDiagnosticAnchorLine(
     args: ResolveDiagnosticAnchorLineArgs
-  ): number {
-    const suggested =
-      Number.isFinite(args.suggestedLine) && args.suggestedLine > 0
-        ? Math.floor(args.suggestedLine)
-        : 1;
-    const maxLine = args.content
-      ? Math.max(1, args.content.split('\n').length)
-      : undefined;
-    const clamp = (line: number): number => {
-      const floored = Number.isFinite(line) && line > 0 ? Math.floor(line) : 1;
-      if (!maxLine) {
-        return floored;
-      }
-      return Math.min(maxLine, Math.max(1, floored));
-    };
-
-    // For YAML, always keep the suggested line — do not snap to block start.
-    return clamp(suggested);
+  ): DiagnosticAnchorResult {
+    return super.resolveDiagnosticAnchorLine(args);
   }
 }

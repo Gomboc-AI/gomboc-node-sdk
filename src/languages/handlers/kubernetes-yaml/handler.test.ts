@@ -107,12 +107,21 @@ describe('KubernetesYAMLLanguageHandler', () => {
     expect(groups.flat()).toEqual(lines);
   });
 
-  it('resolveDiagnosticAnchorLine keeps suggested line for YAML', () => {
+  it('resolveDiagnosticAnchorLine anchors add/no-op to nearest meaningful line above', () => {
     const result = handler.resolveDiagnosticAnchorLine({
       content: kubernetesYaml,
       suggestedLine: 5,
       fromFixOperation: false,
     });
-    expect(result).toBe(5);
+    expect(result).toEqual({ line: 4, character: 2 });
+  });
+
+  it('resolveDiagnosticAnchorLine keeps fix operation line for updates/deletes', () => {
+    const result = handler.resolveDiagnosticAnchorLine({
+      content: kubernetesYaml,
+      suggestedLine: 5,
+      fromFixOperation: true,
+    });
+    expect(result).toEqual({ line: 5, character: 0 });
   });
 });
