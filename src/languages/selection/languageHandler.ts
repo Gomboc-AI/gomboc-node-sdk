@@ -34,6 +34,17 @@ import {
   HelmLanguageHandler,
   HtmlLanguageHandler,
   LuaLanguageHandler,
+  MarkdownLanguageHandler,
+  OcamlLanguageHandler,
+  PhpLanguageHandler,
+  ProtobufLanguageHandler,
+  RubyLanguageHandler,
+  RustLanguageHandler,
+  ScalaLanguageHandler,
+  SqlLanguageHandler,
+  SwiftLanguageHandler,
+  TomlLanguageHandler,
+  YamlLanguageHandler,
 } from '../handlers';
 
 export interface LanguageSelectionArgs {
@@ -50,6 +61,7 @@ const languageHandlerFactories: Array<() => ILanguage> = [
   () => new CloudFormationJsonLanguageHandler(),
   () => new KubernetesYamlLanguageHandler(),
   () => new CloudFormationYamlLanguageHandler(),
+  () => new YamlLanguageHandler(),
   () => new MavenXmlLanguageHandler(),
   () => new GradleLanguageHandler(),
   () => new JavaLanguageHandler(),
@@ -70,6 +82,16 @@ const languageHandlerFactories: Array<() => ILanguage> = [
   () => new KotlinLanguageHandler(),
   () => new HtmlLanguageHandler(),
   () => new LuaLanguageHandler(),
+  () => new MarkdownLanguageHandler(),
+  () => new OcamlLanguageHandler(),
+  () => new PhpLanguageHandler(),
+  () => new ProtobufLanguageHandler(),
+  () => new RubyLanguageHandler(),
+  () => new RustLanguageHandler(),
+  () => new ScalaLanguageHandler(),
+  () => new SqlLanguageHandler(),
+  () => new SwiftLanguageHandler(),
+  () => new TomlLanguageHandler(),
 ];
 
 function findMatchingLanguageHandler(
@@ -100,9 +122,10 @@ export const findMatchingLanguageImplementation = (
  * specific handlers must run before broader fallbacks.
  *
  * Order: dockerfile → terraform → hcl → helm → helm-template → cloudformation-json → kubernetes-yaml →
- * cloudformation-yaml → maven-xml → gradle → java → bicep → python → bash → cpp → c →
+ * cloudformation-yaml → yaml → maven-xml → gradle → java → bicep → python → bash → cpp → c →
  * csharp → css → elixir → go → gotemplate → groovy → javascript → typescript → json →
- * kotlin → html → lua.
+ * kotlin → html → lua → markdown → ocaml → php → protobuf → ruby → rust → scala →
+ * sql → swift → toml.
  */
 export const detectLanguageId = (
   args: LanguageSelectionArgs
@@ -188,6 +211,28 @@ export const mapLanguageIdToOrlLanguage = (args: {
       return 'html';
     case 'lua':
       return 'lua';
+    case 'markdown':
+      return 'markdown';
+    case 'ocaml':
+      return 'ocaml';
+    case 'php':
+      return 'php';
+    case 'protobuf':
+      return 'protobuf';
+    case 'ruby':
+      return 'ruby';
+    case 'rust':
+      return 'rust';
+    case 'scala':
+      return 'scala';
+    case 'sql':
+      return 'sql';
+    case 'swift':
+      return 'swift';
+    case 'toml':
+      return 'toml';
+    case 'yaml':
+      return 'yaml';
     default:
       return null;
   }

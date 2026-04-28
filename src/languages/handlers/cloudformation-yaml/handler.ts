@@ -67,8 +67,15 @@ export class CloudFormationYamlLanguageHandler extends YamlBaseLanguageHandler {
       (this.hasPatternAtLineStart(firstLines, 'kind:') &&
         this.hasPatternAtLineStart(firstLines, 'apiVersion:')) ||
       isK8sDir;
+    const isCloudFormation =
+      fileName.includes('template') ||
+      fileName.includes('cloudformation') ||
+      fileName.includes('sam') ||
+      this.hasPatternAtLineStart(firstLines, 'AWSTemplateFormatVersion:') ||
+      this.hasPatternAtLineStart(firstLines, 'Resources:') ||
+      this.hasPatternAtLineStart(firstLines, 'Transform:');
 
-    return !isHelm && !isKubernetes;
+    return isCloudFormation && !isHelm && !isKubernetes;
   }
 
   override getResourceContextExtractKind(): ResourceContextExtractKind {

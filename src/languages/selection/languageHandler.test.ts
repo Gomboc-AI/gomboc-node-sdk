@@ -89,11 +89,41 @@ describe('isOrlScannableLanguageFile', () => {
     expect(
       isOrlScannableLanguageFile({ filePath: 'main.lua', content: '' })
     ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'README.md', content: '' })
+    ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'main.ml', content: '' })
+    ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'index.php', content: '' })
+    ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'schema.proto', content: '' })
+    ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'app.rb', content: '' })
+    ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'main.rs', content: '' })
+    ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'Main.scala', content: '' })
+    ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'schema.sql', content: '' })
+    ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'main.swift', content: '' })
+    ).toBe(true);
+    expect(
+      isOrlScannableLanguageFile({ filePath: 'config.toml', content: '' })
+    ).toBe(true);
   });
 
   it('rejects non-ORL files', () => {
     expect(
-      isOrlScannableLanguageFile({ filePath: 'README.md', content: '' })
+      isOrlScannableLanguageFile({ filePath: 'README.rst', content: '' })
     ).toBe(false);
   });
 });
@@ -470,7 +500,161 @@ describe('languageHandler selector', () => {
     ).toBe('lua');
   });
 
-  it('returns concrete handler implementation for java, bicep, python, bash, cpp, c, csharp, css, elixir, go, gotemplate, groovy, javascript, typescript, json, kotlin, hcl, helm, html, and lua', () => {
+  it('detects markdown files and maps to ORL markdown', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/README.md',
+      content: '# Title',
+    });
+    expect(languageId).toBe('markdown');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/README.md',
+      })
+    ).toBe('markdown');
+  });
+
+  it('detects ocaml files and maps to ORL ocaml', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/main.ml',
+      content: 'let value = 1',
+    });
+    expect(languageId).toBe('ocaml');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/main.ml',
+      })
+    ).toBe('ocaml');
+  });
+
+  it('detects php files and maps to ORL php', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/index.php',
+      content: '<?php echo "ok";',
+    });
+    expect(languageId).toBe('php');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/index.php',
+      })
+    ).toBe('php');
+  });
+
+  it('detects protobuf files and maps to ORL protobuf', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/schema.proto',
+      content: 'message User {}',
+    });
+    expect(languageId).toBe('protobuf');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/schema.proto',
+      })
+    ).toBe('protobuf');
+  });
+
+  it('detects ruby files and maps to ORL ruby', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/app.rb',
+      content: 'def run\nend',
+    });
+    expect(languageId).toBe('ruby');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/app.rb',
+      })
+    ).toBe('ruby');
+  });
+
+  it('detects rust files and maps to ORL rust', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/main.rs',
+      content: 'fn main() {}',
+    });
+    expect(languageId).toBe('rust');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/main.rs',
+      })
+    ).toBe('rust');
+  });
+
+  it('detects scala files and maps to ORL scala', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/Main.scala',
+      content: 'object Main {}',
+    });
+    expect(languageId).toBe('scala');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/Main.scala',
+      })
+    ).toBe('scala');
+  });
+
+  it('detects sql files and maps to ORL sql', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/schema.sql',
+      content: 'CREATE TABLE users (id INT);',
+    });
+    expect(languageId).toBe('sql');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/schema.sql',
+      })
+    ).toBe('sql');
+  });
+
+  it('detects swift files and maps to ORL swift', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/main.swift',
+      content: ['class App {', '}'].join('\n'),
+    });
+    expect(languageId).toBe('swift');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/main.swift',
+      })
+    ).toBe('swift');
+  });
+
+  it('detects toml files and maps to ORL toml', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/config.toml',
+      content: ['[server]', 'port = 8080'].join('\n'),
+    });
+    expect(languageId).toBe('toml');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/config.toml',
+      })
+    ).toBe('toml');
+  });
+
+  it('detects plain yaml files and maps to ORL yaml', () => {
+    const languageId = detectLanguageId({
+      filePath: '/workspace/config.yaml',
+      content: ['name: app', 'enabled: true'].join('\n'),
+    });
+    expect(languageId).toBe('yaml');
+    expect(
+      mapLanguageIdToOrlLanguage({
+        languageId: languageId || '',
+        filePath: '/workspace/config.yaml',
+      })
+    ).toBe('yaml');
+  });
+
+  it('returns concrete handler implementation for java, bicep, python, bash, cpp, c, csharp, css, elixir, go, gotemplate, groovy, javascript, typescript, json, kotlin, hcl, helm, html, lua, markdown, ocaml, php, protobuf, ruby, rust, scala, sql, swift, toml, and yaml', () => {
     expect(
       chooseLanguageImplementation({
         filePath: '/workspace/src/App.java',
@@ -614,5 +798,82 @@ describe('languageHandler selector', () => {
         content: ['function run()', 'end'].join('\n'),
       }).displayName
     ).toBe('Lua');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/README.md',
+        content: '# Title',
+      }).displayName
+    ).toBe('Markdown');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/main.ml',
+        content: 'let value = 1',
+      }).displayName
+    ).toBe('OCaml');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/index.php',
+        content: '<?php echo "ok";',
+      }).displayName
+    ).toBe('PHP');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/schema.proto',
+        content: 'message User {}',
+      }).displayName
+    ).toBe('Protobuf');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/app.rb',
+        content: 'def run\nend',
+      }).displayName
+    ).toBe('Ruby');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/main.rs',
+        content: 'fn main() {}',
+      }).displayName
+    ).toBe('Rust');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/Main.scala',
+        content: 'object Main {}',
+      }).displayName
+    ).toBe('Scala');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/schema.sql',
+        content: 'CREATE TABLE users (id INT);',
+      }).displayName
+    ).toBe('SQL');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/main.swift',
+        content: 'class App {}',
+      }).displayName
+    ).toBe('Swift');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/config.toml',
+        content: ['[server]', 'port = 8080'].join('\n'),
+      }).displayName
+    ).toBe('TOML');
+
+    expect(
+      chooseLanguageImplementation({
+        filePath: '/workspace/config.yaml',
+        content: ['name: app', 'enabled: true'].join('\n'),
+      }).displayName
+    ).toBe('YAML');
   });
 });
