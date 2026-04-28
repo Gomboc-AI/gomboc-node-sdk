@@ -304,11 +304,11 @@ describe('TerraformLanguageHandler', () => {
         })
       ).toBe(true);
       expect(
-        handler.detectLanguage({ filePath: '/workspace/main.hcl', content: '' })
-      ).toBe(true);
-      expect(
         handler.detectLanguage({ filePath: '/workspace/main.TF', content: '' })
       ).toBe(true);
+      expect(
+        handler.detectLanguage({ filePath: '/workspace/main.hcl', content: '' })
+      ).toBe(false);
       expect(
         handler.detectLanguage({
           filePath: '/workspace/main.json',
