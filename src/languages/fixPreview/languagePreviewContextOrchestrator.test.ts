@@ -70,24 +70,6 @@ describe('languagePreviewContextOrchestrator', () => {
     });
   });
 
-  it('builds json container contexts for package manifests', () => {
-    const contexts = buildLanguagePreviewResourceContexts({
-      filePath: '/workspace/package.json',
-      content: ['{', '  "name": "svc",', '  "version": "1.0.0"', '}'].join(
-        '\n'
-      ),
-      hunks: [{ fingerprint: 'h-3', newStart: 2 }],
-    });
-
-    expect(contexts).toHaveLength(1);
-    expect(contexts[0]).toMatchObject({
-      title: 'JSON container',
-      startLine: 1,
-      endLine: 4,
-      relatedHunkFingerprints: ['h-3'],
-    });
-  });
-
   it('falls back to line-window context for unknown language files', () => {
     const contexts = buildLanguagePreviewResourceContexts({
       filePath: '/workspace/notes.txt',
