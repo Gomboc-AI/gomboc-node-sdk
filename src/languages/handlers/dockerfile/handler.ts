@@ -8,6 +8,9 @@ import {
   GetDocumentInfoArgs,
   ListBlocksArgs,
   BlockRange,
+  BuildDiagnosticRangeArgs,
+  DiagnosticRangeResult,
+  ResolveDiagnosticAnchorLineArgs,
   ResourceContextExtractKind,
 } from '../../types';
 import { BaseLanguageHandler } from '../base';
@@ -122,5 +125,30 @@ export class DockerfileLanguageHandler extends BaseLanguageHandler {
 
   listBlocks(args: ListBlocksArgs): BlockRange[] {
     return this.parseBlocks(args.content);
+  }
+
+  override resolveDiagnosticAnchorLine(
+    args: ResolveDiagnosticAnchorLineArgs
+  ): number {
+    const suggested =
+      Number.isFinite(args.suggestedLine) && args.suggestedLine > 0
+        ? Math.floor(args.suggestedLine)
+        : 1;
+    const maxLine = Math.max(1, (args.content ?? '').split('\n').length);
+    return Math.min(maxLine, Math.max(1, suggested));
+  }
+
+  override buildDiagnosticRange(
+    args: BuildDiagnosticRangeArgs
+  ): DiagnosticRangeResult {
+    const line = Math.max(1, Math.floor(args.line1Based || 1));
+    const text = typeof args.content === 'string' ? args.content : '';
+    const lines = text.split('\n');
+    const idx = Math.min(Math.max(0, line - 1), Math.max(0, lines.length - 1));
+    const lineText = lines[idx] || '';
+    const firstNonWhitespace = lineText.search(/\S/);
+    const startChar = firstNonWhitespace >= 0 ? firstNonWhitespace : 0;
+    const endChar = Math.max(startChar + 1, lineText.trimEnd().length);
+    return { startChar, endChar };
   }
 }
