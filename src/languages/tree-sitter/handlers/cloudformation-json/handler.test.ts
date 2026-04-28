@@ -64,10 +64,7 @@ const emptyFile = '';
 const handler = new TreeSitterCloudFormationJsonLanguageHandler();
 
 const findLineContaining = (content: string, needle: string): number =>
-  Math.max(
-    1,
-    content.split('\n').findIndex(line => line.includes(needle)) + 1
-  );
+  Math.max(1, content.split('\n').findIndex(line => line.includes(needle)) + 1);
 
 describe('TreeSitterCloudFormationJsonLanguageHandler', () => {
   describe('listBlocks', () => {

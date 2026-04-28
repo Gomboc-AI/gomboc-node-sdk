@@ -106,7 +106,9 @@ export class TreeSitterPythonLanguageHandler extends TreeSitterLanguageHandler {
   /**
    * Anchors diagnostics to the nearest enclosing block header when possible.
    */
-  public resolveDiagnosticAnchorLine(args: ResolveDiagnosticAnchorLineArgs): number {
+  public resolveDiagnosticAnchorLine(
+    args: ResolveDiagnosticAnchorLineArgs
+  ): number {
     const suggestedLine =
       Number.isFinite(args.suggestedLine) && args.suggestedLine > 0
         ? Math.floor(args.suggestedLine)
@@ -128,7 +130,10 @@ export class TreeSitterPythonLanguageHandler extends TreeSitterLanguageHandler {
    * Maps Python grammar node types into legacy-compatible diagnostic block types.
    */
   private getCompatibilityBlockType(node: Parser.SyntaxNode): string {
-    if (node.type === 'function_definition' || node.type === 'async_function_definition') {
+    if (
+      node.type === 'function_definition' ||
+      node.type === 'async_function_definition'
+    ) {
       return 'python_function';
     }
 

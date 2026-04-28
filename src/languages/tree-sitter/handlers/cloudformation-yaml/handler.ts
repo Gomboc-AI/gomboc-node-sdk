@@ -99,7 +99,10 @@ export class TreeSitterCloudFormationYamlLanguageHandler extends TreeSitterLangu
   public override listBlocks(args: ListBlocksArgs): BlockRange[] {
     const language = this.getTreeSitterLanguage();
     const tree = parseContent(language, args.content);
-    const rootMapping = this.findFirstNodeByType(tree.rootNode, 'block_mapping');
+    const rootMapping = this.findFirstNodeByType(
+      tree.rootNode,
+      'block_mapping'
+    );
     if (!rootMapping) {
       return [];
     }
@@ -115,7 +118,8 @@ export class TreeSitterCloudFormationYamlLanguageHandler extends TreeSitterLangu
     }
 
     const resourcesValueNode =
-      resourcesPair.childForFieldName('value') || resourcesPair.namedChildren[1];
+      resourcesPair.childForFieldName('value') ||
+      resourcesPair.namedChildren[1];
     if (!resourcesValueNode) {
       return [];
     }
@@ -186,7 +190,8 @@ export class TreeSitterCloudFormationYamlLanguageHandler extends TreeSitterLangu
         continue;
       }
 
-      const typeValueNode = child.childForFieldName('value') || child.namedChildren[1];
+      const typeValueNode =
+        child.childForFieldName('value') || child.namedChildren[1];
       if (!typeValueNode) {
         return null;
       }
@@ -211,7 +216,7 @@ export class TreeSitterCloudFormationYamlLanguageHandler extends TreeSitterLangu
   private stripOuterQuotes(value: string): string {
     if (
       (value.startsWith('"') && value.endsWith('"')) ||
-      (value.startsWith('\'') && value.endsWith('\''))
+      (value.startsWith("'") && value.endsWith("'"))
     ) {
       return value.slice(1, -1);
     }

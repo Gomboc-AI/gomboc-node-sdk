@@ -79,10 +79,7 @@ const fourSpaceIndentedConstructor = `public class App {
 const handler = new TreeSitterJavaLanguageHandler();
 
 const findLineContaining = (content: string, needle: string): number =>
-  Math.max(
-    1,
-    content.split('\n').findIndex(line => line.includes(needle)) + 1
-  );
+  Math.max(1, content.split('\n').findIndex(line => line.includes(needle)) + 1);
 
 describe('TreeSitterJavaLanguageHandler', () => {
   describe('listBlocks', () => {
@@ -167,7 +164,11 @@ describe('TreeSitterJavaLanguageHandler', () => {
       });
 
       expect(blocks).toHaveLength(3);
-      expect(blocks.map(block => block.name)).toEqual(['Outer', 'Inner', 'show']);
+      expect(blocks.map(block => block.name)).toEqual([
+        'Outer',
+        'Inner',
+        'show',
+      ]);
       expect(blocks[1].type).toBe('java_class');
       expect(blocks[2].type).toBe('java_method');
     });
@@ -241,7 +242,10 @@ describe('TreeSitterJavaLanguageHandler', () => {
 
     it('returns innermost nested blocks in inner classes', () => {
       const showBodyLine = findLineContaining(innerClass, 'System.out.println');
-      const innerDeclarationLine = findLineContaining(innerClass, 'class Inner');
+      const innerDeclarationLine = findLineContaining(
+        innerClass,
+        'class Inner'
+      );
 
       expect(
         handler.findBlockAtLine({
@@ -359,7 +363,10 @@ describe('TreeSitterJavaLanguageHandler', () => {
 
     it('starts at column 2 for two-space indented method declarations', () => {
       const range = handler.buildDiagnosticRange({
-        line1Based: findLineContaining(simpleClass, 'public String getName() {'),
+        line1Based: findLineContaining(
+          simpleClass,
+          'public String getName() {'
+        ),
         content: simpleClass,
       });
 

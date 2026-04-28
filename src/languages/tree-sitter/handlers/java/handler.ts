@@ -73,7 +73,9 @@ export class TreeSitterJavaLanguageHandler extends TreeSitterLanguageHandler {
     const blocks: BlockRange[] = [];
 
     for (const match of matches) {
-      const blockCapture = match.captures.find(capture => capture.name === 'block');
+      const blockCapture = match.captures.find(
+        capture => capture.name === 'block'
+      );
       if (!blockCapture) {
         continue;
       }
@@ -81,7 +83,10 @@ export class TreeSitterJavaLanguageHandler extends TreeSitterLanguageHandler {
       const nameCapture = match.captures.find(
         capture => capture.name === 'block.name'
       );
-      const block = this.toBlockRange(blockCapture.node, nameCapture?.node.text);
+      const block = this.toBlockRange(
+        blockCapture.node,
+        nameCapture?.node.text
+      );
       if (block) {
         blocks.push(block);
       }
@@ -118,7 +123,9 @@ export class TreeSitterJavaLanguageHandler extends TreeSitterLanguageHandler {
     return null;
   }
 
-  override resolveDiagnosticAnchorLine(args: ResolveDiagnosticAnchorLineArgs): number {
+  override resolveDiagnosticAnchorLine(
+    args: ResolveDiagnosticAnchorLineArgs
+  ): number {
     const maxLine = Math.max(1, args.content.split('\n').length);
     if (args.suggestedLine > maxLine) {
       return maxLine;

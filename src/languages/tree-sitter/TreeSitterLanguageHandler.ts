@@ -99,15 +99,13 @@ export abstract class TreeSitterLanguageHandler implements ILanguage {
       }
 
       const blockCapture =
-        match.captures.find((capture) => capture.name === 'block') ||
+        match.captures.find(capture => capture.name === 'block') ||
         match.captures[0];
       const nameCapture = match.captures.find(
-        (capture) => capture.name === 'name'
+        capture => capture.name === 'name'
       );
 
-      blocks.push(
-        syntaxNodeToBlockRange(blockCapture.node, nameCapture?.node)
-      );
+      blocks.push(syntaxNodeToBlockRange(blockCapture.node, nameCapture?.node));
     }
 
     blocks.sort((left, right) => {
@@ -126,7 +124,7 @@ export abstract class TreeSitterLanguageHandler implements ILanguage {
   findBlockAtLine(args: FindBlockAtLineArgs): BlockRange | null {
     const blocks = this.listBlocks(args);
     const containing = blocks.filter(
-      (block) => block.startLine <= args.line && block.endLine >= args.line
+      block => block.startLine <= args.line && block.endLine >= args.line
     );
     if (containing.length === 0) {
       return null;
@@ -138,10 +136,7 @@ export abstract class TreeSitterLanguageHandler implements ILanguage {
       if (candidateSpan < bestSpan) {
         return candidate;
       }
-      if (
-        candidateSpan === bestSpan &&
-        candidate.startLine >= best.startLine
-      ) {
+      if (candidateSpan === bestSpan && candidate.startLine >= best.startLine) {
         return candidate;
       }
       return best;
@@ -158,7 +153,7 @@ export abstract class TreeSitterLanguageHandler implements ILanguage {
     }
 
     const blocks = this.listBlocks(args).filter(
-      (block) => block.startLine <= args.line
+      block => block.startLine <= args.line
     );
     if (blocks.length === 0) {
       return null;

@@ -68,15 +68,19 @@ const multilineResource = [
   '}',
 ].join('\n');
 
-const tfvarsContent = ['instance_type = "t3.micro"', 'region        = "us-east-1"'].join(
-  '\n'
-);
+const tfvarsContent = [
+  'instance_type = "t3.micro"',
+  'region        = "us-east-1"',
+].join('\n');
 
 const emptyFile = '';
 
-const localsOnly = ['locals {', '  env    = "prod"', '  region = "us-east-1"', '}'].join(
-  '\n'
-);
+const localsOnly = [
+  'locals {',
+  '  env    = "prod"',
+  '  region = "us-east-1"',
+  '}',
+].join('\n');
 
 const handler = new TreeSitterTerraformLanguageHandler();
 const filePath = '/workspace/main.tf';
@@ -110,7 +114,9 @@ describe('TreeSitterTerraformLanguageHandler', () => {
 
     it('maps data block to aws_ami.latest', () => {
       const blocks = handler.listBlocks({ filePath, content: multiBlockTypes });
-      const data = blocks.find(block => block.header === 'data "aws_ami" "latest"');
+      const data = blocks.find(
+        block => block.header === 'data "aws_ami" "latest"'
+      );
 
       expect(data).toBeDefined();
       expect(data?.type).toBe('aws_ami');
@@ -144,7 +150,9 @@ describe('TreeSitterTerraformLanguageHandler', () => {
         name: 'web',
         header: 'resource "aws_instance" "web"',
       });
-      expect(blocks.some(block => block.header.includes('network_interface'))).toBe(false);
+      expect(
+        blocks.some(block => block.header.includes('network_interface'))
+      ).toBe(false);
     });
 
     it('returns no blocks for empty files', () => {
@@ -163,32 +171,56 @@ describe('TreeSitterTerraformLanguageHandler', () => {
 
   describe('findBlockAtLine', () => {
     it('returns logs block on declaration line', () => {
-      const block = handler.findBlockAtLine({ filePath, content: twoResources, line: 1 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: twoResources,
+        line: 1,
+      });
       expect(block?.name).toBe('logs');
     });
 
     it('returns logs block on inner body line', () => {
-      const block = handler.findBlockAtLine({ filePath, content: twoResources, line: 2 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: twoResources,
+        line: 2,
+      });
       expect(block?.name).toBe('logs');
     });
 
     it('returns logs block on closing brace line', () => {
-      const block = handler.findBlockAtLine({ filePath, content: twoResources, line: 3 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: twoResources,
+        line: 3,
+      });
       expect(block?.name).toBe('logs');
     });
 
     it('returns null on blank line between blocks', () => {
-      const block = handler.findBlockAtLine({ filePath, content: twoResources, line: 4 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: twoResources,
+        line: 4,
+      });
       expect(block).toBeNull();
     });
 
     it('returns main block inside main resource body', () => {
-      const block = handler.findBlockAtLine({ filePath, content: twoResources, line: 6 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: twoResources,
+        line: 6,
+      });
       expect(block?.name).toBe('main');
     });
 
     it('returns outer aws_instance block for nested network_interface line', () => {
-      const block = handler.findBlockAtLine({ filePath, content: nestedBlocks, line: 6 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: nestedBlocks,
+        line: 6,
+      });
       expect(block?.type).toBe('aws_instance');
       expect(block?.name).toBe('web');
     });
@@ -196,17 +228,29 @@ describe('TreeSitterTerraformLanguageHandler', () => {
 
   describe('findNearestBlock', () => {
     it('returns preceding logs block for gap line between resources', () => {
-      const block = handler.findNearestBlock({ filePath, content: twoResources, line: 4 });
+      const block = handler.findNearestBlock({
+        filePath,
+        content: twoResources,
+        line: 4,
+      });
       expect(block?.name).toBe('logs');
     });
 
     it('returns main block past end of file', () => {
-      const block = handler.findNearestBlock({ filePath, content: twoResources, line: 100 });
+      const block = handler.findNearestBlock({
+        filePath,
+        content: twoResources,
+        line: 100,
+      });
       expect(block?.name).toBe('main');
     });
 
     it('returns first block on first line', () => {
-      const block = handler.findNearestBlock({ filePath, content: twoResources, line: 1 });
+      const block = handler.findNearestBlock({
+        filePath,
+        content: twoResources,
+        line: 1,
+      });
       expect(block?.name).toBe('logs');
     });
   });
@@ -343,33 +387,39 @@ describe('TreeSitterTerraformLanguageHandler', () => {
 
   describe('detectLanguage', () => {
     it('detects .tf files', () => {
-      expect(handler.detectLanguage({ filePath: '/workspace/main.tf', content: '' })).toBe(
-        true
-      );
+      expect(
+        handler.detectLanguage({ filePath: '/workspace/main.tf', content: '' })
+      ).toBe(true);
     });
 
     it('detects .tfvars files', () => {
       expect(
-        handler.detectLanguage({ filePath: '/workspace/terraform.tfvars', content: '' })
+        handler.detectLanguage({
+          filePath: '/workspace/terraform.tfvars',
+          content: '',
+        })
       ).toBe(true);
     });
 
     it('detects .hcl files', () => {
-      expect(handler.detectLanguage({ filePath: '/workspace/main.hcl', content: '' })).toBe(
-        true
-      );
+      expect(
+        handler.detectLanguage({ filePath: '/workspace/main.hcl', content: '' })
+      ).toBe(true);
     });
 
     it('does not detect .py files', () => {
-      expect(handler.detectLanguage({ filePath: '/workspace/app.py', content: '' })).toBe(
-        false
-      );
+      expect(
+        handler.detectLanguage({ filePath: '/workspace/app.py', content: '' })
+      ).toBe(false);
     });
 
     it('does not detect .json files', () => {
-      expect(handler.detectLanguage({ filePath: '/workspace/data.json', content: '' })).toBe(
-        false
-      );
+      expect(
+        handler.detectLanguage({
+          filePath: '/workspace/data.json',
+          content: '',
+        })
+      ).toBe(false);
     });
   });
 

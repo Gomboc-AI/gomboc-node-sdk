@@ -84,7 +84,9 @@ export class TreeSitterTerraformLanguageHandler extends TreeSitterLanguageHandle
         continue;
       }
 
-      const blockCapture = match.captures.find(capture => capture.name === 'block');
+      const blockCapture = match.captures.find(
+        capture => capture.name === 'block'
+      );
       const keywordCapture = match.captures.find(
         capture => capture.name === 'block.keyword'
       );
@@ -199,7 +201,9 @@ export class TreeSitterTerraformLanguageHandler extends TreeSitterLanguageHandle
    * Anchors diagnostics to the edit line, except insertion-style fixes which
    * anchor to the nearest node above the insertion point.
    */
-  public override resolveDiagnosticAnchorLine(args: ResolveDiagnosticAnchorLineArgs): number {
+  public override resolveDiagnosticAnchorLine(
+    args: ResolveDiagnosticAnchorLineArgs
+  ): number {
     const suggestedLine =
       Number.isFinite(args.suggestedLine) && args.suggestedLine > 0
         ? Math.floor(args.suggestedLine)

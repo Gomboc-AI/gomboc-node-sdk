@@ -1,9 +1,6 @@
 import Parser from 'tree-sitter';
 
-const queryCache = new WeakMap<
-  Parser.Language,
-  Map<string, Parser.Query>
->();
+const queryCache = new WeakMap<Parser.Language, Map<string, Parser.Query>>();
 
 /**
  * Compiles and caches tree-sitter queries by language + query text.

@@ -83,7 +83,8 @@ export class TreeSitterCloudFormationJsonLanguageHandler extends TreeSitterLangu
       }
 
       const resourcesValue =
-        resourcesPair.childForFieldName('value') || resourcesPair.namedChildren[1];
+        resourcesPair.childForFieldName('value') ||
+        resourcesPair.namedChildren[1];
       if (!resourcesValue || resourcesValue.type !== 'object') {
         return [];
       }
@@ -136,7 +137,9 @@ export class TreeSitterCloudFormationJsonLanguageHandler extends TreeSitterLangu
   /**
    * Keeps insertion anchors stable by using the last non-root named node in JSON files.
    */
-  override resolveDiagnosticAnchorLine(args: ResolveDiagnosticAnchorLineArgs): number {
+  override resolveDiagnosticAnchorLine(
+    args: ResolveDiagnosticAnchorLineArgs
+  ): number {
     const language = this.getTreeSitterLanguage();
     const tree = parseContent(language, args.content);
     const maxLine = tree.rootNode.endPosition.row + 1;
@@ -198,7 +201,8 @@ export class TreeSitterCloudFormationJsonLanguageHandler extends TreeSitterLangu
         continue;
       }
 
-      const typeValueNode = child.childForFieldName('value') || child.namedChildren[1];
+      const typeValueNode =
+        child.childForFieldName('value') || child.namedChildren[1];
       if (!typeValueNode || typeValueNode.type !== 'string') {
         return null;
       }
@@ -227,7 +231,7 @@ export class TreeSitterCloudFormationJsonLanguageHandler extends TreeSitterLangu
   private stripOuterQuotes(value: string): string {
     if (
       (value.startsWith('"') && value.endsWith('"')) ||
-      (value.startsWith('\'') && value.endsWith('\''))
+      (value.startsWith("'") && value.endsWith("'"))
     ) {
       return value.slice(1, -1);
     }

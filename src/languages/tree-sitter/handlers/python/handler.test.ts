@@ -23,12 +23,14 @@ const topLevelMix = [
   '',
   '',
   'def helper():',
-  '    return \'ok\'',
+  "    return 'ok'",
 ].join('\n');
 
-const decoratedFunc = ['@property', 'def my_prop(self):', '    return self._x'].join(
-  '\n'
-);
+const decoratedFunc = [
+  '@property',
+  'def my_prop(self):',
+  '    return self._x',
+].join('\n');
 
 const decoratedClass = [
   '@dataclass',
@@ -44,7 +46,9 @@ const stackedDecorators = [
   '    pass',
 ].join('\n');
 
-const asyncFunc = ['async def fetch():', '    return await something()'].join('\n');
+const asyncFunc = ['async def fetch():', '    return await something()'].join(
+  '\n'
+);
 
 const nestedFunc = [
   'def outer():',
@@ -91,7 +95,10 @@ describe('TreeSitterPythonLanguageHandler', () => {
     });
 
     it('finds class and method blocks', () => {
-      const blocks = handler.listBlocks({ filePath, content: classWithMethods });
+      const blocks = handler.listBlocks({
+        filePath,
+        content: classWithMethods,
+      });
 
       expect(blocks).toHaveLength(3);
       expect(blocks.map(block => block.name)).toEqual([
@@ -145,7 +152,10 @@ describe('TreeSitterPythonLanguageHandler', () => {
     });
 
     it('handles stacked decorators as a single block starting at first decorator', () => {
-      const blocks = handler.listBlocks({ filePath, content: stackedDecorators });
+      const blocks = handler.listBlocks({
+        filePath,
+        content: stackedDecorators,
+      });
 
       expect(blocks).toHaveLength(1);
       expect(blocks[0].name).toBe('util');
@@ -173,7 +183,10 @@ describe('TreeSitterPythonLanguageHandler', () => {
     });
 
     it('handles multiline signatures with body-based end line', () => {
-      const blocks = handler.listBlocks({ filePath, content: multilineSignature });
+      const blocks = handler.listBlocks({
+        filePath,
+        content: multilineSignature,
+      });
 
       expect(blocks).toHaveLength(1);
       expect(blocks[0].name).toBe('complex');
@@ -184,27 +197,47 @@ describe('TreeSitterPythonLanguageHandler', () => {
 
   describe('findBlockAtLine', () => {
     it('returns Service when the line is on class declaration', () => {
-      const block = handler.findBlockAtLine({ filePath, content: topLevelMix, line: 1 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: topLevelMix,
+        line: 1,
+      });
       expect(block?.name).toBe('Service');
     });
 
     it('returns __init__ for a line inside __init__ body', () => {
-      const block = handler.findBlockAtLine({ filePath, content: topLevelMix, line: 3 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: topLevelMix,
+        line: 3,
+      });
       expect(block?.name).toBe('__init__');
     });
 
     it('returns helper on helper declaration line', () => {
-      const block = handler.findBlockAtLine({ filePath, content: topLevelMix, line: 9 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: topLevelMix,
+        line: 9,
+      });
       expect(block?.name).toBe('helper');
     });
 
     it('returns helper for a line inside helper body', () => {
-      const block = handler.findBlockAtLine({ filePath, content: topLevelMix, line: 10 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: topLevelMix,
+        line: 10,
+      });
       expect(block?.name).toBe('helper');
     });
 
     it('returns null on blank line between class and helper', () => {
-      const block = handler.findBlockAtLine({ filePath, content: topLevelMix, line: 8 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: topLevelMix,
+        line: 8,
+      });
       expect(block).toBeNull();
     });
 
@@ -224,24 +257,40 @@ describe('TreeSitterPythonLanguageHandler', () => {
     });
 
     it('returns inner when line is inside inner body', () => {
-      const block = handler.findBlockAtLine({ filePath, content: nestedFunc, line: 3 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: nestedFunc,
+        line: 3,
+      });
       expect(block?.name).toBe('inner');
     });
 
     it('returns outer when line is inside outer but outside inner', () => {
-      const block = handler.findBlockAtLine({ filePath, content: nestedFunc, line: 4 });
+      const block = handler.findBlockAtLine({
+        filePath,
+        content: nestedFunc,
+        line: 4,
+      });
       expect(block?.name).toBe('outer');
     });
   });
 
   describe('findNearestBlock', () => {
     it('returns helper for line after helper block end', () => {
-      const block = handler.findNearestBlock({ filePath, content: topLevelMix, line: 11 });
+      const block = handler.findNearestBlock({
+        filePath,
+        content: topLevelMix,
+        line: 11,
+      });
       expect(block?.name).toBe('helper');
     });
 
     it('returns nearest preceding block between class and helper', () => {
-      const block = handler.findNearestBlock({ filePath, content: topLevelMix, line: 8 });
+      const block = handler.findNearestBlock({
+        filePath,
+        content: topLevelMix,
+        line: 8,
+      });
       expect(block?.name).toBe('get_name');
     });
 

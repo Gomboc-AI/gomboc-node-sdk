@@ -39,34 +39,55 @@ describe('DockerfileLanguageHandler', () => {
   describe('detectLanguage', () => {
     it('matches Dockerfile by filename', () => {
       expect(
-        handler.detectLanguage({ filePath: '/workspace/Dockerfile', content: '' })
+        handler.detectLanguage({
+          filePath: '/workspace/Dockerfile',
+          content: '',
+        })
       ).toBe(true);
     });
 
     it('matches Dockerfile.dev and Dockerfile.production variants', () => {
       expect(
-        handler.detectLanguage({ filePath: '/workspace/Dockerfile.dev', content: '' })
+        handler.detectLanguage({
+          filePath: '/workspace/Dockerfile.dev',
+          content: '',
+        })
       ).toBe(true);
       expect(
-        handler.detectLanguage({ filePath: '/workspace/Dockerfile.production', content: '' })
+        handler.detectLanguage({
+          filePath: '/workspace/Dockerfile.production',
+          content: '',
+        })
       ).toBe(true);
     });
 
     it('matches .dockerfile extension', () => {
       expect(
-        handler.detectLanguage({ filePath: '/workspace/app.dockerfile', content: '' })
+        handler.detectLanguage({
+          filePath: '/workspace/app.dockerfile',
+          content: '',
+        })
       ).toBe(true);
     });
 
     it('rejects non-dockerfile files', () => {
       expect(
-        handler.detectLanguage({ filePath: '/workspace/docker-compose.yml', content: '' })
+        handler.detectLanguage({
+          filePath: '/workspace/docker-compose.yml',
+          content: '',
+        })
       ).toBe(false);
       expect(
-        handler.detectLanguage({ filePath: '/workspace/package.json', content: '' })
+        handler.detectLanguage({
+          filePath: '/workspace/package.json',
+          content: '',
+        })
       ).toBe(false);
       expect(
-        handler.detectLanguage({ filePath: '/workspace/tsconfig.json', content: '' })
+        handler.detectLanguage({
+          filePath: '/workspace/tsconfig.json',
+          content: '',
+        })
       ).toBe(false);
     });
   });
@@ -92,7 +113,10 @@ describe('DockerfileLanguageHandler', () => {
     });
 
     it('uses image name as block name when no AS alias is given', () => {
-      const blocks = handler.listBlocks({ filePath, content: singleStageNoAlias });
+      const blocks = handler.listBlocks({
+        filePath,
+        content: singleStageNoAlias,
+      });
       expect(blocks).toHaveLength(1);
       expect(blocks[0].name).toBe('ubuntu:22.04');
       expect(blocks[0].startLine).toBe(1);
@@ -107,7 +131,10 @@ describe('DockerfileLanguageHandler', () => {
     });
 
     it('ignores comment and blank lines — only FROM lines create blocks', () => {
-      const blocks = handler.listBlocks({ filePath, content: commentsAndBlanks });
+      const blocks = handler.listBlocks({
+        filePath,
+        content: commentsAndBlanks,
+      });
       expect(blocks).toHaveLength(1);
       expect(blocks[0].name).toBe('base');
     });
@@ -119,34 +146,39 @@ describe('DockerfileLanguageHandler', () => {
     });
 
     it('returns empty array for empty file', () => {
-      expect(
-        handler.listBlocks({ filePath, content: emptyFile })
-      ).toHaveLength(0);
+      expect(handler.listBlocks({ filePath, content: emptyFile })).toHaveLength(
+        0
+      );
     });
   });
 
   describe('findBlockAtLine', () => {
     it('returns the containing stage for any line within it', () => {
       expect(
-        handler.findBlockAtLine({ filePath, content: multistage, line: 1 })?.name
+        handler.findBlockAtLine({ filePath, content: multistage, line: 1 })
+          ?.name
       ).toBe('base');
       expect(
-        handler.findBlockAtLine({ filePath, content: multistage, line: 2 })?.name
+        handler.findBlockAtLine({ filePath, content: multistage, line: 2 })
+          ?.name
       ).toBe('base');
       expect(
-        handler.findBlockAtLine({ filePath, content: multistage, line: 5 })?.name
+        handler.findBlockAtLine({ filePath, content: multistage, line: 5 })
+          ?.name
       ).toBe('build');
     });
 
     it('assigns the blank line between stages to the preceding stage', () => {
       expect(
-        handler.findBlockAtLine({ filePath, content: multistage, line: 3 })?.name
+        handler.findBlockAtLine({ filePath, content: multistage, line: 3 })
+          ?.name
       ).toBe('base');
     });
 
     it('returns the second stage when on its FROM line', () => {
       expect(
-        handler.findBlockAtLine({ filePath, content: multistage, line: 4 })?.name
+        handler.findBlockAtLine({ filePath, content: multistage, line: 4 })
+          ?.name
       ).toBe('build');
     });
 
@@ -160,12 +192,16 @@ describe('DockerfileLanguageHandler', () => {
   describe('findNearestBlock', () => {
     it('returns the last block when line is past end of file', () => {
       expect(
-        handler.findNearestBlock({ filePath, content: multistage, line: 999 })?.name
+        handler.findNearestBlock({ filePath, content: multistage, line: 999 })
+          ?.name
       ).toBe('build');
     });
 
     it('returns the first block when line is before any stage', () => {
-      const blocks = handler.listBlocks({ filePath, content: commentsAndBlanks });
+      const blocks = handler.listBlocks({
+        filePath,
+        content: commentsAndBlanks,
+      });
       expect(
         handler.findNearestBlock({
           filePath,

@@ -93,8 +93,7 @@ export function findLastNodeBefore(
       if (
         !best ||
         endRow > best.endPosition.row ||
-        (endRow === best.endPosition.row &&
-          startRow >= best.startPosition.row)
+        (endRow === best.endPosition.row && startRow >= best.startPosition.row)
       ) {
         best = node;
       }
