@@ -12,7 +12,7 @@ import {
 } from '../../types';
 import { BaseLanguageHandler } from '../base';
 
-export class MavenXMLLanguageHandler extends BaseLanguageHandler {
+export class MavenXmlLanguageHandler extends BaseLanguageHandler {
   displayName = 'Maven XML';
   codeResourceType = 'xml';
   extensions = ['.xml'];

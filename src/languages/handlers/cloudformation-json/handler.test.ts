@@ -1,4 +1,4 @@
-import { CloudFormationJSONLanguageHandler } from './handler';
+import { CloudFormationJsonLanguageHandler } from './handler';
 
 const cloudFormationJson = JSON.stringify(
   {
@@ -20,7 +20,7 @@ const cloudFormationJson = JSON.stringify(
 );
 
 describe('CloudFormationJSONLanguageHandler', () => {
-  const handler = new CloudFormationJSONLanguageHandler();
+  const handler = new CloudFormationJsonLanguageHandler();
 
   it('detectLanguage matches template-like basenames only', () => {
     expect(

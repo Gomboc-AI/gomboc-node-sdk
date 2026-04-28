@@ -7,14 +7,13 @@ import type { ResourceContextExtractKind } from '../types';
 import { ILanguage } from '../types';
 import {
   TerraformLanguageHandler,
-  CloudFormationYAMLLanguageHandler,
-  CloudFormationJSONLanguageHandler,
+  CloudFormationYamlLanguageHandler,
+  CloudFormationJsonLanguageHandler,
   DockerfileLanguageHandler,
-  KubernetesYAMLLanguageHandler,
+  KubernetesYamlLanguageHandler,
   HelmTemplateLanguageHandler,
-  MavenXMLLanguageHandler,
+  MavenXmlLanguageHandler,
   GradleLanguageHandler,
-  NpmPackageJSONLanguageHandler,
   JavaLanguageHandler,
   BicepLanguageHandler,
   PythonLanguageHandler,
@@ -29,11 +28,10 @@ const languageHandlerFactories: Array<() => ILanguage> = [
   () => new DockerfileLanguageHandler(),
   () => new TerraformLanguageHandler(),
   () => new HelmTemplateLanguageHandler(),
-  () => new NpmPackageJSONLanguageHandler(),
-  () => new CloudFormationJSONLanguageHandler(),
-  () => new KubernetesYAMLLanguageHandler(),
-  () => new CloudFormationYAMLLanguageHandler(),
-  () => new MavenXMLLanguageHandler(),
+  () => new CloudFormationJsonLanguageHandler(),
+  () => new KubernetesYamlLanguageHandler(),
+  () => new CloudFormationYamlLanguageHandler(),
+  () => new MavenXmlLanguageHandler(),
   () => new GradleLanguageHandler(),
   () => new JavaLanguageHandler(),
   () => new BicepLanguageHandler(),
@@ -64,11 +62,11 @@ export const findMatchingLanguageImplementation = (
  *
  * Resolution is first-match against {@link languageHandlerFactories} (see that array for
  * the canonical order). Order matters where extensions overlap: e.g. YAML can be Helm,
- * Kubernetes, or CloudFormation; JSON can be npm package manifests or CloudFormation. More
+ * Kubernetes, or CloudFormation. More
  * specific handlers must run before broader fallbacks.
  *
- * Order: dockerfile → terraform → helm-template → npm-package-json → cloudformation-json →
- * kubernetes-yaml → cloudformation-yaml → maven-xml → gradle → java → bicep → python.
+ * Order: dockerfile → terraform → helm-template → cloudformation-json → kubernetes-yaml →
+ * cloudformation-yaml → maven-xml → gradle → java → bicep → python.
  */
 export const detectLanguageId = (
   args: LanguageSelectionArgs
@@ -114,8 +112,6 @@ export const mapLanguageIdToOrlLanguage = (args: {
       return 'xml';
     case 'gradle':
       return ext === '.kts' ? 'kotlin' : 'groovy';
-    case 'npm-package-json':
-      return 'json';
     case 'java':
       return 'java';
     case 'bicep':

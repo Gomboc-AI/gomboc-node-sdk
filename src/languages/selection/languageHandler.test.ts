@@ -40,18 +40,6 @@ describe('isOrlScannableLanguageFile', () => {
     ).toBe(true);
   });
 
-  it('treats npm package manifests as scannable', () => {
-    expect(
-      isOrlScannableLanguageFile({ filePath: 'package.json', content: '' })
-    ).toBe(true);
-    expect(
-      isOrlScannableLanguageFile({
-        filePath: 'package-lock.json',
-        content: '',
-      })
-    ).toBe(true);
-  });
-
   it('rejects non-ORL files', () => {
     expect(
       isOrlScannableLanguageFile({ filePath: 'README.md', content: '' })
@@ -133,13 +121,7 @@ describe('languageHandler selector', () => {
     expect(languageId).toBe('kubernetes-yaml');
   });
 
-  it('splits json between npm package and cloudformation', () => {
-    expect(
-      detectLanguageId({
-        filePath: '/workspace/package.json',
-        content: '{"name":"app"}',
-      })
-    ).toBe('npm-package-json');
+  it('detects cloudformation json templates', () => {
     expect(
       detectLanguageId({
         filePath: '/workspace/template.json',

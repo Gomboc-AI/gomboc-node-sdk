@@ -1,13 +1,12 @@
 export { BaseLanguageHandler } from './base';
 export { TerraformLanguageHandler } from './terraform/handler';
-export { CloudFormationYAMLLanguageHandler } from './cloudformation-yaml/handler';
-export { CloudFormationJSONLanguageHandler } from './cloudformation-json/handler';
+export { CloudFormationYamlLanguageHandler } from './cloudformation-yaml/handler';
+export { CloudFormationJsonLanguageHandler } from './cloudformation-json/handler';
 export { DockerfileLanguageHandler } from './dockerfile/handler';
-export { KubernetesYAMLLanguageHandler } from './kubernetes-yaml/handler';
+export { KubernetesYamlLanguageHandler } from './kubernetes-yaml/handler';
 export { HelmTemplateLanguageHandler } from './helm-template/handler';
-export { MavenXMLLanguageHandler } from './maven-xml/handler';
+export { MavenXmlLanguageHandler } from './maven-xml/handler';
 export { GradleLanguageHandler } from './gradle/handler';
-export { NpmPackageJSONLanguageHandler } from './npm-package-json/handler';
 export { JavaLanguageHandler } from './java/handler';
 export { BicepLanguageHandler } from './bicep/handler';
 export { PythonLanguageHandler } from './python/handler';

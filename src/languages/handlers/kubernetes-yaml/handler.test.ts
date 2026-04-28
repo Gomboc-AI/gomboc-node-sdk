@@ -1,4 +1,4 @@
-import { KubernetesYAMLLanguageHandler } from './handler';
+import { KubernetesYamlLanguageHandler } from './handler';
 
 const kubernetesYaml = [
   'apiVersion: apps/v1',
@@ -15,7 +15,7 @@ const kubernetesYaml = [
 ].join('\n');
 
 describe('KubernetesYAMLLanguageHandler', () => {
-  const handler = new KubernetesYAMLLanguageHandler();
+  const handler = new KubernetesYamlLanguageHandler();
 
   it('returns kubernetes document info metadata', () => {
     expect(

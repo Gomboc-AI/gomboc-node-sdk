@@ -1,4 +1,4 @@
-import { MavenXMLLanguageHandler } from './handler';
+import { MavenXmlLanguageHandler } from './handler';
 
 const mavenXml = [
   '<project>',
@@ -14,7 +14,7 @@ const mavenXml = [
 ].join('\n');
 
 describe('MavenXMLLanguageHandler', () => {
-  const handler = new MavenXMLLanguageHandler();
+  const handler = new MavenXmlLanguageHandler();
 
   it('returns maven xml document info metadata', () => {
     expect(

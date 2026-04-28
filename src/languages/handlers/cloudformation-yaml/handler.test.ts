@@ -1,4 +1,4 @@
-import { CloudFormationYAMLLanguageHandler } from './handler';
+import { CloudFormationYamlLanguageHandler } from './handler';
 
 const cloudFormationYaml = [
   'AWSTemplateFormatVersion: "2010-09-09"',
@@ -15,7 +15,7 @@ const cloudFormationYaml = [
 
 describe('CloudFormationYAMLLanguageHandler', () => {
   const filePath = '/workspace/template.yaml';
-  const handler = new CloudFormationYAMLLanguageHandler();
+  const handler = new CloudFormationYamlLanguageHandler();
 
   it('returns cloudformation yaml document info metadata', () => {
     expect(

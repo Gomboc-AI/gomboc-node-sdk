@@ -14,7 +14,7 @@ import {
 } from '../../types';
 import { BaseLanguageHandler } from '../base';
 
-export class CloudFormationJSONLanguageHandler extends BaseLanguageHandler {
+export class CloudFormationJsonLanguageHandler extends BaseLanguageHandler {
   displayName = 'CloudFormation JSON';
   codeResourceType = 'cloudformation';
   extensions = ['.json'];

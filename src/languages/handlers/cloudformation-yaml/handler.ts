@@ -15,7 +15,7 @@ import {
 } from '../../types';
 import { YamlBaseLanguageHandler } from '../yamlBase';
 
-export class CloudFormationYAMLLanguageHandler extends YamlBaseLanguageHandler {
+export class CloudFormationYamlLanguageHandler extends YamlBaseLanguageHandler {
   displayName = 'CloudFormation YAML';
   codeResourceType = 'cloudformation';
   extensions = ['.yaml', '.yml'];

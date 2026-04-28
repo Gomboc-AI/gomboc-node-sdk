@@ -12,7 +12,7 @@ import {
 } from '../../types';
 import { YamlBaseLanguageHandler } from '../yamlBase';
 
-export class KubernetesYAMLLanguageHandler extends YamlBaseLanguageHandler {
+export class KubernetesYamlLanguageHandler extends YamlBaseLanguageHandler {
   displayName = 'Kubernetes YAML';
   codeResourceType = 'kubernetes';
   extensions = ['.yaml', '.yml'];
