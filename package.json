@@ -58,9 +58,13 @@
   },
   "homepage": "https://github.com/gomboc-ai/gomboc-node-sdk#readme",
   "dependencies": {
+    "@tree-sitter-grammars/tree-sitter-hcl": "^1.2.0",
     "axios": "^1.14.0",
+    "i": "^0.3.7",
     "neverthrow": "^8.2.0",
+    "npm": "^11.13.0",
     "tree-sitter": "^0.25.0",
+    "tree-sitter-python": "^0.25.0",
     "zod": "^4.3.6"
   },
   "devDependencies": {
