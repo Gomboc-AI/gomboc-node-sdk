@@ -59,11 +59,12 @@
   "homepage": "https://github.com/gomboc-ai/gomboc-node-sdk#readme",
   "dependencies": {
     "@tree-sitter-grammars/tree-sitter-hcl": "^1.2.0",
+    "@tree-sitter-grammars/tree-sitter-yaml": "^0.7.1",
     "axios": "^1.14.0",
-    "i": "^0.3.7",
     "neverthrow": "^8.2.0",
     "npm": "^11.13.0",
     "tree-sitter": "^0.25.0",
+    "tree-sitter-json": "^0.24.8",
     "tree-sitter-python": "^0.25.0",
     "zod": "^4.3.6"
   },
@@ -77,6 +78,7 @@
     "eslint-plugin-jest": "^28.14.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
+    "jest-util": "^30.3.0",
     "json-schema-to-typescript": "^15.0.4",
     "openapi-typescript": "^7.8.0",
     "prettier": "^3.0.0",
