@@ -1,5 +1,15 @@
 # @gomboc-ai/gomboc-node-sdk
 
+## 2.0.0
+
+### Major Changes
+
+- 3281272: Adding a bunch of new languages as well as updating how the language diagnostic return val looks
+
+### Minor Changes
+
+- f279763: Adding new language support and handlers
+
 ## 1.2.0
 
 ### Minor Changes
