@@ -10,7 +10,11 @@
     "isolatedModules": true,
     "incremental": false,
     "noEmit": true,
-    "rootDir": "src"
+    "rootDir": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": [
