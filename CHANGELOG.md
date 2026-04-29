@@ -1,5 +1,11 @@
 # @gomboc-ai/gomboc-node-sdk
 
+## 2.0.2
+
+### Patch Changes
+
+- b31e0f4: exporting in multiple formats
+
 ## 2.0.1
 
 ### Patch Changes
