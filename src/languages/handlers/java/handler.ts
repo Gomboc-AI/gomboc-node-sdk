@@ -29,7 +29,7 @@ export class JavaLanguageHandler extends BaseLanguageHandler {
     const typePattern =
       /^\s*(?:public|protected|private|abstract|final|sealed|non-sealed|static|\s)*(class|interface|enum|record)\s+([A-Za-z_][A-Za-z0-9_]*)\b/;
     const methodPattern =
-      /^\s*(?:public|protected|private|static|final|abstract|synchronized|native|default|strictfp|\s)+(?:<[^>]+>\s*)?(?:(?:[A-Za-z_][A-Za-z0-9_<>\[\],.? ]*)\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*\([^;{}]*\)\s*(?:throws\s+[^{]+)?\{/;
+      /^\s*(?:public|protected|private|static|final|abstract|synchronized|native|default|strictfp|\s)+(?:<[^>]+>\s*)?(?:(?:[A-Za-z_][A-Za-z0-9_<>[\],.? ]*)\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*\([^;{}]*\)\s*(?:throws\s+[^{]+)?\{/;
     const controlKeywords = new Set([
       'if',
       'for',

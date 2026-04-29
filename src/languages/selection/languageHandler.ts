@@ -17,6 +17,34 @@ import {
   JavaLanguageHandler,
   BicepLanguageHandler,
   PythonLanguageHandler,
+  BashLanguageHandler,
+  CLanguageHandler,
+  CppLanguageHandler,
+  CsharpLanguageHandler,
+  CssLanguageHandler,
+  ElixirLanguageHandler,
+  GoLanguageHandler,
+  GoTemplateLanguageHandler,
+  GroovyLanguageHandler,
+  JavascriptLanguageHandler,
+  TypescriptLanguageHandler,
+  JsonLanguageHandler,
+  KotlinLanguageHandler,
+  HclLanguageHandler,
+  HelmLanguageHandler,
+  HtmlLanguageHandler,
+  LuaLanguageHandler,
+  MarkdownLanguageHandler,
+  OcamlLanguageHandler,
+  PhpLanguageHandler,
+  ProtobufLanguageHandler,
+  RubyLanguageHandler,
+  RustLanguageHandler,
+  ScalaLanguageHandler,
+  SqlLanguageHandler,
+  SwiftLanguageHandler,
+  TomlLanguageHandler,
+  YamlLanguageHandler,
 } from '../handlers';
 
 export interface LanguageSelectionArgs {
@@ -27,15 +55,43 @@ export interface LanguageSelectionArgs {
 const languageHandlerFactories: Array<() => ILanguage> = [
   () => new DockerfileLanguageHandler(),
   () => new TerraformLanguageHandler(),
+  () => new HclLanguageHandler(),
+  () => new HelmLanguageHandler(),
   () => new HelmTemplateLanguageHandler(),
   () => new CloudFormationJsonLanguageHandler(),
   () => new KubernetesYamlLanguageHandler(),
   () => new CloudFormationYamlLanguageHandler(),
+  () => new YamlLanguageHandler(),
   () => new MavenXmlLanguageHandler(),
   () => new GradleLanguageHandler(),
   () => new JavaLanguageHandler(),
   () => new BicepLanguageHandler(),
   () => new PythonLanguageHandler(),
+  () => new BashLanguageHandler(),
+  () => new CppLanguageHandler(),
+  () => new CLanguageHandler(),
+  () => new CsharpLanguageHandler(),
+  () => new CssLanguageHandler(),
+  () => new ElixirLanguageHandler(),
+  () => new GoLanguageHandler(),
+  () => new GoTemplateLanguageHandler(),
+  () => new GroovyLanguageHandler(),
+  () => new JavascriptLanguageHandler(),
+  () => new TypescriptLanguageHandler(),
+  () => new JsonLanguageHandler(),
+  () => new KotlinLanguageHandler(),
+  () => new HtmlLanguageHandler(),
+  () => new LuaLanguageHandler(),
+  () => new MarkdownLanguageHandler(),
+  () => new OcamlLanguageHandler(),
+  () => new PhpLanguageHandler(),
+  () => new ProtobufLanguageHandler(),
+  () => new RubyLanguageHandler(),
+  () => new RustLanguageHandler(),
+  () => new ScalaLanguageHandler(),
+  () => new SqlLanguageHandler(),
+  () => new SwiftLanguageHandler(),
+  () => new TomlLanguageHandler(),
 ];
 
 function findMatchingLanguageHandler(
@@ -65,8 +121,11 @@ export const findMatchingLanguageImplementation = (
  * Kubernetes, or CloudFormation. More
  * specific handlers must run before broader fallbacks.
  *
- * Order: dockerfile → terraform → helm-template → cloudformation-json → kubernetes-yaml →
- * cloudformation-yaml → maven-xml → gradle → java → bicep → python.
+ * Order: dockerfile → terraform → hcl → helm → helm-template → cloudformation-json → kubernetes-yaml →
+ * cloudformation-yaml → yaml → maven-xml → gradle → java → bicep → python → bash → cpp → c →
+ * csharp → css → elixir → go → gotemplate → groovy → javascript → typescript → json →
+ * kotlin → html → lua → markdown → ocaml → php → protobuf → ruby → rust → scala →
+ * sql → swift → toml.
  */
 export const detectLanguageId = (
   args: LanguageSelectionArgs
@@ -118,6 +177,62 @@ export const mapLanguageIdToOrlLanguage = (args: {
       return 'bicep';
     case 'python':
       return 'python';
+    case 'bash':
+      return 'bash';
+    case 'cpp':
+      return 'cpp';
+    case 'c':
+      return 'c';
+    case 'csharp':
+      return 'csharp';
+    case 'css':
+      return 'css';
+    case 'elixir':
+      return 'elixir';
+    case 'go':
+      return 'go';
+    case 'gotemplate':
+      return 'gotemplate';
+    case 'groovy':
+      return 'groovy';
+    case 'javascript':
+      return 'javascript';
+    case 'typescript':
+      return 'typescript';
+    case 'json':
+      return 'json';
+    case 'kotlin':
+      return 'kotlin';
+    case 'hcl':
+      return 'hcl';
+    case 'helm':
+      return 'helm';
+    case 'html':
+      return 'html';
+    case 'lua':
+      return 'lua';
+    case 'markdown':
+      return 'markdown';
+    case 'ocaml':
+      return 'ocaml';
+    case 'php':
+      return 'php';
+    case 'protobuf':
+      return 'protobuf';
+    case 'ruby':
+      return 'ruby';
+    case 'rust':
+      return 'rust';
+    case 'scala':
+      return 'scala';
+    case 'sql':
+      return 'sql';
+    case 'swift':
+      return 'swift';
+    case 'toml':
+      return 'toml';
+    case 'yaml':
+      return 'yaml';
     default:
       return null;
   }

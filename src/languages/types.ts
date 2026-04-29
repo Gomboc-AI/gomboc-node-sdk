@@ -204,6 +204,11 @@ export interface ResolveDiagnosticAnchorLineArgs {
   fromFixOperation: boolean;
 }
 
+export interface DiagnosticAnchorResult {
+  line: number;
+  character: number;
+}
+
 export interface DescribeBlockArgs {
   filePath: string;
   content: string;
@@ -274,7 +279,9 @@ export interface ILanguage {
 
   // --- Diagnostic placement ---
   buildDiagnosticRange(args: BuildDiagnosticRangeArgs): DiagnosticRangeResult;
-  resolveDiagnosticAnchorLine(args: ResolveDiagnosticAnchorLineArgs): number;
+  resolveDiagnosticAnchorLine(
+    args: ResolveDiagnosticAnchorLineArgs
+  ): DiagnosticAnchorResult;
 
   // --- Block context for converter ---
   describeBlock(args: DescribeBlockArgs): BlockDescription;

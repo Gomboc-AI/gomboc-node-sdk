@@ -22,6 +22,7 @@ import {
   MatchRulesToDiffArgs,
   PreviewResourceContext,
   ResourceContextExtractKind,
+  DiagnosticAnchorResult,
   ResolveDiagnosticAnchorLineArgs,
   ScopedEditRange,
 } from '../types';
@@ -78,7 +79,7 @@ export abstract class BaseLanguageHandler implements ILanguage {
   /**
    * Optional override hook for language handlers that need custom preview context boundaries.
    */
-  protected resolvePreviewContextRange(args: {
+  protected resolvePreviewContextRange(_args: {
     kind: ResourceContextExtractKind;
     lines: string[];
     line: number;
@@ -222,41 +223,44 @@ export abstract class BaseLanguageHandler implements ILanguage {
   }
 
   /**
-   * Resolve a diagnostic anchor line, optionally snapping to block start.
+   * Resolve a diagnostic anchor to a precise line + character position:
+   * - fix operation updates/deletes stay on the suggested line
+   * - add/no-op placement anchors to the nearest meaningful line above insertion
+   * The returned character is the first non-whitespace column on the resolved line.
    */
-  resolveDiagnosticAnchorLine(args: ResolveDiagnosticAnchorLineArgs): number {
+  resolveDiagnosticAnchorLine(
+    args: ResolveDiagnosticAnchorLineArgs
+  ): DiagnosticAnchorResult {
     const suggested =
       Number.isFinite(args.suggestedLine) && args.suggestedLine > 0
         ? Math.floor(args.suggestedLine)
         : 1;
-    const maxLine = args.content
-      ? Math.max(1, args.content.split('\n').length)
-      : undefined;
-    const clamp = (line: number): number => {
-      const floored = Number.isFinite(line) && line > 0 ? Math.floor(line) : 1;
-      if (!maxLine) {
-        return floored;
-      }
-      return Math.min(maxLine, Math.max(1, floored));
+    const lines = (args.content ?? '').split('\n');
+    const maxLine = Math.max(1, lines.length);
+    const clamp = (n: number): number =>
+      Math.min(
+        maxLine,
+        Math.max(1, Number.isFinite(n) && n > 0 ? Math.floor(n) : 1)
+      );
+
+    const toResult = (line: number): DiagnosticAnchorResult => {
+      const lineText = lines[Math.min(line - 1, lines.length - 1)] || '';
+      const firstNonWs = lineText.search(/\S/);
+      return { line, character: firstNonWs >= 0 ? firstNonWs : 0 };
     };
 
-    if (!args.content) {
-      return clamp(suggested);
-    }
-    if (args.fromFixOperation) {
-      return clamp(suggested);
+    const resolvedSuggested = clamp(suggested);
+    if (!args.content || args.fromFixOperation) {
+      return toResult(resolvedSuggested);
     }
 
-    const context = this.buildDiagnosticContext({
-      filePath: '',
-      content: args.content,
-      hint: { line: suggested, filePath: '' },
-    });
-    const anchored =
-      context.diagnosticAnchorLine && context.diagnosticAnchorLine > 0
-        ? context.diagnosticAnchorLine
-        : suggested;
-    return clamp(anchored);
+    for (let idx = Math.max(0, resolvedSuggested - 2); idx >= 0; idx -= 1) {
+      if (!this.isWeakAnchorLine(lines[idx] || '')) {
+        return toResult(clamp(idx + 1));
+      }
+    }
+
+    return toResult(resolvedSuggested);
   }
 
   // --- Block context for converter ---

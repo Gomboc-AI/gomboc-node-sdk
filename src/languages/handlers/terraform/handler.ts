@@ -16,11 +16,11 @@ export class TerraformLanguageHandler extends BaseLanguageHandler {
   displayName = 'Terraform';
   diagnosticClearScope = 'directory' as const;
   codeResourceType = 'terraform';
-  extensions = ['.tf', '.tfvars', '.hcl'];
+  extensions = ['.tf', '.tfvars'];
 
   detectLanguage(args: DetectLanguageArgs): boolean {
     const ext = path.extname(args.filePath || '').toLowerCase();
-    return ext === '.tf' || ext === '.tfvars' || ext === '.hcl';
+    return ext === '.tf' || ext === '.tfvars';
   }
 
   /**
