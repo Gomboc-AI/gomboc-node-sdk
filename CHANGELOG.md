@@ -1,5 +1,12 @@
 # @gomboc-ai/gomboc-node-sdk
 
+## 2.0.1
+
+### Patch Changes
+
+- 0bb877c: fixing failing build
+- 50cd373: Exporting the language service and the saga access service
+
 ## 2.0.0
 
 ### Major Changes
