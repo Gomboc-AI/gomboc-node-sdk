@@ -27,72 +27,15 @@ paths:
                     status: error
                     error:
                       message: Sample error message
-  /docs:
-    get:
-      operationId: GetDocs
+    head:
+      operationId: HeadHealthcheck
+      tags:
+        - Health
       responses:
         "200":
-          description: GET /docs Positive response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetDocsPositiveResponse"
+          description: HEAD /healthcheck Positive response
         "400":
-          description: GET /docs Negative response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetDocsNegativeResponse"
-              examples:
-                example1:
-                  value:
-                    status: error
-                    error:
-                      message: Sample error message
-  /docs/swagger.html:
-    get:
-      operationId: GetDocsSwaggerHtml
-      responses:
-        "200":
-          description: GET /docs/swagger.html Positive response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetDocsSwaggerHtmlPositiveResponse"
-        "400":
-          description: GET /docs/swagger.html Negative response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetDocsSwaggerHtmlNegativeResponse"
-              examples:
-                example1:
-                  value:
-                    status: error
-                    error:
-                      message: Sample error message
-  /openapi.json:
-    get:
-      operationId: GetOpenapiJson
-      responses:
-        "200":
-          description: GET /openapi.json Positive response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetOpenapiJsonPositiveResponse"
-        "400":
-          description: GET /openapi.json Negative response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetOpenapiJsonNegativeResponse"
-              examples:
-                example1:
-                  value:
-                    status: error
-                    error:
-                      message: Sample error message
+          description: HEAD /healthcheck Negative response
   /api/v1/rules/create:
     post:
       operationId: PostApiV1RulesCreate
@@ -161,6 +104,28 @@ paths:
                     status: error
                     error:
                       message: Sample error message
+    head:
+      operationId: HeadApiV1RulesGet
+      tags:
+        - Rules
+      parameters:
+        - name: name
+          in: query
+          required: true
+          description: HEAD /api/v1/rules/get Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1RulesGetParameterName"
+        - name: includeClassifications
+          in: query
+          required: false
+          description: HEAD /api/v1/rules/get Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1RulesGetParameterIncludeClassifications"
+      responses:
+        "200":
+          description: HEAD /api/v1/rules/get Positive response
+        "400":
+          description: HEAD /api/v1/rules/get Negative response
   /api/v1/rules/update:
     put:
       operationId: PutApiV1RulesUpdate
@@ -308,6 +273,64 @@ paths:
                     status: error
                     error:
                       message: Sample error message
+    head:
+      operationId: HeadApiV1RulesSearch
+      tags:
+        - Rules
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: HEAD /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1RulesSearchParameterPage"
+        - name: perPage
+          in: query
+          required: false
+          description: HEAD /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1RulesSearchParameterPerPage"
+        - name: query
+          in: query
+          required: false
+          description: HEAD /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1RulesSearchParameterQuery"
+        - name: filters
+          in: query
+          required: false
+          description: HEAD /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1RulesSearchParameterFilters"
+        - name: filters[]
+          in: query
+          required: false
+          description: HEAD /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1RulesSearchParameterFilters"
+        - name: type
+          in: query
+          required: false
+          description: HEAD /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1RulesSearchParameterType"
+        - name: iacLanguage
+          in: query
+          required: false
+          description: HEAD /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1RulesSearchParameterIacLanguage"
+        - name: includeClassifications
+          in: query
+          required: false
+          description: HEAD /api/v1/rules/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1RulesSearchParameterIncludeClassifications"
+      responses:
+        "200":
+          description: HEAD /api/v1/rules/search Positive response
+        "400":
+          description: HEAD /api/v1/rules/search Negative response
   /api/v1/rules/activate:
     put:
       operationId: PutApiV1RulesActivate
@@ -419,6 +442,40 @@ paths:
                     status: error
                     error:
                       message: Sample error message
+    head:
+      operationId: HeadApiV1ClassificationsGet
+      tags:
+        - Classifications
+      parameters:
+        - name: name
+          in: query
+          required: true
+          description: HEAD /api/v1/classifications/get Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ClassificationsGetParameterName"
+        - name: parents
+          in: query
+          required: false
+          description: HEAD /api/v1/classifications/get Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ClassificationsGetParameterParents"
+        - name: children
+          in: query
+          required: false
+          description: HEAD /api/v1/classifications/get Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ClassificationsGetParameterChildren"
+        - name: expandChildren
+          in: query
+          required: false
+          description: HEAD /api/v1/classifications/get Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ClassificationsGetParameterExpandChildren"
+      responses:
+        "200":
+          description: HEAD /api/v1/classifications/get Positive response
+        "400":
+          description: HEAD /api/v1/classifications/get Negative response
   /api/v1/classifications/update:
     put:
       operationId: PutApiV1ClassificationsUpdate
@@ -536,6 +593,46 @@ paths:
                     status: error
                     error:
                       message: Sample error message
+    head:
+      operationId: HeadApiV1ClassificationsSearch
+      tags:
+        - Classifications
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: HEAD /api/v1/classifications/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ClassificationsSearchParameterPage"
+        - name: perPage
+          in: query
+          required: false
+          description: HEAD /api/v1/classifications/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ClassificationsSearchParameterPerPage"
+        - name: query
+          in: query
+          required: false
+          description: HEAD /api/v1/classifications/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ClassificationsSearchParameterQuery"
+        - name: filters
+          in: query
+          required: false
+          description: HEAD /api/v1/classifications/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ClassificationsSearchParameterFilters"
+        - name: filters[]
+          in: query
+          required: false
+          description: HEAD /api/v1/classifications/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ClassificationsSearchParameterFilters"
+      responses:
+        "200":
+          description: HEAD /api/v1/classifications/search Positive response
+        "400":
+          description: HEAD /api/v1/classifications/search Negative response
   /api/v1/channels/create:
     post:
       operationId: PostApiV1ChannelsCreate
@@ -598,6 +695,22 @@ paths:
                     status: error
                     error:
                       message: Sample error message
+    head:
+      operationId: HeadApiV1ChannelsGet
+      tags:
+        - Channels
+      parameters:
+        - name: name
+          in: query
+          required: false
+          description: HEAD /api/v1/channels/get Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ChannelsGetParameterName"
+      responses:
+        "200":
+          description: HEAD /api/v1/channels/get Positive response
+        "400":
+          description: HEAD /api/v1/channels/get Negative response
   /api/v1/channels/batch/create:
     post:
       operationId: PostApiV1ChannelsBatchCreate
@@ -785,6 +898,54 @@ paths:
                     status: error
                     error:
                       message: Sample error message
+    head:
+      operationId: HeadApiV1ChannelsRules
+      tags:
+        - Channels
+      parameters:
+        - name: name
+          in: query
+          required: false
+          description: HEAD /api/v1/channels/rules Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ChannelsRulesParameterName"
+        - name: filters
+          in: query
+          required: false
+          description: HEAD /api/v1/channels/rules Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ChannelsRulesParameterFilters"
+        - name: filters[]
+          in: query
+          required: false
+          description: HEAD /api/v1/channels/rules Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ChannelsRulesParameterFilters"
+        - name: page
+          in: query
+          required: false
+          description: HEAD /api/v1/channels/rules Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ChannelsRulesParameterPage"
+        - name: perPage
+          in: query
+          required: false
+          description: HEAD /api/v1/channels/rules Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ChannelsRulesParameterPerPage"
+        - name: includeClassifications
+          in: query
+          required: false
+          description: HEAD /api/v1/channels/rules Parameter
+          schema:
+            $ref:
+              "#/components/schemas/HeadApiV1ChannelsRulesParameterIncludeClassificatio\
+              ns"
+      responses:
+        "200":
+          description: HEAD /api/v1/channels/rules Positive response
+        "400":
+          description: HEAD /api/v1/channels/rules Negative response
   /api/v1/channels/search:
     get:
       operationId: GetApiV1ChannelsSearch
@@ -828,6 +989,34 @@ paths:
                     status: error
                     error:
                       message: Sample error message
+    head:
+      operationId: HeadApiV1ChannelsSearch
+      tags:
+        - Channels
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: HEAD /api/v1/channels/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ChannelsSearchParameterPage"
+        - name: perPage
+          in: query
+          required: false
+          description: HEAD /api/v1/channels/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ChannelsSearchParameterPerPage"
+        - name: query
+          in: query
+          required: false
+          description: HEAD /api/v1/channels/search Parameter
+          schema:
+            $ref: "#/components/schemas/HeadApiV1ChannelsSearchParameterQuery"
+      responses:
+        "200":
+          description: HEAD /api/v1/channels/search Positive response
+        "400":
+          description: HEAD /api/v1/channels/search Negative response
 components:
   schemas:
     GetHealthcheckPositiveResponse:
@@ -852,113 +1041,6 @@ components:
         - data
       additionalProperties: false
     GetHealthcheckNegativeResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          const: error
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-          required:
-            - message
-          additionalProperties: false
-      required:
-        - status
-        - error
-      additionalProperties: false
-    GetDocsPositiveResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          const: success
-        data:
-          type: object
-          properties:
-            html:
-              type: string
-          required:
-            - html
-          additionalProperties: false
-      required:
-        - status
-        - data
-      additionalProperties: false
-    GetDocsNegativeResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          const: error
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-          required:
-            - message
-          additionalProperties: false
-      required:
-        - status
-        - error
-      additionalProperties: false
-    GetDocsSwaggerHtmlPositiveResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          const: success
-        data:
-          type: object
-          properties:
-            html:
-              type: string
-          required:
-            - html
-          additionalProperties: false
-      required:
-        - status
-        - data
-      additionalProperties: false
-    GetDocsSwaggerHtmlNegativeResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          const: error
-        error:
-          type: object
-          properties:
-            message:
-              type: string
-          required:
-            - message
-          additionalProperties: false
-      required:
-        - status
-        - error
-      additionalProperties: false
-    GetOpenapiJsonPositiveResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          const: success
-        data:
-          type: object
-          properties:
-            json: {}
-          required:
-            - json
-          additionalProperties: false
-      required:
-        - status
-        - data
-      additionalProperties: false
-    GetOpenapiJsonNegativeResponse:
       type: object
       properties:
         status:
@@ -1257,6 +1339,11 @@ components:
         - status
         - error
       additionalProperties: false
+    HeadApiV1RulesGetParameterName:
+      type: string
+    HeadApiV1RulesGetParameterIncludeClassifications:
+      default: 1
+      type: number
     PutApiV1RulesUpdatePositiveResponse:
       type: object
       properties:
@@ -1610,6 +1697,27 @@ components:
         - status
         - error
       additionalProperties: false
+    HeadApiV1RulesSearchParameterPage:
+      default: 1
+      type: number
+    HeadApiV1RulesSearchParameterPerPage:
+      default: 20
+      type: number
+    HeadApiV1RulesSearchParameterQuery:
+      type: string
+    HeadApiV1RulesSearchParameterFilters:
+      anyOf:
+        - type: string
+        - type: array
+          items:
+            type: string
+    HeadApiV1RulesSearchParameterType:
+      type: string
+    HeadApiV1RulesSearchParameterIacLanguage:
+      type: string
+    HeadApiV1RulesSearchParameterIncludeClassifications:
+      default: 1
+      type: number
     PutApiV1RulesActivatePositiveResponse:
       type: object
       properties:
@@ -1843,6 +1951,17 @@ components:
         - status
         - error
       additionalProperties: false
+    HeadApiV1ClassificationsGetParameterName:
+      type: string
+    HeadApiV1ClassificationsGetParameterParents:
+      default: 0
+      type: number
+    HeadApiV1ClassificationsGetParameterChildren:
+      default: 0
+      type: number
+    HeadApiV1ClassificationsGetParameterExpandChildren:
+      default: false
+      type: boolean
     PutApiV1ClassificationsUpdatePositiveResponse:
       type: object
       properties:
@@ -2088,6 +2207,20 @@ components:
         - status
         - error
       additionalProperties: false
+    HeadApiV1ClassificationsSearchParameterPage:
+      default: 1
+      type: number
+    HeadApiV1ClassificationsSearchParameterPerPage:
+      default: 20
+      type: number
+    HeadApiV1ClassificationsSearchParameterQuery:
+      type: string
+    HeadApiV1ClassificationsSearchParameterFilters:
+      anyOf:
+        - type: string
+        - type: array
+          items:
+            type: string
     PostApiV1ChannelsCreatePositiveResponse:
       type: object
       properties:
@@ -2232,6 +2365,8 @@ components:
         - status
         - error
       additionalProperties: false
+    HeadApiV1ChannelsGetParameterName:
+      type: string
     PostApiV1ChannelsBatchCreatePositiveResponse:
       type: object
       properties:
@@ -2725,6 +2860,23 @@ components:
         - status
         - error
       additionalProperties: false
+    HeadApiV1ChannelsRulesParameterName:
+      type: string
+    HeadApiV1ChannelsRulesParameterFilters:
+      anyOf:
+        - type: string
+        - type: array
+          items:
+            type: string
+    HeadApiV1ChannelsRulesParameterPage:
+      default: 1
+      type: number
+    HeadApiV1ChannelsRulesParameterPerPage:
+      default: 20
+      type: number
+    HeadApiV1ChannelsRulesParameterIncludeClassifications:
+      default: 1
+      type: number
     GetApiV1ChannelsSearchParameterPage:
       default: 1
       type: number
@@ -2812,6 +2964,14 @@ components:
         - status
         - error
       additionalProperties: false
+    HeadApiV1ChannelsSearchParameterPage:
+      default: 1
+      type: number
+    HeadApiV1ChannelsSearchParameterPerPage:
+      default: 20
+      type: number
+    HeadApiV1ChannelsSearchParameterQuery:
+      type: string
   responses: {}
   parameters: {}
   examples: {}
