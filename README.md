@@ -8,6 +8,14 @@ TypeScript SDKs for Gomboc services. This repository is intended to grow with ad
 
 For now, **copy `.env.op-tmpl` to `.env`** and fill in the values. OnePassword CLI injection (`op inject`) is not set up for this repo yet; the template file documents the variables you need for local integration tests (`npm run test:integration`).
 
+## Updating Open API specs
+
+1. Copy the spec from the source service into `openApiClientSpecs/` (replace the existing YAML as appropriate).
+2. Run `npm run generate-types`.
+3. Adjust any functions in the clients if needed.
+4. Make sure lint, format, and tests pass (`npm run lint`, `npm test`).
+5. Run `npx changeset`.
+
 ## Use in another service
 
 Install the package, then create a loader with the end-user’s bearer token, tenant account id, and rules service origin (no `/api` suffix — the SDK adds `/api` and versioned paths).
