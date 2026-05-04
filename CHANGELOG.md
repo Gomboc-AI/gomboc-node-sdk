@@ -1,5 +1,11 @@
 # @gomboc-ai/gomboc-node-sdk
 
+## 2.1.0
+
+### Minor Changes
+
+- 4bda235: Update rules-service to give better API responses
+
 ## 2.0.2
 
 ### Patch Changes
