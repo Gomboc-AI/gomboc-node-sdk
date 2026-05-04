@@ -16,55 +16,7 @@ export interface paths {
     post?: never;
     delete?: never;
     options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/docs': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['GetDocs'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/docs/swagger.html': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['GetDocsSwaggerHtml'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/openapi.json': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['GetOpenapiJson'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
+    head: operations['HeadHealthcheck'];
     patch?: never;
     trace?: never;
   };
@@ -96,7 +48,7 @@ export interface paths {
     post?: never;
     delete?: never;
     options?: never;
-    head?: never;
+    head: operations['HeadApiV1RulesGet'];
     patch?: never;
     trace?: never;
   };
@@ -144,7 +96,7 @@ export interface paths {
     post?: never;
     delete?: never;
     options?: never;
-    head?: never;
+    head: operations['HeadApiV1RulesSearch'];
     patch?: never;
     trace?: never;
   };
@@ -192,7 +144,7 @@ export interface paths {
     post?: never;
     delete?: never;
     options?: never;
-    head?: never;
+    head: operations['HeadApiV1ClassificationsGet'];
     patch?: never;
     trace?: never;
   };
@@ -240,7 +192,7 @@ export interface paths {
     post?: never;
     delete?: never;
     options?: never;
-    head?: never;
+    head: operations['HeadApiV1ClassificationsSearch'];
     patch?: never;
     trace?: never;
   };
@@ -272,7 +224,7 @@ export interface paths {
     post?: never;
     delete?: never;
     options?: never;
-    head?: never;
+    head: operations['HeadApiV1ChannelsGet'];
     patch?: never;
     trace?: never;
   };
@@ -352,7 +304,7 @@ export interface paths {
     post?: never;
     delete?: never;
     options?: never;
-    head?: never;
+    head: operations['HeadApiV1ChannelsRules'];
     patch?: never;
     trace?: never;
   };
@@ -368,7 +320,7 @@ export interface paths {
     post?: never;
     delete?: never;
     options?: never;
-    head?: never;
+    head: operations['HeadApiV1ChannelsSearch'];
     patch?: never;
     trace?: never;
   };
@@ -385,48 +337,6 @@ export interface components {
       };
     };
     GetHealthcheckNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    GetDocsPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: {
-        html: string;
-      };
-    };
-    GetDocsNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    GetDocsSwaggerHtmlPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: {
-        html: string;
-      };
-    };
-    GetDocsSwaggerHtmlNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    GetOpenapiJsonPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: {
-        json: unknown;
-      };
-    };
-    GetOpenapiJsonNegativeResponse: {
       /** @constant */
       status: 'error';
       error: {
@@ -545,6 +455,9 @@ export interface components {
         message: string;
       };
     };
+    HeadApiV1RulesGetParameterName: string;
+    /** @default 1 */
+    HeadApiV1RulesGetParameterIncludeClassifications: number;
     PutApiV1RulesUpdatePositiveResponse: {
       /** @constant */
       status: 'success';
@@ -686,6 +599,16 @@ export interface components {
         message: string;
       };
     };
+    /** @default 1 */
+    HeadApiV1RulesSearchParameterPage: number;
+    /** @default 20 */
+    HeadApiV1RulesSearchParameterPerPage: number;
+    HeadApiV1RulesSearchParameterQuery: string;
+    HeadApiV1RulesSearchParameterFilters: string | string[];
+    HeadApiV1RulesSearchParameterType: string;
+    HeadApiV1RulesSearchParameterIacLanguage: string;
+    /** @default 1 */
+    HeadApiV1RulesSearchParameterIncludeClassifications: number;
     PutApiV1RulesActivatePositiveResponse: {
       /** @constant */
       status: 'success';
@@ -780,6 +703,13 @@ export interface components {
         message: string;
       };
     };
+    HeadApiV1ClassificationsGetParameterName: string;
+    /** @default 0 */
+    HeadApiV1ClassificationsGetParameterParents: number;
+    /** @default 0 */
+    HeadApiV1ClassificationsGetParameterChildren: number;
+    /** @default false */
+    HeadApiV1ClassificationsGetParameterExpandChildren: boolean;
     PutApiV1ClassificationsUpdatePositiveResponse: {
       /** @constant */
       status: 'success';
@@ -875,6 +805,12 @@ export interface components {
         message: string;
       };
     };
+    /** @default 1 */
+    HeadApiV1ClassificationsSearchParameterPage: number;
+    /** @default 20 */
+    HeadApiV1ClassificationsSearchParameterPerPage: number;
+    HeadApiV1ClassificationsSearchParameterQuery: string;
+    HeadApiV1ClassificationsSearchParameterFilters: string | string[];
     PostApiV1ChannelsCreatePositiveResponse: {
       /** @constant */
       status: 'success';
@@ -934,6 +870,7 @@ export interface components {
         message: string;
       };
     };
+    HeadApiV1ChannelsGetParameterName: string;
     PostApiV1ChannelsBatchCreatePositiveResponse: {
       /** @constant */
       status: 'success';
@@ -1127,6 +1064,14 @@ export interface components {
         message: string;
       };
     };
+    HeadApiV1ChannelsRulesParameterName: string;
+    HeadApiV1ChannelsRulesParameterFilters: string | string[];
+    /** @default 1 */
+    HeadApiV1ChannelsRulesParameterPage: number;
+    /** @default 20 */
+    HeadApiV1ChannelsRulesParameterPerPage: number;
+    /** @default 1 */
+    HeadApiV1ChannelsRulesParameterIncludeClassifications: number;
     /** @default 1 */
     GetApiV1ChannelsSearchParameterPage: number;
     /** @default 20 */
@@ -1162,6 +1107,11 @@ export interface components {
         message: string;
       };
     };
+    /** @default 1 */
+    HeadApiV1ChannelsSearchParameterPage: number;
+    /** @default 20 */
+    HeadApiV1ChannelsSearchParameterPerPage: number;
+    HeadApiV1ChannelsSearchParameterQuery: string;
   };
   responses: never;
   parameters: never;
@@ -1200,7 +1150,7 @@ export interface operations {
       };
     };
   };
-  GetDocs: {
+  HeadHealthcheck: {
     parameters: {
       query?: never;
       header?: never;
@@ -1209,81 +1159,19 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description GET /docs Positive response */
+      /** @description HEAD /healthcheck Positive response */
       200: {
         headers: {
           [name: string]: unknown;
         };
-        content: {
-          'application/json': components['schemas']['GetDocsPositiveResponse'];
-        };
+        content?: never;
       };
-      /** @description GET /docs Negative response */
+      /** @description HEAD /healthcheck Negative response */
       400: {
         headers: {
           [name: string]: unknown;
         };
-        content: {
-          'application/json': components['schemas']['GetDocsNegativeResponse'];
-        };
-      };
-    };
-  };
-  GetDocsSwaggerHtml: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description GET /docs/swagger.html Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GetDocsSwaggerHtmlPositiveResponse'];
-        };
-      };
-      /** @description GET /docs/swagger.html Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GetDocsSwaggerHtmlNegativeResponse'];
-        };
-      };
-    };
-  };
-  GetOpenapiJson: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description GET /openapi.json Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GetOpenapiJsonPositiveResponse'];
-        };
-      };
-      /** @description GET /openapi.json Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GetOpenapiJsonNegativeResponse'];
-        };
+        content?: never;
       };
     };
   };
@@ -1352,6 +1240,36 @@ export interface operations {
         content: {
           'application/json': components['schemas']['GetApiV1RulesGetNegativeResponse'];
         };
+      };
+    };
+  };
+  HeadApiV1RulesGet: {
+    parameters: {
+      query: {
+        /** @description HEAD /api/v1/rules/get Parameter */
+        name: components['schemas']['HeadApiV1RulesGetParameterName'];
+        /** @description HEAD /api/v1/rules/get Parameter */
+        includeClassifications?: components['schemas']['HeadApiV1RulesGetParameterIncludeClassifications'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/rules/get Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/rules/get Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };
@@ -1471,6 +1389,48 @@ export interface operations {
       };
     };
   };
+  HeadApiV1RulesSearch: {
+    parameters: {
+      query?: {
+        /** @description HEAD /api/v1/rules/search Parameter */
+        page?: components['schemas']['HeadApiV1RulesSearchParameterPage'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        perPage?: components['schemas']['HeadApiV1RulesSearchParameterPerPage'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        query?: components['schemas']['HeadApiV1RulesSearchParameterQuery'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        filters?: components['schemas']['HeadApiV1RulesSearchParameterFilters'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        'filters[]'?: components['schemas']['HeadApiV1RulesSearchParameterFilters'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        type?: components['schemas']['HeadApiV1RulesSearchParameterType'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        iacLanguage?: components['schemas']['HeadApiV1RulesSearchParameterIacLanguage'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        includeClassifications?: components['schemas']['HeadApiV1RulesSearchParameterIncludeClassifications'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/rules/search Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/rules/search Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   PutApiV1RulesActivate: {
     parameters: {
       query?: never;
@@ -1574,6 +1534,40 @@ export interface operations {
         content: {
           'application/json': components['schemas']['GetApiV1ClassificationsGetNegativeResponse'];
         };
+      };
+    };
+  };
+  HeadApiV1ClassificationsGet: {
+    parameters: {
+      query: {
+        /** @description HEAD /api/v1/classifications/get Parameter */
+        name: components['schemas']['HeadApiV1ClassificationsGetParameterName'];
+        /** @description HEAD /api/v1/classifications/get Parameter */
+        parents?: components['schemas']['HeadApiV1ClassificationsGetParameterParents'];
+        /** @description HEAD /api/v1/classifications/get Parameter */
+        children?: components['schemas']['HeadApiV1ClassificationsGetParameterChildren'];
+        /** @description HEAD /api/v1/classifications/get Parameter */
+        expandChildren?: components['schemas']['HeadApiV1ClassificationsGetParameterExpandChildren'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/classifications/get Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/classifications/get Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };
@@ -1683,6 +1677,42 @@ export interface operations {
       };
     };
   };
+  HeadApiV1ClassificationsSearch: {
+    parameters: {
+      query?: {
+        /** @description HEAD /api/v1/classifications/search Parameter */
+        page?: components['schemas']['HeadApiV1ClassificationsSearchParameterPage'];
+        /** @description HEAD /api/v1/classifications/search Parameter */
+        perPage?: components['schemas']['HeadApiV1ClassificationsSearchParameterPerPage'];
+        /** @description HEAD /api/v1/classifications/search Parameter */
+        query?: components['schemas']['HeadApiV1ClassificationsSearchParameterQuery'];
+        /** @description HEAD /api/v1/classifications/search Parameter */
+        filters?: components['schemas']['HeadApiV1ClassificationsSearchParameterFilters'];
+        /** @description HEAD /api/v1/classifications/search Parameter */
+        'filters[]'?: components['schemas']['HeadApiV1ClassificationsSearchParameterFilters'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/classifications/search Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/classifications/search Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   PostApiV1ChannelsCreate: {
     parameters: {
       query?: never;
@@ -1746,6 +1776,34 @@ export interface operations {
         content: {
           'application/json': components['schemas']['GetApiV1ChannelsGetNegativeResponse'];
         };
+      };
+    };
+  };
+  HeadApiV1ChannelsGet: {
+    parameters: {
+      query?: {
+        /** @description HEAD /api/v1/channels/get Parameter */
+        name?: components['schemas']['HeadApiV1ChannelsGetParameterName'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/channels/get Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/channels/get Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };
@@ -1925,6 +1983,44 @@ export interface operations {
       };
     };
   };
+  HeadApiV1ChannelsRules: {
+    parameters: {
+      query?: {
+        /** @description HEAD /api/v1/channels/rules Parameter */
+        name?: components['schemas']['HeadApiV1ChannelsRulesParameterName'];
+        /** @description HEAD /api/v1/channels/rules Parameter */
+        filters?: components['schemas']['HeadApiV1ChannelsRulesParameterFilters'];
+        /** @description HEAD /api/v1/channels/rules Parameter */
+        'filters[]'?: components['schemas']['HeadApiV1ChannelsRulesParameterFilters'];
+        /** @description HEAD /api/v1/channels/rules Parameter */
+        page?: components['schemas']['HeadApiV1ChannelsRulesParameterPage'];
+        /** @description HEAD /api/v1/channels/rules Parameter */
+        perPage?: components['schemas']['HeadApiV1ChannelsRulesParameterPerPage'];
+        /** @description HEAD /api/v1/channels/rules Parameter */
+        includeClassifications?: components['schemas']['HeadApiV1ChannelsRulesParameterIncludeClassifications'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/channels/rules Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/channels/rules Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
   GetApiV1ChannelsSearch: {
     parameters: {
       query?: {
@@ -1958,6 +2054,38 @@ export interface operations {
         content: {
           'application/json': components['schemas']['GetApiV1ChannelsSearchNegativeResponse'];
         };
+      };
+    };
+  };
+  HeadApiV1ChannelsSearch: {
+    parameters: {
+      query?: {
+        /** @description HEAD /api/v1/channels/search Parameter */
+        page?: components['schemas']['HeadApiV1ChannelsSearchParameterPage'];
+        /** @description HEAD /api/v1/channels/search Parameter */
+        perPage?: components['schemas']['HeadApiV1ChannelsSearchParameterPerPage'];
+        /** @description HEAD /api/v1/channels/search Parameter */
+        query?: components['schemas']['HeadApiV1ChannelsSearchParameterQuery'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/channels/search Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/channels/search Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
     };
   };

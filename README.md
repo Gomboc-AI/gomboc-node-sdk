@@ -4,9 +4,13 @@
 
 TypeScript SDKs for Gomboc services. This repository is intended to grow with additional packages over time; **today it ships the rules service client** (`RulesServiceLoader`, `PoliciesHandler`, `RulesServiceSdk`, and related types) under `src/rulesService/`.
 
-## Local development
+## Developing locally
 
-For now, **copy `.env.op-tmpl` to `.env`** and fill in the values. OnePassword CLI injection (`op inject`) is not set up for this repo yet; the template file documents the variables you need for local integration tests (`npm run test:integration`).
+1. `npm i`
+2. `op-inject` to get the env vals
+3. `npm run generate-types` to generate the required types from the openapi specs
+
+Once done with your changes, make sure to run `npx changeset` to produce the changeset for a release. 
 
 ## Use in another service
 
