@@ -1,5 +1,11 @@
 # @gomboc-ai/gomboc-node-sdk
 
+## 2.1.2
+
+### Patch Changes
+
+- be6a6a4: fix names
+
 ## 2.1.1
 
 ### Patch Changes
