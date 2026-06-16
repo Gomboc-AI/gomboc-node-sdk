@@ -1520,7 +1520,7 @@ components:
                   const: BITBUCKET
                 - type: string
                   const: AZDO
-            originalPullRequestId:
+            originalPullRequest:
               type: object
               properties:
                 id:
@@ -1534,7 +1534,7 @@ components:
                 - id
                 - url
                 - author
-            resultingPullRequestId:
+            resultingPullRequest:
               type: object
               properties:
                 id:
