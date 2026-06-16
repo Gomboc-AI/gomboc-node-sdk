@@ -1,5 +1,11 @@
 # @gomboc-ai/gomboc-node-sdk
 
+## 2.1.1
+
+### Patch Changes
+
+- 162eb2a: extend integrations service client
+
 ## 2.1.0
 
 ### Minor Changes
