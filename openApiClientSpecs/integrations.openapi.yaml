@@ -1339,6 +1339,11 @@ components:
           type: number
         requestOrigin:
           type: string
+          enum:
+            - GITHUB_ACTION
+            - IDE
+            - MCP
+            - CODE_AGENT
         effect:
           type: string
         reports:
@@ -1498,10 +1503,58 @@ components:
             required:
               - status
               - message
+        durationInSeconds:
+          type: integer
+          minimum: 0
+          maximum: 9007199254740991
+        scmContext:
+          type: object
+          properties:
+            scmType:
+              anyOf:
+                - type: string
+                  const: GITHUB
+                - type: string
+                  const: GITLAB
+                - type: string
+                  const: BITBUCKET
+                - type: string
+                  const: AZDO
+            originalPullRequestId:
+              type: object
+              properties:
+                id:
+                  type: string
+                url:
+                  type: string
+                  format: uri
+                author:
+                  type: string
+              required:
+                - id
+                - url
+                - author
+            resultingPullRequestId:
+              type: object
+              properties:
+                id:
+                  type: string
+                url:
+                  type: string
+                  format: uri
+                author:
+                  type: string
+              required:
+                - id
+                - url
+                - author
+          required:
+            - scmType
       required:
         - requestOrigin
         - reports
         - errors
+        - durationInSeconds
     PostReportingOrlFixAppliedPositiveResponse:
       type: object
       properties:

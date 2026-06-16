@@ -481,7 +481,8 @@ export interface components {
     PostReportingOrlExternalRequestBody: {
       /** @default 1 */
       version: number;
-      requestOrigin: string;
+      /** @enum {string} */
+      requestOrigin: 'GITHUB_ACTION' | 'IDE' | 'MCP' | 'CODE_AGENT';
       effect?: string;
       reports: {
         path?: string;
@@ -537,6 +538,22 @@ export interface components {
         status: number;
         message: string;
       }[];
+      durationInSeconds: number;
+      scmContext?: {
+        scmType: 'GITHUB' | 'GITLAB' | 'BITBUCKET' | 'AZDO';
+        originalPullRequestId?: {
+          id: string;
+          /** Format: uri */
+          url: string;
+          author: string;
+        };
+        resultingPullRequestId?: {
+          id: string;
+          /** Format: uri */
+          url: string;
+          author: string;
+        };
+      };
     };
     PostReportingOrlFixAppliedPositiveResponse: {
       /** @constant */
