@@ -4,2089 +4,2089 @@
  */
 
 export interface paths {
-    "/healthcheck": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["GetHealthcheck"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head: operations["HeadHealthcheck"];
-        patch?: never;
-        trace?: never;
+  '/healthcheck': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/rules/create": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: operations["PostApiV1RulesCreate"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations['GetHealthcheck'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head: operations['HeadHealthcheck'];
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/rules/create': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/rules/get": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["GetApiV1RulesGet"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head: operations["HeadApiV1RulesGet"];
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post: operations['PostApiV1RulesCreate'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/rules/get': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/rules/update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put: operations["PutApiV1RulesUpdate"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations['GetApiV1RulesGet'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head: operations['HeadApiV1RulesGet'];
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/rules/update': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/rules/delete": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        delete: operations["DeleteApiV1RulesDelete"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put: operations['PutApiV1RulesUpdate'];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/rules/delete': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/rules/search": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["GetApiV1RulesSearch"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head: operations["HeadApiV1RulesSearch"];
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    delete: operations['DeleteApiV1RulesDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/rules/search': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/rules/activate": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put: operations["PutApiV1RulesActivate"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations['GetApiV1RulesSearch'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head: operations['HeadApiV1RulesSearch'];
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/rules/activate': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/classifications/create": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: operations["PostApiV1ClassificationsCreate"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put: operations['PutApiV1RulesActivate'];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/classifications/create': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/classifications/get": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["GetApiV1ClassificationsGet"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head: operations["HeadApiV1ClassificationsGet"];
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post: operations['PostApiV1ClassificationsCreate'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/classifications/get': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/classifications/update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put: operations["PutApiV1ClassificationsUpdate"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations['GetApiV1ClassificationsGet'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head: operations['HeadApiV1ClassificationsGet'];
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/classifications/update': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/classifications/delete": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        delete: operations["DeleteApiV1ClassificationsDelete"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put: operations['PutApiV1ClassificationsUpdate'];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/classifications/delete': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/classifications/search": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["GetApiV1ClassificationsSearch"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head: operations["HeadApiV1ClassificationsSearch"];
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    delete: operations['DeleteApiV1ClassificationsDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/classifications/search': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/channels/create": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: operations["PostApiV1ChannelsCreate"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations['GetApiV1ClassificationsSearch'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head: operations['HeadApiV1ClassificationsSearch'];
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/channels/create': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/channels/get": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["GetApiV1ChannelsGet"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head: operations["HeadApiV1ChannelsGet"];
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post: operations['PostApiV1ChannelsCreate'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/channels/get': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/channels/batch/create": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: operations["PostApiV1ChannelsBatchCreate"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get: operations['GetApiV1ChannelsGet'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head: operations['HeadApiV1ChannelsGet'];
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/channels/batch/create': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/channels/batch/upsert": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post: operations["PostApiV1ChannelsBatchUpsert"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post: operations['PostApiV1ChannelsBatchCreate'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/channels/batch/upsert': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/channels/update": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put: operations["PutApiV1ChannelsUpdate"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post: operations['PostApiV1ChannelsBatchUpsert'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/channels/update': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/channels/delete": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        delete: operations["DeleteApiV1ChannelsDelete"];
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put: operations['PutApiV1ChannelsUpdate'];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/channels/delete': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/channels/rules": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["GetApiV1ChannelsRules"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head: operations["HeadApiV1ChannelsRules"];
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    post?: never;
+    delete: operations['DeleteApiV1ChannelsDelete'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/channels/rules': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/api/v1/channels/search": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get: operations["GetApiV1ChannelsSearch"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head: operations["HeadApiV1ChannelsSearch"];
-        patch?: never;
-        trace?: never;
+    get: operations['GetApiV1ChannelsRules'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head: operations['HeadApiV1ChannelsRules'];
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v1/channels/search': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    get: operations['GetApiV1ChannelsSearch'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head: operations['HeadApiV1ChannelsSearch'];
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: {
-        GetHealthcheckPositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                status: string;
-                timestamp: string;
-            };
-        };
-        GetHealthcheckNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        PostApiV1RulesCreatePositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                /** Format: uuid */
-                accountId: string;
-                type: string;
-                version: string;
-                iacLanguage: string;
-                name: string;
-                shortName: string | null;
-                revision: number;
-                revisions: number[];
-                classificationPaths?: {
-                    /** Format: uuid */
-                    accountId: string;
-                    name: string;
-                    shortName: string | null;
-                }[][];
-                annotations?: {
-                    [key: string]: unknown;
-                };
-                metadata?: {
-                    [key: string]: unknown;
-                };
-                body?: {
-                    [key: string]: unknown;
-                };
-                /** Format: uuid */
-                id: string;
-                createdAt: unknown;
-                updatedAt: unknown;
-            };
-        };
-        PostApiV1RulesCreateNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        PostApiV1RulesCreateRequestBody: {
-            type: string;
-            version: string;
-            iacLanguage: string;
-            name: string;
-            classificationNames?: string[];
-            classifications?: {
-                name: string;
-                /** Format: uuid */
-                accountId?: string;
-            }[];
-            shortName?: string;
-            annotations?: {
-                [key: string]: unknown;
-            };
-            metadata?: {
-                [key: string]: unknown;
-            };
-            body?: {
-                [key: string]: unknown;
-            };
-            revisionData?: {
-                [key: string]: unknown;
-            };
-            /** @default false */
-            active: boolean;
-        };
-        GetApiV1RulesGetParameterName: string;
-        /** @default 1 */
-        GetApiV1RulesGetParameterIncludeClassifications: number;
-        GetApiV1RulesGetPositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                /** Format: uuid */
-                accountId: string;
-                type: string;
-                version: string;
-                iacLanguage: string;
-                name: string;
-                shortName: string | null;
-                revision: number;
-                revisions: number[];
-                classificationPaths?: {
-                    /** Format: uuid */
-                    accountId: string;
-                    name: string;
-                    shortName: string | null;
-                }[][];
-                annotations?: {
-                    [key: string]: unknown;
-                };
-                metadata?: {
-                    [key: string]: unknown;
-                };
-                body?: {
-                    [key: string]: unknown;
-                };
-                /** Format: uuid */
-                id: string;
-                createdAt: unknown;
-                updatedAt: unknown;
-            };
-        };
-        GetApiV1RulesGetNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        HeadApiV1RulesGetParameterName: string;
-        /** @default 1 */
-        HeadApiV1RulesGetParameterIncludeClassifications: number;
-        PutApiV1RulesUpdatePositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                /** Format: uuid */
-                accountId: string;
-                type: string;
-                version: string;
-                iacLanguage: string;
-                name: string;
-                shortName: string | null;
-                revision: number;
-                revisions: number[];
-                classificationPaths?: {
-                    /** Format: uuid */
-                    accountId: string;
-                    name: string;
-                    shortName: string | null;
-                }[][];
-                annotations?: {
-                    [key: string]: unknown;
-                };
-                metadata?: {
-                    [key: string]: unknown;
-                };
-                body?: {
-                    [key: string]: unknown;
-                };
-                /** Format: uuid */
-                id: string;
-                createdAt: unknown;
-                updatedAt: unknown;
-            };
-        };
-        PutApiV1RulesUpdateNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        PutApiV1RulesUpdateRequestBody: {
-            type?: string;
-            version?: string;
-            iacLanguage?: string;
-            classificationNames?: string[];
-            classifications?: {
-                name: string;
-                /** Format: uuid */
-                accountId?: string;
-            }[];
-            shortName?: string;
-            annotations?: {
-                [key: string]: unknown;
-            };
-            metadata?: {
-                [key: string]: unknown;
-            };
-            body?: {
-                [key: string]: unknown;
-            };
-            revisionData?: {
-                [key: string]: unknown;
-            };
-            /** @default false */
-            active: boolean;
-            name: string;
-        };
-        DeleteApiV1RulesDeleteParameterName: string;
-        DeleteApiV1RulesDeleteParameterRevision: number;
-        DeleteApiV1RulesDeleteParameterAll: boolean;
-        DeleteApiV1RulesDeletePositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                success: boolean;
-            };
-        };
-        DeleteApiV1RulesDeleteNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        /** @default 1 */
-        GetApiV1RulesSearchParameterPage: number;
-        /** @default 20 */
-        GetApiV1RulesSearchParameterPerPage: number;
-        GetApiV1RulesSearchParameterQuery: string;
-        GetApiV1RulesSearchParameterFilters: string | string[];
-        GetApiV1RulesSearchParameterType: string;
-        GetApiV1RulesSearchParameterIacLanguage: string;
-        /** @default 1 */
-        GetApiV1RulesSearchParameterIncludeClassifications: number;
-        GetApiV1RulesSearchPositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                rules: {
-                    /** Format: uuid */
-                    accountId: string;
-                    type: string;
-                    version: string;
-                    iacLanguage: string;
-                    name: string;
-                    shortName: string | null;
-                    revision: number;
-                    revisions: number[];
-                    classificationPaths?: {
-                        /** Format: uuid */
-                        accountId: string;
-                        name: string;
-                        shortName: string | null;
-                    }[][];
-                    annotations?: {
-                        [key: string]: unknown;
-                    };
-                    metadata?: {
-                        [key: string]: unknown;
-                    };
-                    body?: {
-                        [key: string]: unknown;
-                    };
-                    /** Format: uuid */
-                    id: string;
-                    createdAt: unknown;
-                    updatedAt: unknown;
-                }[];
-                total: number;
-                page: number;
-                perPage: number;
-            };
-        };
-        GetApiV1RulesSearchNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        /** @default 1 */
-        HeadApiV1RulesSearchParameterPage: number;
-        /** @default 20 */
-        HeadApiV1RulesSearchParameterPerPage: number;
-        HeadApiV1RulesSearchParameterQuery: string;
-        HeadApiV1RulesSearchParameterFilters: string | string[];
-        HeadApiV1RulesSearchParameterType: string;
-        HeadApiV1RulesSearchParameterIacLanguage: string;
-        /** @default 1 */
-        HeadApiV1RulesSearchParameterIncludeClassifications: number;
-        PutApiV1RulesActivatePositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                success: boolean;
-            };
-        };
-        PutApiV1RulesActivateNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        PutApiV1RulesActivateRequestBody: {
-            name: string;
-            revision: number;
-        };
-        PostApiV1ClassificationsCreatePositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                /** Format: uuid */
-                accountId: string;
-                name: string;
-                parent: string | null;
-                shortName: string | null;
-                description: string | null;
-                annotations?: {
-                    [key: string]: unknown;
-                };
-                /** Format: uuid */
-                id: string;
-                createdAt: unknown;
-                updatedAt: unknown;
-                parentPath?: string[];
-                children?: {
-                    [key: string]: unknown;
-                };
-            };
-        };
-        PostApiV1ClassificationsCreateNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        PostApiV1ClassificationsCreateRequestBody: {
-            name: string;
-            parent?: string;
-            shortName?: string;
-            description?: string;
-            annotations?: {
-                [key: string]: unknown;
-            };
-        };
-        GetApiV1ClassificationsGetParameterName: string;
-        /** @default 0 */
-        GetApiV1ClassificationsGetParameterParents: number;
-        /** @default 0 */
-        GetApiV1ClassificationsGetParameterChildren: number;
-        /** @default false */
-        GetApiV1ClassificationsGetParameterExpandChildren: boolean;
-        GetApiV1ClassificationsGetPositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                /** Format: uuid */
-                accountId: string;
-                name: string;
-                parent: string | null;
-                shortName: string | null;
-                description: string | null;
-                annotations?: {
-                    [key: string]: unknown;
-                };
-                /** Format: uuid */
-                id: string;
-                createdAt: unknown;
-                updatedAt: unknown;
-                parentPath?: string[];
-                children?: {
-                    [key: string]: unknown;
-                };
-            };
-        };
-        GetApiV1ClassificationsGetNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        HeadApiV1ClassificationsGetParameterName: string;
-        /** @default 0 */
-        HeadApiV1ClassificationsGetParameterParents: number;
-        /** @default 0 */
-        HeadApiV1ClassificationsGetParameterChildren: number;
-        /** @default false */
-        HeadApiV1ClassificationsGetParameterExpandChildren: boolean;
-        PutApiV1ClassificationsUpdatePositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                /** Format: uuid */
-                accountId: string;
-                name: string;
-                parent: string | null;
-                shortName: string | null;
-                description: string | null;
-                annotations?: {
-                    [key: string]: unknown;
-                };
-                /** Format: uuid */
-                id: string;
-                createdAt: unknown;
-                updatedAt: unknown;
-                parentPath?: string[];
-                children?: {
-                    [key: string]: unknown;
-                };
-            };
-        };
-        PutApiV1ClassificationsUpdateNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        PutApiV1ClassificationsUpdateRequestBody: {
-            name: string;
-            parent?: string;
-            shortName?: string;
-            description?: string;
-            annotations?: {
-                [key: string]: unknown;
-            };
-        };
-        DeleteApiV1ClassificationsDeleteParameterName: string;
-        DeleteApiV1ClassificationsDeletePositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                success: boolean;
-            };
-        };
-        DeleteApiV1ClassificationsDeleteNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        /** @default 1 */
-        GetApiV1ClassificationsSearchParameterPage: number;
-        /** @default 20 */
-        GetApiV1ClassificationsSearchParameterPerPage: number;
-        GetApiV1ClassificationsSearchParameterQuery: string;
-        GetApiV1ClassificationsSearchParameterFilters: string | string[];
-        GetApiV1ClassificationsSearchPositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                classifications: {
-                    /** Format: uuid */
-                    accountId: string;
-                    name: string;
-                    parent: string | null;
-                    shortName: string | null;
-                    description: string | null;
-                    annotations?: {
-                        [key: string]: unknown;
-                    };
-                    /** Format: uuid */
-                    id: string;
-                    createdAt: unknown;
-                    updatedAt: unknown;
-                    parentPath?: string[];
-                    children?: {
-                        [key: string]: unknown;
-                    };
-                }[];
-                total: number;
-                page: number;
-                perPage: number;
-            };
-        };
-        GetApiV1ClassificationsSearchNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        /** @default 1 */
-        HeadApiV1ClassificationsSearchParameterPage: number;
-        /** @default 20 */
-        HeadApiV1ClassificationsSearchParameterPerPage: number;
-        HeadApiV1ClassificationsSearchParameterQuery: string;
-        HeadApiV1ClassificationsSearchParameterFilters: string | string[];
-        PostApiV1ChannelsCreatePositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                /** Format: uuid */
-                accountId: string;
-                name: string;
-                query?: string;
-                filters: string[];
-                annotations?: {
-                    [key: string]: unknown;
-                };
-                /** Format: uuid */
-                id: string;
-                createdAt: unknown;
-                updatedAt: unknown;
-            };
-        };
-        PostApiV1ChannelsCreateNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        PostApiV1ChannelsCreateRequestBody: {
-            name: string;
-            query?: string;
-            filters?: string[];
-            annotations?: {
-                [key: string]: unknown;
-            };
-        };
-        GetApiV1ChannelsGetParameterName: string;
-        GetApiV1ChannelsGetPositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                /** Format: uuid */
-                accountId: string;
-                name: string;
-                query?: string;
-                filters: string[];
-                annotations?: {
-                    [key: string]: unknown;
-                };
-                /** Format: uuid */
-                id: string;
-                createdAt: unknown;
-                updatedAt: unknown;
-            };
-        };
-        GetApiV1ChannelsGetNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        HeadApiV1ChannelsGetParameterName: string;
-        PostApiV1ChannelsBatchCreatePositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                results: {
-                    name: string;
-                    /** @enum {string} */
-                    status: "created" | "skipped" | "error";
-                    channel?: {
-                        /** Format: uuid */
-                        accountId: string;
-                        name: string;
-                        query?: string;
-                        filters: string[];
-                        annotations?: {
-                            [key: string]: unknown;
-                        };
-                        /** Format: uuid */
-                        id: string;
-                        createdAt: unknown;
-                        updatedAt: unknown;
-                    };
-                    error?: string;
-                }[];
-            };
-        };
-        PostApiV1ChannelsBatchCreateNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        PostApiV1ChannelsBatchCreateRequestBody: {
-            channels: {
-                name: string;
-                query?: string;
-                filters?: string[];
-                annotations?: {
-                    [key: string]: unknown;
-                };
-            }[];
-            /**
-             * @default error
-             * @enum {string}
-             */
-            onConflict: "error" | "skip";
-        };
-        PostApiV1ChannelsBatchUpsertPositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                results: {
-                    name: string;
-                    /** @enum {string} */
-                    status: "created" | "updated" | "error";
-                    channel?: {
-                        /** Format: uuid */
-                        accountId: string;
-                        name: string;
-                        query?: string;
-                        filters: string[];
-                        annotations?: {
-                            [key: string]: unknown;
-                        };
-                        /** Format: uuid */
-                        id: string;
-                        createdAt: unknown;
-                        updatedAt: unknown;
-                    };
-                    error?: string;
-                }[];
-            };
-        };
-        PostApiV1ChannelsBatchUpsertNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        PostApiV1ChannelsBatchUpsertRequestBody: {
-            channels: {
-                query?: string;
-                filters?: string[];
-                annotations?: {
-                    [key: string]: unknown;
-                };
-                name: string;
-            }[];
-        };
-        PutApiV1ChannelsUpdatePositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                /** Format: uuid */
-                accountId: string;
-                name: string;
-                query?: string;
-                filters: string[];
-                annotations?: {
-                    [key: string]: unknown;
-                };
-                /** Format: uuid */
-                id: string;
-                createdAt: unknown;
-                updatedAt: unknown;
-            };
-        };
-        PutApiV1ChannelsUpdateNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        PutApiV1ChannelsUpdateRequestBody: {
-            query?: string;
-            filters?: string[];
-            annotations?: {
-                [key: string]: unknown;
-            };
-            name: string;
-        };
-        DeleteApiV1ChannelsDeleteParameterName: string;
-        DeleteApiV1ChannelsDeletePositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                success: boolean;
-            };
-        };
-        DeleteApiV1ChannelsDeleteNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        GetApiV1ChannelsRulesParameterName: string;
-        GetApiV1ChannelsRulesParameterFilters: string | string[];
-        /** @default 1 */
-        GetApiV1ChannelsRulesParameterPage: number;
-        /** @default 20 */
-        GetApiV1ChannelsRulesParameterPerPage: number;
-        /** @default 1 */
-        GetApiV1ChannelsRulesParameterIncludeClassifications: number;
-        GetApiV1ChannelsRulesPositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                rules: {
-                    /** Format: uuid */
-                    accountId: string;
-                    type: string;
-                    version: string;
-                    iacLanguage: string;
-                    name: string;
-                    shortName: string | null;
-                    revision: number;
-                    revisions: number[];
-                    classificationPaths?: {
-                        /** Format: uuid */
-                        accountId: string;
-                        name: string;
-                        shortName: string | null;
-                    }[][];
-                    annotations?: {
-                        [key: string]: unknown;
-                    };
-                    metadata?: {
-                        [key: string]: unknown;
-                    };
-                    body?: {
-                        [key: string]: unknown;
-                    };
-                    /** Format: uuid */
-                    id: string;
-                    createdAt: unknown;
-                    updatedAt: unknown;
-                }[];
-                total: number;
-                page: number;
-                perPage: number;
-            };
-        };
-        GetApiV1ChannelsRulesNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        HeadApiV1ChannelsRulesParameterName: string;
-        HeadApiV1ChannelsRulesParameterFilters: string | string[];
-        /** @default 1 */
-        HeadApiV1ChannelsRulesParameterPage: number;
-        /** @default 20 */
-        HeadApiV1ChannelsRulesParameterPerPage: number;
-        /** @default 1 */
-        HeadApiV1ChannelsRulesParameterIncludeClassifications: number;
-        /** @default 1 */
-        GetApiV1ChannelsSearchParameterPage: number;
-        /** @default 20 */
-        GetApiV1ChannelsSearchParameterPerPage: number;
-        GetApiV1ChannelsSearchParameterQuery: string;
-        GetApiV1ChannelsSearchPositiveResponse: {
-            /** @constant */
-            status: "success";
-            data: {
-                channels: {
-                    /** Format: uuid */
-                    accountId: string;
-                    name: string;
-                    query?: string;
-                    filters: string[];
-                    annotations?: {
-                        [key: string]: unknown;
-                    };
-                    /** Format: uuid */
-                    id: string;
-                    createdAt: unknown;
-                    updatedAt: unknown;
-                }[];
-                total: number;
-                page: number;
-                perPage: number;
-            };
-        };
-        GetApiV1ChannelsSearchNegativeResponse: {
-            /** @constant */
-            status: "error";
-            error: {
-                message: string;
-            };
-        };
-        /** @default 1 */
-        HeadApiV1ChannelsSearchParameterPage: number;
-        /** @default 20 */
-        HeadApiV1ChannelsSearchParameterPerPage: number;
-        HeadApiV1ChannelsSearchParameterQuery: string;
+  schemas: {
+    GetHealthcheckPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        status: string;
+        timestamp: string;
+      };
     };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+    GetHealthcheckNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PostApiV1RulesCreatePositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        /** Format: uuid */
+        accountId: string;
+        type: string;
+        version: string;
+        iacLanguage: string;
+        name: string;
+        shortName: string | null;
+        revision: number;
+        revisions: number[];
+        classificationPaths?: {
+          /** Format: uuid */
+          accountId: string;
+          name: string;
+          shortName: string | null;
+        }[][];
+        annotations?: {
+          [key: string]: unknown;
+        };
+        metadata?: {
+          [key: string]: unknown;
+        };
+        body?: {
+          [key: string]: unknown;
+        };
+        /** Format: uuid */
+        id: string;
+        createdAt: unknown;
+        updatedAt: unknown;
+      };
+    };
+    PostApiV1RulesCreateNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PostApiV1RulesCreateRequestBody: {
+      type: string;
+      version: string;
+      iacLanguage: string;
+      name: string;
+      classificationNames?: string[];
+      classifications?: {
+        name: string;
+        /** Format: uuid */
+        accountId?: string;
+      }[];
+      shortName?: string;
+      annotations?: {
+        [key: string]: unknown;
+      };
+      metadata?: {
+        [key: string]: unknown;
+      };
+      body?: {
+        [key: string]: unknown;
+      };
+      revisionData?: {
+        [key: string]: unknown;
+      };
+      /** @default false */
+      active: boolean;
+    };
+    GetApiV1RulesGetParameterName: string;
+    /** @default 1 */
+    GetApiV1RulesGetParameterIncludeClassifications: number;
+    GetApiV1RulesGetPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        /** Format: uuid */
+        accountId: string;
+        type: string;
+        version: string;
+        iacLanguage: string;
+        name: string;
+        shortName: string | null;
+        revision: number;
+        revisions: number[];
+        classificationPaths?: {
+          /** Format: uuid */
+          accountId: string;
+          name: string;
+          shortName: string | null;
+        }[][];
+        annotations?: {
+          [key: string]: unknown;
+        };
+        metadata?: {
+          [key: string]: unknown;
+        };
+        body?: {
+          [key: string]: unknown;
+        };
+        /** Format: uuid */
+        id: string;
+        createdAt: unknown;
+        updatedAt: unknown;
+      };
+    };
+    GetApiV1RulesGetNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    HeadApiV1RulesGetParameterName: string;
+    /** @default 1 */
+    HeadApiV1RulesGetParameterIncludeClassifications: number;
+    PutApiV1RulesUpdatePositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        /** Format: uuid */
+        accountId: string;
+        type: string;
+        version: string;
+        iacLanguage: string;
+        name: string;
+        shortName: string | null;
+        revision: number;
+        revisions: number[];
+        classificationPaths?: {
+          /** Format: uuid */
+          accountId: string;
+          name: string;
+          shortName: string | null;
+        }[][];
+        annotations?: {
+          [key: string]: unknown;
+        };
+        metadata?: {
+          [key: string]: unknown;
+        };
+        body?: {
+          [key: string]: unknown;
+        };
+        /** Format: uuid */
+        id: string;
+        createdAt: unknown;
+        updatedAt: unknown;
+      };
+    };
+    PutApiV1RulesUpdateNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PutApiV1RulesUpdateRequestBody: {
+      type?: string;
+      version?: string;
+      iacLanguage?: string;
+      classificationNames?: string[];
+      classifications?: {
+        name: string;
+        /** Format: uuid */
+        accountId?: string;
+      }[];
+      shortName?: string;
+      annotations?: {
+        [key: string]: unknown;
+      };
+      metadata?: {
+        [key: string]: unknown;
+      };
+      body?: {
+        [key: string]: unknown;
+      };
+      revisionData?: {
+        [key: string]: unknown;
+      };
+      /** @default false */
+      active: boolean;
+      name: string;
+    };
+    DeleteApiV1RulesDeleteParameterName: string;
+    DeleteApiV1RulesDeleteParameterRevision: number;
+    DeleteApiV1RulesDeleteParameterAll: boolean;
+    DeleteApiV1RulesDeletePositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        success: boolean;
+      };
+    };
+    DeleteApiV1RulesDeleteNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    /** @default 1 */
+    GetApiV1RulesSearchParameterPage: number;
+    /** @default 20 */
+    GetApiV1RulesSearchParameterPerPage: number;
+    GetApiV1RulesSearchParameterQuery: string;
+    GetApiV1RulesSearchParameterFilters: string | string[];
+    GetApiV1RulesSearchParameterType: string;
+    GetApiV1RulesSearchParameterIacLanguage: string;
+    /** @default 1 */
+    GetApiV1RulesSearchParameterIncludeClassifications: number;
+    GetApiV1RulesSearchPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        rules: {
+          /** Format: uuid */
+          accountId: string;
+          type: string;
+          version: string;
+          iacLanguage: string;
+          name: string;
+          shortName: string | null;
+          revision: number;
+          revisions: number[];
+          classificationPaths?: {
+            /** Format: uuid */
+            accountId: string;
+            name: string;
+            shortName: string | null;
+          }[][];
+          annotations?: {
+            [key: string]: unknown;
+          };
+          metadata?: {
+            [key: string]: unknown;
+          };
+          body?: {
+            [key: string]: unknown;
+          };
+          /** Format: uuid */
+          id: string;
+          createdAt: unknown;
+          updatedAt: unknown;
+        }[];
+        total: number;
+        page: number;
+        perPage: number;
+      };
+    };
+    GetApiV1RulesSearchNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    /** @default 1 */
+    HeadApiV1RulesSearchParameterPage: number;
+    /** @default 20 */
+    HeadApiV1RulesSearchParameterPerPage: number;
+    HeadApiV1RulesSearchParameterQuery: string;
+    HeadApiV1RulesSearchParameterFilters: string | string[];
+    HeadApiV1RulesSearchParameterType: string;
+    HeadApiV1RulesSearchParameterIacLanguage: string;
+    /** @default 1 */
+    HeadApiV1RulesSearchParameterIncludeClassifications: number;
+    PutApiV1RulesActivatePositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        success: boolean;
+      };
+    };
+    PutApiV1RulesActivateNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PutApiV1RulesActivateRequestBody: {
+      name: string;
+      revision: number;
+    };
+    PostApiV1ClassificationsCreatePositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        /** Format: uuid */
+        accountId: string;
+        name: string;
+        parent: string | null;
+        shortName: string | null;
+        description: string | null;
+        annotations?: {
+          [key: string]: unknown;
+        };
+        /** Format: uuid */
+        id: string;
+        createdAt: unknown;
+        updatedAt: unknown;
+        parentPath?: string[];
+        children?: {
+          [key: string]: unknown;
+        };
+      };
+    };
+    PostApiV1ClassificationsCreateNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PostApiV1ClassificationsCreateRequestBody: {
+      name: string;
+      parent?: string;
+      shortName?: string;
+      description?: string;
+      annotations?: {
+        [key: string]: unknown;
+      };
+    };
+    GetApiV1ClassificationsGetParameterName: string;
+    /** @default 0 */
+    GetApiV1ClassificationsGetParameterParents: number;
+    /** @default 0 */
+    GetApiV1ClassificationsGetParameterChildren: number;
+    /** @default false */
+    GetApiV1ClassificationsGetParameterExpandChildren: boolean;
+    GetApiV1ClassificationsGetPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        /** Format: uuid */
+        accountId: string;
+        name: string;
+        parent: string | null;
+        shortName: string | null;
+        description: string | null;
+        annotations?: {
+          [key: string]: unknown;
+        };
+        /** Format: uuid */
+        id: string;
+        createdAt: unknown;
+        updatedAt: unknown;
+        parentPath?: string[];
+        children?: {
+          [key: string]: unknown;
+        };
+      };
+    };
+    GetApiV1ClassificationsGetNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    HeadApiV1ClassificationsGetParameterName: string;
+    /** @default 0 */
+    HeadApiV1ClassificationsGetParameterParents: number;
+    /** @default 0 */
+    HeadApiV1ClassificationsGetParameterChildren: number;
+    /** @default false */
+    HeadApiV1ClassificationsGetParameterExpandChildren: boolean;
+    PutApiV1ClassificationsUpdatePositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        /** Format: uuid */
+        accountId: string;
+        name: string;
+        parent: string | null;
+        shortName: string | null;
+        description: string | null;
+        annotations?: {
+          [key: string]: unknown;
+        };
+        /** Format: uuid */
+        id: string;
+        createdAt: unknown;
+        updatedAt: unknown;
+        parentPath?: string[];
+        children?: {
+          [key: string]: unknown;
+        };
+      };
+    };
+    PutApiV1ClassificationsUpdateNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PutApiV1ClassificationsUpdateRequestBody: {
+      name: string;
+      parent?: string;
+      shortName?: string;
+      description?: string;
+      annotations?: {
+        [key: string]: unknown;
+      };
+    };
+    DeleteApiV1ClassificationsDeleteParameterName: string;
+    DeleteApiV1ClassificationsDeletePositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        success: boolean;
+      };
+    };
+    DeleteApiV1ClassificationsDeleteNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    /** @default 1 */
+    GetApiV1ClassificationsSearchParameterPage: number;
+    /** @default 20 */
+    GetApiV1ClassificationsSearchParameterPerPage: number;
+    GetApiV1ClassificationsSearchParameterQuery: string;
+    GetApiV1ClassificationsSearchParameterFilters: string | string[];
+    GetApiV1ClassificationsSearchPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        classifications: {
+          /** Format: uuid */
+          accountId: string;
+          name: string;
+          parent: string | null;
+          shortName: string | null;
+          description: string | null;
+          annotations?: {
+            [key: string]: unknown;
+          };
+          /** Format: uuid */
+          id: string;
+          createdAt: unknown;
+          updatedAt: unknown;
+          parentPath?: string[];
+          children?: {
+            [key: string]: unknown;
+          };
+        }[];
+        total: number;
+        page: number;
+        perPage: number;
+      };
+    };
+    GetApiV1ClassificationsSearchNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    /** @default 1 */
+    HeadApiV1ClassificationsSearchParameterPage: number;
+    /** @default 20 */
+    HeadApiV1ClassificationsSearchParameterPerPage: number;
+    HeadApiV1ClassificationsSearchParameterQuery: string;
+    HeadApiV1ClassificationsSearchParameterFilters: string | string[];
+    PostApiV1ChannelsCreatePositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        /** Format: uuid */
+        accountId: string;
+        name: string;
+        query?: string;
+        filters: string[];
+        annotations?: {
+          [key: string]: unknown;
+        };
+        /** Format: uuid */
+        id: string;
+        createdAt: unknown;
+        updatedAt: unknown;
+      };
+    };
+    PostApiV1ChannelsCreateNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PostApiV1ChannelsCreateRequestBody: {
+      name: string;
+      query?: string;
+      filters?: string[];
+      annotations?: {
+        [key: string]: unknown;
+      };
+    };
+    GetApiV1ChannelsGetParameterName: string;
+    GetApiV1ChannelsGetPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        /** Format: uuid */
+        accountId: string;
+        name: string;
+        query?: string;
+        filters: string[];
+        annotations?: {
+          [key: string]: unknown;
+        };
+        /** Format: uuid */
+        id: string;
+        createdAt: unknown;
+        updatedAt: unknown;
+      };
+    };
+    GetApiV1ChannelsGetNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    HeadApiV1ChannelsGetParameterName: string;
+    PostApiV1ChannelsBatchCreatePositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        results: {
+          name: string;
+          /** @enum {string} */
+          status: 'created' | 'skipped' | 'error';
+          channel?: {
+            /** Format: uuid */
+            accountId: string;
+            name: string;
+            query?: string;
+            filters: string[];
+            annotations?: {
+              [key: string]: unknown;
+            };
+            /** Format: uuid */
+            id: string;
+            createdAt: unknown;
+            updatedAt: unknown;
+          };
+          error?: string;
+        }[];
+      };
+    };
+    PostApiV1ChannelsBatchCreateNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PostApiV1ChannelsBatchCreateRequestBody: {
+      channels: {
+        name: string;
+        query?: string;
+        filters?: string[];
+        annotations?: {
+          [key: string]: unknown;
+        };
+      }[];
+      /**
+       * @default error
+       * @enum {string}
+       */
+      onConflict: 'error' | 'skip';
+    };
+    PostApiV1ChannelsBatchUpsertPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        results: {
+          name: string;
+          /** @enum {string} */
+          status: 'created' | 'updated' | 'error';
+          channel?: {
+            /** Format: uuid */
+            accountId: string;
+            name: string;
+            query?: string;
+            filters: string[];
+            annotations?: {
+              [key: string]: unknown;
+            };
+            /** Format: uuid */
+            id: string;
+            createdAt: unknown;
+            updatedAt: unknown;
+          };
+          error?: string;
+        }[];
+      };
+    };
+    PostApiV1ChannelsBatchUpsertNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PostApiV1ChannelsBatchUpsertRequestBody: {
+      channels: {
+        query?: string;
+        filters?: string[];
+        annotations?: {
+          [key: string]: unknown;
+        };
+        name: string;
+      }[];
+    };
+    PutApiV1ChannelsUpdatePositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        /** Format: uuid */
+        accountId: string;
+        name: string;
+        query?: string;
+        filters: string[];
+        annotations?: {
+          [key: string]: unknown;
+        };
+        /** Format: uuid */
+        id: string;
+        createdAt: unknown;
+        updatedAt: unknown;
+      };
+    };
+    PutApiV1ChannelsUpdateNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PutApiV1ChannelsUpdateRequestBody: {
+      query?: string;
+      filters?: string[];
+      annotations?: {
+        [key: string]: unknown;
+      };
+      name: string;
+    };
+    DeleteApiV1ChannelsDeleteParameterName: string;
+    DeleteApiV1ChannelsDeletePositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        success: boolean;
+      };
+    };
+    DeleteApiV1ChannelsDeleteNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    GetApiV1ChannelsRulesParameterName: string;
+    GetApiV1ChannelsRulesParameterFilters: string | string[];
+    /** @default 1 */
+    GetApiV1ChannelsRulesParameterPage: number;
+    /** @default 20 */
+    GetApiV1ChannelsRulesParameterPerPage: number;
+    /** @default 1 */
+    GetApiV1ChannelsRulesParameterIncludeClassifications: number;
+    GetApiV1ChannelsRulesPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        rules: {
+          /** Format: uuid */
+          accountId: string;
+          type: string;
+          version: string;
+          iacLanguage: string;
+          name: string;
+          shortName: string | null;
+          revision: number;
+          revisions: number[];
+          classificationPaths?: {
+            /** Format: uuid */
+            accountId: string;
+            name: string;
+            shortName: string | null;
+          }[][];
+          annotations?: {
+            [key: string]: unknown;
+          };
+          metadata?: {
+            [key: string]: unknown;
+          };
+          body?: {
+            [key: string]: unknown;
+          };
+          /** Format: uuid */
+          id: string;
+          createdAt: unknown;
+          updatedAt: unknown;
+        }[];
+        total: number;
+        page: number;
+        perPage: number;
+      };
+    };
+    GetApiV1ChannelsRulesNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    HeadApiV1ChannelsRulesParameterName: string;
+    HeadApiV1ChannelsRulesParameterFilters: string | string[];
+    /** @default 1 */
+    HeadApiV1ChannelsRulesParameterPage: number;
+    /** @default 20 */
+    HeadApiV1ChannelsRulesParameterPerPage: number;
+    /** @default 1 */
+    HeadApiV1ChannelsRulesParameterIncludeClassifications: number;
+    /** @default 1 */
+    GetApiV1ChannelsSearchParameterPage: number;
+    /** @default 20 */
+    GetApiV1ChannelsSearchParameterPerPage: number;
+    GetApiV1ChannelsSearchParameterQuery: string;
+    GetApiV1ChannelsSearchPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        channels: {
+          /** Format: uuid */
+          accountId: string;
+          name: string;
+          query?: string;
+          filters: string[];
+          annotations?: {
+            [key: string]: unknown;
+          };
+          /** Format: uuid */
+          id: string;
+          createdAt: unknown;
+          updatedAt: unknown;
+        }[];
+        total: number;
+        page: number;
+        perPage: number;
+      };
+    };
+    GetApiV1ChannelsSearchNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    /** @default 1 */
+    HeadApiV1ChannelsSearchParameterPage: number;
+    /** @default 20 */
+    HeadApiV1ChannelsSearchParameterPerPage: number;
+    HeadApiV1ChannelsSearchParameterQuery: string;
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    GetHealthcheck: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description GET /healthcheck Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetHealthcheckPositiveResponse"];
-                };
-            };
-            /** @description GET /healthcheck Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetHealthcheckNegativeResponse"];
-                };
-            };
-        };
+  GetHealthcheck: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    HeadHealthcheck: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description GET /healthcheck Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description HEAD /healthcheck Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description HEAD /healthcheck Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          'application/json': components['schemas']['GetHealthcheckPositiveResponse'];
         };
+      };
+      /** @description GET /healthcheck Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GetHealthcheckNegativeResponse'];
+        };
+      };
     };
-    PostApiV1RulesCreate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description POST /api/v1/rules/create Request body */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PostApiV1RulesCreateRequestBody"];
-            };
-        };
-        responses: {
-            /** @description POST /api/v1/rules/create Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PostApiV1RulesCreatePositiveResponse"];
-                };
-            };
-            /** @description POST /api/v1/rules/create Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PostApiV1RulesCreateNegativeResponse"];
-                };
-            };
-        };
+  };
+  HeadHealthcheck: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    GetApiV1RulesGet: {
-        parameters: {
-            query: {
-                /** @description GET /api/v1/rules/get Parameter */
-                name: components["schemas"]["GetApiV1RulesGetParameterName"];
-                /** @description GET /api/v1/rules/get Parameter */
-                includeClassifications?: components["schemas"]["GetApiV1RulesGetParameterIncludeClassifications"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /healthcheck Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description GET /api/v1/rules/get Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1RulesGetPositiveResponse"];
-                };
-            };
-            /** @description GET /api/v1/rules/get Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1RulesGetNegativeResponse"];
-                };
-            };
+        content?: never;
+      };
+      /** @description HEAD /healthcheck Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
         };
+        content?: never;
+      };
     };
-    HeadApiV1RulesGet: {
-        parameters: {
-            query: {
-                /** @description HEAD /api/v1/rules/get Parameter */
-                name: components["schemas"]["HeadApiV1RulesGetParameterName"];
-                /** @description HEAD /api/v1/rules/get Parameter */
-                includeClassifications?: components["schemas"]["HeadApiV1RulesGetParameterIncludeClassifications"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description HEAD /api/v1/rules/get Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description HEAD /api/v1/rules/get Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  PostApiV1RulesCreate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    PutApiV1RulesUpdate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description PUT /api/v1/rules/update Request body */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PutApiV1RulesUpdateRequestBody"];
-            };
-        };
-        responses: {
-            /** @description PUT /api/v1/rules/update Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PutApiV1RulesUpdatePositiveResponse"];
-                };
-            };
-            /** @description PUT /api/v1/rules/update Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PutApiV1RulesUpdateNegativeResponse"];
-                };
-            };
-        };
+    /** @description POST /api/v1/rules/create Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PostApiV1RulesCreateRequestBody'];
+      };
     };
-    DeleteApiV1RulesDelete: {
-        parameters: {
-            query: {
-                /** @description DELETE /api/v1/rules/delete Parameter */
-                name: components["schemas"]["DeleteApiV1RulesDeleteParameterName"];
-                /** @description DELETE /api/v1/rules/delete Parameter */
-                revision?: components["schemas"]["DeleteApiV1RulesDeleteParameterRevision"];
-                /** @description DELETE /api/v1/rules/delete Parameter */
-                all?: components["schemas"]["DeleteApiV1RulesDeleteParameterAll"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    responses: {
+      /** @description POST /api/v1/rules/create Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description DELETE /api/v1/rules/delete Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DeleteApiV1RulesDeletePositiveResponse"];
-                };
-            };
-            /** @description DELETE /api/v1/rules/delete Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DeleteApiV1RulesDeleteNegativeResponse"];
-                };
-            };
+        content: {
+          'application/json': components['schemas']['PostApiV1RulesCreatePositiveResponse'];
         };
+      };
+      /** @description POST /api/v1/rules/create Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostApiV1RulesCreateNegativeResponse'];
+        };
+      };
     };
-    GetApiV1RulesSearch: {
-        parameters: {
-            query?: {
-                /** @description GET /api/v1/rules/search Parameter */
-                page?: components["schemas"]["GetApiV1RulesSearchParameterPage"];
-                /** @description GET /api/v1/rules/search Parameter */
-                perPage?: components["schemas"]["GetApiV1RulesSearchParameterPerPage"];
-                /** @description GET /api/v1/rules/search Parameter */
-                query?: components["schemas"]["GetApiV1RulesSearchParameterQuery"];
-                /** @description GET /api/v1/rules/search Parameter */
-                filters?: components["schemas"]["GetApiV1RulesSearchParameterFilters"];
-                /** @description GET /api/v1/rules/search Parameter */
-                "filters[]"?: components["schemas"]["GetApiV1RulesSearchParameterFilters"];
-                /** @description GET /api/v1/rules/search Parameter */
-                type?: components["schemas"]["GetApiV1RulesSearchParameterType"];
-                /** @description GET /api/v1/rules/search Parameter */
-                iacLanguage?: components["schemas"]["GetApiV1RulesSearchParameterIacLanguage"];
-                /** @description GET /api/v1/rules/search Parameter */
-                includeClassifications?: components["schemas"]["GetApiV1RulesSearchParameterIncludeClassifications"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description GET /api/v1/rules/search Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1RulesSearchPositiveResponse"];
-                };
-            };
-            /** @description GET /api/v1/rules/search Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1RulesSearchNegativeResponse"];
-                };
-            };
-        };
+  };
+  GetApiV1RulesGet: {
+    parameters: {
+      query: {
+        /** @description GET /api/v1/rules/get Parameter */
+        name: components['schemas']['GetApiV1RulesGetParameterName'];
+        /** @description GET /api/v1/rules/get Parameter */
+        includeClassifications?: components['schemas']['GetApiV1RulesGetParameterIncludeClassifications'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    HeadApiV1RulesSearch: {
-        parameters: {
-            query?: {
-                /** @description HEAD /api/v1/rules/search Parameter */
-                page?: components["schemas"]["HeadApiV1RulesSearchParameterPage"];
-                /** @description HEAD /api/v1/rules/search Parameter */
-                perPage?: components["schemas"]["HeadApiV1RulesSearchParameterPerPage"];
-                /** @description HEAD /api/v1/rules/search Parameter */
-                query?: components["schemas"]["HeadApiV1RulesSearchParameterQuery"];
-                /** @description HEAD /api/v1/rules/search Parameter */
-                filters?: components["schemas"]["HeadApiV1RulesSearchParameterFilters"];
-                /** @description HEAD /api/v1/rules/search Parameter */
-                "filters[]"?: components["schemas"]["HeadApiV1RulesSearchParameterFilters"];
-                /** @description HEAD /api/v1/rules/search Parameter */
-                type?: components["schemas"]["HeadApiV1RulesSearchParameterType"];
-                /** @description HEAD /api/v1/rules/search Parameter */
-                iacLanguage?: components["schemas"]["HeadApiV1RulesSearchParameterIacLanguage"];
-                /** @description HEAD /api/v1/rules/search Parameter */
-                includeClassifications?: components["schemas"]["HeadApiV1RulesSearchParameterIncludeClassifications"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description GET /api/v1/rules/get Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description HEAD /api/v1/rules/search Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description HEAD /api/v1/rules/search Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          'application/json': components['schemas']['GetApiV1RulesGetPositiveResponse'];
         };
+      };
+      /** @description GET /api/v1/rules/get Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GetApiV1RulesGetNegativeResponse'];
+        };
+      };
     };
-    PutApiV1RulesActivate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description PUT /api/v1/rules/activate Request body */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PutApiV1RulesActivateRequestBody"];
-            };
-        };
-        responses: {
-            /** @description PUT /api/v1/rules/activate Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PutApiV1RulesActivatePositiveResponse"];
-                };
-            };
-            /** @description PUT /api/v1/rules/activate Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PutApiV1RulesActivateNegativeResponse"];
-                };
-            };
-        };
+  };
+  HeadApiV1RulesGet: {
+    parameters: {
+      query: {
+        /** @description HEAD /api/v1/rules/get Parameter */
+        name: components['schemas']['HeadApiV1RulesGetParameterName'];
+        /** @description HEAD /api/v1/rules/get Parameter */
+        includeClassifications?: components['schemas']['HeadApiV1RulesGetParameterIncludeClassifications'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    PostApiV1ClassificationsCreate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/rules/get Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        /** @description POST /api/v1/classifications/create Request body */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PostApiV1ClassificationsCreateRequestBody"];
-            };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/rules/get Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
         };
-        responses: {
-            /** @description POST /api/v1/classifications/create Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PostApiV1ClassificationsCreatePositiveResponse"];
-                };
-            };
-            /** @description POST /api/v1/classifications/create Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PostApiV1ClassificationsCreateNegativeResponse"];
-                };
-            };
-        };
+        content?: never;
+      };
     };
-    GetApiV1ClassificationsGet: {
-        parameters: {
-            query: {
-                /** @description GET /api/v1/classifications/get Parameter */
-                name: components["schemas"]["GetApiV1ClassificationsGetParameterName"];
-                /** @description GET /api/v1/classifications/get Parameter */
-                parents?: components["schemas"]["GetApiV1ClassificationsGetParameterParents"];
-                /** @description GET /api/v1/classifications/get Parameter */
-                children?: components["schemas"]["GetApiV1ClassificationsGetParameterChildren"];
-                /** @description GET /api/v1/classifications/get Parameter */
-                expandChildren?: components["schemas"]["GetApiV1ClassificationsGetParameterExpandChildren"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description GET /api/v1/classifications/get Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1ClassificationsGetPositiveResponse"];
-                };
-            };
-            /** @description GET /api/v1/classifications/get Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1ClassificationsGetNegativeResponse"];
-                };
-            };
-        };
+  };
+  PutApiV1RulesUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    HeadApiV1ClassificationsGet: {
-        parameters: {
-            query: {
-                /** @description HEAD /api/v1/classifications/get Parameter */
-                name: components["schemas"]["HeadApiV1ClassificationsGetParameterName"];
-                /** @description HEAD /api/v1/classifications/get Parameter */
-                parents?: components["schemas"]["HeadApiV1ClassificationsGetParameterParents"];
-                /** @description HEAD /api/v1/classifications/get Parameter */
-                children?: components["schemas"]["HeadApiV1ClassificationsGetParameterChildren"];
-                /** @description HEAD /api/v1/classifications/get Parameter */
-                expandChildren?: components["schemas"]["HeadApiV1ClassificationsGetParameterExpandChildren"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description HEAD /api/v1/classifications/get Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description HEAD /api/v1/classifications/get Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+    /** @description PUT /api/v1/rules/update Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PutApiV1RulesUpdateRequestBody'];
+      };
     };
-    PutApiV1ClassificationsUpdate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    responses: {
+      /** @description PUT /api/v1/rules/update Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        /** @description PUT /api/v1/classifications/update Request body */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PutApiV1ClassificationsUpdateRequestBody"];
-            };
+        content: {
+          'application/json': components['schemas']['PutApiV1RulesUpdatePositiveResponse'];
         };
-        responses: {
-            /** @description PUT /api/v1/classifications/update Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PutApiV1ClassificationsUpdatePositiveResponse"];
-                };
-            };
-            /** @description PUT /api/v1/classifications/update Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PutApiV1ClassificationsUpdateNegativeResponse"];
-                };
-            };
+      };
+      /** @description PUT /api/v1/rules/update Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          'application/json': components['schemas']['PutApiV1RulesUpdateNegativeResponse'];
+        };
+      };
     };
-    DeleteApiV1ClassificationsDelete: {
-        parameters: {
-            query: {
-                /** @description DELETE /api/v1/classifications/delete Parameter */
-                name: components["schemas"]["DeleteApiV1ClassificationsDeleteParameterName"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description DELETE /api/v1/classifications/delete Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DeleteApiV1ClassificationsDeletePositiveResponse"];
-                };
-            };
-            /** @description DELETE /api/v1/classifications/delete Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DeleteApiV1ClassificationsDeleteNegativeResponse"];
-                };
-            };
-        };
+  };
+  DeleteApiV1RulesDelete: {
+    parameters: {
+      query: {
+        /** @description DELETE /api/v1/rules/delete Parameter */
+        name: components['schemas']['DeleteApiV1RulesDeleteParameterName'];
+        /** @description DELETE /api/v1/rules/delete Parameter */
+        revision?: components['schemas']['DeleteApiV1RulesDeleteParameterRevision'];
+        /** @description DELETE /api/v1/rules/delete Parameter */
+        all?: components['schemas']['DeleteApiV1RulesDeleteParameterAll'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    GetApiV1ClassificationsSearch: {
-        parameters: {
-            query?: {
-                /** @description GET /api/v1/classifications/search Parameter */
-                page?: components["schemas"]["GetApiV1ClassificationsSearchParameterPage"];
-                /** @description GET /api/v1/classifications/search Parameter */
-                perPage?: components["schemas"]["GetApiV1ClassificationsSearchParameterPerPage"];
-                /** @description GET /api/v1/classifications/search Parameter */
-                query?: components["schemas"]["GetApiV1ClassificationsSearchParameterQuery"];
-                /** @description GET /api/v1/classifications/search Parameter */
-                filters?: components["schemas"]["GetApiV1ClassificationsSearchParameterFilters"];
-                /** @description GET /api/v1/classifications/search Parameter */
-                "filters[]"?: components["schemas"]["GetApiV1ClassificationsSearchParameterFilters"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description DELETE /api/v1/rules/delete Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description GET /api/v1/classifications/search Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1ClassificationsSearchPositiveResponse"];
-                };
-            };
-            /** @description GET /api/v1/classifications/search Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1ClassificationsSearchNegativeResponse"];
-                };
-            };
+        content: {
+          'application/json': components['schemas']['DeleteApiV1RulesDeletePositiveResponse'];
         };
+      };
+      /** @description DELETE /api/v1/rules/delete Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['DeleteApiV1RulesDeleteNegativeResponse'];
+        };
+      };
     };
-    HeadApiV1ClassificationsSearch: {
-        parameters: {
-            query?: {
-                /** @description HEAD /api/v1/classifications/search Parameter */
-                page?: components["schemas"]["HeadApiV1ClassificationsSearchParameterPage"];
-                /** @description HEAD /api/v1/classifications/search Parameter */
-                perPage?: components["schemas"]["HeadApiV1ClassificationsSearchParameterPerPage"];
-                /** @description HEAD /api/v1/classifications/search Parameter */
-                query?: components["schemas"]["HeadApiV1ClassificationsSearchParameterQuery"];
-                /** @description HEAD /api/v1/classifications/search Parameter */
-                filters?: components["schemas"]["HeadApiV1ClassificationsSearchParameterFilters"];
-                /** @description HEAD /api/v1/classifications/search Parameter */
-                "filters[]"?: components["schemas"]["HeadApiV1ClassificationsSearchParameterFilters"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description HEAD /api/v1/classifications/search Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description HEAD /api/v1/classifications/search Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
+  };
+  GetApiV1RulesSearch: {
+    parameters: {
+      query?: {
+        /** @description GET /api/v1/rules/search Parameter */
+        page?: components['schemas']['GetApiV1RulesSearchParameterPage'];
+        /** @description GET /api/v1/rules/search Parameter */
+        perPage?: components['schemas']['GetApiV1RulesSearchParameterPerPage'];
+        /** @description GET /api/v1/rules/search Parameter */
+        query?: components['schemas']['GetApiV1RulesSearchParameterQuery'];
+        /** @description GET /api/v1/rules/search Parameter */
+        filters?: components['schemas']['GetApiV1RulesSearchParameterFilters'];
+        /** @description GET /api/v1/rules/search Parameter */
+        'filters[]'?: components['schemas']['GetApiV1RulesSearchParameterFilters'];
+        /** @description GET /api/v1/rules/search Parameter */
+        type?: components['schemas']['GetApiV1RulesSearchParameterType'];
+        /** @description GET /api/v1/rules/search Parameter */
+        iacLanguage?: components['schemas']['GetApiV1RulesSearchParameterIacLanguage'];
+        /** @description GET /api/v1/rules/search Parameter */
+        includeClassifications?: components['schemas']['GetApiV1RulesSearchParameterIncludeClassifications'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    PostApiV1ChannelsCreate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description GET /api/v1/rules/search Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        /** @description POST /api/v1/channels/create Request body */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PostApiV1ChannelsCreateRequestBody"];
-            };
+        content: {
+          'application/json': components['schemas']['GetApiV1RulesSearchPositiveResponse'];
         };
-        responses: {
-            /** @description POST /api/v1/channels/create Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PostApiV1ChannelsCreatePositiveResponse"];
-                };
-            };
-            /** @description POST /api/v1/channels/create Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PostApiV1ChannelsCreateNegativeResponse"];
-                };
-            };
+      };
+      /** @description GET /api/v1/rules/search Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          'application/json': components['schemas']['GetApiV1RulesSearchNegativeResponse'];
+        };
+      };
     };
-    GetApiV1ChannelsGet: {
-        parameters: {
-            query?: {
-                /** @description GET /api/v1/channels/get Parameter */
-                name?: components["schemas"]["GetApiV1ChannelsGetParameterName"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description GET /api/v1/channels/get Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1ChannelsGetPositiveResponse"];
-                };
-            };
-            /** @description GET /api/v1/channels/get Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1ChannelsGetNegativeResponse"];
-                };
-            };
-        };
+  };
+  HeadApiV1RulesSearch: {
+    parameters: {
+      query?: {
+        /** @description HEAD /api/v1/rules/search Parameter */
+        page?: components['schemas']['HeadApiV1RulesSearchParameterPage'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        perPage?: components['schemas']['HeadApiV1RulesSearchParameterPerPage'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        query?: components['schemas']['HeadApiV1RulesSearchParameterQuery'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        filters?: components['schemas']['HeadApiV1RulesSearchParameterFilters'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        'filters[]'?: components['schemas']['HeadApiV1RulesSearchParameterFilters'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        type?: components['schemas']['HeadApiV1RulesSearchParameterType'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        iacLanguage?: components['schemas']['HeadApiV1RulesSearchParameterIacLanguage'];
+        /** @description HEAD /api/v1/rules/search Parameter */
+        includeClassifications?: components['schemas']['HeadApiV1RulesSearchParameterIncludeClassifications'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    HeadApiV1ChannelsGet: {
-        parameters: {
-            query?: {
-                /** @description HEAD /api/v1/channels/get Parameter */
-                name?: components["schemas"]["HeadApiV1ChannelsGetParameterName"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/rules/search Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description HEAD /api/v1/channels/get Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description HEAD /api/v1/channels/get Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/rules/search Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
         };
+        content?: never;
+      };
     };
-    PostApiV1ChannelsBatchCreate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description POST /api/v1/channels/batch/create Request body */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PostApiV1ChannelsBatchCreateRequestBody"];
-            };
-        };
-        responses: {
-            /** @description POST /api/v1/channels/batch/create Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PostApiV1ChannelsBatchCreatePositiveResponse"];
-                };
-            };
-            /** @description POST /api/v1/channels/batch/create Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PostApiV1ChannelsBatchCreateNegativeResponse"];
-                };
-            };
-        };
+  };
+  PutApiV1RulesActivate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    PostApiV1ChannelsBatchUpsert: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** @description POST /api/v1/channels/batch/upsert Request body */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PostApiV1ChannelsBatchUpsertRequestBody"];
-            };
-        };
-        responses: {
-            /** @description POST /api/v1/channels/batch/upsert Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PostApiV1ChannelsBatchUpsertPositiveResponse"];
-                };
-            };
-            /** @description POST /api/v1/channels/batch/upsert Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PostApiV1ChannelsBatchUpsertNegativeResponse"];
-                };
-            };
-        };
+    /** @description PUT /api/v1/rules/activate Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PutApiV1RulesActivateRequestBody'];
+      };
     };
-    PutApiV1ChannelsUpdate: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    responses: {
+      /** @description PUT /api/v1/rules/activate Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        /** @description PUT /api/v1/channels/update Request body */
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["PutApiV1ChannelsUpdateRequestBody"];
-            };
+        content: {
+          'application/json': components['schemas']['PutApiV1RulesActivatePositiveResponse'];
         };
-        responses: {
-            /** @description PUT /api/v1/channels/update Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PutApiV1ChannelsUpdatePositiveResponse"];
-                };
-            };
-            /** @description PUT /api/v1/channels/update Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PutApiV1ChannelsUpdateNegativeResponse"];
-                };
-            };
+      };
+      /** @description PUT /api/v1/rules/activate Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          'application/json': components['schemas']['PutApiV1RulesActivateNegativeResponse'];
+        };
+      };
     };
-    DeleteApiV1ChannelsDelete: {
-        parameters: {
-            query: {
-                /** @description DELETE /api/v1/channels/delete Parameter */
-                name: components["schemas"]["DeleteApiV1ChannelsDeleteParameterName"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description DELETE /api/v1/channels/delete Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DeleteApiV1ChannelsDeletePositiveResponse"];
-                };
-            };
-            /** @description DELETE /api/v1/channels/delete Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DeleteApiV1ChannelsDeleteNegativeResponse"];
-                };
-            };
-        };
+  };
+  PostApiV1ClassificationsCreate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    GetApiV1ChannelsRules: {
-        parameters: {
-            query?: {
-                /** @description GET /api/v1/channels/rules Parameter */
-                name?: components["schemas"]["GetApiV1ChannelsRulesParameterName"];
-                /** @description GET /api/v1/channels/rules Parameter */
-                filters?: components["schemas"]["GetApiV1ChannelsRulesParameterFilters"];
-                /** @description GET /api/v1/channels/rules Parameter */
-                "filters[]"?: components["schemas"]["GetApiV1ChannelsRulesParameterFilters"];
-                /** @description GET /api/v1/channels/rules Parameter */
-                page?: components["schemas"]["GetApiV1ChannelsRulesParameterPage"];
-                /** @description GET /api/v1/channels/rules Parameter */
-                perPage?: components["schemas"]["GetApiV1ChannelsRulesParameterPerPage"];
-                /** @description GET /api/v1/channels/rules Parameter */
-                includeClassifications?: components["schemas"]["GetApiV1ChannelsRulesParameterIncludeClassifications"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description GET /api/v1/channels/rules Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1ChannelsRulesPositiveResponse"];
-                };
-            };
-            /** @description GET /api/v1/channels/rules Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1ChannelsRulesNegativeResponse"];
-                };
-            };
-        };
+    /** @description POST /api/v1/classifications/create Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PostApiV1ClassificationsCreateRequestBody'];
+      };
     };
-    HeadApiV1ChannelsRules: {
-        parameters: {
-            query?: {
-                /** @description HEAD /api/v1/channels/rules Parameter */
-                name?: components["schemas"]["HeadApiV1ChannelsRulesParameterName"];
-                /** @description HEAD /api/v1/channels/rules Parameter */
-                filters?: components["schemas"]["HeadApiV1ChannelsRulesParameterFilters"];
-                /** @description HEAD /api/v1/channels/rules Parameter */
-                "filters[]"?: components["schemas"]["HeadApiV1ChannelsRulesParameterFilters"];
-                /** @description HEAD /api/v1/channels/rules Parameter */
-                page?: components["schemas"]["HeadApiV1ChannelsRulesParameterPage"];
-                /** @description HEAD /api/v1/channels/rules Parameter */
-                perPage?: components["schemas"]["HeadApiV1ChannelsRulesParameterPerPage"];
-                /** @description HEAD /api/v1/channels/rules Parameter */
-                includeClassifications?: components["schemas"]["HeadApiV1ChannelsRulesParameterIncludeClassifications"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    responses: {
+      /** @description POST /api/v1/classifications/create Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description HEAD /api/v1/channels/rules Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description HEAD /api/v1/channels/rules Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          'application/json': components['schemas']['PostApiV1ClassificationsCreatePositiveResponse'];
         };
+      };
+      /** @description POST /api/v1/classifications/create Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostApiV1ClassificationsCreateNegativeResponse'];
+        };
+      };
     };
-    GetApiV1ChannelsSearch: {
-        parameters: {
-            query?: {
-                /** @description GET /api/v1/channels/search Parameter */
-                page?: components["schemas"]["GetApiV1ChannelsSearchParameterPage"];
-                /** @description GET /api/v1/channels/search Parameter */
-                perPage?: components["schemas"]["GetApiV1ChannelsSearchParameterPerPage"];
-                /** @description GET /api/v1/channels/search Parameter */
-                query?: components["schemas"]["GetApiV1ChannelsSearchParameterQuery"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description GET /api/v1/channels/search Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1ChannelsSearchPositiveResponse"];
-                };
-            };
-            /** @description GET /api/v1/channels/search Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GetApiV1ChannelsSearchNegativeResponse"];
-                };
-            };
-        };
+  };
+  GetApiV1ClassificationsGet: {
+    parameters: {
+      query: {
+        /** @description GET /api/v1/classifications/get Parameter */
+        name: components['schemas']['GetApiV1ClassificationsGetParameterName'];
+        /** @description GET /api/v1/classifications/get Parameter */
+        parents?: components['schemas']['GetApiV1ClassificationsGetParameterParents'];
+        /** @description GET /api/v1/classifications/get Parameter */
+        children?: components['schemas']['GetApiV1ClassificationsGetParameterChildren'];
+        /** @description GET /api/v1/classifications/get Parameter */
+        expandChildren?: components['schemas']['GetApiV1ClassificationsGetParameterExpandChildren'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    HeadApiV1ChannelsSearch: {
-        parameters: {
-            query?: {
-                /** @description HEAD /api/v1/channels/search Parameter */
-                page?: components["schemas"]["HeadApiV1ChannelsSearchParameterPage"];
-                /** @description HEAD /api/v1/channels/search Parameter */
-                perPage?: components["schemas"]["HeadApiV1ChannelsSearchParameterPerPage"];
-                /** @description HEAD /api/v1/channels/search Parameter */
-                query?: components["schemas"]["HeadApiV1ChannelsSearchParameterQuery"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody?: never;
+    responses: {
+      /** @description GET /api/v1/classifications/get Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody?: never;
-        responses: {
-            /** @description HEAD /api/v1/channels/search Positive response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-            /** @description HEAD /api/v1/channels/search Negative response */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
+        content: {
+          'application/json': components['schemas']['GetApiV1ClassificationsGetPositiveResponse'];
         };
+      };
+      /** @description GET /api/v1/classifications/get Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GetApiV1ClassificationsGetNegativeResponse'];
+        };
+      };
     };
+  };
+  HeadApiV1ClassificationsGet: {
+    parameters: {
+      query: {
+        /** @description HEAD /api/v1/classifications/get Parameter */
+        name: components['schemas']['HeadApiV1ClassificationsGetParameterName'];
+        /** @description HEAD /api/v1/classifications/get Parameter */
+        parents?: components['schemas']['HeadApiV1ClassificationsGetParameterParents'];
+        /** @description HEAD /api/v1/classifications/get Parameter */
+        children?: components['schemas']['HeadApiV1ClassificationsGetParameterChildren'];
+        /** @description HEAD /api/v1/classifications/get Parameter */
+        expandChildren?: components['schemas']['HeadApiV1ClassificationsGetParameterExpandChildren'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/classifications/get Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/classifications/get Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  PutApiV1ClassificationsUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** @description PUT /api/v1/classifications/update Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PutApiV1ClassificationsUpdateRequestBody'];
+      };
+    };
+    responses: {
+      /** @description PUT /api/v1/classifications/update Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PutApiV1ClassificationsUpdatePositiveResponse'];
+        };
+      };
+      /** @description PUT /api/v1/classifications/update Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PutApiV1ClassificationsUpdateNegativeResponse'];
+        };
+      };
+    };
+  };
+  DeleteApiV1ClassificationsDelete: {
+    parameters: {
+      query: {
+        /** @description DELETE /api/v1/classifications/delete Parameter */
+        name: components['schemas']['DeleteApiV1ClassificationsDeleteParameterName'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description DELETE /api/v1/classifications/delete Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['DeleteApiV1ClassificationsDeletePositiveResponse'];
+        };
+      };
+      /** @description DELETE /api/v1/classifications/delete Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['DeleteApiV1ClassificationsDeleteNegativeResponse'];
+        };
+      };
+    };
+  };
+  GetApiV1ClassificationsSearch: {
+    parameters: {
+      query?: {
+        /** @description GET /api/v1/classifications/search Parameter */
+        page?: components['schemas']['GetApiV1ClassificationsSearchParameterPage'];
+        /** @description GET /api/v1/classifications/search Parameter */
+        perPage?: components['schemas']['GetApiV1ClassificationsSearchParameterPerPage'];
+        /** @description GET /api/v1/classifications/search Parameter */
+        query?: components['schemas']['GetApiV1ClassificationsSearchParameterQuery'];
+        /** @description GET /api/v1/classifications/search Parameter */
+        filters?: components['schemas']['GetApiV1ClassificationsSearchParameterFilters'];
+        /** @description GET /api/v1/classifications/search Parameter */
+        'filters[]'?: components['schemas']['GetApiV1ClassificationsSearchParameterFilters'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description GET /api/v1/classifications/search Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GetApiV1ClassificationsSearchPositiveResponse'];
+        };
+      };
+      /** @description GET /api/v1/classifications/search Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GetApiV1ClassificationsSearchNegativeResponse'];
+        };
+      };
+    };
+  };
+  HeadApiV1ClassificationsSearch: {
+    parameters: {
+      query?: {
+        /** @description HEAD /api/v1/classifications/search Parameter */
+        page?: components['schemas']['HeadApiV1ClassificationsSearchParameterPage'];
+        /** @description HEAD /api/v1/classifications/search Parameter */
+        perPage?: components['schemas']['HeadApiV1ClassificationsSearchParameterPerPage'];
+        /** @description HEAD /api/v1/classifications/search Parameter */
+        query?: components['schemas']['HeadApiV1ClassificationsSearchParameterQuery'];
+        /** @description HEAD /api/v1/classifications/search Parameter */
+        filters?: components['schemas']['HeadApiV1ClassificationsSearchParameterFilters'];
+        /** @description HEAD /api/v1/classifications/search Parameter */
+        'filters[]'?: components['schemas']['HeadApiV1ClassificationsSearchParameterFilters'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/classifications/search Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/classifications/search Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  PostApiV1ChannelsCreate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** @description POST /api/v1/channels/create Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PostApiV1ChannelsCreateRequestBody'];
+      };
+    };
+    responses: {
+      /** @description POST /api/v1/channels/create Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostApiV1ChannelsCreatePositiveResponse'];
+        };
+      };
+      /** @description POST /api/v1/channels/create Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostApiV1ChannelsCreateNegativeResponse'];
+        };
+      };
+    };
+  };
+  GetApiV1ChannelsGet: {
+    parameters: {
+      query?: {
+        /** @description GET /api/v1/channels/get Parameter */
+        name?: components['schemas']['GetApiV1ChannelsGetParameterName'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description GET /api/v1/channels/get Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GetApiV1ChannelsGetPositiveResponse'];
+        };
+      };
+      /** @description GET /api/v1/channels/get Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GetApiV1ChannelsGetNegativeResponse'];
+        };
+      };
+    };
+  };
+  HeadApiV1ChannelsGet: {
+    parameters: {
+      query?: {
+        /** @description HEAD /api/v1/channels/get Parameter */
+        name?: components['schemas']['HeadApiV1ChannelsGetParameterName'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/channels/get Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/channels/get Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  PostApiV1ChannelsBatchCreate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** @description POST /api/v1/channels/batch/create Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PostApiV1ChannelsBatchCreateRequestBody'];
+      };
+    };
+    responses: {
+      /** @description POST /api/v1/channels/batch/create Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostApiV1ChannelsBatchCreatePositiveResponse'];
+        };
+      };
+      /** @description POST /api/v1/channels/batch/create Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostApiV1ChannelsBatchCreateNegativeResponse'];
+        };
+      };
+    };
+  };
+  PostApiV1ChannelsBatchUpsert: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** @description POST /api/v1/channels/batch/upsert Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PostApiV1ChannelsBatchUpsertRequestBody'];
+      };
+    };
+    responses: {
+      /** @description POST /api/v1/channels/batch/upsert Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostApiV1ChannelsBatchUpsertPositiveResponse'];
+        };
+      };
+      /** @description POST /api/v1/channels/batch/upsert Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostApiV1ChannelsBatchUpsertNegativeResponse'];
+        };
+      };
+    };
+  };
+  PutApiV1ChannelsUpdate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** @description PUT /api/v1/channels/update Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PutApiV1ChannelsUpdateRequestBody'];
+      };
+    };
+    responses: {
+      /** @description PUT /api/v1/channels/update Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PutApiV1ChannelsUpdatePositiveResponse'];
+        };
+      };
+      /** @description PUT /api/v1/channels/update Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PutApiV1ChannelsUpdateNegativeResponse'];
+        };
+      };
+    };
+  };
+  DeleteApiV1ChannelsDelete: {
+    parameters: {
+      query: {
+        /** @description DELETE /api/v1/channels/delete Parameter */
+        name: components['schemas']['DeleteApiV1ChannelsDeleteParameterName'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description DELETE /api/v1/channels/delete Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['DeleteApiV1ChannelsDeletePositiveResponse'];
+        };
+      };
+      /** @description DELETE /api/v1/channels/delete Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['DeleteApiV1ChannelsDeleteNegativeResponse'];
+        };
+      };
+    };
+  };
+  GetApiV1ChannelsRules: {
+    parameters: {
+      query?: {
+        /** @description GET /api/v1/channels/rules Parameter */
+        name?: components['schemas']['GetApiV1ChannelsRulesParameterName'];
+        /** @description GET /api/v1/channels/rules Parameter */
+        filters?: components['schemas']['GetApiV1ChannelsRulesParameterFilters'];
+        /** @description GET /api/v1/channels/rules Parameter */
+        'filters[]'?: components['schemas']['GetApiV1ChannelsRulesParameterFilters'];
+        /** @description GET /api/v1/channels/rules Parameter */
+        page?: components['schemas']['GetApiV1ChannelsRulesParameterPage'];
+        /** @description GET /api/v1/channels/rules Parameter */
+        perPage?: components['schemas']['GetApiV1ChannelsRulesParameterPerPage'];
+        /** @description GET /api/v1/channels/rules Parameter */
+        includeClassifications?: components['schemas']['GetApiV1ChannelsRulesParameterIncludeClassifications'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description GET /api/v1/channels/rules Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GetApiV1ChannelsRulesPositiveResponse'];
+        };
+      };
+      /** @description GET /api/v1/channels/rules Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GetApiV1ChannelsRulesNegativeResponse'];
+        };
+      };
+    };
+  };
+  HeadApiV1ChannelsRules: {
+    parameters: {
+      query?: {
+        /** @description HEAD /api/v1/channels/rules Parameter */
+        name?: components['schemas']['HeadApiV1ChannelsRulesParameterName'];
+        /** @description HEAD /api/v1/channels/rules Parameter */
+        filters?: components['schemas']['HeadApiV1ChannelsRulesParameterFilters'];
+        /** @description HEAD /api/v1/channels/rules Parameter */
+        'filters[]'?: components['schemas']['HeadApiV1ChannelsRulesParameterFilters'];
+        /** @description HEAD /api/v1/channels/rules Parameter */
+        page?: components['schemas']['HeadApiV1ChannelsRulesParameterPage'];
+        /** @description HEAD /api/v1/channels/rules Parameter */
+        perPage?: components['schemas']['HeadApiV1ChannelsRulesParameterPerPage'];
+        /** @description HEAD /api/v1/channels/rules Parameter */
+        includeClassifications?: components['schemas']['HeadApiV1ChannelsRulesParameterIncludeClassifications'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/channels/rules Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/channels/rules Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
+  GetApiV1ChannelsSearch: {
+    parameters: {
+      query?: {
+        /** @description GET /api/v1/channels/search Parameter */
+        page?: components['schemas']['GetApiV1ChannelsSearchParameterPage'];
+        /** @description GET /api/v1/channels/search Parameter */
+        perPage?: components['schemas']['GetApiV1ChannelsSearchParameterPerPage'];
+        /** @description GET /api/v1/channels/search Parameter */
+        query?: components['schemas']['GetApiV1ChannelsSearchParameterQuery'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description GET /api/v1/channels/search Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GetApiV1ChannelsSearchPositiveResponse'];
+        };
+      };
+      /** @description GET /api/v1/channels/search Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['GetApiV1ChannelsSearchNegativeResponse'];
+        };
+      };
+    };
+  };
+  HeadApiV1ChannelsSearch: {
+    parameters: {
+      query?: {
+        /** @description HEAD /api/v1/channels/search Parameter */
+        page?: components['schemas']['HeadApiV1ChannelsSearchParameterPage'];
+        /** @description HEAD /api/v1/channels/search Parameter */
+        perPage?: components['schemas']['HeadApiV1ChannelsSearchParameterPerPage'];
+        /** @description HEAD /api/v1/channels/search Parameter */
+        query?: components['schemas']['HeadApiV1ChannelsSearchParameterQuery'];
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description HEAD /api/v1/channels/search Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+      /** @description HEAD /api/v1/channels/search Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
+      };
+    };
+  };
 }
