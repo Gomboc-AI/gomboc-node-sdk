@@ -482,21 +482,7 @@ export interface components {
       /** @default 1 */
       version: number;
       /** @enum {string} */
-      requestOrigin:
-        | 'PORTAL'
-        | 'WORKFLOW'
-        | 'ORCA_SECURITY'
-        | 'CSPM_SERVICE'
-        | 'COMMUNITY'
-        | 'SCM_PULL_REQUEST'
-        | 'SCM_SCHEDULE'
-        | 'HCL_TERRAFORM_RUN_TASK'
-        | 'GOMBOC_SCHEDULE'
-        | 'GITHUB_ACTION'
-        | 'IDE'
-        | 'MCP'
-        | 'PORTAL_DRIFT'
-        | 'CODE_AGENT';
+      requestOrigin: 'GITHUB_ACTION' | 'IDE' | 'MCP' | 'CODE_AGENT';
       effect?: string;
       reports: {
         path?: string;

@@ -1340,19 +1340,9 @@ components:
         requestOrigin:
           type: string
           enum:
-            - PORTAL
-            - WORKFLOW
-            - ORCA_SECURITY
-            - CSPM_SERVICE
-            - COMMUNITY
-            - SCM_PULL_REQUEST
-            - SCM_SCHEDULE
-            - HCL_TERRAFORM_RUN_TASK
-            - GOMBOC_SCHEDULE
             - GITHUB_ACTION
             - IDE
             - MCP
-            - PORTAL_DRIFT
             - CODE_AGENT
         effect:
           type: string
