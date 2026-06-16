@@ -541,13 +541,13 @@ export interface components {
       durationInSeconds: number;
       scmContext?: {
         scmType: 'GITHUB' | 'GITLAB' | 'BITBUCKET' | 'AZDO';
-        originalPullRequestId?: {
+        originalPullRequest?: {
           id: string;
           /** Format: uri */
           url: string;
           author: string;
         };
-        resultingPullRequestId?: {
+        resultingPullRequest?: {
           id: string;
           /** Format: uri */
           url: string;
