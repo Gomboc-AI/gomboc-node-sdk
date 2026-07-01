@@ -1,5 +1,11 @@
 # @gomboc-ai/gomboc-node-sdk
 
+## 2.2.0
+
+### Minor Changes
+
+- 10557a9: new version of reporting/orl-external
+
 ## 2.1.2
 
 ### Patch Changes
