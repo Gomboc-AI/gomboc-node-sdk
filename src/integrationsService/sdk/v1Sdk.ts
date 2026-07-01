@@ -9,6 +9,8 @@ import type {
   CreateOrlFixAppliedEventResponse,
   CreateOrlReportEventRequestBody,
   CreateOrlReportEventResponse,
+  CreateOrlReportEventV2RequestBody,
+  CreateOrlReportEventV2Response,
   DeleteHcpIntegrationParams,
   DeleteHcpIntegrationResponse,
   GetAllHcpIntegrationsResponse,
@@ -181,6 +183,7 @@ export class IntegrationsServiceSdk implements IIntegrationsServiceSdk {
     });
   }
 
+  /** @deprecated Use createOrlReportEventV2 instead. */
   async createOrlReportEvent(
     args: CreateOrlReportEventRequestBody
   ): Promise<
@@ -188,6 +191,17 @@ export class IntegrationsServiceSdk implements IIntegrationsServiceSdk {
   > {
     return this.request<CreateOrlReportEventResponse>(async () => {
       const res = await this.client.post('/reporting/orl-external', args);
+      return res.data;
+    });
+  }
+
+  async createOrlReportEventV2(
+    args: CreateOrlReportEventV2RequestBody
+  ): Promise<
+    Result<CreateOrlReportEventV2Response, IIntegrationsServiceErrorType>
+  > {
+    return this.request<CreateOrlReportEventV2Response>(async () => {
+      const res = await this.client.post('/v2/reporting/orl-external', args);
       return res.data;
     });
   }

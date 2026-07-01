@@ -132,6 +132,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/v2/reporting/orl-external': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['createOrlReportEventV2'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -592,6 +608,131 @@ export interface components {
       } & {
         [key: string]: unknown;
       })[];
+    };
+    PostV2ReportingOrlExternalPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        success: boolean;
+        message: string;
+        jobId?: string;
+      };
+    };
+    PostV2ReportingOrlExternalNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PostV2ReportingOrlExternalRequestBody: {
+      /** @default 2 */
+      version: number;
+      /** @enum {string} */
+      requestOrigin: 'GITHUB_ACTION' | 'IDE' | 'MCP' | 'CODE_AGENT';
+      effect?: string;
+      reports: ({
+        path?: string;
+        branch?: string;
+        workspaceId?: string | null;
+        timestamp?: string;
+        orlReport?: unknown;
+        resultingPullRequest?: {
+          repositoryId: string;
+          repositoryName: string;
+          ownerId: string;
+          ownerName: string;
+          number: string;
+          /** Format: uri */
+          url: string;
+          title: string;
+          sourceBranch: string;
+          targetBranch: string;
+          /** @enum {string} */
+          status: 'EXPECTED' | 'MERGED' | 'CLOSED' | 'OPEN';
+          /** @enum {string} */
+          provider: 'GitHub' | 'GitLab' | 'BitBucket' | 'Azdo';
+        };
+        workflowStatus?: {
+          /** @enum {string} */
+          status: 'success' | 'failure';
+          errors: string[];
+        };
+        timing?: {
+          startedAt?: string;
+          completedAt?: string;
+        };
+      } & {
+        [key: string]: unknown;
+      })[];
+      errors: {
+        status: number;
+        message: string;
+      }[];
+      durationInSeconds: number;
+      scmContext?: {
+        /** @enum {string} */
+        scmType: 'GITHUB' | 'GITLAB' | 'BITBUCKET' | 'AZDO';
+        scmRepositoryId?: string;
+        originalPullRequest?: {
+          pullRequest: {
+            repositoryId: string;
+            repositoryName: string;
+            ownerId: string;
+            ownerName: string;
+            number: string;
+            /** Format: uri */
+            url: string;
+            title: string;
+            sourceBranch: string;
+            targetBranch: string;
+            /** @enum {string} */
+            status: 'EXPECTED' | 'MERGED' | 'CLOSED' | 'OPEN';
+            /** @enum {string} */
+            provider: 'GitHub' | 'GitLab' | 'BitBucket' | 'Azdo';
+            /**
+             * @default false
+             * @constant
+             */
+            authoredByGomboc: false;
+          };
+          branchCommit: {
+            sha: string;
+            branchName: string;
+          };
+        };
+        resultingPullRequest?: {
+          repositoryId: string;
+          repositoryName: string;
+          ownerId: string;
+          ownerName: string;
+          number: string;
+          /** Format: uri */
+          url: string;
+          title: string;
+          sourceBranch: string;
+          targetBranch: string;
+          /** @enum {string} */
+          status: 'EXPECTED' | 'MERGED' | 'CLOSED' | 'OPEN';
+          /** @enum {string} */
+          provider: 'GitHub' | 'GitLab' | 'BitBucket' | 'Azdo';
+        };
+      };
+      gitDiffs?: {
+        [key: string]: string;
+      };
+      remediatedFileContent?: {
+        [key: string]: string;
+      };
+      workflowStatus?: {
+        /** @enum {string} */
+        status: 'success' | 'failure';
+        errors: string[];
+      };
+      timing?: {
+        startedAt?: string;
+        completedAt?: string;
+      };
     };
   };
   responses: never;
@@ -1058,6 +1199,40 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['PostReportingOrlFixAppliedNegativeResponse'];
+        };
+      };
+    };
+  };
+  createOrlReportEventV2: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** @description POST /v2/reporting/orl-external Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PostV2ReportingOrlExternalRequestBody'];
+      };
+    };
+    responses: {
+      /** @description POST /v2/reporting/orl-external Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostV2ReportingOrlExternalPositiveResponse'];
+        };
+      };
+      /** @description POST /v2/reporting/orl-external Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostV2ReportingOrlExternalNegativeResponse'];
         };
       };
     };

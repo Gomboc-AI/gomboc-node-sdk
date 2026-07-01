@@ -60,6 +60,10 @@ export type CreateOrlReportEventRequestBody =
   Schemas['PostReportingOrlExternalRequestBody'];
 export type CreateOrlReportEventResponse =
   Schemas['PostReportingOrlExternalPositiveResponse']['data'];
+export type CreateOrlReportEventV2RequestBody =
+  Schemas['PostV2ReportingOrlExternalRequestBody'];
+export type CreateOrlReportEventV2Response =
+  Schemas['PostV2ReportingOrlExternalPositiveResponse']['data'];
 
 export type CreateOrlFixAppliedEventRequestBody =
   Schemas['PostReportingOrlFixAppliedRequestBody'];
@@ -103,10 +107,16 @@ export interface IIntegrationsServiceSdk {
   ): Promise<
     Result<GetDriftTerraformPlanResponse, IIntegrationsServiceErrorType>
   >;
+  /** @deprecated Use createOrlReportEventV2 instead. */
   createOrlReportEvent(
     args: CreateOrlReportEventRequestBody
   ): Promise<
     Result<CreateOrlReportEventResponse, IIntegrationsServiceErrorType>
+  >;
+  createOrlReportEventV2(
+    args: CreateOrlReportEventV2RequestBody
+  ): Promise<
+    Result<CreateOrlReportEventV2Response, IIntegrationsServiceErrorType>
   >;
   createOrlFixAppliedEvent(
     args: CreateOrlFixAppliedEventRequestBody
