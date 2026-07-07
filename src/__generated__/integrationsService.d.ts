@@ -132,6 +132,54 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/telemetry/v1/traces': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['createTraceTelemetryEvent'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/telemetry/v1/metrics': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['createMetricTelemetryEvent'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/telemetry/v1/logs': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['createLogTelemetryEvent'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/v2/reporting/orl-external': {
     parameters: {
       query?: never;
@@ -478,6 +526,33 @@ export interface components {
     };
     HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterDriftNotificationId: string;
     HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterXOrganizationId: string;
+    Schema1:
+      | string
+      | number
+      | boolean
+      | null
+      | components['schemas']['Schema1'][]
+      | {
+          [key: string]: components['schemas']['Schema1'];
+        };
+    Schema2:
+      | string
+      | number
+      | boolean
+      | null
+      | components['schemas']['Schema2'][]
+      | {
+          [key: string]: components['schemas']['Schema2'];
+        };
+    Schema3:
+      | string
+      | number
+      | boolean
+      | null
+      | components['schemas']['Schema3'][]
+      | {
+          [key: string]: components['schemas']['Schema3'];
+        };
     PostReportingOrlExternalPositiveResponse: {
       /** @constant */
       status: 'success';
@@ -524,7 +599,7 @@ export interface components {
           findings: number;
           fixes: number;
           changes: number;
-          errors: unknown[];
+          errors: components['schemas']['Schema1'][];
           rules: {
             metadata: {
               name: string;
@@ -541,13 +616,13 @@ export interface components {
             findings: number;
             fixes: number;
             changes: number;
-            errors: unknown[];
+            errors: components['schemas']['Schema2'][];
             files: {
               path: string;
             }[];
           }[];
         } & {
-          [key: string]: unknown;
+          [key: string]: components['schemas']['Schema3'];
         };
       }[];
       errors: {
@@ -609,6 +684,103 @@ export interface components {
         [key: string]: unknown;
       })[];
     };
+    PostTelemetryV1TracesParameterContentType: string;
+    /** @enum {string} */
+    PostTelemetryV1TracesParameterXGombocTelemetrySource:
+      | 'CLI'
+      | 'IDE_EXTENSION';
+    PostTelemetryV1TracesParameterXGombocClientId: string;
+    PostTelemetryV1TracesParameterXGombocClientVersion: string;
+    PostTelemetryV1TracesParameterXGombocSessionId: string;
+    PostTelemetryV1TracesPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        [key: string]: unknown;
+      };
+    };
+    PostTelemetryV1TracesNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PostTelemetryV1TracesRequestBody: {
+      resourceSpans: {
+        [key: string]: unknown;
+      }[];
+    };
+    PostTelemetryV1MetricsParameterContentType: string;
+    /** @enum {string} */
+    PostTelemetryV1MetricsParameterXGombocTelemetrySource:
+      | 'CLI'
+      | 'IDE_EXTENSION';
+    PostTelemetryV1MetricsParameterXGombocClientId: string;
+    PostTelemetryV1MetricsParameterXGombocClientVersion: string;
+    PostTelemetryV1MetricsParameterXGombocSessionId: string;
+    PostTelemetryV1MetricsPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        [key: string]: unknown;
+      };
+    };
+    PostTelemetryV1MetricsNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PostTelemetryV1MetricsRequestBody: {
+      resourceMetrics: {
+        [key: string]: unknown;
+      }[];
+    };
+    PostTelemetryV1LogsParameterContentType: string;
+    /** @enum {string} */
+    PostTelemetryV1LogsParameterXGombocTelemetrySource: 'CLI' | 'IDE_EXTENSION';
+    PostTelemetryV1LogsParameterXGombocClientId: string;
+    PostTelemetryV1LogsParameterXGombocClientVersion: string;
+    PostTelemetryV1LogsParameterXGombocSessionId: string;
+    PostTelemetryV1LogsPositiveResponse: {
+      /** @constant */
+      status: 'success';
+      data: {
+        [key: string]: unknown;
+      };
+    };
+    PostTelemetryV1LogsNegativeResponse: {
+      /** @constant */
+      status: 'error';
+      error: {
+        message: string;
+      };
+    };
+    PostTelemetryV1LogsRequestBody: {
+      resourceLogs: {
+        [key: string]: unknown;
+      }[];
+    };
+    Schema4:
+      | string
+      | number
+      | boolean
+      | null
+      | components['schemas']['Schema4'][]
+      | {
+          [key: string]: components['schemas']['Schema4'];
+        };
+    Schema5:
+      | string
+      | number
+      | boolean
+      | null
+      | components['schemas']['Schema5'][]
+      | {
+          [key: string]: components['schemas']['Schema5'];
+        };
     PostV2ReportingOrlExternalPositiveResponse: {
       /** @constant */
       status: 'success';
@@ -636,7 +808,7 @@ export interface components {
         branch?: string;
         workspaceId?: string | null;
         timestamp?: string;
-        orlReport?: unknown;
+        orlReport?: components['schemas']['Schema5'];
         resultingPullRequest?: {
           repositoryId: string;
           repositoryName: string;
@@ -663,7 +835,7 @@ export interface components {
           completedAt?: string;
         };
       } & {
-        [key: string]: unknown;
+        [key: string]: components['schemas']['Schema4'];
       })[];
       errors: {
         status: number;
@@ -1199,6 +1371,141 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['PostReportingOrlFixAppliedNegativeResponse'];
+        };
+      };
+    };
+  };
+  createTraceTelemetryEvent: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description POST /telemetry/v1/traces Parameter */
+        'content-type'?: components['schemas']['PostTelemetryV1TracesParameterContentType'];
+        /** @description POST /telemetry/v1/traces Parameter */
+        'x-gomboc-telemetry-source': components['schemas']['PostTelemetryV1TracesParameterXGombocTelemetrySource'];
+        /** @description POST /telemetry/v1/traces Parameter */
+        'x-gomboc-client-id'?: components['schemas']['PostTelemetryV1TracesParameterXGombocClientId'];
+        /** @description POST /telemetry/v1/traces Parameter */
+        'x-gomboc-client-version'?: components['schemas']['PostTelemetryV1TracesParameterXGombocClientVersion'];
+        /** @description POST /telemetry/v1/traces Parameter */
+        'x-gomboc-session-id'?: components['schemas']['PostTelemetryV1TracesParameterXGombocSessionId'];
+      };
+      path?: never;
+      cookie?: never;
+    };
+    /** @description POST /telemetry/v1/traces Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PostTelemetryV1TracesRequestBody'];
+      };
+    };
+    responses: {
+      /** @description POST /telemetry/v1/traces Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostTelemetryV1TracesPositiveResponse'];
+        };
+      };
+      /** @description POST /telemetry/v1/traces Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostTelemetryV1TracesNegativeResponse'];
+        };
+      };
+    };
+  };
+  createMetricTelemetryEvent: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description POST /telemetry/v1/metrics Parameter */
+        'content-type'?: components['schemas']['PostTelemetryV1MetricsParameterContentType'];
+        /** @description POST /telemetry/v1/metrics Parameter */
+        'x-gomboc-telemetry-source': components['schemas']['PostTelemetryV1MetricsParameterXGombocTelemetrySource'];
+        /** @description POST /telemetry/v1/metrics Parameter */
+        'x-gomboc-client-id'?: components['schemas']['PostTelemetryV1MetricsParameterXGombocClientId'];
+        /** @description POST /telemetry/v1/metrics Parameter */
+        'x-gomboc-client-version'?: components['schemas']['PostTelemetryV1MetricsParameterXGombocClientVersion'];
+        /** @description POST /telemetry/v1/metrics Parameter */
+        'x-gomboc-session-id'?: components['schemas']['PostTelemetryV1MetricsParameterXGombocSessionId'];
+      };
+      path?: never;
+      cookie?: never;
+    };
+    /** @description POST /telemetry/v1/metrics Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PostTelemetryV1MetricsRequestBody'];
+      };
+    };
+    responses: {
+      /** @description POST /telemetry/v1/metrics Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostTelemetryV1MetricsPositiveResponse'];
+        };
+      };
+      /** @description POST /telemetry/v1/metrics Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostTelemetryV1MetricsNegativeResponse'];
+        };
+      };
+    };
+  };
+  createLogTelemetryEvent: {
+    parameters: {
+      query?: never;
+      header: {
+        /** @description POST /telemetry/v1/logs Parameter */
+        'content-type'?: components['schemas']['PostTelemetryV1LogsParameterContentType'];
+        /** @description POST /telemetry/v1/logs Parameter */
+        'x-gomboc-telemetry-source': components['schemas']['PostTelemetryV1LogsParameterXGombocTelemetrySource'];
+        /** @description POST /telemetry/v1/logs Parameter */
+        'x-gomboc-client-id'?: components['schemas']['PostTelemetryV1LogsParameterXGombocClientId'];
+        /** @description POST /telemetry/v1/logs Parameter */
+        'x-gomboc-client-version'?: components['schemas']['PostTelemetryV1LogsParameterXGombocClientVersion'];
+        /** @description POST /telemetry/v1/logs Parameter */
+        'x-gomboc-session-id'?: components['schemas']['PostTelemetryV1LogsParameterXGombocSessionId'];
+      };
+      path?: never;
+      cookie?: never;
+    };
+    /** @description POST /telemetry/v1/logs Request body */
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['PostTelemetryV1LogsRequestBody'];
+      };
+    };
+    responses: {
+      /** @description POST /telemetry/v1/logs Positive response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostTelemetryV1LogsPositiveResponse'];
+        };
+      };
+      /** @description POST /telemetry/v1/logs Negative response */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PostTelemetryV1LogsNegativeResponse'];
         };
       };
     };

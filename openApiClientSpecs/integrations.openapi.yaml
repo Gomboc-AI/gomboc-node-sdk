@@ -475,6 +475,200 @@ paths:
                     status: error
                     error:
                       message: Sample error message
+  /telemetry/v1/traces:
+    post:
+      operationId: createTraceTelemetryEvent
+      tags:
+        - Telemetry
+      parameters:
+        - name: content-type
+          in: header
+          required: false
+          description: POST /telemetry/v1/traces Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1TracesParameterContentType"
+        - name: x-gomboc-telemetry-source
+          in: header
+          required: true
+          description: POST /telemetry/v1/traces Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1TracesParameterXGombocTelemetrySourc\
+              e"
+        - name: x-gomboc-client-id
+          in: header
+          required: false
+          description: POST /telemetry/v1/traces Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1TracesParameterXGombocClientId"
+        - name: x-gomboc-client-version
+          in: header
+          required: false
+          description: POST /telemetry/v1/traces Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1TracesParameterXGombocClientVersion"
+        - name: x-gomboc-session-id
+          in: header
+          required: false
+          description: POST /telemetry/v1/traces Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1TracesParameterXGombocSessionId"
+      requestBody:
+        description: POST /telemetry/v1/traces Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostTelemetryV1TracesRequestBody"
+        required: true
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: POST /telemetry/v1/traces Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostTelemetryV1TracesPositiveResponse"
+        "400":
+          description: POST /telemetry/v1/traces Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostTelemetryV1TracesNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /telemetry/v1/metrics:
+    post:
+      operationId: createMetricTelemetryEvent
+      tags:
+        - Telemetry
+      parameters:
+        - name: content-type
+          in: header
+          required: false
+          description: POST /telemetry/v1/metrics Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1MetricsParameterContentType"
+        - name: x-gomboc-telemetry-source
+          in: header
+          required: true
+          description: POST /telemetry/v1/metrics Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1MetricsParameterXGombocTelemetrySour\
+              ce"
+        - name: x-gomboc-client-id
+          in: header
+          required: false
+          description: POST /telemetry/v1/metrics Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1MetricsParameterXGombocClientId"
+        - name: x-gomboc-client-version
+          in: header
+          required: false
+          description: POST /telemetry/v1/metrics Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1MetricsParameterXGombocClientVersion"
+        - name: x-gomboc-session-id
+          in: header
+          required: false
+          description: POST /telemetry/v1/metrics Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1MetricsParameterXGombocSessionId"
+      requestBody:
+        description: POST /telemetry/v1/metrics Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostTelemetryV1MetricsRequestBody"
+        required: true
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: POST /telemetry/v1/metrics Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostTelemetryV1MetricsPositiveResponse"
+        "400":
+          description: POST /telemetry/v1/metrics Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostTelemetryV1MetricsNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
+  /telemetry/v1/logs:
+    post:
+      operationId: createLogTelemetryEvent
+      tags:
+        - Telemetry
+      parameters:
+        - name: content-type
+          in: header
+          required: false
+          description: POST /telemetry/v1/logs Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1LogsParameterContentType"
+        - name: x-gomboc-telemetry-source
+          in: header
+          required: true
+          description: POST /telemetry/v1/logs Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1LogsParameterXGombocTelemetrySource"
+        - name: x-gomboc-client-id
+          in: header
+          required: false
+          description: POST /telemetry/v1/logs Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1LogsParameterXGombocClientId"
+        - name: x-gomboc-client-version
+          in: header
+          required: false
+          description: POST /telemetry/v1/logs Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1LogsParameterXGombocClientVersion"
+        - name: x-gomboc-session-id
+          in: header
+          required: false
+          description: POST /telemetry/v1/logs Parameter
+          schema:
+            $ref: "#/components/schemas/PostTelemetryV1LogsParameterXGombocSessionId"
+      requestBody:
+        description: POST /telemetry/v1/logs Request body
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostTelemetryV1LogsRequestBody"
+        required: true
+      security:
+        - HTTP_1: []
+      responses:
+        "200":
+          description: POST /telemetry/v1/logs Positive response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostTelemetryV1LogsPositiveResponse"
+        "400":
+          description: POST /telemetry/v1/logs Negative response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostTelemetryV1LogsNegativeResponse"
+              examples:
+                example1:
+                  value:
+                    status: error
+                    error:
+                      message: Sample error message
   /v2/reporting/orl-external:
     post:
       operationId: createOrlReportEventV2
@@ -1323,6 +1517,48 @@ components:
       type: string
     HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterXOrganizationId:
       type: string
+    Schema1:
+      anyOf:
+        - type: string
+        - type: number
+        - type: boolean
+        - type: "null"
+        - type: array
+          items:
+            $ref: "#/components/schemas/Schema1"
+        - type: object
+          propertyNames:
+            type: string
+          additionalProperties:
+            $ref: "#/components/schemas/Schema1"
+    Schema2:
+      anyOf:
+        - type: string
+        - type: number
+        - type: boolean
+        - type: "null"
+        - type: array
+          items:
+            $ref: "#/components/schemas/Schema2"
+        - type: object
+          propertyNames:
+            type: string
+          additionalProperties:
+            $ref: "#/components/schemas/Schema2"
+    Schema3:
+      anyOf:
+        - type: string
+        - type: number
+        - type: boolean
+        - type: "null"
+        - type: array
+          items:
+            $ref: "#/components/schemas/Schema3"
+        - type: object
+          propertyNames:
+            type: string
+          additionalProperties:
+            $ref: "#/components/schemas/Schema3"
     PostReportingOrlExternalPositiveResponse:
       type: object
       properties:
@@ -1442,7 +1678,8 @@ components:
                     maximum: 9007199254740991
                   errors:
                     type: array
-                    items: {}
+                    items:
+                      $ref: "#/components/schemas/Schema1"
                   rules:
                     type: array
                     items:
@@ -1491,7 +1728,8 @@ components:
                           maximum: 9007199254740991
                         errors:
                           type: array
-                          items: {}
+                          items:
+                            $ref: "#/components/schemas/Schema2"
                         files:
                           type: array
                           items:
@@ -1521,7 +1759,8 @@ components:
                   - changes
                   - errors
                   - rules
-                additionalProperties: {}
+                additionalProperties:
+                  $ref: "#/components/schemas/Schema3"
         errors:
           type: array
           items:
@@ -1683,6 +1922,217 @@ components:
       required:
         - requestOrigin
         - events
+    PostTelemetryV1TracesParameterContentType:
+      type: string
+    PostTelemetryV1TracesParameterXGombocTelemetrySource:
+      type: string
+      enum:
+        - CLI
+        - IDE_EXTENSION
+    PostTelemetryV1TracesParameterXGombocClientId:
+      type: string
+      minLength: 1
+    PostTelemetryV1TracesParameterXGombocClientVersion:
+      type: string
+      minLength: 1
+    PostTelemetryV1TracesParameterXGombocSessionId:
+      type: string
+      minLength: 1
+    PostTelemetryV1TracesPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostTelemetryV1TracesNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostTelemetryV1TracesRequestBody:
+      type: object
+      properties:
+        resourceSpans:
+          type: array
+          items:
+            type: object
+            propertyNames:
+              type: string
+            additionalProperties: {}
+      required:
+        - resourceSpans
+    PostTelemetryV1MetricsParameterContentType:
+      type: string
+    PostTelemetryV1MetricsParameterXGombocTelemetrySource:
+      type: string
+      enum:
+        - CLI
+        - IDE_EXTENSION
+    PostTelemetryV1MetricsParameterXGombocClientId:
+      type: string
+      minLength: 1
+    PostTelemetryV1MetricsParameterXGombocClientVersion:
+      type: string
+      minLength: 1
+    PostTelemetryV1MetricsParameterXGombocSessionId:
+      type: string
+      minLength: 1
+    PostTelemetryV1MetricsPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostTelemetryV1MetricsNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostTelemetryV1MetricsRequestBody:
+      type: object
+      properties:
+        resourceMetrics:
+          type: array
+          items:
+            type: object
+            propertyNames:
+              type: string
+            additionalProperties: {}
+      required:
+        - resourceMetrics
+    PostTelemetryV1LogsParameterContentType:
+      type: string
+    PostTelemetryV1LogsParameterXGombocTelemetrySource:
+      type: string
+      enum:
+        - CLI
+        - IDE_EXTENSION
+    PostTelemetryV1LogsParameterXGombocClientId:
+      type: string
+      minLength: 1
+    PostTelemetryV1LogsParameterXGombocClientVersion:
+      type: string
+      minLength: 1
+    PostTelemetryV1LogsParameterXGombocSessionId:
+      type: string
+      minLength: 1
+    PostTelemetryV1LogsPositiveResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: success
+        data:
+          type: object
+          propertyNames:
+            type: string
+          additionalProperties: {}
+      required:
+        - status
+        - data
+      additionalProperties: false
+    PostTelemetryV1LogsNegativeResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          const: error
+        error:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+            - message
+          additionalProperties: false
+      required:
+        - status
+        - error
+      additionalProperties: false
+    PostTelemetryV1LogsRequestBody:
+      type: object
+      properties:
+        resourceLogs:
+          type: array
+          items:
+            type: object
+            propertyNames:
+              type: string
+            additionalProperties: {}
+      required:
+        - resourceLogs
+    Schema4:
+      anyOf:
+        - type: string
+        - type: number
+        - type: boolean
+        - type: "null"
+        - type: array
+          items:
+            $ref: "#/components/schemas/Schema4"
+        - type: object
+          propertyNames:
+            type: string
+          additionalProperties:
+            $ref: "#/components/schemas/Schema4"
+    Schema5:
+      anyOf:
+        - type: string
+        - type: number
+        - type: boolean
+        - type: "null"
+        - type: array
+          items:
+            $ref: "#/components/schemas/Schema5"
+        - type: object
+          propertyNames:
+            type: string
+          additionalProperties:
+            $ref: "#/components/schemas/Schema5"
     PostV2ReportingOrlExternalPositiveResponse:
       type: object
       properties:
@@ -1754,7 +2204,8 @@ components:
                   - "null"
               timestamp:
                 type: string
-              orlReport: {}
+              orlReport:
+                $ref: "#/components/schemas/Schema5"
               resultingPullRequest:
                 type: object
                 properties:
@@ -1825,7 +2276,8 @@ components:
                     type: string
                   completedAt:
                     type: string
-            additionalProperties: {}
+            additionalProperties:
+              $ref: "#/components/schemas/Schema4"
         errors:
           type: array
           items:
