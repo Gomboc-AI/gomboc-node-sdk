@@ -4,355 +4,400 @@
  */
 
 export interface paths {
-  '/healthcheck': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/healthcheck": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["GetHealthcheck"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head: operations["HeadHealthcheck"];
+        patch?: never;
+        trace?: never;
     };
-    get: operations['GetHealthcheck'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head: operations['HeadHealthcheck'];
-    patch?: never;
-    trace?: never;
-  };
-  '/tf-ops/api/v1/hcp/integrations/{integrationId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/tf-ops/api/v1/hcp/integrations/{integrationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["getHcpIntegration"];
+        put?: never;
+        post?: never;
+        delete: operations["deleteHcpIntegration"];
+        options?: never;
+        head: operations["getHcpIntegration__HEAD"];
+        patch?: never;
+        trace?: never;
     };
-    get: operations['getHcpIntegration'];
-    put?: never;
-    post?: never;
-    delete: operations['deleteHcpIntegration'];
-    options?: never;
-    head: operations['getHcpIntegration__HEAD'];
-    patch?: never;
-    trace?: never;
-  };
-  '/tf-ops/api/v1/hcp/integrations': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/tf-ops/api/v1/hcp/integrations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["getAllHcpIntegrations"];
+        put?: never;
+        post: operations["createHcpIntegration"];
+        delete?: never;
+        options?: never;
+        head: operations["getAllHcpIntegrations__HEAD"];
+        patch?: never;
+        trace?: never;
     };
-    get: operations['getAllHcpIntegrations'];
-    put?: never;
-    post: operations['createHcpIntegration'];
-    delete?: never;
-    options?: never;
-    head: operations['getAllHcpIntegrations__HEAD'];
-    patch?: never;
-    trace?: never;
-  };
-  '/tf-ops/api/v1/hcp/webhooks/terraform-run-task/{integrationId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/tf-ops/api/v1/hcp/webhooks/terraform-run-task/{integrationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationId"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations['PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationId'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/tf-ops/api/v1/hcp/webhooks/notifications/{integrationId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/tf-ops/api/v1/hcp/webhooks/notifications/{integrationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["PostTfOpsApiV1HcpWebhooksNotificationsIntegrationId"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations['PostTfOpsApiV1HcpWebhooksNotificationsIntegrationId'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/tf-ops/api/v1/hcp/drift/terraform-plan/{driftNotificationId}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/tf-ops/api/v1/hcp/drift/terraform-plan/{driftNotificationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationId"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head: operations["HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationId"];
+        patch?: never;
+        trace?: never;
     };
-    get: operations['GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationId'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head: operations['HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationId'];
-    patch?: never;
-    trace?: never;
-  };
-  '/reporting/orl-external': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/reporting/orl-external": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["createOrlReportEvent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations['createOrlReportEvent'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/reporting/orl-fix-applied': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/reporting/orl-fix-applied": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["createOrlFixAppliedEvent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations['createOrlFixAppliedEvent'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/v2/reporting/orl-external': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/telemetry/v1/traces": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["createTraceTelemetryEvent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations['createOrlReportEventV2'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
+    "/telemetry/v1/metrics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["createMetricTelemetryEvent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/telemetry/v1/logs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["createLogTelemetryEvent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/reporting/orl-external": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["createOrlReportEventV2"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-  schemas: {
-    GetHealthcheckPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: {
-        status: string;
-        timestamp: string;
-      };
-    };
-    GetHealthcheckNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    GetTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId: string;
-    GetTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId: string;
-    GetTfOpsApiV1HcpIntegrationsIntegrationIdPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: {
-        deletedAt?: unknown;
+    schemas: {
+        GetHealthcheckPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: {
+                status: string;
+                timestamp: string;
+            };
+        };
+        GetHealthcheckNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
+        };
+        GetTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId: string;
+        GetTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId: string;
+        GetTfOpsApiV1HcpIntegrationsIntegrationIdPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: {
+                deletedAt?: unknown;
+                /** Format: uuid */
+                integrationId: string;
+                /** Format: uuid */
+                organizationId: string;
+                /** Format: email */
+                createdBy: string;
+                name: string;
+                HMACKey: string;
+                createdAt: unknown;
+                /** Format: uri */
+                webhookUrl: string;
+                /** @enum {string} */
+                type: "RUN_TASK" | "NOTIFICATION";
+            };
+        };
+        GetTfOpsApiV1HcpIntegrationsIntegrationIdNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
+        };
+        HeadTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId: string;
+        HeadTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId: string;
+        DeleteTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId: string;
+        DeleteTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId: string;
+        DeleteTfOpsApiV1HcpIntegrationsIntegrationIdPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: {
+                integrationId: string;
+            };
+        };
+        DeleteTfOpsApiV1HcpIntegrationsIntegrationIdNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
+        };
+        PostTfOpsApiV1HcpIntegrationsParameterXOrganizationId: string;
+        PostTfOpsApiV1HcpIntegrationsPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: {
+                deletedAt?: unknown;
+                /** Format: uuid */
+                integrationId: string;
+                /** Format: uuid */
+                organizationId: string;
+                /** Format: email */
+                createdBy: string;
+                name: string;
+                HMACKey: string;
+                createdAt: unknown;
+                /** Format: uri */
+                webhookUrl: string;
+                /** @enum {string} */
+                type: "RUN_TASK" | "NOTIFICATION";
+            };
+        };
+        PostTfOpsApiV1HcpIntegrationsNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
+        };
+        PostTfOpsApiV1HcpIntegrationsRequestBody: {
+            /** Format: email */
+            createdBy: string;
+            name?: string;
+            /** @enum {string} */
+            type: "RUN_TASK" | "NOTIFICATION";
+            pat?: string;
+        };
+        GetTfOpsApiV1HcpIntegrationsParameterXOrganizationId: string;
+        GetTfOpsApiV1HcpIntegrationsPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: {
+                integrations: {
+                    deletedAt?: unknown;
+                    /** Format: uuid */
+                    integrationId: string;
+                    /** Format: uuid */
+                    organizationId: string;
+                    /** Format: email */
+                    createdBy: string;
+                    name: string;
+                    HMACKey: string;
+                    createdAt: unknown;
+                    /** Format: uri */
+                    webhookUrl: string;
+                    /** @enum {string} */
+                    type: "RUN_TASK" | "NOTIFICATION";
+                }[];
+            };
+        };
+        GetTfOpsApiV1HcpIntegrationsNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
+        };
+        HeadTfOpsApiV1HcpIntegrationsParameterXOrganizationId: string;
         /** Format: uuid */
-        integrationId: string;
+        PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdParameterIntegrationId: string;
+        PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: Record<string, never>;
+        };
+        PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
+        };
+        PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdRequestBody: {
+            payload_version: number;
+            stage: string;
+            access_token: string;
+            capabilities: {
+                outcomes: boolean;
+            };
+            /** Format: uri */
+            configuration_version_download_url: string;
+            configuration_version_id: string;
+            is_speculative: boolean;
+            organization_name: string;
+            /** Format: uri */
+            plan_json_api_url?: string;
+            /** Format: uri */
+            run_app_url: string;
+            run_created_at: string;
+            run_created_by: string;
+            run_id: string;
+            run_message: string;
+            /** Format: uri */
+            task_result_callback_url: string;
+            /** @enum {string} */
+            task_result_enforcement_level: "mandatory" | "advisory" | "test";
+            task_result_id: string;
+            vcs_branch: string | null;
+            /** Format: uri */
+            vcs_commit_url: string | null;
+            /** Format: uri */
+            vcs_pull_request_url: string | null;
+            /** Format: uri */
+            vcs_repo_url: string | null;
+            /** Format: uri */
+            workspace_app_url: string;
+            workspace_id: string;
+            workspace_name: string;
+            workspace_working_directory: string;
+        };
         /** Format: uuid */
-        organizationId: string;
-        /** Format: email */
-        createdBy: string;
-        name: string;
-        HMACKey: string;
-        createdAt: unknown;
-        /** Format: uri */
-        webhookUrl: string;
-        /** @enum {string} */
-        type: 'RUN_TASK' | 'NOTIFICATION';
-      };
-    };
-    GetTfOpsApiV1HcpIntegrationsIntegrationIdNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    HeadTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId: string;
-    HeadTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId: string;
-    DeleteTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId: string;
-    DeleteTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId: string;
-    DeleteTfOpsApiV1HcpIntegrationsIntegrationIdPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: {
-        integrationId: string;
-      };
-    };
-    DeleteTfOpsApiV1HcpIntegrationsIntegrationIdNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    PostTfOpsApiV1HcpIntegrationsParameterXOrganizationId: string;
-    PostTfOpsApiV1HcpIntegrationsPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: {
-        deletedAt?: unknown;
-        /** Format: uuid */
-        integrationId: string;
-        /** Format: uuid */
-        organizationId: string;
-        /** Format: email */
-        createdBy: string;
-        name: string;
-        HMACKey: string;
-        createdAt: unknown;
-        /** Format: uri */
-        webhookUrl: string;
-        /** @enum {string} */
-        type: 'RUN_TASK' | 'NOTIFICATION';
-      };
-    };
-    PostTfOpsApiV1HcpIntegrationsNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    PostTfOpsApiV1HcpIntegrationsRequestBody: {
-      /** Format: email */
-      createdBy: string;
-      name?: string;
-      /** @enum {string} */
-      type: 'RUN_TASK' | 'NOTIFICATION';
-      pat?: string;
-    };
-    GetTfOpsApiV1HcpIntegrationsParameterXOrganizationId: string;
-    GetTfOpsApiV1HcpIntegrationsPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: {
-        integrations: {
-          deletedAt?: unknown;
-          /** Format: uuid */
-          integrationId: string;
-          /** Format: uuid */
-          organizationId: string;
-          /** Format: email */
-          createdBy: string;
-          name: string;
-          HMACKey: string;
-          createdAt: unknown;
-          /** Format: uri */
-          webhookUrl: string;
-          /** @enum {string} */
-          type: 'RUN_TASK' | 'NOTIFICATION';
-        }[];
-      };
-    };
-    GetTfOpsApiV1HcpIntegrationsNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    HeadTfOpsApiV1HcpIntegrationsParameterXOrganizationId: string;
-    /** Format: uuid */
-    PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdParameterIntegrationId: string;
-    PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: Record<string, never>;
-    };
-    PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdRequestBody: {
-      payload_version: number;
-      stage: string;
-      access_token: string;
-      capabilities: {
-        outcomes: boolean;
-      };
-      /** Format: uri */
-      configuration_version_download_url: string;
-      configuration_version_id: string;
-      is_speculative: boolean;
-      organization_name: string;
-      /** Format: uri */
-      plan_json_api_url?: string;
-      /** Format: uri */
-      run_app_url: string;
-      run_created_at: string;
-      run_created_by: string;
-      run_id: string;
-      run_message: string;
-      /** Format: uri */
-      task_result_callback_url: string;
-      /** @enum {string} */
-      task_result_enforcement_level: 'mandatory' | 'advisory' | 'test';
-      task_result_id: string;
-      vcs_branch: string | null;
-      /** Format: uri */
-      vcs_commit_url: string | null;
-      /** Format: uri */
-      vcs_pull_request_url: string | null;
-      /** Format: uri */
-      vcs_repo_url: string | null;
-      /** Format: uri */
-      workspace_app_url: string;
-      workspace_id: string;
-      workspace_name: string;
-      workspace_working_directory: string;
-    };
-    /** Format: uuid */
-    PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdParameterIntegrationId: string;
-    PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: Record<string, never>;
-    };
-    PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdRequestBody: {
-      payload_version: 'PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdRequestBody';
-    } & (Record<string, never> &
-      Record<string, never> &
-      Omit<
-        | {
+        PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdParameterIntegrationId: string;
+        PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: Record<string, never>;
+        };
+        PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
+        };
+        PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdRequestBody: {
+            payload_version: "PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdRequestBody";
+        } & (Record<string, never> & Record<string, never> & Omit<{
             /** @constant */
             payload_version: 1;
             notification_configuration_id: string;
@@ -367,874 +412,1072 @@ export interface components {
             workspace_name: string | null;
             organization_name: string | null;
             notifications: {
-              message: string;
-              /** @enum {string} */
-              trigger:
-                | 'run:created'
-                | 'run:planning'
-                | 'run:needs_attention'
-                | 'run:applying'
-                | 'run:completed'
-                | 'run:errored'
-                | 'assessment:drifted'
-                | 'assessment:check_failure'
-                | 'assessment:failed'
-                | 'workspace:auto_destroy_reminder'
-                | 'workspace:auto_destroy_run_results'
-                | 'verification';
-              run_status: string | null;
-              /** Format: date-time */
-              run_updated_at: string | null;
-              run_updated_by: string | null;
+                message: string;
+                /** @enum {string} */
+                trigger: "run:created" | "run:planning" | "run:needs_attention" | "run:applying" | "run:completed" | "run:errored" | "assessment:drifted" | "assessment:check_failure" | "assessment:failed" | "workspace:auto_destroy_reminder" | "workspace:auto_destroy_run_results" | "verification";
+                run_status: string | null;
+                /** Format: date-time */
+                run_updated_at: string | null;
+                run_updated_by: string | null;
             }[];
-          }
-        | {
+        } | {
             /** @constant */
-            payload_version: '2';
+            payload_version: "2";
             notification_configuration_id: string;
             /** Format: uri */
             notification_configuration_url: string;
             /** @enum {string} */
-            trigger_scope: 'assessment' | 'workspace';
+            trigger_scope: "assessment" | "workspace";
             /** @enum {string} */
-            trigger:
-              | 'run:created'
-              | 'run:planning'
-              | 'run:needs_attention'
-              | 'run:applying'
-              | 'run:completed'
-              | 'run:errored'
-              | 'assessment:drifted'
-              | 'assessment:check_failure'
-              | 'assessment:failed'
-              | 'workspace:auto_destroy_reminder'
-              | 'workspace:auto_destroy_run_results'
-              | 'verification';
+            trigger: "run:created" | "run:planning" | "run:needs_attention" | "run:applying" | "run:completed" | "run:errored" | "assessment:drifted" | "assessment:check_failure" | "assessment:failed" | "workspace:auto_destroy_reminder" | "workspace:auto_destroy_run_results" | "verification";
             message: string;
             details: {
-              new_assessment_result?: {
-                id: string;
-                /** Format: uri */
-                url: string;
-                succeeded: boolean;
-                drifted: boolean;
-                all_checks_succeeded: boolean;
-                resources_drifted: number;
-                resources_undrifted: number;
-                checks_passed: number;
-                checks_failed: number;
-                checks_errored: number;
-                checks_unknown: number;
+                new_assessment_result?: {
+                    id: string;
+                    /** Format: uri */
+                    url: string;
+                    succeeded: boolean;
+                    drifted: boolean;
+                    all_checks_succeeded: boolean;
+                    resources_drifted: number;
+                    resources_undrifted: number;
+                    checks_passed: number;
+                    checks_failed: number;
+                    checks_errored: number;
+                    checks_unknown: number;
+                    /** Format: date-time */
+                    created_at: string;
+                };
+                prior_assessment_result?: {
+                    id: string;
+                    /** Format: uri */
+                    url: string;
+                    succeeded: boolean;
+                    drifted: boolean;
+                    all_checks_succeeded: boolean;
+                    resources_drifted: number;
+                    resources_undrifted: number;
+                    checks_passed: number;
+                    checks_failed: number;
+                    checks_errored: number;
+                    checks_unknown: number;
+                    /** Format: date-time */
+                    created_at: string;
+                };
+                workspace_id?: string;
+                workspace_name: string;
+                organization_name: string;
                 /** Format: date-time */
-                created_at: string;
-              };
-              prior_assessment_result?: {
-                id: string;
-                /** Format: uri */
-                url: string;
-                succeeded: boolean;
-                drifted: boolean;
-                all_checks_succeeded: boolean;
-                resources_drifted: number;
-                resources_undrifted: number;
-                checks_passed: number;
-                checks_failed: number;
-                checks_errored: number;
-                checks_unknown: number;
+                auto_destroy_at?: string | null;
                 /** Format: date-time */
-                created_at: string;
-              };
-              workspace_id?: string;
-              workspace_name: string;
-              organization_name: string;
-              /** Format: date-time */
-              auto_destroy_at?: string | null;
-              /** Format: date-time */
-              run_created_at?: string | null;
-              run_status?: string | null;
-              run_external_id?: string | null;
-              run_create_error_message?: string | null;
-              /** @enum {string} */
-              trigger_type?: 'reminder' | 'results';
+                run_created_at?: string | null;
+                run_status?: string | null;
+                run_external_id?: string | null;
+                run_create_error_message?: string | null;
+                /** @enum {string} */
+                trigger_type?: "reminder" | "results";
             };
-          },
-        'payload_version'
-      >);
-    GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterDriftNotificationId: string;
-    GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterXOrganizationId: string;
-    GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: {
-        rawTerraformPlan: string;
-      };
-    };
-    GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterDriftNotificationId: string;
-    HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterXOrganizationId: string;
-    PostReportingOrlExternalPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: {
-        success: boolean;
-        message: string;
-        jobId?: string;
-      };
-    };
-    PostReportingOrlExternalNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    PostReportingOrlExternalRequestBody: {
-      /** @default 1 */
-      version: number;
-      /** @enum {string} */
-      requestOrigin: 'GITHUB_ACTION' | 'IDE' | 'MCP' | 'CODE_AGENT';
-      effect?: string;
-      reports: {
-        path?: string;
-        branch?: string;
-        orlReport?: {
-          /** @constant */
-          type: 'Report';
-          /** @constant */
-          version: 'v1';
-          metadata: {
-            name: string;
-            description?: string;
-            priority?: number;
-            skip?: boolean;
-            required_contexts?: string[];
-            annotations?: {
-              [key: string]: string;
+        }, "payload_version">);
+        GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterDriftNotificationId: string;
+        GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterXOrganizationId: string;
+        GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: {
+                rawTerraformPlan: string;
             };
-          };
-          workspace: string;
-          language: string;
-          rules_applied: number;
-          findings: number;
-          fixes: number;
-          changes: number;
-          errors: unknown[];
-          rules: {
-            metadata: {
-              name: string;
-              description?: string;
-              priority?: number;
-              skip?: boolean;
-              required_contexts?: string[];
-              annotations?: {
-                [key: string]: string;
-              };
-              classifications?: string[];
+        };
+        GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
             };
-            name: string;
-            findings: number;
-            fixes: number;
-            changes: number;
-            errors: unknown[];
-            files: {
-              path: string;
+        };
+        HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterDriftNotificationId: string;
+        HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterXOrganizationId: string;
+        Schema1: string | number | boolean | null | components["schemas"]["Schema1"][] | {
+            [key: string]: components["schemas"]["Schema1"];
+        };
+        Schema2: string | number | boolean | null | components["schemas"]["Schema2"][] | {
+            [key: string]: components["schemas"]["Schema2"];
+        };
+        Schema3: string | number | boolean | null | components["schemas"]["Schema3"][] | {
+            [key: string]: components["schemas"]["Schema3"];
+        };
+        PostReportingOrlExternalPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: {
+                success: boolean;
+                message: string;
+                jobId?: string;
+            };
+        };
+        PostReportingOrlExternalNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
+        };
+        PostReportingOrlExternalRequestBody: {
+            /** @default 1 */
+            version: number;
+            /** @enum {string} */
+            requestOrigin: "GITHUB_ACTION" | "IDE" | "MCP" | "CODE_AGENT";
+            effect?: string;
+            reports: {
+                path?: string;
+                branch?: string;
+                orlReport?: {
+                    /** @constant */
+                    type: "Report";
+                    /** @constant */
+                    version: "v1";
+                    metadata: {
+                        name: string;
+                        description?: string;
+                        priority?: number;
+                        skip?: boolean;
+                        required_contexts?: string[];
+                        annotations?: {
+                            [key: string]: string;
+                        };
+                    };
+                    workspace: string;
+                    language: string;
+                    rules_applied: number;
+                    findings: number;
+                    fixes: number;
+                    changes: number;
+                    errors: components["schemas"]["Schema1"][];
+                    rules: {
+                        metadata: {
+                            name: string;
+                            description?: string;
+                            priority?: number;
+                            skip?: boolean;
+                            required_contexts?: string[];
+                            annotations?: {
+                                [key: string]: string;
+                            };
+                            classifications?: string[];
+                        };
+                        name: string;
+                        findings: number;
+                        fixes: number;
+                        changes: number;
+                        errors: components["schemas"]["Schema2"][];
+                        files: {
+                            path: string;
+                        }[];
+                    }[];
+                } & {
+                    [key: string]: components["schemas"]["Schema3"];
+                };
             }[];
-          }[];
-        } & {
-          [key: string]: unknown;
+            errors: {
+                status: number;
+                message: string;
+            }[];
+            durationInSeconds: number;
+            scmContext?: {
+                scmType: "GITHUB" | "GITLAB" | "BITBUCKET" | "AZDO";
+                originalPullRequest?: {
+                    id: string;
+                    /** Format: uri */
+                    url: string;
+                    author: string;
+                };
+                resultingPullRequest?: {
+                    id: string;
+                    /** Format: uri */
+                    url: string;
+                    author: string;
+                };
+            };
         };
-      }[];
-      errors: {
-        status: number;
-        message: string;
-      }[];
-      durationInSeconds: number;
-      scmContext?: {
-        scmType: 'GITHUB' | 'GITLAB' | 'BITBUCKET' | 'AZDO';
-        originalPullRequest?: {
-          id: string;
-          /** Format: uri */
-          url: string;
-          author: string;
+        PostReportingOrlFixAppliedPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: {
+                success: boolean;
+                message: string;
+            };
         };
-        resultingPullRequest?: {
-          id: string;
-          /** Format: uri */
-          url: string;
-          author: string;
+        PostReportingOrlFixAppliedNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
         };
-      };
-    };
-    PostReportingOrlFixAppliedPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: {
-        success: boolean;
-        message: string;
-      };
-    };
-    PostReportingOrlFixAppliedNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    PostReportingOrlFixAppliedRequestBody: {
-      /** @default 1 */
-      version: number;
-      requestOrigin: string;
-      events: ({
-        /** @constant */
-        type: 'orl_fix_applied';
-        idempotencyKey: string;
-        occurredAt: string;
+        PostReportingOrlFixAppliedRequestBody: {
+            /** @default 1 */
+            version: number;
+            requestOrigin: string;
+            events: ({
+                /** @constant */
+                type: "orl_fix_applied";
+                idempotencyKey: string;
+                occurredAt: string;
+                /** @enum {string} */
+                fixKind: "individual" | "grouped";
+                /** @default [] */
+                ruleNames: string[];
+                /** @default [] */
+                ruleIdentifiers: string[];
+                /** @default [] */
+                filePaths: string[];
+                repoPath?: string;
+                branch?: string;
+            } & {
+                [key: string]: unknown;
+            })[];
+        };
+        PostTelemetryV1TracesParameterContentType: string;
         /** @enum {string} */
-        fixKind: 'individual' | 'grouped';
-        /** @default [] */
-        ruleNames: string[];
-        /** @default [] */
-        ruleIdentifiers: string[];
-        /** @default [] */
-        filePaths: string[];
-        repoPath?: string;
-        branch?: string;
-      } & {
-        [key: string]: unknown;
-      })[];
-    };
-    PostV2ReportingOrlExternalPositiveResponse: {
-      /** @constant */
-      status: 'success';
-      data: {
-        success: boolean;
-        message: string;
-        jobId?: string;
-      };
-    };
-    PostV2ReportingOrlExternalNegativeResponse: {
-      /** @constant */
-      status: 'error';
-      error: {
-        message: string;
-      };
-    };
-    PostV2ReportingOrlExternalRequestBody: {
-      /** @default 2 */
-      version: number;
-      /** @enum {string} */
-      requestOrigin: 'GITHUB_ACTION' | 'IDE' | 'MCP' | 'CODE_AGENT';
-      effect?: string;
-      reports: ({
-        path?: string;
-        branch?: string;
-        workspaceId?: string | null;
-        timestamp?: string;
-        orlReport?: unknown;
-        resultingPullRequest?: {
-          repositoryId: string;
-          repositoryName: string;
-          ownerId: string;
-          ownerName: string;
-          number: string;
-          /** Format: uri */
-          url: string;
-          title: string;
-          sourceBranch: string;
-          targetBranch: string;
-          /** @enum {string} */
-          status: 'EXPECTED' | 'MERGED' | 'CLOSED' | 'OPEN';
-          /** @enum {string} */
-          provider: 'GitHub' | 'GitLab' | 'BitBucket' | 'Azdo';
+        PostTelemetryV1TracesParameterXGombocTelemetrySource: "CLI" | "IDE_EXTENSION";
+        PostTelemetryV1TracesParameterXGombocClientId: string;
+        PostTelemetryV1TracesParameterXGombocClientVersion: string;
+        PostTelemetryV1TracesParameterXGombocSessionId: string;
+        PostTelemetryV1TracesPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: {
+                [key: string]: unknown;
+            };
         };
-        workflowStatus?: {
-          /** @enum {string} */
-          status: 'success' | 'failure';
-          errors: string[];
+        PostTelemetryV1TracesNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
         };
-        timing?: {
-          startedAt?: string;
-          completedAt?: string;
+        PostTelemetryV1TracesRequestBody: {
+            resourceSpans: {
+                [key: string]: unknown;
+            }[];
         };
-      } & {
-        [key: string]: unknown;
-      })[];
-      errors: {
-        status: number;
-        message: string;
-      }[];
-      durationInSeconds: number;
-      scmContext?: {
+        PostTelemetryV1MetricsParameterContentType: string;
         /** @enum {string} */
-        scmType: 'GITHUB' | 'GITLAB' | 'BITBUCKET' | 'AZDO';
-        scmRepositoryId?: string;
-        originalPullRequest?: {
-          pullRequest: {
-            repositoryId: string;
-            repositoryName: string;
-            ownerId: string;
-            ownerName: string;
-            number: string;
-            /** Format: uri */
-            url: string;
-            title: string;
-            sourceBranch: string;
-            targetBranch: string;
+        PostTelemetryV1MetricsParameterXGombocTelemetrySource: "CLI" | "IDE_EXTENSION";
+        PostTelemetryV1MetricsParameterXGombocClientId: string;
+        PostTelemetryV1MetricsParameterXGombocClientVersion: string;
+        PostTelemetryV1MetricsParameterXGombocSessionId: string;
+        PostTelemetryV1MetricsPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: {
+                [key: string]: unknown;
+            };
+        };
+        PostTelemetryV1MetricsNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
+        };
+        PostTelemetryV1MetricsRequestBody: {
+            resourceMetrics: {
+                [key: string]: unknown;
+            }[];
+        };
+        PostTelemetryV1LogsParameterContentType: string;
+        /** @enum {string} */
+        PostTelemetryV1LogsParameterXGombocTelemetrySource: "CLI" | "IDE_EXTENSION";
+        PostTelemetryV1LogsParameterXGombocClientId: string;
+        PostTelemetryV1LogsParameterXGombocClientVersion: string;
+        PostTelemetryV1LogsParameterXGombocSessionId: string;
+        PostTelemetryV1LogsPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: {
+                [key: string]: unknown;
+            };
+        };
+        PostTelemetryV1LogsNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
+        };
+        PostTelemetryV1LogsRequestBody: {
+            resourceLogs: {
+                [key: string]: unknown;
+            }[];
+        };
+        Schema4: string | number | boolean | null | components["schemas"]["Schema4"][] | {
+            [key: string]: components["schemas"]["Schema4"];
+        };
+        Schema5: string | number | boolean | null | components["schemas"]["Schema5"][] | {
+            [key: string]: components["schemas"]["Schema5"];
+        };
+        PostV2ReportingOrlExternalPositiveResponse: {
+            /** @constant */
+            status: "success";
+            data: {
+                success: boolean;
+                message: string;
+                jobId?: string;
+            };
+        };
+        PostV2ReportingOrlExternalNegativeResponse: {
+            /** @constant */
+            status: "error";
+            error: {
+                message: string;
+            };
+        };
+        PostV2ReportingOrlExternalRequestBody: {
+            /** @default 2 */
+            version: number;
             /** @enum {string} */
-            status: 'EXPECTED' | 'MERGED' | 'CLOSED' | 'OPEN';
-            /** @enum {string} */
-            provider: 'GitHub' | 'GitLab' | 'BitBucket' | 'Azdo';
-            /**
-             * @default false
-             * @constant
-             */
-            authoredByGomboc: false;
-          };
-          branchCommit: {
-            sha: string;
-            branchName: string;
-          };
+            requestOrigin: "GITHUB_ACTION" | "IDE" | "MCP" | "CODE_AGENT";
+            effect?: string;
+            reports: ({
+                path?: string;
+                branch?: string;
+                workspaceId?: string | null;
+                timestamp?: string;
+                orlReport?: components["schemas"]["Schema5"];
+                resultingPullRequest?: {
+                    repositoryId: string;
+                    repositoryName: string;
+                    ownerId: string;
+                    ownerName: string;
+                    number: string;
+                    /** Format: uri */
+                    url: string;
+                    title: string;
+                    sourceBranch: string;
+                    targetBranch: string;
+                    /** @enum {string} */
+                    status: "EXPECTED" | "MERGED" | "CLOSED" | "OPEN";
+                    /** @enum {string} */
+                    provider: "GitHub" | "GitLab" | "BitBucket" | "Azdo";
+                };
+                workflowStatus?: {
+                    /** @enum {string} */
+                    status: "success" | "failure";
+                    errors: string[];
+                };
+                timing?: {
+                    startedAt?: string;
+                    completedAt?: string;
+                };
+            } & {
+                [key: string]: components["schemas"]["Schema4"];
+            })[];
+            errors: {
+                status: number;
+                message: string;
+            }[];
+            durationInSeconds: number;
+            scmContext?: {
+                /** @enum {string} */
+                scmType: "GITHUB" | "GITLAB" | "BITBUCKET" | "AZDO";
+                scmRepositoryId?: string;
+                originalPullRequest?: {
+                    pullRequest: {
+                        repositoryId: string;
+                        repositoryName: string;
+                        ownerId: string;
+                        ownerName: string;
+                        number: string;
+                        /** Format: uri */
+                        url: string;
+                        title: string;
+                        sourceBranch: string;
+                        targetBranch: string;
+                        /** @enum {string} */
+                        status: "EXPECTED" | "MERGED" | "CLOSED" | "OPEN";
+                        /** @enum {string} */
+                        provider: "GitHub" | "GitLab" | "BitBucket" | "Azdo";
+                        /**
+                         * @default false
+                         * @constant
+                         */
+                        authoredByGomboc: false;
+                    };
+                    branchCommit: {
+                        sha: string;
+                        branchName: string;
+                    };
+                };
+                resultingPullRequest?: {
+                    repositoryId: string;
+                    repositoryName: string;
+                    ownerId: string;
+                    ownerName: string;
+                    number: string;
+                    /** Format: uri */
+                    url: string;
+                    title: string;
+                    sourceBranch: string;
+                    targetBranch: string;
+                    /** @enum {string} */
+                    status: "EXPECTED" | "MERGED" | "CLOSED" | "OPEN";
+                    /** @enum {string} */
+                    provider: "GitHub" | "GitLab" | "BitBucket" | "Azdo";
+                };
+            };
+            gitDiffs?: {
+                [key: string]: string;
+            };
+            remediatedFileContent?: {
+                [key: string]: string;
+            };
+            workflowStatus?: {
+                /** @enum {string} */
+                status: "success" | "failure";
+                errors: string[];
+            };
+            timing?: {
+                startedAt?: string;
+                completedAt?: string;
+            };
         };
-        resultingPullRequest?: {
-          repositoryId: string;
-          repositoryName: string;
-          ownerId: string;
-          ownerName: string;
-          number: string;
-          /** Format: uri */
-          url: string;
-          title: string;
-          sourceBranch: string;
-          targetBranch: string;
-          /** @enum {string} */
-          status: 'EXPECTED' | 'MERGED' | 'CLOSED' | 'OPEN';
-          /** @enum {string} */
-          provider: 'GitHub' | 'GitLab' | 'BitBucket' | 'Azdo';
-        };
-      };
-      gitDiffs?: {
-        [key: string]: string;
-      };
-      remediatedFileContent?: {
-        [key: string]: string;
-      };
-      workflowStatus?: {
-        /** @enum {string} */
-        status: 'success' | 'failure';
-        errors: string[];
-      };
-      timing?: {
-        startedAt?: string;
-        completedAt?: string;
-      };
     };
-  };
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-  GetHealthcheck: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    GetHealthcheck: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description GET /healthcheck Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetHealthcheckPositiveResponse"];
+                };
+            };
+            /** @description GET /healthcheck Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetHealthcheckNegativeResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description GET /healthcheck Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    HeadHealthcheck: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-        content: {
-          'application/json': components['schemas']['GetHealthcheckPositiveResponse'];
+        requestBody?: never;
+        responses: {
+            /** @description HEAD /healthcheck Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description HEAD /healthcheck Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
-      };
-      /** @description GET /healthcheck Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GetHealthcheckNegativeResponse'];
-        };
-      };
     };
-  };
-  HeadHealthcheck: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    getHcpIntegration: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description GET /tf-ops/api/v1/hcp/integrations/:integrationId Parameter */
+                "x-organization-id": components["schemas"]["GetTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId"];
+            };
+            path: {
+                /** @description GET /tf-ops/api/v1/hcp/integrations/:integrationId Parameter */
+                integrationId: components["schemas"]["GetTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description GET /tf-ops/api/v1/hcp/integrations/:integrationId Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTfOpsApiV1HcpIntegrationsIntegrationIdPositiveResponse"];
+                };
+            };
+            /** @description GET /tf-ops/api/v1/hcp/integrations/:integrationId Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTfOpsApiV1HcpIntegrationsIntegrationIdNegativeResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description HEAD /healthcheck Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    deleteHcpIntegration: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description DELETE /tf-ops/api/v1/hcp/integrations/:integrationId Parameter */
+                "x-organization-id": components["schemas"]["DeleteTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId"];
+            };
+            path: {
+                /** @description DELETE /tf-ops/api/v1/hcp/integrations/:integrationId Parameter */
+                integrationId: components["schemas"]["DeleteTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId"];
+            };
+            cookie?: never;
         };
-        content?: never;
-      };
-      /** @description HEAD /healthcheck Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
+        requestBody?: never;
+        responses: {
+            /** @description DELETE /tf-ops/api/v1/hcp/integrations/:integrationId Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeleteTfOpsApiV1HcpIntegrationsIntegrationIdPositiveResponse"];
+                };
+            };
+            /** @description DELETE /tf-ops/api/v1/hcp/integrations/:integrationId Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeleteTfOpsApiV1HcpIntegrationsIntegrationIdNegativeResponse"];
+                };
+            };
         };
-        content?: never;
-      };
     };
-  };
-  getHcpIntegration: {
-    parameters: {
-      query?: never;
-      header: {
-        /** @description GET /tf-ops/api/v1/hcp/integrations/:integrationId Parameter */
-        'x-organization-id': components['schemas']['GetTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId'];
-      };
-      path: {
-        /** @description GET /tf-ops/api/v1/hcp/integrations/:integrationId Parameter */
-        integrationId: components['schemas']['GetTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId'];
-      };
-      cookie?: never;
+    getHcpIntegration__HEAD: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description HEAD /tf-ops/api/v1/hcp/integrations/:integrationId Parameter */
+                "x-organization-id": components["schemas"]["HeadTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId"];
+            };
+            path: {
+                /** @description HEAD /tf-ops/api/v1/hcp/integrations/:integrationId Parameter */
+                integrationId: components["schemas"]["HeadTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description HEAD /tf-ops/api/v1/hcp/integrations/:integrationId Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description HEAD /tf-ops/api/v1/hcp/integrations/:integrationId Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description GET /tf-ops/api/v1/hcp/integrations/:integrationId Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    getAllHcpIntegrations: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description GET /tf-ops/api/v1/hcp/integrations Parameter */
+                "x-organization-id": components["schemas"]["GetTfOpsApiV1HcpIntegrationsParameterXOrganizationId"];
+            };
+            path?: never;
+            cookie?: never;
         };
-        content: {
-          'application/json': components['schemas']['GetTfOpsApiV1HcpIntegrationsIntegrationIdPositiveResponse'];
+        requestBody?: never;
+        responses: {
+            /** @description GET /tf-ops/api/v1/hcp/integrations Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTfOpsApiV1HcpIntegrationsPositiveResponse"];
+                };
+            };
+            /** @description GET /tf-ops/api/v1/hcp/integrations Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTfOpsApiV1HcpIntegrationsNegativeResponse"];
+                };
+            };
         };
-      };
-      /** @description GET /tf-ops/api/v1/hcp/integrations/:integrationId Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GetTfOpsApiV1HcpIntegrationsIntegrationIdNegativeResponse'];
-        };
-      };
     };
-  };
-  deleteHcpIntegration: {
-    parameters: {
-      query?: never;
-      header: {
-        /** @description DELETE /tf-ops/api/v1/hcp/integrations/:integrationId Parameter */
-        'x-organization-id': components['schemas']['DeleteTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId'];
-      };
-      path: {
-        /** @description DELETE /tf-ops/api/v1/hcp/integrations/:integrationId Parameter */
-        integrationId: components['schemas']['DeleteTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId'];
-      };
-      cookie?: never;
+    createHcpIntegration: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description POST /tf-ops/api/v1/hcp/integrations Parameter */
+                "x-organization-id": components["schemas"]["PostTfOpsApiV1HcpIntegrationsParameterXOrganizationId"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description POST /tf-ops/api/v1/hcp/integrations Request body */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostTfOpsApiV1HcpIntegrationsRequestBody"];
+            };
+        };
+        responses: {
+            /** @description POST /tf-ops/api/v1/hcp/integrations Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTfOpsApiV1HcpIntegrationsPositiveResponse"];
+                };
+            };
+            /** @description POST /tf-ops/api/v1/hcp/integrations Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTfOpsApiV1HcpIntegrationsNegativeResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description DELETE /tf-ops/api/v1/hcp/integrations/:integrationId Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    getAllHcpIntegrations__HEAD: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description HEAD /tf-ops/api/v1/hcp/integrations Parameter */
+                "x-organization-id": components["schemas"]["HeadTfOpsApiV1HcpIntegrationsParameterXOrganizationId"];
+            };
+            path?: never;
+            cookie?: never;
         };
-        content: {
-          'application/json': components['schemas']['DeleteTfOpsApiV1HcpIntegrationsIntegrationIdPositiveResponse'];
+        requestBody?: never;
+        responses: {
+            /** @description HEAD /tf-ops/api/v1/hcp/integrations Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description HEAD /tf-ops/api/v1/hcp/integrations Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
-      };
-      /** @description DELETE /tf-ops/api/v1/hcp/integrations/:integrationId Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['DeleteTfOpsApiV1HcpIntegrationsIntegrationIdNegativeResponse'];
-        };
-      };
     };
-  };
-  getHcpIntegration__HEAD: {
-    parameters: {
-      query?: never;
-      header: {
-        /** @description HEAD /tf-ops/api/v1/hcp/integrations/:integrationId Parameter */
-        'x-organization-id': components['schemas']['HeadTfOpsApiV1HcpIntegrationsIntegrationIdParameterXOrganizationId'];
-      };
-      path: {
-        /** @description HEAD /tf-ops/api/v1/hcp/integrations/:integrationId Parameter */
-        integrationId: components['schemas']['HeadTfOpsApiV1HcpIntegrationsIntegrationIdParameterIntegrationId'];
-      };
-      cookie?: never;
+    PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationId: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description POST /tf-ops/api/v1/hcp/webhooks/terraform-run-task/:integrationId Parameter */
+                integrationId: components["schemas"]["PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdParameterIntegrationId"];
+            };
+            cookie?: never;
+        };
+        /** @description POST /tf-ops/api/v1/hcp/webhooks/terraform-run-task/:integrationId Request body */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdRequestBody"];
+            };
+        };
+        responses: {
+            /** @description POST /tf-ops/api/v1/hcp/webhooks/terraform-run-task/:integrationId Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdPositiveResponse"];
+                };
+            };
+            /** @description POST /tf-ops/api/v1/hcp/webhooks/terraform-run-task/:integrationId Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdNegativeResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description HEAD /tf-ops/api/v1/hcp/integrations/:integrationId Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    PostTfOpsApiV1HcpWebhooksNotificationsIntegrationId: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description POST /tf-ops/api/v1/hcp/webhooks/notifications/:integrationId Parameter */
+                integrationId: components["schemas"]["PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdParameterIntegrationId"];
+            };
+            cookie?: never;
         };
-        content?: never;
-      };
-      /** @description HEAD /tf-ops/api/v1/hcp/integrations/:integrationId Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
+        /** @description POST /tf-ops/api/v1/hcp/webhooks/notifications/:integrationId Request body */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdRequestBody"];
+            };
         };
-        content?: never;
-      };
+        responses: {
+            /** @description POST /tf-ops/api/v1/hcp/webhooks/notifications/:integrationId Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdPositiveResponse"];
+                };
+            };
+            /** @description POST /tf-ops/api/v1/hcp/webhooks/notifications/:integrationId Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdNegativeResponse"];
+                };
+            };
+        };
     };
-  };
-  getAllHcpIntegrations: {
-    parameters: {
-      query?: never;
-      header: {
-        /** @description GET /tf-ops/api/v1/hcp/integrations Parameter */
-        'x-organization-id': components['schemas']['GetTfOpsApiV1HcpIntegrationsParameterXOrganizationId'];
-      };
-      path?: never;
-      cookie?: never;
+    GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationId: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description GET /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Parameter */
+                "x-organization-id": components["schemas"]["GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterXOrganizationId"];
+            };
+            path: {
+                /** @description GET /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Parameter */
+                driftNotificationId: components["schemas"]["GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterDriftNotificationId"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description GET /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdPositiveResponse"];
+                };
+            };
+            /** @description GET /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdNegativeResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description GET /tf-ops/api/v1/hcp/integrations Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationId: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description HEAD /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Parameter */
+                "x-organization-id": components["schemas"]["HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterXOrganizationId"];
+            };
+            path: {
+                /** @description HEAD /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Parameter */
+                driftNotificationId: components["schemas"]["HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterDriftNotificationId"];
+            };
+            cookie?: never;
         };
-        content: {
-          'application/json': components['schemas']['GetTfOpsApiV1HcpIntegrationsPositiveResponse'];
+        requestBody?: never;
+        responses: {
+            /** @description HEAD /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description HEAD /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
         };
-      };
-      /** @description GET /tf-ops/api/v1/hcp/integrations Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GetTfOpsApiV1HcpIntegrationsNegativeResponse'];
-        };
-      };
     };
-  };
-  createHcpIntegration: {
-    parameters: {
-      query?: never;
-      header: {
-        /** @description POST /tf-ops/api/v1/hcp/integrations Parameter */
-        'x-organization-id': components['schemas']['PostTfOpsApiV1HcpIntegrationsParameterXOrganizationId'];
-      };
-      path?: never;
-      cookie?: never;
+    createOrlReportEvent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description POST /reporting/orl-external Request body */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostReportingOrlExternalRequestBody"];
+            };
+        };
+        responses: {
+            /** @description POST /reporting/orl-external Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostReportingOrlExternalPositiveResponse"];
+                };
+            };
+            /** @description POST /reporting/orl-external Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostReportingOrlExternalNegativeResponse"];
+                };
+            };
+        };
     };
-    /** @description POST /tf-ops/api/v1/hcp/integrations Request body */
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['PostTfOpsApiV1HcpIntegrationsRequestBody'];
-      };
+    createOrlFixAppliedEvent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description POST /reporting/orl-fix-applied Request body */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostReportingOrlFixAppliedRequestBody"];
+            };
+        };
+        responses: {
+            /** @description POST /reporting/orl-fix-applied Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostReportingOrlFixAppliedPositiveResponse"];
+                };
+            };
+            /** @description POST /reporting/orl-fix-applied Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostReportingOrlFixAppliedNegativeResponse"];
+                };
+            };
+        };
     };
-    responses: {
-      /** @description POST /tf-ops/api/v1/hcp/integrations Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    createTraceTelemetryEvent: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description POST /telemetry/v1/traces Parameter */
+                "content-type"?: components["schemas"]["PostTelemetryV1TracesParameterContentType"];
+                /** @description POST /telemetry/v1/traces Parameter */
+                "x-gomboc-telemetry-source": components["schemas"]["PostTelemetryV1TracesParameterXGombocTelemetrySource"];
+                /** @description POST /telemetry/v1/traces Parameter */
+                "x-gomboc-client-id"?: components["schemas"]["PostTelemetryV1TracesParameterXGombocClientId"];
+                /** @description POST /telemetry/v1/traces Parameter */
+                "x-gomboc-client-version"?: components["schemas"]["PostTelemetryV1TracesParameterXGombocClientVersion"];
+                /** @description POST /telemetry/v1/traces Parameter */
+                "x-gomboc-session-id"?: components["schemas"]["PostTelemetryV1TracesParameterXGombocSessionId"];
+            };
+            path?: never;
+            cookie?: never;
         };
-        content: {
-          'application/json': components['schemas']['PostTfOpsApiV1HcpIntegrationsPositiveResponse'];
+        /** @description POST /telemetry/v1/traces Request body */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostTelemetryV1TracesRequestBody"];
+            };
         };
-      };
-      /** @description POST /tf-ops/api/v1/hcp/integrations Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
+        responses: {
+            /** @description POST /telemetry/v1/traces Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTelemetryV1TracesPositiveResponse"];
+                };
+            };
+            /** @description POST /telemetry/v1/traces Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTelemetryV1TracesNegativeResponse"];
+                };
+            };
         };
-        content: {
-          'application/json': components['schemas']['PostTfOpsApiV1HcpIntegrationsNegativeResponse'];
-        };
-      };
     };
-  };
-  getAllHcpIntegrations__HEAD: {
-    parameters: {
-      query?: never;
-      header: {
-        /** @description HEAD /tf-ops/api/v1/hcp/integrations Parameter */
-        'x-organization-id': components['schemas']['HeadTfOpsApiV1HcpIntegrationsParameterXOrganizationId'];
-      };
-      path?: never;
-      cookie?: never;
+    createMetricTelemetryEvent: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description POST /telemetry/v1/metrics Parameter */
+                "content-type"?: components["schemas"]["PostTelemetryV1MetricsParameterContentType"];
+                /** @description POST /telemetry/v1/metrics Parameter */
+                "x-gomboc-telemetry-source": components["schemas"]["PostTelemetryV1MetricsParameterXGombocTelemetrySource"];
+                /** @description POST /telemetry/v1/metrics Parameter */
+                "x-gomboc-client-id"?: components["schemas"]["PostTelemetryV1MetricsParameterXGombocClientId"];
+                /** @description POST /telemetry/v1/metrics Parameter */
+                "x-gomboc-client-version"?: components["schemas"]["PostTelemetryV1MetricsParameterXGombocClientVersion"];
+                /** @description POST /telemetry/v1/metrics Parameter */
+                "x-gomboc-session-id"?: components["schemas"]["PostTelemetryV1MetricsParameterXGombocSessionId"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description POST /telemetry/v1/metrics Request body */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostTelemetryV1MetricsRequestBody"];
+            };
+        };
+        responses: {
+            /** @description POST /telemetry/v1/metrics Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTelemetryV1MetricsPositiveResponse"];
+                };
+            };
+            /** @description POST /telemetry/v1/metrics Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTelemetryV1MetricsNegativeResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description HEAD /tf-ops/api/v1/hcp/integrations Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
+    createLogTelemetryEvent: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description POST /telemetry/v1/logs Parameter */
+                "content-type"?: components["schemas"]["PostTelemetryV1LogsParameterContentType"];
+                /** @description POST /telemetry/v1/logs Parameter */
+                "x-gomboc-telemetry-source": components["schemas"]["PostTelemetryV1LogsParameterXGombocTelemetrySource"];
+                /** @description POST /telemetry/v1/logs Parameter */
+                "x-gomboc-client-id"?: components["schemas"]["PostTelemetryV1LogsParameterXGombocClientId"];
+                /** @description POST /telemetry/v1/logs Parameter */
+                "x-gomboc-client-version"?: components["schemas"]["PostTelemetryV1LogsParameterXGombocClientVersion"];
+                /** @description POST /telemetry/v1/logs Parameter */
+                "x-gomboc-session-id"?: components["schemas"]["PostTelemetryV1LogsParameterXGombocSessionId"];
+            };
+            path?: never;
+            cookie?: never;
         };
-        content?: never;
-      };
-      /** @description HEAD /tf-ops/api/v1/hcp/integrations Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
+        /** @description POST /telemetry/v1/logs Request body */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostTelemetryV1LogsRequestBody"];
+            };
         };
-        content?: never;
-      };
+        responses: {
+            /** @description POST /telemetry/v1/logs Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTelemetryV1LogsPositiveResponse"];
+                };
+            };
+            /** @description POST /telemetry/v1/logs Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostTelemetryV1LogsNegativeResponse"];
+                };
+            };
+        };
     };
-  };
-  PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationId: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description POST /tf-ops/api/v1/hcp/webhooks/terraform-run-task/:integrationId Parameter */
-        integrationId: components['schemas']['PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdParameterIntegrationId'];
-      };
-      cookie?: never;
+    createOrlReportEventV2: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description POST /v2/reporting/orl-external Request body */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostV2ReportingOrlExternalRequestBody"];
+            };
+        };
+        responses: {
+            /** @description POST /v2/reporting/orl-external Positive response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostV2ReportingOrlExternalPositiveResponse"];
+                };
+            };
+            /** @description POST /v2/reporting/orl-external Negative response */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostV2ReportingOrlExternalNegativeResponse"];
+                };
+            };
+        };
     };
-    /** @description POST /tf-ops/api/v1/hcp/webhooks/terraform-run-task/:integrationId Request body */
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdRequestBody'];
-      };
-    };
-    responses: {
-      /** @description POST /tf-ops/api/v1/hcp/webhooks/terraform-run-task/:integrationId Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdPositiveResponse'];
-        };
-      };
-      /** @description POST /tf-ops/api/v1/hcp/webhooks/terraform-run-task/:integrationId Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['PostTfOpsApiV1HcpWebhooksTerraformRunTaskIntegrationIdNegativeResponse'];
-        };
-      };
-    };
-  };
-  PostTfOpsApiV1HcpWebhooksNotificationsIntegrationId: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description POST /tf-ops/api/v1/hcp/webhooks/notifications/:integrationId Parameter */
-        integrationId: components['schemas']['PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdParameterIntegrationId'];
-      };
-      cookie?: never;
-    };
-    /** @description POST /tf-ops/api/v1/hcp/webhooks/notifications/:integrationId Request body */
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdRequestBody'];
-      };
-    };
-    responses: {
-      /** @description POST /tf-ops/api/v1/hcp/webhooks/notifications/:integrationId Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdPositiveResponse'];
-        };
-      };
-      /** @description POST /tf-ops/api/v1/hcp/webhooks/notifications/:integrationId Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['PostTfOpsApiV1HcpWebhooksNotificationsIntegrationIdNegativeResponse'];
-        };
-      };
-    };
-  };
-  GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationId: {
-    parameters: {
-      query?: never;
-      header: {
-        /** @description GET /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Parameter */
-        'x-organization-id': components['schemas']['GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterXOrganizationId'];
-      };
-      path: {
-        /** @description GET /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Parameter */
-        driftNotificationId: components['schemas']['GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterDriftNotificationId'];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description GET /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdPositiveResponse'];
-        };
-      };
-      /** @description GET /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['GetTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdNegativeResponse'];
-        };
-      };
-    };
-  };
-  HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationId: {
-    parameters: {
-      query?: never;
-      header: {
-        /** @description HEAD /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Parameter */
-        'x-organization-id': components['schemas']['HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterXOrganizationId'];
-      };
-      path: {
-        /** @description HEAD /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Parameter */
-        driftNotificationId: components['schemas']['HeadTfOpsApiV1HcpDriftTerraformPlanDriftNotificationIdParameterDriftNotificationId'];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description HEAD /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description HEAD /tf-ops/api/v1/hcp/drift/terraform-plan/:driftNotificationId Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  createOrlReportEvent: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** @description POST /reporting/orl-external Request body */
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['PostReportingOrlExternalRequestBody'];
-      };
-    };
-    responses: {
-      /** @description POST /reporting/orl-external Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['PostReportingOrlExternalPositiveResponse'];
-        };
-      };
-      /** @description POST /reporting/orl-external Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['PostReportingOrlExternalNegativeResponse'];
-        };
-      };
-    };
-  };
-  createOrlFixAppliedEvent: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** @description POST /reporting/orl-fix-applied Request body */
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['PostReportingOrlFixAppliedRequestBody'];
-      };
-    };
-    responses: {
-      /** @description POST /reporting/orl-fix-applied Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['PostReportingOrlFixAppliedPositiveResponse'];
-        };
-      };
-      /** @description POST /reporting/orl-fix-applied Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['PostReportingOrlFixAppliedNegativeResponse'];
-        };
-      };
-    };
-  };
-  createOrlReportEventV2: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** @description POST /v2/reporting/orl-external Request body */
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['PostV2ReportingOrlExternalRequestBody'];
-      };
-    };
-    responses: {
-      /** @description POST /v2/reporting/orl-external Positive response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['PostV2ReportingOrlExternalPositiveResponse'];
-        };
-      };
-      /** @description POST /v2/reporting/orl-external Negative response */
-      400: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': components['schemas']['PostV2ReportingOrlExternalNegativeResponse'];
-        };
-      };
-    };
-  };
 }
