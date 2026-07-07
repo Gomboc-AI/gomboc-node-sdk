@@ -1,6 +1,6 @@
 {
   "name": "@gomboc-ai/gomboc-node-sdk",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "A node.sdk for all gomboc projects",
   "type": "module",
   "main": "./dist/index.js",

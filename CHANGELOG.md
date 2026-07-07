@@ -1,5 +1,11 @@
 # @gomboc-ai/gomboc-node-sdk
 
+## 2.2.1
+
+### Patch Changes
+
+- 834fd90: expand schema
+
 ## 2.2.0
 
 ### Minor Changes
