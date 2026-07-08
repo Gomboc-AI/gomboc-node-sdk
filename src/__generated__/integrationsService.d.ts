@@ -772,15 +772,6 @@ export interface components {
       | {
           [key: string]: components['schemas']['Schema4'];
         };
-    Schema5:
-      | string
-      | number
-      | boolean
-      | null
-      | components['schemas']['Schema5'][]
-      | {
-          [key: string]: components['schemas']['Schema5'];
-        };
     PostV2ReportingOrlExternalPositiveResponse: {
       /** @constant */
       status: 'success';
@@ -803,19 +794,90 @@ export interface components {
       /** @enum {string} */
       requestOrigin: 'GITHUB_ACTION' | 'IDE' | 'MCP' | 'CODE_AGENT';
       effect?: string;
-      reports: ({
+      reports: {
         path?: string;
         branch?: string;
         workspaceId?: string | null;
         timestamp?: string;
-        orlReport?: components['schemas']['Schema5'];
+        orlReport?: {
+          /** @constant */
+          type: 'Report';
+          /** @constant */
+          version: 'v1';
+          metadata: {
+            name: string;
+            description?: string;
+            priority?: number;
+            skip?: boolean;
+            required_contexts?: string[];
+            annotations?: {
+              [key: string]: string;
+            };
+          };
+          workspace: string;
+          language: string;
+          rules_applied: number;
+          findings: number;
+          fixes: number;
+          changes: number;
+          errors: components['schemas']['Schema4'][];
+          rules: {
+            metadata: {
+              name: string;
+              description?: string;
+              priority?: number;
+              skip?: boolean;
+              required_contexts?: string[];
+              annotations?: {
+                [key: string]: string;
+              };
+              classifications?: string[];
+            };
+            name: string;
+            findings: number;
+            fixes: number;
+            changes: number;
+            errors: components['schemas']['Schema4'][];
+            files: {
+              path: string;
+            }[];
+            findingLocations?: {
+              id: string;
+              originalLocation?: {
+                id: string;
+                filePath: string;
+                startLine: number;
+                endLine?: number;
+                startColumn: number;
+                endColumn?: number;
+              };
+              resolvedLocation?: {
+                id: string;
+                filePath: string;
+                startLine: number;
+                endLine?: number;
+                startColumn: number;
+                endColumn?: number;
+              };
+              /** @enum {string} */
+              resolutionStatus?:
+                | 'unchanged'
+                | 'shifted'
+                | 'deleted'
+                | 'invalidated';
+              remediated?: boolean;
+              remediateable?: boolean;
+              message?: string;
+              level?: string;
+            }[];
+          }[];
+        };
         resultingPullRequest?: {
           repositoryId: string;
           repositoryName: string;
           ownerId: string;
           ownerName: string;
           number: string;
-          /** Format: uri */
           url: string;
           title: string;
           sourceBranch: string;
@@ -834,9 +896,20 @@ export interface components {
           startedAt?: string;
           completedAt?: string;
         };
-      } & {
-        [key: string]: components['schemas']['Schema4'];
-      })[];
+        auditFindings?: {
+          findingId: string;
+          filePath: string;
+          codeSnippet: string;
+          message?: string;
+          level?: string;
+          coordinates: {
+            startLine: number;
+            endLine?: number;
+            startColumn: number;
+            endColumn?: number;
+          };
+        }[];
+      }[];
       errors: {
         status: number;
         message: string;
@@ -853,7 +926,6 @@ export interface components {
             ownerId: string;
             ownerName: string;
             number: string;
-            /** Format: uri */
             url: string;
             title: string;
             sourceBranch: string;
@@ -879,7 +951,6 @@ export interface components {
           ownerId: string;
           ownerName: string;
           number: string;
-          /** Format: uri */
           url: string;
           title: string;
           sourceBranch: string;
