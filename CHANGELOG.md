@@ -1,5 +1,11 @@
 # @gomboc-ai/gomboc-node-sdk
 
+## 2.2.2
+
+### Patch Changes
+
+- 1edaee1: update external orl reports v2
+
 ## 2.2.1
 
 ### Patch Changes
