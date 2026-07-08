@@ -2119,20 +2119,6 @@ components:
             type: string
           additionalProperties:
             $ref: "#/components/schemas/Schema4"
-    Schema5:
-      anyOf:
-        - type: string
-        - type: number
-        - type: boolean
-        - type: "null"
-        - type: array
-          items:
-            $ref: "#/components/schemas/Schema5"
-        - type: object
-          propertyNames:
-            type: string
-          additionalProperties:
-            $ref: "#/components/schemas/Schema5"
     PostV2ReportingOrlExternalPositiveResponse:
       type: object
       properties:
@@ -2205,7 +2191,190 @@ components:
               timestamp:
                 type: string
               orlReport:
-                $ref: "#/components/schemas/Schema5"
+                type: object
+                properties:
+                  type:
+                    type: string
+                    const: Report
+                  version:
+                    type: string
+                    const: v1
+                  metadata:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      priority:
+                        type: number
+                      skip:
+                        type: boolean
+                      required_contexts:
+                        type: array
+                        items:
+                          type: string
+                      annotations:
+                        type: object
+                        propertyNames:
+                          type: string
+                        additionalProperties:
+                          type: string
+                    required:
+                      - name
+                  workspace:
+                    type: string
+                  language:
+                    type: string
+                  rules_applied:
+                    type: number
+                  findings:
+                    type: number
+                  fixes:
+                    type: number
+                  changes:
+                    type: number
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Schema4"
+                  rules:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        metadata:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            description:
+                              type: string
+                            priority:
+                              type: number
+                            skip:
+                              type: boolean
+                            required_contexts:
+                              type: array
+                              items:
+                                type: string
+                            annotations:
+                              type: object
+                              propertyNames:
+                                type: string
+                              additionalProperties:
+                                type: string
+                            classifications:
+                              type: array
+                              items:
+                                type: string
+                          required:
+                            - name
+                        name:
+                          type: string
+                        findings:
+                          type: number
+                        fixes:
+                          type: number
+                        changes:
+                          type: number
+                        errors:
+                          type: array
+                          items:
+                            $ref: "#/components/schemas/Schema4"
+                        files:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              path:
+                                type: string
+                            required:
+                              - path
+                        findingLocations:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                              originalLocation:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  filePath:
+                                    type: string
+                                  startLine:
+                                    type: number
+                                  endLine:
+                                    type: number
+                                  startColumn:
+                                    type: number
+                                  endColumn:
+                                    type: number
+                                required:
+                                  - id
+                                  - filePath
+                                  - startLine
+                                  - startColumn
+                              resolvedLocation:
+                                type: object
+                                properties:
+                                  id:
+                                    type: string
+                                  filePath:
+                                    type: string
+                                  startLine:
+                                    type: number
+                                  endLine:
+                                    type: number
+                                  startColumn:
+                                    type: number
+                                  endColumn:
+                                    type: number
+                                required:
+                                  - id
+                                  - filePath
+                                  - startLine
+                                  - startColumn
+                              resolutionStatus:
+                                type: string
+                                enum:
+                                  - unchanged
+                                  - shifted
+                                  - deleted
+                                  - invalidated
+                              remediated:
+                                type: boolean
+                              remediateable:
+                                type: boolean
+                              message:
+                                type: string
+                              level:
+                                type: string
+                            required:
+                              - id
+                      required:
+                        - metadata
+                        - name
+                        - findings
+                        - fixes
+                        - changes
+                        - errors
+                        - files
+                required:
+                  - type
+                  - version
+                  - metadata
+                  - workspace
+                  - language
+                  - rules_applied
+                  - findings
+                  - fixes
+                  - changes
+                  - errors
+                  - rules
               resultingPullRequest:
                 type: object
                 properties:
@@ -2221,7 +2390,6 @@ components:
                     type: string
                   url:
                     type: string
-                    format: uri
                   title:
                     type: string
                   sourceBranch:
@@ -2276,8 +2444,40 @@ components:
                     type: string
                   completedAt:
                     type: string
-            additionalProperties:
-              $ref: "#/components/schemas/Schema4"
+              auditFindings:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    findingId:
+                      type: string
+                    filePath:
+                      type: string
+                    codeSnippet:
+                      type: string
+                    message:
+                      type: string
+                    level:
+                      type: string
+                    coordinates:
+                      type: object
+                      properties:
+                        startLine:
+                          type: number
+                        endLine:
+                          type: number
+                        startColumn:
+                          type: number
+                        endColumn:
+                          type: number
+                      required:
+                        - startLine
+                        - startColumn
+                  required:
+                    - findingId
+                    - filePath
+                    - codeSnippet
+                    - coordinates
         errors:
           type: array
           items:
@@ -2326,7 +2526,6 @@ components:
                       type: string
                     url:
                       type: string
-                      format: uri
                     title:
                       type: string
                     sourceBranch:
@@ -2391,7 +2590,6 @@ components:
                   type: string
                 url:
                   type: string
-                  format: uri
                 title:
                   type: string
                 sourceBranch:
