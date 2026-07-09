@@ -11,6 +11,7 @@ import {
 } from '../../types';
 import { BaseLanguageHandler } from '../base';
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export class JsonLanguageHandler extends BaseLanguageHandler {
   displayName = 'JSON';
   codeResourceType = 'json';

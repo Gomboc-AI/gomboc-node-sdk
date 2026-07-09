@@ -10,6 +10,7 @@ import {
 } from '../../types';
 import { YamlBaseLanguageHandler } from '../yamlBase';
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export class YamlLanguageHandler extends YamlBaseLanguageHandler {
   displayName = 'YAML';
   codeResourceType = 'yaml';

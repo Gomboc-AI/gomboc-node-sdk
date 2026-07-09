@@ -72,6 +72,7 @@ const generateSummaryTable = (report: OrlReport): string => {
   return summaryTemplate;
 };
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export const makeIacScanReport = (report: OrlReport): ScanReport => {
   const reportName = report.metadata.display_name ?? report.metadata.name;
   const { language, rules, errors } = report.spec;

@@ -11,6 +11,7 @@ import {
 } from '../../types';
 import { YamlBaseLanguageHandler } from '../yamlBase';
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export class HelmLanguageHandler extends YamlBaseLanguageHandler {
   displayName = 'Helm';
   codeResourceType = 'kubernetes';

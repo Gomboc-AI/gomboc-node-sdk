@@ -1,11 +1,13 @@
 import { Report as OrlReport } from '@/orl/generated-types/report';
 import type { RulesServiceLoader } from '@/rulesService/client';
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export type ScanReportFile = {
   title: string;
   summary: string;
 };
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export enum Language {
   BASH = 'BASH',
   BICEP = 'BICEP',
@@ -47,9 +49,14 @@ export enum Language {
   YAML = 'YAML',
 }
 
-/** Every {@link Language} value as a string, in enum declaration order. */
+/**
+ * Every {@link Language} value as a string, in enum declaration order.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
+ */
 export const LanguageList: Language[] = Object.values(Language) as Language[];
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export type ScanReport = {
   title: string;
   summary: string;
@@ -58,13 +65,16 @@ export type ScanReport = {
   appliedRules: string[];
 };
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export type ScanReportMaker = (report: OrlReport) => ScanReport;
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export type PullRequestBodyRulesServiceClient = Pick<
   RulesServiceLoader,
   'getRule' | 'getClassification'
 >;
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export type PullRequestBodyArgs = {
   report: OrlReport;
   originalPullRequestIdentifier?: string | null;
@@ -76,19 +86,23 @@ export type PullRequestBodyArgs = {
   rulesServiceClient?: PullRequestBodyRulesServiceClient | null;
 };
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface DetectLanguageArgs {
   filePath: string;
   content: string;
 }
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface FindBlockAtLineArgs {
   filePath: string;
   content: string;
   line: number;
 }
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface GetDocumentInfoArgs {
   filePath: string;
   content: string;
 }
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface DocumentInfo {
   languageId: string;
   filePath: string;
@@ -98,6 +112,7 @@ export interface DocumentInfo {
   supportsBlocks?: boolean;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface PreviewContextHunk {
   fingerprint: string;
   newStart: number;
@@ -106,6 +121,8 @@ export interface PreviewContextHunk {
 /**
  * Strategy for grouping fix-preview resource snippets around diff hunks
  * (see fixpreviews/resourceContext.ts).
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export type ResourceContextExtractKind =
   | 'terraform'
@@ -114,6 +131,7 @@ export type ResourceContextExtractKind =
   | 'json'
   | 'unknown';
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface BuildPreviewResourceContextsArgs {
   filePath: string;
   content: string;
@@ -122,6 +140,7 @@ export interface BuildPreviewResourceContextsArgs {
   maxLinesPerContext?: number;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface PreviewResourceContext {
   id: string;
   title: string;
@@ -132,6 +151,7 @@ export interface PreviewResourceContext {
   relatedHunkFingerprints: string[];
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface BlockRange {
   type: string; // e.g. "aws_instance", "Deployment", "docker_stage"
   name?: string; // e.g. "web", "my-app"
@@ -140,28 +160,33 @@ export interface BlockRange {
   header: string; // display label for diagnostics/code actions
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface ScopedEditRange {
   startLine: number; // 1-based
   endLine: number; // 1-based
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface FindNearestBlockArgs {
   filePath: string;
   content: string;
   line: number;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface FindScopedEditRangeArgs {
   filePath: string;
   content: string;
   line: number;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface ListBlocksArgs {
   filePath: string;
   content: string;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface DiagnosticContext {
   languageId: string;
   filePath: string;
@@ -173,12 +198,14 @@ export interface DiagnosticContext {
   tags?: string[]; // optional hints for rule matching
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface BuildDiagnosticContextArgs {
   filePath: string;
   content: string;
   hint: DiagnosticHint;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface DiagnosticHint {
   line: number;
   message?: string;
@@ -187,28 +214,33 @@ export interface DiagnosticHint {
   newLines?: string[];
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface BuildDiagnosticRangeArgs {
   line1Based: number;
   content: string;
   uniqueOffset?: number;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface DiagnosticRangeResult {
   startChar: number;
   endChar: number;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface ResolveDiagnosticAnchorLineArgs {
   content: string;
   suggestedLine: number;
   fromFixOperation: boolean;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface DiagnosticAnchorResult {
   line: number;
   character: number;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface DescribeBlockArgs {
   filePath: string;
   content: string;
@@ -216,6 +248,7 @@ export interface DescribeBlockArgs {
   block?: BlockRange;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface BlockDescription {
   blockType: string;
   blockName: string | null;
@@ -226,6 +259,8 @@ export interface BlockDescription {
 /**
  * This represents the implementation of a language and it's associated behavior and
  * properties.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export interface FormatBlockDisplayNameArgs {
   blockType: string;
@@ -233,6 +268,7 @@ export interface FormatBlockDisplayNameArgs {
   filePath: string;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface MatchRulesToDiffArgs {
   blockType: string;
   blockName: string | null;
@@ -242,10 +278,12 @@ export interface MatchRulesToDiffArgs {
   properties: string[];
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export type PullRequestBodyMaker = (
   args: PullRequestBodyArgs
 ) => Promise<string>;
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface ILanguage {
   makeScanReport: ScanReportMaker;
   makePullRequestBody: PullRequestBodyMaker;
@@ -293,61 +331,77 @@ export interface ILanguage {
   matchRulesToDiff(args: MatchRulesToDiffArgs): string[];
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export type StorageEntryType = 'file' | 'directory' | 'symlink' | 'other';
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface StorageEntry {
   name: string;
   path: string;
   type: StorageEntryType;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface ReadTextOptions {
   encoding?: BufferEncoding; // default 'utf8'
 }
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface WriteTextOptions {
   encoding?: BufferEncoding; // default 'utf8'
   mode?: number; // e.g. 0o755 for hooks
 }
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface RemoveOptions {
   recursive?: boolean;
   force?: boolean;
 }
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface MkdirOptions {
   recursive?: boolean;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface ReadTextArgs {
   path: string;
   opts?: ReadTextOptions;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface WriteTextArgs {
   path: string;
   content: string;
   opts?: WriteTextOptions;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface WriteBytesArgs {
   path: string;
   content: Uint8Array;
   opts?: { mode?: number };
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface MkdirArgs {
   path: string;
   opts?: MkdirOptions;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface CopyFileArgs {
   srcPath: string;
   destPath: string;
 }
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface RemoveArgs {
   path: string;
   opts?: RemoveOptions;
 }
 
-/** Arguments for {@link IStorage.mkdtemp}, mirroring Node `fs.promises.mkdtemp`. */
+/**
+ * Arguments for {@link IStorage.mkdtemp}, mirroring Node `fs.promises.mkdtemp`.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
+ */
 export interface MkdtempArgs {
   /**
    * Directory name prefix; Node appends random characters to the final path segment
@@ -358,6 +412,8 @@ export interface MkdtempArgs {
 
 /**
  * This is a interface to represent a storage system with read, write, copy properties
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export interface IStorage {
   // identity/capabilities

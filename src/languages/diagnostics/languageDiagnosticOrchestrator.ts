@@ -1,6 +1,7 @@
 import { chooseLanguageImplementation } from '../selection/languageHandler';
 import { DiagnosticContext } from '../types';
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface BuildLanguageDiagnosticContextArgs {
   filePath: string;
   originalContent: string;
@@ -13,6 +14,8 @@ export interface BuildLanguageDiagnosticContextArgs {
 
 /**
  * Coordinates language-specific diagnostic context creation.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export const buildLanguageDiagnosticContext = (
   args: BuildLanguageDiagnosticContextArgs
@@ -36,6 +39,8 @@ export const buildLanguageDiagnosticContext = (
 
 /**
  * Tries original content first, then falls back to modified content.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export const buildLanguageDiagnosticContextWithFallback = (
   args: BuildLanguageDiagnosticContextArgs

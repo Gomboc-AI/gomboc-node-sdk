@@ -5,7 +5,11 @@ import {
   ResourceContextExtractKind,
 } from '../types';
 
-/** Human-readable label and 1-based inclusive line range for a preview slice. */
+/**
+ * Human-readable label and 1-based inclusive line range for a preview slice.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
+ */
 export interface PreviewContextRange {
   title: string;
   startLine: number;
@@ -24,6 +28,8 @@ export interface PreviewContextRange {
  *    vertically when a range exceeds `maxLinesPerContext`.
  *
  * Line numbers in the returned contexts are 1-based and inclusive.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export function buildPreviewResourceContexts(
   args: BuildPreviewResourceContextsArgs & {

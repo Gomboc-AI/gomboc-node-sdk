@@ -12,6 +12,7 @@ import {
 } from '../../types';
 import { YamlBaseLanguageHandler } from '../yamlBase';
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export class KubernetesYamlLanguageHandler extends YamlBaseLanguageHandler {
   displayName = 'Kubernetes YAML';
   codeResourceType = 'kubernetes';

@@ -28,6 +28,8 @@ function mapStatToEntryType(s: fs.Stats): StorageEntryType {
 
 /**
  * Local filesystem-backed {@link IStorage} using Node `fs.promises`.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export class FileSystemHandler implements IStorage {
   /**
