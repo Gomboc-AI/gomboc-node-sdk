@@ -1,5 +1,11 @@
 # @gomboc-ai/gomboc-node-sdk
 
+## 2.2.3
+
+### Patch Changes
+
+- b16197e: add jsdoc notes on deprecated exports
+
 ## 2.2.2
 
 ### Patch Changes
