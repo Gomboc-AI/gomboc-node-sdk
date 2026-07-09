@@ -436,6 +436,7 @@ const generateStructuredSummary = async (args: {
   return summaryTemplate;
 };
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export const makeIacPullRequestBody: PullRequestBodyMaker = async args => {
   const {
     report,

@@ -15,6 +15,7 @@ import {
 } from '../../types';
 import { YamlBaseLanguageHandler } from '../yamlBase';
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export class CloudFormationYamlLanguageHandler extends YamlBaseLanguageHandler {
   displayName = 'CloudFormation YAML';
   codeResourceType = 'cloudformation';

@@ -47,6 +47,9 @@ import {
   YamlLanguageHandler,
 } from '../handlers';
 
+/**
+ * @deprecated Not needed anymore; handled by ORL itself.
+ */
 export interface LanguageSelectionArgs {
   filePath: string;
   content: string;
@@ -107,6 +110,9 @@ function findMatchingLanguageHandler(
   return null;
 }
 
+/**
+ * @deprecated Not needed anymore; handled by ORL itself.
+ */
 export const findMatchingLanguageImplementation = (
   args: LanguageSelectionArgs
 ): ILanguage | null => {
@@ -126,6 +132,8 @@ export const findMatchingLanguageImplementation = (
  * csharp → css → elixir → go → gotemplate → groovy → javascript → typescript → json →
  * kotlin → html → lua → markdown → ocaml → php → protobuf → ruby → rust → scala →
  * sql → swift → toml.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export const detectLanguageId = (
   args: LanguageSelectionArgs
@@ -138,6 +146,9 @@ export const detectLanguageId = (
   return handler.getDocumentInfo(args).languageId;
 };
 
+/**
+ * @deprecated Not needed anymore; handled by ORL itself.
+ */
 export const chooseLanguageImplementation = (
   args: LanguageSelectionArgs
 ): ILanguage => {
@@ -147,6 +158,8 @@ export const chooseLanguageImplementation = (
 
 /**
  * Maps internal language IDs to ORL CLI language values.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export const mapLanguageIdToOrlLanguage = (args: {
   languageId: string;
@@ -241,6 +254,8 @@ export const mapLanguageIdToOrlLanguage = (args: {
 /**
  * True when language handlers recognize the file and it maps to an ORL CLI language.
  * Used for workspace staging (copy/list) when content may be omitted (empty string).
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export function isOrlScannableLanguageFile(args: {
   filePath: string;
@@ -260,6 +275,8 @@ export function isOrlScannableLanguageFile(args: {
 
 /**
  * Fix-preview context extractor kind for the matched language handler.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export function getResourceContextExtractKind(
   args: LanguageSelectionArgs

@@ -12,6 +12,7 @@ import {
 } from '../../types';
 import { BaseLanguageHandler } from '../base';
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export class TerraformLanguageHandler extends BaseLanguageHandler {
   displayName = 'Terraform';
   diagnosticClearScope = 'directory' as const;

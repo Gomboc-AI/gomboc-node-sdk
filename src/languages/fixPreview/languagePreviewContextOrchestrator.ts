@@ -5,6 +5,7 @@ import {
 } from '../selection/languageHandler';
 import { PreviewContextHunk, PreviewResourceContext } from '../types';
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export interface BuildLanguagePreviewResourceContextsArgs {
   filePath: string;
   content: string;
@@ -15,6 +16,8 @@ export interface BuildLanguagePreviewResourceContextsArgs {
 
 /**
  * Coordinates language-specific preview context creation.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export const buildLanguagePreviewResourceContexts = (
   args: BuildLanguagePreviewResourceContextsArgs

@@ -35,6 +35,8 @@ import {
  * Shared base class for all language handlers. Provides sensible default
  * implementations for every method on {@link ILanguage} so concrete
  * handlers only need to override what diverges from the norm.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export abstract class BaseLanguageHandler implements ILanguage {
   /** Shared ORL scan report formatter for all IaC-capable languages. */

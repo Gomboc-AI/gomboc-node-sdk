@@ -10,6 +10,7 @@ import {
 } from '../../types';
 import { BaseLanguageHandler } from '../base';
 
+/** @deprecated Not needed anymore; handled by ORL itself. */
 export class KotlinLanguageHandler extends BaseLanguageHandler {
   displayName = 'Kotlin';
   codeResourceType = 'kotlin';

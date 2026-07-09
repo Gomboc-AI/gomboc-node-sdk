@@ -8,6 +8,8 @@ import { BaseLanguageHandler } from './base';
  * Shared base for YAML-family language handlers (Kubernetes, Helm, CloudFormation YAML).
  * Overrides diff grouping and diagnostic anchoring to use indentation-aware behavior
  * instead of the default brace-counting approach.
+ *
+ * @deprecated Not needed anymore; handled by ORL itself.
  */
 export abstract class YamlBaseLanguageHandler extends BaseLanguageHandler {
   override isWeakAnchorLine(line: string): boolean {
